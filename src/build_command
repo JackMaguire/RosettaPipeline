@@ -1,0 +1,5 @@
+g++ -std=c++11 -o temp temp.cc -lwthttp -lwt -lboost_signals
+#Also look into: -ltiff -lpng15 -lhpdf -lboost_signals -lwthttp -lwt
+#-I/usr/local/include -L/usr/local/lib
+#-lwthttp -lwt -lboost_system -lboost_thread -lboost_filesystem
+#-lboost_program_options
