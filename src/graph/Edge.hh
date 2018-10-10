@@ -6,6 +6,8 @@
 namespace graph {
 
 class Edge {
+public:
+  
 
 protected:
   void init();
