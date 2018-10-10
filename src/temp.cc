@@ -5,6 +5,9 @@
 #include <Wt/WPushButton>
 #include <Wt/WText>
 
+//#include <Wt/WDoubleSpinBox>
+//#include <Wt/Chart/WCartesianChart>
+
 #include <string>
 
 // c++0x only, for std::bind
@@ -53,6 +56,10 @@ HelloApplication::HelloApplication(const WEnvironment& env)
 
   greeting_ = new WText(root());                         // empty text
   greeting_->setText( "Number of button clicks: " + std::to_string( num_button_clicks_ ) );
+
+
+  root()->addWidget(new WBreak());
+  //root()->addWidget(new Chart::WCartesianChart());
 
   /*
    * Connect signals with slots

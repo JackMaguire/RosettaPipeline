@@ -1,1 +1,1 @@
-./temp . --http-address 0.0.0.0 --http-port 8080
+./temp --doc_root . --http-address 0.0.0.0 --http-port 8080
