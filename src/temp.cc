@@ -8,12 +8,46 @@
 //#include <Wt/WDoubleSpinBox>
 //#include <Wt/Chart/WCartesianChart>
 
+#include <Wt/WPaintDevice>
+#include <Wt/WPaintedWidget>
+#include <Wt/WPainter>
+#include <Wt/WSpinBox>
+
 #include <string>
 
 // c++0x only, for std::bind
 // #include <functional>
 
 using namespace Wt;
+
+class MyPaintedWidget : public Wt::WPaintedWidget
+{
+public:
+  MyPaintedWidget(Wt::WContainerWidget *parent = 0)
+    : Wt::WPaintedWidget(parent), end_(100)
+  {
+    resize(200, 60);   // Provide a default size.
+  }
+
+  void setEnd(int end) {
+    end_ = end;
+    update();          // Trigger a repaint.
+  }
+
+protected:
+  void paintEvent(Wt::WPaintDevice *paintDevice) {
+    Wt::WPainter painter(paintDevice);
+    painter.setBrush(Wt::WBrush(Wt::blue));
+    painter.drawRect(0, 0 ,end_, 50);
+
+    painter.setBrush(Wt::WBrush(Wt::black));
+    painter.drawEllipse( 10, 10, 10, 10 );
+    painter.drawEllipse( 20, 20, 5, 5 );
+  }
+
+private:
+  int end_;
+};
 
 /*
  * A simple hello world application class which demonstrates how to react
@@ -60,6 +94,10 @@ HelloApplication::HelloApplication(const WEnvironment& env)
 
   root()->addWidget(new WBreak());
   //root()->addWidget(new Chart::WCartesianChart());
+
+  Wt::WContainerWidget *container = new Wt::WContainerWidget();
+  MyPaintedWidget *painting = new MyPaintedWidget(container);
+  root()->addWidget( container );
 
   /*
    * Connect signals with slots
