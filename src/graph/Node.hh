@@ -1,5 +1,6 @@
 #pragma once
 
+#include <graph/Node.fwd.hh>
 #include <graph/Edge.fwd.hh>
 
 #include <vector>

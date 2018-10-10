@@ -1,5 +1,6 @@
 #pragma once
 
+#include <graph/Edge.fwd.hh>
 #include <graph/Node.fwd.hh>
 
 namespace graph {
@@ -7,11 +8,7 @@ namespace graph {
 class Edge {
 
 protected:
-  void init(){
-    num_results_to_transfer_ = 0;
-    percentage_of_results_to_transfer_ = 50;
-    use_percentage_instead_of_count_ = false;
-  }
+  void init();
 
 private:
   NodeSP source_node_;
@@ -26,5 +23,6 @@ private:
 
   std::string notes_;
 };
+
 
 }//namespace graph
