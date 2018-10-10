@@ -61,6 +61,10 @@ public://general compilation access
 
   std::string dirname() const;
 
+  std::vector< std::string > determineAutoFlags() const;
+
+  static std::vector< std::string > commonFlags();
+
 public://edge access and modification
   int numUpstreamEdges() const;
 
@@ -93,6 +97,8 @@ public://container access
 
 protected:
   void init();
+
+  void save( std::vector< std::string > & output_lines ) const;
 
 private:
   int id_;
