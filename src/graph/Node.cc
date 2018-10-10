@@ -19,6 +19,111 @@ Node::Node( String title, int x, int y ) {
 
 Node::~Node(){}
 
+Node::Node( std::vector< std::string > const & lines, int line_to_start_at ) {
+  init();
+
+  int current_line = line_to_start_at;
+
+  if( lines[ current_line ] != "START_NODE" ) {
+    //TODO
+    //throw new LoadFailureException( "Expected 'START_NODE' instead of '" + first_line + "'" );
+  }
+
+  while( lines[ ++current_line ] != "END_NODE" ){
+    std::string const line = lines[ current_line ];
+
+    if( line == "START_FLAGS" ) {
+      while( lines[ ++current_line ] != "END_FLAGS" ){
+	//std::move this?
+	user_rosetta_flags_.emplace_back( lines[ current_line ] );
+      }
+      continue;
+    }
+
+    if( line == "START_NOTES" ) {
+      while( lines[ ++current_line ] != "END_NOTES" ){
+	//std::move this?
+	notes_ += lines[ current_line ] + "\n";
+      }
+      continue;
+    }
+
+    if( line == "START_SCRIPT" ) {
+      while( lines[ ++current_line ] != "END_SCRIPT" ){
+	//std::move this?
+	xml_script_ += lines[ current_line ] + "\n";
+      }
+      continue;
+    }
+
+    String[] split = line.split( "\\s+" );
+
+    if( split[ 0 ].equals( "id" ) ) {
+      id_ = Integer.parseInt( split[ 1 ] );
+      continue;
+      }
+
+    if( split[ 0 ].equals( "x" ) ) {
+      x_ = Integer.parseInt( split[ 1 ] );
+      continue;
+      }
+
+    if( split[ 0 ].equals( "y" ) ) {
+      y_ = Integer.parseInt( split[ 1 ] );
+      continue;
+      }
+
+    if( split[ 0 ].equals( "r" ) ) {
+      r = Integer.parseInt( split[ 1 ] );
+      continue;
+      }
+
+    if( split[ 0 ].equals( "g" ) ) {
+      g = Integer.parseInt( split[ 1 ] );
+      continue;
+      }
+
+    if( split[ 0 ].equals( "b" ) ) {
+      b = Integer.parseInt( split[ 1 ] );
+      continue;
+      }
+
+    if( split[ 0 ].equals( "command" ) ) {
+      command_ = "";
+      for( int i = 1; i < split.length; ++i ) {
+	command_ += split[ i ];
+	if( i != split.length - 1 ) {
+	  command_ += " ";
+	  }
+	}
+      continue;
+      }
+
+    if( split[ 0 ].equals( "title" ) ) {
+      title_ = split[ 1 ];
+      for( int i = 2; i < split.length; ++i ) {
+	title_ += " " + split[ i ];
+	}
+      continue;
+      }
+
+    if( split[ 0 ].equals( "script" ) ) {
+      xml_script_filename_ = split[ 1 ];
+      continue;
+      }
+
+    if( split[ 0 ].equals( "use_script_file" ) ) {
+      use_script_file_ = Boolean.parseBoolean( split[ 1 ] );
+      continue;
+      }
+
+    if( split[ 0 ].equals( "use_default_command" ) ) {
+      continue;
+      }
+    } // for string line
+
+}
+
 void Node::init(){
   use_default_command_ = true;
 
