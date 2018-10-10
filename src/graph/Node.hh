@@ -13,6 +13,9 @@ public:
   Node( String title, int x, int y );
   ~Node();
 
+protected:
+  Node( std::vector< std::string > const & lines, int line_to_start_at );
+
 public://getters and setters:
   int ID() const { return id_; }
   void setID( int id ){ id_ = id; }

@@ -56,71 +56,84 @@ Node::Node( std::vector< std::string > const & lines, int line_to_start_at ) {
       continue;
     }
 
-    String[] split = line.split( "\\s+" );
-
-    if( split[ 0 ].equals( "id" ) ) {
-      id_ = Integer.parseInt( split[ 1 ] );
-      continue;
+    std::vector< std::string > tokens;
+    {//stolen from https://stackoverflow.com/questions/13172158/c-split-string-by-line
+      std::string const delimiter = " ";
+      std::string::size_type prev = 0;
+      std::string::size_type pos = line.find( delimiter, prev );
+      while ( pos != std::string::npos ) {
+	tokens.push_back( line.substr( prev, pos - prev ) );
+	prev = pos + 1;
+	pos = line.find( delimiter, prev );
       }
 
-    if( split[ 0 ].equals( "x" ) ) {
-      x_ = Integer.parseInt( split[ 1 ] );
-      continue;
-      }
+      // To get the last substring (or only, if delimiter is not found)
+      tokens.push_back( line.substr( prev ) );
+    }
 
-    if( split[ 0 ].equals( "y" ) ) {
-      y_ = Integer.parseInt( split[ 1 ] );
+    if( tokens[ 0 ] == "id" ) {
+      id_ = std::stoi( split[ 1 ] );
       continue;
-      }
+    }
 
-    if( split[ 0 ].equals( "r" ) ) {
-      r = Integer.parseInt( split[ 1 ] );
+    if( tokens[ 0 ] == "x" ) {
+      x_ = std::stoi( split[ 1 ] );
       continue;
-      }
+    }
 
-    if( split[ 0 ].equals( "g" ) ) {
-      g = Integer.parseInt( split[ 1 ] );
+    if( tokens[ 0 ] == "y" ) {
+      y_ = std::stoi( split[ 1 ] );
       continue;
-      }
+    }
 
-    if( split[ 0 ].equals( "b" ) ) {
-      b = Integer.parseInt( split[ 1 ] );
+    if( tokens[ 0 ] == "r" ) {
+      r = std::stoi( split[ 1 ] );
       continue;
-      }
+    }
 
-    if( split[ 0 ].equals( "command" ) ) {
+    if( tokens[ 0 ] == "g" ) {
+      g = std::stoi( split[ 1 ] );
+      continue;
+    }
+
+    if( tokens[ 0 ] == "b" ) {
+      b = std::stoi( split[ 1 ] );
+      continue;
+    }
+
+    if( tokens[ 0 ] == "command" ) {
       command_ = "";
-      for( int i = 1; i < split.length; ++i ) {
-	command_ += split[ i ];
-	if( i != split.length - 1 ) {
+      for( int i = 1; i < tokens.size(); ++i ) {
+	command_ += tokens[ i ];
+	if( i != tokens.size() - 1 ) {
 	  command_ += " ";
-	  }
 	}
-      continue;
       }
+      continue;
+    }
 
-    if( split[ 0 ].equals( "title" ) ) {
-      title_ = split[ 1 ];
-      for( int i = 2; i < split.length; ++i ) {
-	title_ += " " + split[ i ];
-	}
-      continue;
+    if( tokens[ 0 ] == "title" ) {
+      title_ = tokens[ 1 ];
+      for( int i = 2; i < tokens.size(); ++i ) {
+	title_ += " " + tokens[ i ];
       }
+      continue;
+    }
 
-    if( split[ 0 ].equals( "script" ) ) {
-      xml_script_filename_ = split[ 1 ];
+    if( tokens[ 0 ] == "script" ) {
+      xml_script_filename_ = ( tokens[ 1 ] == "1" );
       continue;
-      }
+    }
 
-    if( split[ 0 ].equals( "use_script_file" ) ) {
-      use_script_file_ = Boolean.parseBoolean( split[ 1 ] );
+    if( tokens[ 0 ] == "use_script_file" ) {
+      use_script_file_ = ( tokens[ 1 ] == "1" );
       continue;
-      }
+    }
 
-    if( split[ 0 ].equals( "use_default_command" ) ) {
+    if( tokens[ 0 ] == "use_default_command" ) {
       continue;
-      }
-    } // for string line
+    }
+  } // for string line
 
 }
 
@@ -234,8 +247,8 @@ void Node::save( std::vector< std::string > & output_lines ) const {
   output_lines.emplace_back( "command " + command_ );
   output_lines.emplace_back( "title " + title_ );
   output_lines.emplace_back( "script " + xml_script_filename_ );
-  output_lines.emplace_back( "use_script_file " + std::to_string( use_script_file_ ) );
-  output_lines.emplace_back( "use_default_command " + std::to_string( use_default_command_ ) );
+  output_lines.emplace_back( "use_script_file " + ( use_script_file_ ? "1" : "0" ) );
+  output_lines.emplace_back( "use_default_command " + ( use_default_command_ ? "1" : "0" ) );
 
   output_lines.emplace_back( "START_FLAGS" );
   for( std::string const & flag : user_rosetta_flags_ ) {
