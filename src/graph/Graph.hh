@@ -24,8 +24,13 @@ struct PreliminaryEdge {
 class Graph {
 public:
   Graph();
+  ~Graph();
 
-public://general access
+public://deletion
+  void removeNodeAndDeleteItsEdges( NodeSP & );
+
+  void removeEdgeAndNotifyItsNodes( EdgeSP & );
+
 
 public://node access
   int getNumNodes() const;
@@ -36,6 +41,19 @@ public://edge access
   int getNumEdges() const;
   std::vector< EdgeSP > const & edges() const;
   EdgeSP addEdge( NodeSP const & source, NodeSP const & destination );
+
+public://selection access
+  NodeSP selectedNode();
+  NodeCSP selectedNode() const;
+  void setSelectedNode( NodeSP const & );
+
+  EdgeSP selectedEdge();
+  EdgeCSP selectedEdge() const;
+  void setSelectedEdge( EdgeSP const & );
+
+  PreliminaryEdgeSP ghostEdge();
+  PreliminaryEdgeCSP ghostEdge() const;
+  void setGhostEdge( PreliminaryEdgeSP const & );
 
 protected:
   int getNextNodeID() { return next_node_id_++; }
@@ -88,34 +106,64 @@ Graph::edges() const {
 }
 
 inline
-EdgeSP
-Graph::addEdge( NodeSP const & source, NodeSP const & destination ) {
-  //NodeCSP const source = e->getSourceNodeCSP();
-  //NodeCSP const destination = e->getDestinationNodeCSP();
-  if( source == destination ){
-    return 0;
-  }
-
-  // Make sure there is not already an edge
-  for( EdgeCSP const & de : source->getDownstreamEdges() ) {
-    if( de->getDestinationNodeCSP() == destination ) {
-      return 0;
-    }
-  }
-
-  // Make sure there is no reverse Edge
-  for( EdgeCSP de : destination->getDownstreamEdges() ) {
-    if( de->getDestinationNodeCSP() == source ) {
-      return 0;
-    }
-  }
-
-  EdgeSP const new_edge = std::make_shared< Edge >( source, destination );
-  source->addDownstreamEdge( new_edge );
-  destination->addUpstreamEdge( new_edge );
-  edges_.push_back( new_edge );
-
-  return new_edge;
+NodeSP
+Graph::selectedNode() {
+  return selected_node_;
 }
+
+inline
+NodeCSP
+Graph::selectedNode() const {
+  return selected_node_;
+}
+
+inline
+void
+Graph::setSelectedNode( NodeSP const & n ) {
+  selected_node_ = n;
+  if( n != 0 ) {
+    selected_edge_ = 0;
+  }
+}
+
+inline
+EdgeSP
+Graph::selectedEdge() {
+  return selected_edge_;
+}
+
+inline
+EdgeCSP
+Graph::selectedEdge() const {
+  return selected_edge_;
+}
+
+inline
+void
+Graph::setSelectedEdge( EdgeSP const & e ) {
+  selected_edge_ = e;
+  if( e != 0 ) {
+    selected_node_ = 0;
+  }
+}
+
+inline
+PreliminaryEdgeSP
+Graph::ghostEdge() {
+  return ghost_edge_;
+}
+
+inline
+PreliminaryEdgeCSP
+Graph::ghostEdge() const {
+  return ghost_edge_;
+}
+
+inline
+void
+Graph::setGhostEdge( PreliminaryEdgeSP const & e ) {
+  ghost_edge_ = e;
+}
+
 
 }//namespace graph

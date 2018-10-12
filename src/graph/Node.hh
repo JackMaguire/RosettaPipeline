@@ -88,7 +88,10 @@ public://edge access and modification
   void removeDownstreamEdge( EdgeSP const & edge );
 
 public://container access
+  std::vector< EdgeSP > & getUpstreamEdges() { return upstream_edges_; }
   std::vector< EdgeSP > const & getUpstreamEdges() const { return upstream_edges_; }
+
+  std::vector< EdgeSP > & getDownstreamEdges() { return downstream_edges_; }
   std::vector< EdgeSP > const & getDownstreamEdges() const { return downstream_edges_; }
 
   std::vector< std::string > const & userRosettaFlags() const { return user_rosetta_flags_; }
