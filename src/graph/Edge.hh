@@ -59,6 +59,8 @@ public://Getters and setters for "other"
 protected:
   void init();
 
+  void save( std::vector< std::string > & output_lines ) const;
+
 private:
   NodeWP source_node_;//Weak pointer to avoid circular references
   NodeWP destination_node_;//Weak pointer to avoid circular references
