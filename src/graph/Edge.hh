@@ -25,10 +25,32 @@ public://Node getters and setters
   void setDestinationNode( NodeSP const & node );
   void setDestinationNode( NodeWP const & node );
 
-public://Getter and setters for sorting options
+public://Getters and setters for sorting options
   std::string const & columnNameToSortBy() const;
   std::string const & getColumnNameToSortBy() const;
-  void setColumnNameToSortBy( std::string setting ) const;//passing by value on purpose
+  void setColumnNameToSortBy( std::string setting );//passing by value on purpose
+
+  bool positiveScoresAreBetter() const;
+  bool getPositiveScoresAreBetter() const;
+  void setPositiveScoresAreBetter( bool setting );
+
+public://Getters and setters for transfer options
+  int numResultsToTransfer() const;
+  int getNumResultsToTransfer() const;
+  void setNumResultsToTransfer( int setting );
+
+  double percentageOfResultsToTransfer() const;
+  double getPercentageOfResultsToTransfer() const;
+  void setPercentageOfResultsToTransfer( double setting );
+
+  bool usePercentageInsteadOfCount() const;
+  bool getUsePercentageInsteadOfCount() const;
+  void setUsePercentageInsteadOfCount( bool setting );
+
+public://Getters and setters for "other"
+  std::string const & notes() const;
+  std::string const & getNotes() const;
+  void setNotes( std::string setting );//passing by value on purpose
 
 protected:
   void init();
@@ -125,9 +147,98 @@ Edge::getColumnNameToSortBy() const {
 
 inline
 void
-Edge::setColumnNameToSortBy( std::string setting ) const {//passing by value on purpose
+Edge::setColumnNameToSortBy( std::string setting ) {//passing by value on purpose
   column_name_to_sort_by_ = std::move( setting );
 }
 
+inline
+bool
+Edge::positiveScoresAreBetter() const {
+  return positive_scores_are_better_;
+}
+
+inline
+bool
+Edge::getPositiveScoresAreBetter() const {
+  return positive_scores_are_better_;
+}
+
+inline
+void
+Edge::setPositiveScoresAreBetter( bool setting ) {
+  positive_scores_are_better_ = setting;
+}
+
+inline
+int
+Edge::numResultsToTransfer() const{
+  return num_results_to_transfer_;
+}
+
+inline
+int
+Edge::getNumResultsToTransfer() const {
+  return num_results_to_transfer_;
+}
+
+inline
+void
+Edge::setNumResultsToTransfer( int setting ) {
+  num_results_to_transfer_ = setting;
+}
+
+inline
+double
+Edge::percentageOfResultsToTransfer() const {
+  return percentage_of_results_to_transfer_;
+}
+
+inline
+double
+Edge::getPercentageOfResultsToTransfer() const {
+  return percentage_of_results_to_transfer_;
+}
+
+inline
+void
+Edge::setPercentageOfResultsToTransfer( double setting ) {
+  percentage_of_results_to_transfer_ = setting;
+}
+
+inline
+bool
+Edge::usePercentageInsteadOfCount() const {
+  return use_percentage_instead_of_count_;
+}
+
+inline
+bool
+Edge::getUsePercentageInsteadOfCount() const {
+  return use_percentage_instead_of_count_;
+}
+
+inline
+void
+Edge::setUsePercentageInsteadOfCount( bool setting ) {
+  use_percentage_instead_of_count_ = setting;
+}
+
+inline
+std::string const &
+Edge::notes() const {
+  return notes_;
+}
+
+inline
+std::string const &
+Edge::getNotes() const {
+  return notes_;
+}
+
+inline
+void
+Edge::setNotes( std::string setting ) {//passing by value on purpose
+  notes_ = std::move( setting );
+}
 
 }//namespace graph
