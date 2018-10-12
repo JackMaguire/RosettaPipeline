@@ -4,14 +4,14 @@
 namespace graph {
 
 Node::Node( int x, int y ) {
-  title_ = "Node_" + id_;
+  title_ = "Node_" + std::to_string( id_ );
   x_ = x;
   y_ = y;
   init();
 }
 
-Node::Node( String title, int x, int y ) {
-  title_ = title;
+Node::Node( std::string title, int x, int y ) {//pass-by-value on purpose
+  title_ = std::move( title );
   x_ = x;
   y_ = y;
   init();
@@ -72,32 +72,32 @@ Node::Node( std::vector< std::string > const & lines, int line_to_start_at ) {
     }
 
     if( tokens[ 0 ] == "id" ) {
-      id_ = std::stoi( split[ 1 ] );
+      id_ = std::stoi( tokens[ 1 ] );
       continue;
     }
 
     if( tokens[ 0 ] == "x" ) {
-      x_ = std::stoi( split[ 1 ] );
+      x_ = std::stoi( tokens[ 1 ] );
       continue;
     }
 
     if( tokens[ 0 ] == "y" ) {
-      y_ = std::stoi( split[ 1 ] );
+      y_ = std::stoi( tokens[ 1 ] );
       continue;
     }
 
     if( tokens[ 0 ] == "r" ) {
-      r = std::stoi( split[ 1 ] );
+      red_ = std::stoi( tokens[ 1 ] );
       continue;
     }
 
     if( tokens[ 0 ] == "g" ) {
-      g = std::stoi( split[ 1 ] );
+      green_ = std::stoi( tokens[ 1 ] );
       continue;
     }
 
     if( tokens[ 0 ] == "b" ) {
-      b = std::stoi( split[ 1 ] );
+      blue_ = std::stoi( tokens[ 1 ] );
       continue;
     }
 
@@ -143,20 +143,20 @@ void Node::init(){
   use_script_file_ = false;
   xml_script_filename_ = "script.xml";
   xml_script_ =
-    "<ROSETTASCRIPTS>\n" +
-    "    <SCOREFXNS>\n" +
-    "    </SCOREFXNS>\n" +
-    "    <RESIDUE_SELECTORS>\n" +
-    "    </RESIDUE_SELECTORS>\n" +
-    "    <TASKOPERATIONS>\n" +
-    "    </TASKOPERATIONS>\n" +
-    "    <FILTERS>\n" +
-    "    </FILTERS>\n" +
-    "    <MOVERS>\n" +
-    "    </MOVERS>\n" +
-    "    <PROTOCOLS>\n" +
-    "    </PROTOCOLS>\n" +
-    "    <OUTPUT />\n" +
+    "<ROSETTASCRIPTS>\n"
+    "    <SCOREFXNS>\n"
+    "    </SCOREFXNS>\n"
+    "    <RESIDUE_SELECTORS>\n"
+    "    </RESIDUE_SELECTORS>\n"
+    "    <TASKOPERATIONS>\n"
+    "    </TASKOPERATIONS>\n"
+    "    <FILTERS>\n"
+    "    </FILTERS>\n"
+    "    <MOVERS>\n"
+    "    </MOVERS>\n"
+    "    <PROTOCOLS>\n"
+    "    </PROTOCOLS>\n"
+    "    <OUTPUT />\n"
     "</ROSETTASCRIPTS>\n";
 
   stage_ = 0;
@@ -179,7 +179,7 @@ int
 Node::inDegreeIgnoringTheseNodes( std::vector< NodeSP > const & nodes_to_ignore ) const {
   int degree = 0;
   for( EdgeSP const & e : upstream_edges_ ) {
-    NodeSP const & upstream_node = e.sourceNode();
+    NodeSP const upstream_node = e->getSourceNodeSP();
     auto const iter = std::find( nodes_to_ignore.begin(), nodes_to_ignore.end(), upstream_node );
     if( iter == nodes_to_ignore.end() ) {
       ++degree;
@@ -196,7 +196,7 @@ Node::dirname() const {
       *it = '_';
     }
   }
-  return "stage" + stage() + "_" + title;
+  return "stage" + std::to_string( stage() ) + "_" + title;
 }
 
 std::vector< std::string >
@@ -233,7 +233,7 @@ Node::commonFlags() {
   vec.emplace_back( "-ignore_unrecognized_res true   # false by default" );
   vec.emplace_back( "-ignore_waters false            # true by default" );
   vec.emplace_back( "-mpi_tracer_to_file mpi_" );
-  return list;
+  return vec;
 }
 
 void Node::save( std::vector< std::string > & output_lines ) const {
@@ -241,14 +241,14 @@ void Node::save( std::vector< std::string > & output_lines ) const {
   output_lines.emplace_back( "id " + std::to_string( id_ ) );
   output_lines.emplace_back( "x " + std::to_string( x_ ) );
   output_lines.emplace_back( "y " + std::to_string( y_ ) );
-  output_lines.emplace_back( "r " + std::to_string( color_.getRed() ) );
-  output_lines.emplace_back( "g " + std::to_string( color_.getGreen() ) );
-  output_lines.emplace_back( "b " + std::to_string( color_.getBlue() ) );
+  output_lines.emplace_back( "r " + std::to_string( red_ ) );
+  output_lines.emplace_back( "g " + std::to_string( green_ ) );
+  output_lines.emplace_back( "b " + std::to_string( blue_ ) );
   output_lines.emplace_back( "command " + command_ );
   output_lines.emplace_back( "title " + title_ );
   output_lines.emplace_back( "script " + xml_script_filename_ );
-  output_lines.emplace_back( "use_script_file " + ( use_script_file_ ? "1" : "0" ) );
-  output_lines.emplace_back( "use_default_command " + ( use_default_command_ ? "1" : "0" ) );
+  output_lines.emplace_back( std::string( "use_script_file " ) + ( use_script_file_ ? "1" : "0" ) );
+  output_lines.emplace_back( std::string( "use_default_command " ) + ( use_default_command_ ? "1" : "0" ) );
 
   output_lines.emplace_back( "START_FLAGS" );
   for( std::string const & flag : user_rosetta_flags_ ) {

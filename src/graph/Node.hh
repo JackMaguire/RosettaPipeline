@@ -4,13 +4,14 @@
 #include <graph/Edge.fwd.hh>
 
 #include <vector>
+#include <string>
 
 namespace graph {
 
 class Node {
 public:
   Node( int x, int y );
-  Node( String title, int x, int y );
+  Node( std::string title, int x, int y );//pass-by-value on purpose
   ~Node();
 
 protected:

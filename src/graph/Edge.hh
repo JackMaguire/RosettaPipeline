@@ -3,22 +3,26 @@
 #include <graph/Edge.fwd.hh>
 #include <graph/Node.fwd.hh>
 
+#include <string>
+
 namespace graph {
 
 class Edge {
 public:
   Edge();
-  Edge( NodeCP const & source_node, NodeCP const & destination_node );
+  Edge( NodeSP const & source_node, NodeSP const & destination_node );
 
   ~Edge();
 
 public://Node getters and setters
+  Node const & sourceNode() const;
   Node const & getSourceNode() const;
   NodeCSP getSourceNodeCSP() const;
   NodeSP getSourceNodeSP();
   void setSourceNode( NodeSP const & node );
   void setSourceNode( NodeWP const & node );
 
+  Node const & destinationNode() const;
   Node const & getDestinationNode() const;
   NodeCSP getDestinationNodeCSP() const;
   NodeSP getDestinationNodeSP();
@@ -71,10 +75,16 @@ private:
 
 inline
 Node const &
-Edge::getSourceNode() const {
+Edge::sourceNode() const {
   auto ptr = source_node_.lock();
   assert( ptr );
   return *ptr;
+}
+
+inline
+Node const &
+Edge::getSourceNode() const {
+  return sourceNode();
 }
 
 inline
@@ -103,10 +113,16 @@ Edge::setSourceNode( NodeWP const & node ) {
 
 inline
 Node const &
-Edge::getDestinationNode() const {
+Edge::destinationNode() const {
   auto ptr = destination_node_.lock();
   assert( ptr );
   return *ptr;
+}
+
+inline
+Node const &
+Edge::getDestinationNode() const {
+  return destinationNode();
 }
 
 inline
