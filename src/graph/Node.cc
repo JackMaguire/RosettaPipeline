@@ -1,6 +1,8 @@
 #include <graph/Node.hh>
 #include <graph/Edge.hh>
 
+#include <iostream>
+
 namespace graph {
 
 Node::Node( int x, int y ) {
@@ -182,10 +184,7 @@ Node::Node( std::vector< std::string > const & lines, int line_to_start_at ) {
 
   int current_line = line_to_start_at;
 
-  if( lines[ current_line ] != "START_NODE" ) {
-    //TODO
-    //throw new LoadFailureException( "Expected 'START_NODE' instead of '" + first_line + "'" );
-  }
+  assert( lines[ current_line ] == "START_NODE" );
 
   while( lines[ ++current_line ] != "END_NODE" ){
     std::string const line = lines[ current_line ];
@@ -233,6 +232,7 @@ Node::Node( std::vector< std::string > const & lines, int line_to_start_at ) {
 
     if( tokens[ 0 ] == "id" ) {
       id_ = std::stoi( tokens[ 1 ] );
+      std::cout << "LOADING ID: " << id_ << std::endl;
       continue;
     }
 

@@ -1,6 +1,8 @@
 #include <graph/Edge.hh>
 #include <graph/Node.hh>
 
+#include <iostream>
+
 namespace graph {
 
 Edge::Edge() :
@@ -75,10 +77,7 @@ Edge::Edge(
 
   int current_line = line_to_start_at;
 
-  if( lines[ current_line ] != "START_EDGE" ) {
-    //TODO
-    //throw new LoadFailureException( "Expected 'START_EDGE' instead of '" + first_line + "'" );
-  }
+  assert( lines[ current_line ] == "START_EDGE" );
  
   while( lines[ ++current_line ] != "END_EDGE" ){
     std::string const line = lines[ current_line ];
@@ -110,25 +109,35 @@ Edge::Edge(
     
     if( tokens[ 0 ] == "source" ) {
       int const node_id = std::stoi( tokens[ 1 ] );
+      std::cout << "looking for node with id " << node_id << std::endl;
+      bool found_a_match = false;
       for( NodeSP const & n : nodes ) {
 	if( n->ID() == node_id ) {
+	  std::cout << "\t" << n->ID() << std::endl;
 	  source_node_ = n;
-	  source_node_.lock()->addDownstreamEdge( shared_from_this() );
+	  n->addDownstreamEdge( shared_from_this() );
+	  found_a_match = true;
 	  break;
 	}
       }
+      assert( found_a_match );
       continue;
     }//if source
 
     if( tokens[ 0 ] == "destination" ) {
       int const node_id = std::stoi( tokens[ 1 ] );
+      std::cout << "looking for node with id " << node_id << std::endl;
+      bool found_a_match = false;
       for( NodeSP const & n : nodes ) {
+	std::cout << "\t" << n->ID() << std::endl;
 	if( n->ID() == node_id ) {
 	  destination_node_ = n;
-	  destination_node_.lock()->addUpstreamEdge( shared_from_this() );
+	  n->addUpstreamEdge( shared_from_this() );
+	  found_a_match = true;
 	  break;
 	}
       }
+      assert( found_a_match );
       continue;
     }//if destination
 

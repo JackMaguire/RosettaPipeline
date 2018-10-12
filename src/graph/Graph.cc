@@ -2,6 +2,8 @@
 #include <graph/Node.hh>
 #include <graph/Edge.hh>
 
+#include <iostream>
+
 namespace graph {
 
 Graph::Graph(){}
@@ -133,20 +135,22 @@ Graph::loadSelfNodesAndEdges( std::vector< std::string > & lines, int line_to_st
     }
     if( tokens[ 0 ] == "num_nodes" ) {
       int const num_nodes = std::stoi( tokens[ 1 ] );
+      std::cout << "Looking for " << num_nodes << " Nodes!" << std::endl;
       for( int i = 0; i < num_nodes; ++i ) {
 	NodeSP new_node = std::make_shared< Node >( lines, ++current_line );
 	nodes_.emplace_back( std::move( new_node ) );
+	std::cout << "\t!" << std::endl;
+	while( lines[ ++current_line ] != "END_NODE" ){}
       }
       assert( nodes_.size() == num_nodes );
-      while( lines[ ++current_line ] != "END_NODE" ){}
       continue;
     }
     if( tokens[ 0 ] == "num_edges" ) {
       int const num_edges = std::stoi( tokens[ 1 ] );
       for( int i = 0; i < num_edges; ++i ) {
 	edges_.emplace_back( std::make_shared< Edge >( nodes_, lines, ++current_line ) );
+	while( lines[ ++current_line ] != "END_EDGE" ){}
       }
-      while( lines[ ++current_line ] != "END_EDGE" ){}
       continue;
     }
   }
