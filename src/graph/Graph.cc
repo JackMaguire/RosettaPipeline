@@ -1,4 +1,6 @@
 #include <graph/Graph.hh>
+#include <graph/Node.hh>
+#include <graph/Edge.hh>
 
 namespace graph {
 
@@ -69,5 +71,89 @@ Graph::removeEdgeAndNotifyItsNodes( EdgeSP & e ) {
     edges_.erase( iter );
   }
 }
+
+
+// Save/Load
+void
+Graph::saveSelfNodesAndEdges( std::vector< std::string > & output_lines ) const {
+  output_lines.emplace_back( "START_GRAPH" );
+  output_lines.emplace_back( "next_node_id " + std::to_string( next_node_id_ ) );
+  output_lines.emplace_back( "num_nodes " + std::to_string( nodes_.size() ) );
+
+  for( NodeSP const & n : nodes_ ) {
+    n->save( output_lines );
+  }
+
+  output_lines.emplace_back( "num_edges " + std::to_string( edges_.size() ) );
+  for( EdgeSP const & e : edges_ ) {
+    e->save( output_lines );
+  }
+
+  output_lines.emplace_back( "END_GRAPH" );
+}
+
+void
+Graph::loadSelfNodesAndEdges( std::vector< std::string > & lines, int line_to_start_at ) {
+  // First, Delete everything!
+  selected_node_ = 0;
+  selected_edge_ = 0;
+  next_node_id_ = 0;
+  nodes_.clear();
+  edges_.clear();
+
+  if( lines[ line_to_start_at ] != "START_GRAPH" ) {
+    //TODO throw something
+  }
+
+  int current_line = line_to_start_at;
+
+  while( lines[ ++current_line ] != "END_GRAPH" ){
+
+    std::string const line = lines[ current_line ];
+    std::vector< std::string > tokens;
+    {//stolen from https://stackoverflow.com/questions/13172158/c-split-string-by-line
+      std::string const delimiter = " ";
+      std::string::size_type prev = 0;
+      std::string::size_type pos = line.find( delimiter, prev );
+      while ( pos != std::string::npos ) {
+	tokens.push_back( line.substr( prev, pos - prev ) );
+	prev = pos + 1;
+	pos = line.find( delimiter, prev );
+      }
+
+      // To get the last substring (or only, if delimiter is not found)
+      tokens.push_back( line.substr( prev ) );
+    }
+
+    if( tokens.size() < 2 ) continue;
+
+    if( tokens[ 0 ] == "next_node_id" ) {
+      next_node_id_ = std::stoi( tokens[ 1 ] );
+      continue;
+    }
+    if( tokens[ 0 ] == "num_nodes" ) {
+      int const num_nodes = std::stoi( tokens[ 1 ] );
+      for( int i = 0; i < num_nodes; ++i ) {
+	NodeSP new_node = std::make_shared< Node >( lines, ++current_line );
+	nodes_.emplace_back( std::move( new_node ) );
+      }
+      assert( nodes_.size() == num_nodes );
+      while( lines[ ++current_line ] != "END_NODE" ){}
+      continue;
+    }
+    if( tokens[ 0 ] == "num_edges" ) {
+      int const num_edges = std::stoi( tokens[ 1 ] );
+      for( int i = 0; i < num_edges; ++i ) {
+	edges_.emplace_back( std::make_shared< Edge >( nodes_, lines, ++current_line ) );
+      }
+      while( lines[ ++current_line ] != "END_EDGE" ){}
+      continue;
+    }
+  }
+
+  assert( nodes_.size() > 0 );
+  selected_node_ = nodes_[ 0 ];
+}// load self
+
 
 }//namesapce graph

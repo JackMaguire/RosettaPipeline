@@ -31,6 +31,11 @@ public://deletion
 
   void removeEdgeAndNotifyItsNodes( EdgeSP & );
 
+public://IO
+  void saveSelfNodesAndEdges( std::vector< std::string > & output_lines ) const;
+
+  void loadSelfNodesAndEdges( std::vector< std::string > & output_lines, int line_to_start_at );
+
 
 public://node access
   int getNumNodes() const;
