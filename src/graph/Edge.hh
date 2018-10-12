@@ -7,7 +7,7 @@
 
 namespace graph {
 
-class Edge {
+class Edge : public std::enable_shared_from_this< Edge > {
 public:
   Edge();
   Edge( NodeSP const & source_node, NodeSP const & destination_node );
@@ -60,6 +60,13 @@ protected:
   void init();
 
   void save( std::vector< std::string > & output_lines ) const;
+
+  //load ctor
+  Edge(
+    std::vector< NodeSP > const & nodes,
+    std::vector< std::string > const & lines,
+    int line_to_start_at
+  );
 
 private:
   NodeWP source_node_;//Weak pointer to avoid circular references

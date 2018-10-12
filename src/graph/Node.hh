@@ -8,14 +8,11 @@
 
 namespace graph {
 
-class Node {
+class Node : public std::enable_shared_from_this< Node > {
 public:
   Node( int x, int y );
   Node( std::string title, int x, int y );//pass-by-value on purpose
   ~Node();
-
-protected:
-  Node( std::vector< std::string > const & lines, int line_to_start_at );
 
 public://getters and setters:
   int ID() const { return id_; }
@@ -103,6 +100,9 @@ protected:
   void init();
 
   void save( std::vector< std::string > & output_lines ) const;
+
+  //load ctor
+  Node( std::vector< std::string > const & lines, int line_to_start_at );
 
 private:
   int id_;

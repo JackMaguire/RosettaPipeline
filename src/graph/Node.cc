@@ -19,124 +19,6 @@ Node::Node( std::string title, int x, int y ) {//pass-by-value on purpose
 
 Node::~Node(){}
 
-Node::Node( std::vector< std::string > const & lines, int line_to_start_at ) {
-  init();
-
-  int current_line = line_to_start_at;
-
-  if( lines[ current_line ] != "START_NODE" ) {
-    //TODO
-    //throw new LoadFailureException( "Expected 'START_NODE' instead of '" + first_line + "'" );
-  }
-
-  while( lines[ ++current_line ] != "END_NODE" ){
-    std::string const line = lines[ current_line ];
-
-    if( line == "START_FLAGS" ) {
-      while( lines[ ++current_line ] != "END_FLAGS" ){
-	//std::move this?
-	user_rosetta_flags_.emplace_back( lines[ current_line ] );
-      }
-      continue;
-    }
-
-    if( line == "START_NOTES" ) {
-      while( lines[ ++current_line ] != "END_NOTES" ){
-	//std::move this?
-	notes_ += lines[ current_line ] + "\n";
-      }
-      continue;
-    }
-
-    if( line == "START_SCRIPT" ) {
-      while( lines[ ++current_line ] != "END_SCRIPT" ){
-	//std::move this?
-	xml_script_ += lines[ current_line ] + "\n";
-      }
-      continue;
-    }
-
-    std::vector< std::string > tokens;
-    {//stolen from https://stackoverflow.com/questions/13172158/c-split-string-by-line
-      std::string const delimiter = " ";
-      std::string::size_type prev = 0;
-      std::string::size_type pos = line.find( delimiter, prev );
-      while ( pos != std::string::npos ) {
-	tokens.push_back( line.substr( prev, pos - prev ) );
-	prev = pos + 1;
-	pos = line.find( delimiter, prev );
-      }
-
-      // To get the last substring (or only, if delimiter is not found)
-      tokens.push_back( line.substr( prev ) );
-    }
-
-    if( tokens[ 0 ] == "id" ) {
-      id_ = std::stoi( tokens[ 1 ] );
-      continue;
-    }
-
-    if( tokens[ 0 ] == "x" ) {
-      x_ = std::stoi( tokens[ 1 ] );
-      continue;
-    }
-
-    if( tokens[ 0 ] == "y" ) {
-      y_ = std::stoi( tokens[ 1 ] );
-      continue;
-    }
-
-    if( tokens[ 0 ] == "r" ) {
-      red_ = std::stoi( tokens[ 1 ] );
-      continue;
-    }
-
-    if( tokens[ 0 ] == "g" ) {
-      green_ = std::stoi( tokens[ 1 ] );
-      continue;
-    }
-
-    if( tokens[ 0 ] == "b" ) {
-      blue_ = std::stoi( tokens[ 1 ] );
-      continue;
-    }
-
-    if( tokens[ 0 ] == "command" ) {
-      command_ = "";
-      for( int i = 1; i < tokens.size(); ++i ) {
-	command_ += tokens[ i ];
-	if( i != tokens.size() - 1 ) {
-	  command_ += " ";
-	}
-      }
-      continue;
-    }
-
-    if( tokens[ 0 ] == "title" ) {
-      title_ = tokens[ 1 ];
-      for( int i = 2; i < tokens.size(); ++i ) {
-	title_ += " " + tokens[ i ];
-      }
-      continue;
-    }
-
-    if( tokens[ 0 ] == "script" ) {
-      xml_script_filename_ = ( tokens[ 1 ] == "1" );
-      continue;
-    }
-
-    if( tokens[ 0 ] == "use_script_file" ) {
-      use_script_file_ = ( tokens[ 1 ] == "1" );
-      continue;
-    }
-
-    if( tokens[ 0 ] == "use_default_command" ) {
-      continue;
-    }
-  } // for string line
-
-}
-
 void Node::init(){
   use_default_command_ = true;
 
@@ -236,6 +118,8 @@ Node::commonFlags() {
   return vec;
 }
 
+
+
 void Node::save( std::vector< std::string > & output_lines ) const {
   output_lines.emplace_back( "START_NODE" );
   output_lines.emplace_back( "id " + std::to_string( id_ ) );
@@ -292,4 +176,125 @@ void Node::save( std::vector< std::string > & output_lines ) const {
 }
 
 
-}
+
+Node::Node( std::vector< std::string > const & lines, int line_to_start_at ) {
+  init();
+
+  int current_line = line_to_start_at;
+
+  if( lines[ current_line ] != "START_NODE" ) {
+    //TODO
+    //throw new LoadFailureException( "Expected 'START_NODE' instead of '" + first_line + "'" );
+  }
+
+  while( lines[ ++current_line ] != "END_NODE" ){
+    std::string const line = lines[ current_line ];
+
+    if( line == "START_FLAGS" ) {
+      while( lines[ ++current_line ] != "END_FLAGS" ){
+	//std::move this?
+	user_rosetta_flags_.emplace_back( lines[ current_line ] );
+      }
+      continue;
+    }
+
+    if( line == "START_NOTES" ) {
+      while( lines[ ++current_line ] != "END_NOTES" ){
+	//std::move this?
+	notes_ += lines[ current_line ] + "\n";
+      }
+      continue;
+    }
+
+    if( line == "START_SCRIPT" ) {
+      while( lines[ ++current_line ] != "END_SCRIPT" ){
+	//std::move this?
+	xml_script_ += lines[ current_line ] + "\n";
+      }
+      continue;
+    }
+
+    std::vector< std::string > tokens;
+    {//stolen from https://stackoverflow.com/questions/13172158/c-split-string-by-line
+      std::string const delimiter = " ";
+      std::string::size_type prev = 0;
+      std::string::size_type pos = line.find( delimiter, prev );
+      while ( pos != std::string::npos ) {
+	tokens.push_back( line.substr( prev, pos - prev ) );
+	prev = pos + 1;
+	pos = line.find( delimiter, prev );
+      }
+
+      // To get the last substring (or only, if delimiter is not found)
+      tokens.push_back( line.substr( prev ) );
+    }
+
+    if( tokens.size() < 2 ) continue;
+
+    if( tokens[ 0 ] == "id" ) {
+      id_ = std::stoi( tokens[ 1 ] );
+      continue;
+    }
+
+    if( tokens[ 0 ] == "x" ) {
+      x_ = std::stoi( tokens[ 1 ] );
+      continue;
+    }
+
+    if( tokens[ 0 ] == "y" ) {
+      y_ = std::stoi( tokens[ 1 ] );
+      continue;
+    }
+
+    if( tokens[ 0 ] == "r" ) {
+      red_ = std::stoi( tokens[ 1 ] );
+      continue;
+    }
+
+    if( tokens[ 0 ] == "g" ) {
+      green_ = std::stoi( tokens[ 1 ] );
+      continue;
+    }
+
+    if( tokens[ 0 ] == "b" ) {
+      blue_ = std::stoi( tokens[ 1 ] );
+      continue;
+    }
+
+    if( tokens[ 0 ] == "command" ) {
+      command_ = "";
+      for( int i = 1; i < tokens.size(); ++i ) {
+	command_ += tokens[ i ];
+	if( i != tokens.size() - 1 ) {
+	  command_ += " ";
+	}
+      }
+      continue;
+    }
+
+    if( tokens[ 0 ] == "title" ) {
+      title_ = tokens[ 1 ];
+      for( int i = 2; i < tokens.size(); ++i ) {
+	title_ += " " + tokens[ i ];
+      }
+      continue;
+    }
+
+    if( tokens[ 0 ] == "script" ) {
+      xml_script_filename_ = ( tokens[ 1 ] == "1" );
+      continue;
+    }
+
+    if( tokens[ 0 ] == "use_script_file" ) {
+      use_script_file_ = ( tokens[ 1 ] == "1" );
+      continue;
+    }
+
+    if( tokens[ 0 ] == "use_default_command" ) {
+      continue;
+    }
+  } // for string line
+
+}//load ctor
+
+}//namespace graph

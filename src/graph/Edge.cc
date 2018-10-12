@@ -19,7 +19,6 @@ Edge::Edge( NodeSP const & source_node, NodeSP const & destination_node ) :
 
 Edge::~Edge(){}
 
-
 void Edge::init(){
   column_name_to_sort_by_ = "total_score";
   positive_scores_are_better_ = false;
@@ -30,7 +29,6 @@ void Edge::init(){
 
   notes_ = "";
 }
-
 
 void Edge::save( std::vector< std::string > & output_lines ) const {
 
@@ -67,5 +65,105 @@ void Edge::save( std::vector< std::string > & output_lines ) const {
 
 }
 
+
+Edge::Edge(
+  std::vector< NodeSP > const & nodes,
+  std::vector< std::string > const & lines,
+  int line_to_start_at
+) {
+  init();
+
+  int current_line = line_to_start_at;
+
+  if( lines[ current_line ] != "START_EDGE" ) {
+    //TODO
+    //throw new LoadFailureException( "Expected 'START_EDGE' instead of '" + first_line + "'" );
+  }
+ 
+  while( lines[ ++current_line ] != "END_EDGE" ){
+    std::string const line = lines[ current_line ];
+
+    if( line == "START_NOTES" ) {
+      while( lines[ ++current_line ] != "END_NOTES" ){
+	//std::move this?
+	notes_ += lines[ current_line ] + "\n";
+      }
+      continue;
+    }//Notes
+
+    std::vector< std::string > tokens;
+    {//stolen from https://stackoverflow.com/questions/13172158/c-split-string-by-line
+      std::string const delimiter = " ";
+      std::string::size_type prev = 0;
+      std::string::size_type pos = line.find( delimiter, prev );
+      while ( pos != std::string::npos ) {
+	tokens.push_back( line.substr( prev, pos - prev ) );
+	prev = pos + 1;
+	pos = line.find( delimiter, prev );
+      }
+
+      // To get the last substring (or only, if delimiter is not found)
+      tokens.push_back( line.substr( prev ) );
+    }
+
+    if( tokens.size() < 2 ) continue;
+    
+    if( tokens[ 0 ] == "source" ) {
+      int const node_id = std::stoi( tokens[ 1 ] );
+      for( NodeSP const & n : nodes ) {
+	if( n->ID() == node_id ) {
+	  source_node_ = n;
+	  source_node_.lock()->addDownstreamEdge( shared_from_this() );
+	  break;
+	}
+      }
+      continue;
+    }//if source
+
+    if( tokens[ 0 ] == "destination" ) {
+      int const node_id = std::stoi( tokens[ 1 ] );
+      for( NodeSP const & n : nodes ) {
+	if( n->ID() == node_id ) {
+	  destination_node_ = n;
+	  destination_node_.lock()->addUpstreamEdge( shared_from_this() );
+	  break;
+	}
+      }
+      continue;
+    }//if destination
+
+    if( tokens[ 0 ] == "column" ) {
+      column_name_to_sort_by_ = tokens[ 1 ];
+      continue;
+    }
+
+    if( tokens[ 0 ] == "pos_is_better" ) {
+      positive_scores_are_better_ = ( tokens[ 1 ] == "1" );
+      continue;
+    }
+
+    if( tokens[ 0 ] == "num" ) {
+      num_results_to_transfer_ = std::stoi( tokens[ 1 ] );
+      continue;
+    }
+
+    if( tokens[ 0 ] == "perc" ) {
+      percentage_of_results_to_transfer_ = std::stod( tokens[ 1 ] );
+      continue;
+    }
+
+    if( tokens[ 0 ] == "use_perc" ) {
+      use_percentage_instead_of_count_ = ( tokens[ 1 ] == "1" );
+      continue;
+    }
+
+    if( current_line == lines.size() - 1 ){
+      //TODO
+      //throw something
+    }
+
+  }//while not END_EDGE
+
+}
 
 } //namespace graph
