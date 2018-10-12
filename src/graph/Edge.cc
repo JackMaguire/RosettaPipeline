@@ -4,13 +4,13 @@
 namespace graph {
 
 Edge::Edge() :
-  source_node_( 0 ),
-  destination_node_( 0 )
+  source_node_(),
+  destination_node_()
 {
   init();
 }
 
-Edge::Edge( NodeSP const & source_node, NodeSP const & destination_node )
+Edge::Edge( NodeSP const & source_node, NodeSP const & destination_node ) :
   source_node_( source_node ),
   destination_node_( destination_node )
 {

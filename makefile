@@ -1,3 +1,6 @@
 
-make: graph/Node.cc
-	clang++ -c -o ../build/Node.o graph/Node.cc -O3 -I. -std=c++17
+Node.o: src/graph/Node.cc
+	clang++ -c -o build/Node.o src/graph/Node.cc -O3 -Isrc -std=c++17
+
+Edge.o: src/graph/Edge.cc
+	clang++ -c -o build/Edge.o src/graph/Edge.cc -O3 -Isrc -std=c++17
