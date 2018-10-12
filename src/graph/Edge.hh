@@ -2,12 +2,16 @@
 
 #include <graph/Edge.fwd.hh>
 #include <graph/Node.fwd.hh>
+#include <graph/Graph.fwd.hh>
 
 #include <string>
 
 namespace graph {
 
 class Edge : public std::enable_shared_from_this< Edge > {
+
+friend class Graph;
+
 public:
   Edge();
   Edge( NodeSP const & source_node, NodeSP const & destination_node );
@@ -61,6 +65,7 @@ protected:
 
   void save( std::vector< std::string > & output_lines ) const;
 
+public://This technically has to be public in order to use make_shared
   //load ctor
   Edge(
     std::vector< NodeSP > const & nodes,

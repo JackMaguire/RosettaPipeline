@@ -2,6 +2,7 @@
 
 #include <graph/Node.fwd.hh>
 #include <graph/Edge.fwd.hh>
+#include <graph/Graph.fwd.hh>
 
 #include <vector>
 #include <string>
@@ -9,6 +10,9 @@
 namespace graph {
 
 class Node : public std::enable_shared_from_this< Node > {
+
+friend class Graph;
+
 public:
   Node( int x, int y );
   Node( std::string title, int x, int y );//pass-by-value on purpose
@@ -104,6 +108,7 @@ protected:
 
   void save( std::vector< std::string > & output_lines ) const;
 
+public://This technically has to be public in order to use make_shared
   //load ctor
   Node( std::vector< std::string > const & lines, int line_to_start_at );
 
