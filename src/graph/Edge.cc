@@ -32,6 +32,17 @@ void Edge::init(){
   notes_ = "";
 }
 
+namespace {
+//Stolen from https://stackoverflow.com/questions/874134/find-if-string-ends-with-another-string-in-c
+bool hasEnding ( std::string const & fullString, std::string const & ending ) {
+  if( fullString.length() < ending.length() ) {
+    return false;
+  }
+
+  return fullString.compare ( fullString.length() - ending.length(), ending.length(), ending ) == 0;
+}
+}
+
 void Edge::save( std::vector< std::string > & output_lines ) const {
 
   output_lines.emplace_back( "START_EDGE" );
@@ -48,18 +59,10 @@ void Edge::save( std::vector< std::string > & output_lines ) const {
     ( use_percentage_instead_of_count_ ? "1" : "0" ) );
 
   output_lines.emplace_back( "START_NOTES" );
-  {//stolen from https://stackoverflow.com/questions/13172158/c-split-string-by-line
-    std::string const delimiter = "\n";
-    std::string::size_type prev = 0;
-    std::string::size_type pos = notes_.find( delimiter, prev );
-    while ( pos != std::string::npos ) {
-      output_lines.push_back( notes_.substr( prev, pos - prev ) );
-      prev = pos + 1;
-      pos = notes_.find( delimiter, prev );
-    }
-
-    // To get the last substring (or only, if delimiter is not found)
-    output_lines.push_back( notes_.substr( prev ) );
+  if( hasEnding( notes_, "\n") ){
+    output_lines.emplace_back( notes_ );
+  } else {
+    output_lines.emplace_back( notes_ + "\n" );
   }
   output_lines.emplace_back( "END_NOTES" );
 
