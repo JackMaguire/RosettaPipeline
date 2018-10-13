@@ -232,7 +232,6 @@ Node::Node( std::vector< std::string > const & lines, int line_to_start_at ) {
 
     if( tokens[ 0 ] == "id" ) {
       id_ = std::stoi( tokens[ 1 ] );
-      std::cout << "LOADING ID: " << id_ << std::endl;
       continue;
     }
 

@@ -107,11 +107,9 @@ Edge::load(
     
     if( tokens[ 0 ] == "source" ) {
       int const node_id = std::stoi( tokens[ 1 ] );
-      std::cout << "looking1 for node with id " << node_id << std::endl;
       bool found_a_match = false;
       for( NodeSP const & n : nodes ) {
 	if( n->ID() == node_id ) {
-	  std::cout << "\t" << n->ID() << std::endl;
 	  source_node_ = n;
 	  n->addDownstreamEdge( shared_from_this() );
 	  found_a_match = true;
@@ -124,10 +122,8 @@ Edge::load(
 
     if( tokens[ 0 ] == "destination" ) {
       int const node_id = std::stoi( tokens[ 1 ] );
-      std::cout << "looking2 for node with id " << node_id << std::endl;
       bool found_a_match = false;
       for( NodeSP const & n : nodes ) {
-	std::cout << "\t" << n->ID() << std::endl;
 	if( n->ID() == node_id ) {
 	  destination_node_ = n;
 	  n->addUpstreamEdge( shared_from_this() );
