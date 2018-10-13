@@ -67,14 +67,12 @@ void Edge::save( std::vector< std::string > & output_lines ) const {
 
 }
 
-
-Edge::Edge(
+void
+Edge::load(
   std::vector< NodeSP > const & nodes,
   std::vector< std::string > const & lines,
   int line_to_start_at
 ) {
-  init();
-
   int current_line = line_to_start_at;
 
   assert( lines[ current_line ] == "START_EDGE" );
@@ -109,7 +107,7 @@ Edge::Edge(
     
     if( tokens[ 0 ] == "source" ) {
       int const node_id = std::stoi( tokens[ 1 ] );
-      std::cout << "looking for node with id " << node_id << std::endl;
+      std::cout << "looking1 for node with id " << node_id << std::endl;
       bool found_a_match = false;
       for( NodeSP const & n : nodes ) {
 	if( n->ID() == node_id ) {
@@ -126,7 +124,7 @@ Edge::Edge(
 
     if( tokens[ 0 ] == "destination" ) {
       int const node_id = std::stoi( tokens[ 1 ] );
-      std::cout << "looking for node with id " << node_id << std::endl;
+      std::cout << "looking2 for node with id " << node_id << std::endl;
       bool found_a_match = false;
       for( NodeSP const & n : nodes ) {
 	std::cout << "\t" << n->ID() << std::endl;

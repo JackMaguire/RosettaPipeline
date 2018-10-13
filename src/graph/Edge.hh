@@ -65,9 +65,8 @@ protected:
 
   void save( std::vector< std::string > & output_lines ) const;
 
-public://This technically has to be public in order to use make_shared
-  //load ctor
-  Edge(
+  //load 
+  void load(
     std::vector< NodeSP > const & nodes,
     std::vector< std::string > const & lines,
     int line_to_start_at
