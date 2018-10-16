@@ -23,6 +23,13 @@ graph: Node.o Edge.o Graph.o
 
 bin: save_and_load_graph
 
+###########
+# OPTIONS #
+###########
+
+options: src/global_data/options.hh
+	${CXX} -c -o build/options.o src/global_data/options.cc ${GEN} 
+
 #########
 # GRAPH #
 #########

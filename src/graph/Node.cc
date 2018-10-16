@@ -176,7 +176,7 @@ void Node::save( std::vector< std::string > & output_lines ) const {
 Node::Node( std::vector< std::string > const & lines, int line_to_start_at ) {
   init();
 
-  int current_line = line_to_start_at;
+  uint current_line = line_to_start_at;
 
   assert( lines[ current_line ] == "START_NODE" );
 
