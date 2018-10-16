@@ -5,6 +5,7 @@
 #include <graph/Graph.fwd.hh>
 
 #include <vector>
+#include <algorithm>
 #include <string>
 #include <cassert>
 

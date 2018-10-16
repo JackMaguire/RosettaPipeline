@@ -134,8 +134,8 @@ Graph::loadSelfNodesAndEdges( std::vector< std::string > & lines, int line_to_st
       continue;
     }
     if( tokens[ 0 ] == "num_nodes" ) {
-      int const num_nodes = std::stoi( tokens[ 1 ] );
-      for( int i = 0; i < num_nodes; ++i ) {
+      uint const num_nodes = std::stoi( tokens[ 1 ] );
+      for( uint i = 0; i < num_nodes; ++i ) {
 	NodeSP new_node = std::make_shared< Node >( lines, ++current_line );
 	nodes_.emplace_back( std::move( new_node ) );
 	while( lines[ ++current_line ] != "END_NODE" ){}

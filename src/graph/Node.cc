@@ -256,7 +256,7 @@ Node::Node( std::vector< std::string > const & lines, int line_to_start_at ) {
 
     if( tokens[ 0 ] == "command" ) {
       command_ = "";
-      for( int i = 1; i < tokens.size(); ++i ) {
+      for( unsigned int i = 1; i < tokens.size(); ++i ) {
 	command_ += tokens[ i ];
 	if( i != tokens.size() - 1 ) {
 	  command_ += " ";
@@ -267,7 +267,7 @@ Node::Node( std::vector< std::string > const & lines, int line_to_start_at ) {
 
     if( tokens[ 0 ] == "title" ) {
       title_ = tokens[ 1 ];
-      for( int i = 2; i < tokens.size(); ++i ) {
+      for( unsigned int i = 2; i < tokens.size(); ++i ) {
 	title_ += " " + tokens[ i ];
       }
       continue;

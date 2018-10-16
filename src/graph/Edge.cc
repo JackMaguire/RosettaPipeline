@@ -76,7 +76,7 @@ Edge::load(
   std::vector< std::string > const & lines,
   int line_to_start_at
 ) {
-  int current_line = line_to_start_at;
+  unsigned int current_line = line_to_start_at;
 
   assert( lines[ current_line ] == "START_EDGE" );
  

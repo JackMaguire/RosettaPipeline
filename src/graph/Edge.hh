@@ -5,6 +5,7 @@
 #include <graph/Graph.fwd.hh>
 
 #include <string>
+#include <vector>
 #include <cassert>
 
 namespace graph {
