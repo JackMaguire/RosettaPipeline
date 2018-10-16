@@ -86,7 +86,7 @@ void addStageIntroToScript( int stage, std::stringstream & script ) {
 }
 
 void addGlobalVariablesToRunScript( std::stringstream & script ) {
-  script << "nproc=" << options::GlobalOptions::getNumProcessors() << "\n";
+  script << "nproc=" << options::GlobalOptions::num_processors << "\n";
 }
 
 
