@@ -1,6 +1,12 @@
 # This is my first makefile ever so be nice!
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+	include makefile_ubuntu
+endif
+ifeq ($(UNAME_S),Darwin)
+	include makefile_mac
+endif
 
-include makefile_ubuntu
 #include makefile_mac
 
 WT_FLAGS=-lwthttp -lwt -lboost_signals
@@ -43,9 +49,16 @@ DummyPanel.o: src/devel/DummyPanel.hh
 save_and_load_graph.o: src/apps/proof_of_concept/save_and_load_graph.cc build/graph.o
 	${CXX} -c -o build/save_and_load_graph.o src/apps/proof_of_concept/save_and_load_graph.cc -O3 -Isrc -std=${std} ${WARN}
 
+testing_ground.o: build/graph.o
+	${CXX} -c -o build/testing_ground.o src/apps/proof_of_concept/testing_ground.cc -O3 -Isrc -std=${std} ${WARN}
+
 #######
 # BIN #
 #######
 
 save_and_load_graph: build/graph.o build/save_and_load_graph.o
 	${CXX} -o bin/save_and_load_graph build/save_and_load_graph.o build/graph.o -O3 -Isrc -std=${std} ${WARN}
+
+
+testing_ground: build/graph.o build/testing_ground.o
+	${CXX} -o bin/testing_ground build/testing_ground.o build/graph.o -O3 -Isrc -std=${std} ${WARN}
