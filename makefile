@@ -1,4 +1,6 @@
 # This is my first makefile ever so be nice!
+
+#logic stolen from https://stackoverflow.com/questions/714100/os-detecting-makefile
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
 	include makefile_ubuntu
