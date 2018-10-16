@@ -12,6 +12,7 @@ public:
   MyPaintedWidget()
     : WPaintedWidget(), end_(100)
   {
+    //setLayoutSizeAware( true );
     resize(200, 60);   // Provide a default size.
   }
 
@@ -19,6 +20,10 @@ public:
     end_ = end;
     update();          // Trigger a repaint.
   }
+
+  /*void layoutSizeChanged( int w, int h ) override {
+    }*/
+};
 
 protected:
   void paintEvent(Wt::WPaintDevice *paintDevice) {
