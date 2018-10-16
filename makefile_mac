@@ -1,5 +1,5 @@
 # This is my first makefile ever so be nice!
 
-CXX='clang++'
-std='c++1z'
-WARN='-Wall'
+CXX=clang++
+std=c++1z
+WARN=-Wall
