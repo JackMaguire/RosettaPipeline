@@ -64,7 +64,7 @@ public://getters and setters:
 public://general compilation access
   std::string const & getEffectiveCommand() const;
 
-  int inDegreeIgnoringTheseNodes( std::vector< NodeSP > const & nodes_to_ignore ) const;
+  int inDegreeIgnoringTheseNodes( std::vector< NodeCSP > const & nodes_to_ignore ) const;
 
   std::string dirname() const;
 

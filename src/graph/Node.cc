@@ -60,7 +60,7 @@ void Node::init(){
 }
 
 int
-Node::inDegreeIgnoringTheseNodes( std::vector< NodeSP > const & nodes_to_ignore ) const {
+Node::inDegreeIgnoringTheseNodes( std::vector< NodeCSP > const & nodes_to_ignore ) const {
   int degree = 0;
   for( EdgeSP const & e : upstream_edges_ ) {
     NodeSP const upstream_node = e->getSourceNodeSP();

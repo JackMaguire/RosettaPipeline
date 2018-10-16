@@ -40,6 +40,30 @@ bool cycleExists( Graph const & g ) {
   return false;
 }
 
+
+std::vector< graph::NodeCSP > determineOrderOfNodes( graph::Graph const & g ) {
+  std::vector< graph::NodeSP > unassigned_nodes = g.nodes();//Copy!
+  std::vector< graph::NodeCSP > assigned_nodes_in_order;
+
+  while ( true ) {
+    // Add nodes that do not depend on any unassigned node
+    // Work backwards so that we can easily delete while we work
+    for( int j = unassigned_nodes.size() - 1; j >= 0; --j ) {
+      graph::NodeCSP const & u_node = unassigned_nodes[ j ];
+      if( u_node->inDegreeIgnoringTheseNodes( assigned_nodes_in_order ) == 0 ) {
+	assigned_nodes_in_order.push_back( u_node );
+	unassigned_nodes.erase( unassigned_nodes.begin() + j );
+      }
+    }
+
+    if( unassigned_nodes.size() == 0 ) {
+      break;
+    }
+  }
+
+  return assigned_nodes_in_order;
+}
+
 std::string
 compile_setup_script( graph::Graph const & g ){
   std::string script = "";

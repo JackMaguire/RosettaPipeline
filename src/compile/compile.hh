@@ -2,11 +2,20 @@
 
 #include <graph/Graph.hh>
 
-namespace compile {
+#include <string>
+#include <vector>
 
-bool cycleExists( graph::Graph const & g );
+namespace compile {
 
 std::string
 compile_setup_script( graph::Graph const & g );
+
+
+//utility
+bool cycleExists( graph::Graph const & g );
+
+std::vector< graph::NodeCSP >
+determineOrderOfNodes( Graph const & g );
+
 
 }//namespace compile
