@@ -3,6 +3,8 @@
 include makefile_ubuntu
 #include makefile_mac
 
+WT_FLAGS=-lwthttp -lwt -lboost_signals
+
 ########
 # META #
 ########
@@ -31,6 +33,9 @@ graph: build/Graph.o build/Edge.o build/Node.o
 #########
 # DEVEL #
 #########
+
+DummyPanel.o: src/devel/DummyPanel.hh
+	${CXX} -c -o build/DummyPanel.o src/devel/DummyPanel.hh -O3 -Isrc -std=${std} ${WARN} ${WT_FLAGS}
 
 ########
 # APPS #
