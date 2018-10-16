@@ -16,7 +16,7 @@ WT_FLAGS=-lwthttp -lwt -lboost_signals
 ########
 # META #
 ########
-all: graph save_and_load_graph.o bin
+all: graph devel apps bin
 
 graph: Node.o Edge.o Graph.o
 
@@ -45,6 +45,12 @@ graph: build/Graph.o build/Edge.o build/Node.o
 DummyPanel.o: src/devel/DummyPanel.hh
 	${CXX} -c -o build/DummyPanel.o src/devel/DummyPanel.hh -O3 -Isrc -std=${std} ${WARN} ${WT_FLAGS}
 
+devel: build/DummyPanel.o
+	cp build/DummyPanel.o build/devel.o
+
+#devel: build/DummyPanel.o
+#	ld -r build/DummyPanel.o -o build/devel.o
+
 ########
 # APPS #
 ########
@@ -54,6 +60,8 @@ save_and_load_graph.o: src/apps/proof_of_concept/save_and_load_graph.cc build/gr
 testing_ground.o: build/graph.o
 	${CXX} -c -o build/testing_ground.o src/apps/proof_of_concept/testing_ground.cc -O3 -Isrc -std=${std} ${WARN}
 
+apps: save_and_load_graph.o testing_ground.o
+
 #######
 # BIN #
 #######
@@ -62,5 +70,5 @@ save_and_load_graph: build/graph.o build/save_and_load_graph.o
 	${CXX} -o bin/save_and_load_graph build/save_and_load_graph.o build/graph.o -O3 -Isrc -std=${std} ${WARN}
 
 
-testing_ground: build/graph.o build/testing_ground.o
-	${CXX} -o bin/testing_ground build/testing_ground.o build/graph.o -O3 -Isrc -std=${std} ${WARN}
+testing_ground: build/graph.o build/testing_ground.o build/devel.o
+	${CXX} -o bin/testing_ground build/testing_ground.o build/graph.o build/devel.o -O3 -Isrc -std=${std} ${WARN}
