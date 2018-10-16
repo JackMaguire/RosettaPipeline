@@ -17,7 +17,7 @@ WT_FLAGS=-lwthttp -lwt -lboost_signals
 ########
 # META #
 ########
-all: graph devel apps bin
+all: graph compile devel apps bin
 
 graph: Node.o Edge.o Graph.o
 
@@ -39,6 +39,13 @@ Graph.o: src/graph/Graph.cc src/graph/Node.hh src/graph/Edge.hh
 graph: Graph.o Edge.o Node.o
 	ld -r build/Graph.o build/Edge.o build/Node.o -o build/graph.o
 
+###########
+# COMPILE #
+###########
+
+compile: graph
+	${CXX} -c -o build/compile.o src/compile/compile.cc ${GEN} 
+
 #########
 # DEVEL #
 #########
@@ -46,7 +53,7 @@ graph: Graph.o Edge.o Node.o
 DummyPanel.o: src/devel/DummyPanel.hh
 	${CXX} -c -o build/DummyPanel.o src/devel/DummyPanel.hh ${GEN} ${WT_FLAGS}
 
-devel: build/DummyPanel.o
+devel: DummyPanel.o
 	cp build/DummyPanel.o build/devel.o
 
 #devel: build/DummyPanel.o
@@ -55,10 +62,10 @@ devel: build/DummyPanel.o
 ########
 # APPS #
 ########
-save_and_load_graph.o: src/apps/proof_of_concept/save_and_load_graph.cc build/graph.o
+save_and_load_graph.o: src/apps/proof_of_concept/save_and_load_graph.cc graph
 	${CXX} -c -o build/save_and_load_graph.o src/apps/proof_of_concept/save_and_load_graph.cc ${GEN}
 
-testing_ground.o: build/graph.o
+testing_ground.o: graph
 	${CXX} -c -o build/testing_ground.o src/apps/proof_of_concept/testing_ground.cc ${GEN}
 
 apps: save_and_load_graph.o testing_ground.o
