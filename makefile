@@ -32,6 +32,9 @@ bin: save_and_load_graph
 options: src/global_data/options.hh
 	${CXX} -c -o build/options.o src/global_data/options.cc ${GEN} 
 
+global_data: options
+	cp build/options.o build/global_data.o
+
 #########
 # GRAPH #
 #########
@@ -71,7 +74,7 @@ devel: DummyPanel.o
 ########
 # APPS #
 ########
-save_and_load_graph.o: src/apps/proof_of_concept/save_and_load_graph.cc graph
+save_and_load_graph.o: src/apps/proof_of_concept/save_and_load_graph.cc graph global_data
 	${CXX} -c -o build/save_and_load_graph.o src/apps/proof_of_concept/save_and_load_graph.cc ${GEN}
 
 testing_ground.o: graph
@@ -83,8 +86,8 @@ apps: save_and_load_graph.o testing_ground.o
 # BIN #
 #######
 
-save_and_load_graph: build/graph.o build/save_and_load_graph.o
-	${CXX} -o bin/save_and_load_graph build/save_and_load_graph.o build/graph.o ${GEN}
+save_and_load_graph: build/save_and_load_graph.o graph global_data
+	${CXX} -o bin/save_and_load_graph build/save_and_load_graph.o build/global_data.o build/graph.o ${GEN}
 
 
 testing_ground: build/graph.o build/testing_ground.o build/devel.o
