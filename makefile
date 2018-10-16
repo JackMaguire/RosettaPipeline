@@ -11,6 +11,7 @@ endif
 
 #include makefile_mac
 
+GEN=-flto -O3 -Isrc -std=${std} ${WARN}
 WT_FLAGS=-lwthttp -lwt -lboost_signals
 
 ########
@@ -27,13 +28,13 @@ bin: save_and_load_graph
 #########
 
 Node.o: src/graph/Node.cc src/graph/Edge.hh src/graph/Graph.fwd.hh
-	${CXX} -c -o build/Node.o src/graph/Node.cc -O3 -Isrc -std=${std} ${WARN}
+	${CXX} -c -o build/Node.o src/graph/Node.cc ${GEN}
 
 Edge.o: src/graph/Edge.cc src/graph/Node.hh src/graph/Graph.fwd.hh
-	${CXX} -c -o build/Edge.o src/graph/Edge.cc -O3 -Isrc -std=${std} ${WARN}
+	${CXX} -c -o build/Edge.o src/graph/Edge.cc ${GEN}
 
 Graph.o: src/graph/Graph.cc src/graph/Node.hh src/graph/Edge.hh
-	${CXX} -c -o build/Graph.o src/graph/Graph.cc -O3 -Isrc -std=${std} ${WARN}
+	${CXX} -c -o build/Graph.o src/graph/Graph.cc ${GEN}
 
 graph: Graph.o Edge.o Node.o
 	ld -r build/Graph.o build/Edge.o build/Node.o -o build/graph.o
@@ -43,7 +44,7 @@ graph: Graph.o Edge.o Node.o
 #########
 
 DummyPanel.o: src/devel/DummyPanel.hh
-	${CXX} -c -o build/DummyPanel.o src/devel/DummyPanel.hh -O3 -Isrc -std=${std} ${WARN} ${WT_FLAGS}
+	${CXX} -c -o build/DummyPanel.o src/devel/DummyPanel.hh ${GEN} ${WT_FLAGS}
 
 devel: build/DummyPanel.o
 	cp build/DummyPanel.o build/devel.o
@@ -55,10 +56,10 @@ devel: build/DummyPanel.o
 # APPS #
 ########
 save_and_load_graph.o: src/apps/proof_of_concept/save_and_load_graph.cc build/graph.o
-	${CXX} -c -o build/save_and_load_graph.o src/apps/proof_of_concept/save_and_load_graph.cc -O3 -Isrc -std=${std} ${WARN}
+	${CXX} -c -o build/save_and_load_graph.o src/apps/proof_of_concept/save_and_load_graph.cc ${GEN}
 
 testing_ground.o: build/graph.o
-	${CXX} -c -o build/testing_ground.o src/apps/proof_of_concept/testing_ground.cc -O3 -Isrc -std=${std} ${WARN}
+	${CXX} -c -o build/testing_ground.o src/apps/proof_of_concept/testing_ground.cc ${GEN}
 
 apps: save_and_load_graph.o testing_ground.o
 
@@ -67,8 +68,8 @@ apps: save_and_load_graph.o testing_ground.o
 #######
 
 save_and_load_graph: build/graph.o build/save_and_load_graph.o
-	${CXX} -o bin/save_and_load_graph build/save_and_load_graph.o build/graph.o -O3 -Isrc -std=${std} ${WARN}
+	${CXX} -o bin/save_and_load_graph build/save_and_load_graph.o build/graph.o ${GEN}
 
 
 testing_ground: build/graph.o build/testing_ground.o build/devel.o
-	${CXX} -o bin/testing_ground build/testing_ground.o build/graph.o build/devel.o -O3 -Isrc -std=${std} ${WARN}
+	${CXX} -o bin/testing_ground build/testing_ground.o build/graph.o build/devel.o ${GEN}
