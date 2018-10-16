@@ -3,3 +3,4 @@
 CXX=clang++
 std=c++1z
 WARN=-Wall
+ARCH=i386

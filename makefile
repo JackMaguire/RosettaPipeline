@@ -11,13 +11,15 @@ endif
 
 #include makefile_mac
 
-GEN=-flto -O3 -Isrc -std=${std} ${WARN}
+GEN=-flto -O3 -Isrc -std=${std} ${WARN} -arch ${ARCH}
 WT_FLAGS=-lwthttp -lwt -lboost_signals
 
 ########
 # META #
 ########
 all: graph compile devel apps bin
+
+all_no_wt: graph compile
 
 graph: Node.o Edge.o Graph.o
 
@@ -44,7 +46,7 @@ Graph.o: src/graph/Graph.cc src/graph/Node.hh src/graph/Edge.hh
 	${CXX} -c -o build/Graph.o src/graph/Graph.cc ${GEN}
 
 graph: Graph.o Edge.o Node.o
-	ld -r build/Graph.o build/Edge.o build/Node.o -o build/graph.o
+	ld -r build/Graph.o build/Edge.o build/Node.o -o build/graph.o -arch ${ARCH}
 
 ###########
 # COMPILE #
