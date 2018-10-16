@@ -1,7 +1,8 @@
 #pragma once
 
-#include <graph/Graph.hh>
+#include <graph/Graph.fwd.hh>
 
+#include <sstream>
 #include <string>
 #include <vector>
 
@@ -17,5 +18,10 @@ bool cycleExists( graph::Graph const & g );
 std::vector< graph::NodeCSP >
 determineOrderOfNodes( Graph const & g );
 
+void addGlobalIntroToScript( std::stringstream & script );
+
+void addStageIntroToScript( int stage, std::stringstream & script );
+
+void addGlobalVariablesToRunScript( std::stringstream & script );
 
 }//namespace compile

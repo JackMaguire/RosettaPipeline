@@ -1,14 +1,23 @@
 #include <graph/Graph.hh>
-
-#include <graph/Graph.hh>
 #include <graph/Node.hh>
 #include <graph/Edge.hh>
 
+#include <global_data/options.hh>
+
 #include <set>
+#include <sstream>
 
 using namespace graph;
 
 namespace compile {
+
+std::string
+compile_setup_script( graph::Graph const & g ){
+  std::string script = "";
+
+  return script;
+}
+
 
 bool cycleExists( NodeCSP const & starting_node, std::set< NodeCSP > & nodes_already_visited ) {
   if( nodes_already_visited.find( starting_node ) != nodes_already_visited.end() ) {
@@ -64,11 +73,21 @@ std::vector< graph::NodeCSP > determineOrderOfNodes( graph::Graph const & g ) {
   return assigned_nodes_in_order;
 }
 
-std::string
-compile_setup_script( graph::Graph const & g ){
-  std::string script = "";
-
-  return script;
+void addGlobalIntroToScript( std::stringstream & script ) {
+  script << "# Script was created using JD3BASH\n";
+  //script << "# Version number: " << VersionInfo.current_version << "\n";//TODO
+  script << "# Visit github.com/JackMaguire/JD3Bash for details\n\n";
 }
 
-};
+void addStageIntroToScript( int stage, std::stringstream & script ) {
+  script << "\n###########\n";
+  script << "# STAGE " << stage << " #\n";
+  script << "###########\n\n";
+}
+
+void addGlobalVariablesToRunScript( std::stringstream & script ) {
+  script << "nproc=" << options::GlobalOptions::getNumProcessors() << "\n";
+}
+
+
+}//namespace compile
