@@ -3,9 +3,9 @@
 #include <string>
 #include <vector>
 
-namespace options {
+namespace global_data {
 
-struct GlobalOptions {
+struct Options {
 
   //////////////
   // View Options
@@ -27,14 +27,14 @@ struct GlobalOptions {
 
 };
 
-bool GlobalOptions::show_node_titles = true;
-bool GlobalOptions::put_node_titles_to_side = true;
-int GlobalOptions::grid_size = 10;
+bool Options::show_node_titles = true;
+bool Options::put_node_titles_to_side = true;
+int Options::grid_size = 10;
 
-bool GlobalOptions::serialize_intermediate_poses = false;
-int GlobalOptions::num_processors = 0;
-std::string GlobalOptions::default_run_command =
+bool Options::serialize_intermediate_poses = false;
+int Options::num_processors = 0;
+std::string Options::default_run_command =
   std::string( "mpirun -n $nproc rosetta_scripts.mpiserialization.linuxgccrelease @ flags" );
-bool GlobalOptions::delete_unused_intermediate_poses = true;
+bool Options::delete_unused_intermediate_poses = true;
 
 };

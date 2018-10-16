@@ -6,10 +6,10 @@ namespace global_data {
 
 struct Version {
 
-  static std::string number = "0.0.0";
+  static std::string number;
 
 };
 
-std::string Version::number;
+std::string Version::number = "0.0.0";
 
 } //namespace

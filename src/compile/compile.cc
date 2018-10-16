@@ -3,6 +3,7 @@
 #include <graph/Edge.hh>
 
 #include <global_data/options.hh>
+#include <global_data/version.hh>
 
 #include <set>
 #include <sstream>
@@ -75,7 +76,7 @@ std::vector< graph::NodeCSP > determineOrderOfNodes( graph::Graph const & g ) {
 
 void addGlobalIntroToScript( std::stringstream & script ) {
   script << "# Script was created using JD3BASH\n";
-  //script << "# Version number: " << VersionInfo.current_version << "\n";//TODO
+  script << "# Version number: " << global_data::Version::number << "\n";
   script << "# Visit github.com/JackMaguire/JD3Bash for details\n\n";
 }
 
@@ -86,7 +87,7 @@ void addStageIntroToScript( int stage, std::stringstream & script ) {
 }
 
 void addGlobalVariablesToRunScript( std::stringstream & script ) {
-  script << "nproc=" << options::GlobalOptions::num_processors << "\n";
+  script << "nproc=" << global_data::Options::num_processors << "\n";
 }
 
 

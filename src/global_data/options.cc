@@ -1,10 +1,10 @@
 #include <global_data/options.hh>
 
-namespace options {
+namespace global_data {
 
 ////////////
 // Save/Load
-void GlobalOptions::save( std::vector< std::string > & output_lines ) {
+void Options::save( std::vector< std::string > & output_lines ) {
   output_lines.emplace_back( "START_OPTIONS" );
 
   output_lines.emplace_back( "show_node_titles " + std::to_string( show_node_titles ) );
@@ -18,7 +18,7 @@ void GlobalOptions::save( std::vector< std::string > & output_lines ) {
   output_lines.emplace_back( "END_OPTIONS" );
 }
 
-void GlobalOptions::load( std::vector< std::string > const & lines, int line_to_start_at ) {
+void Options::load( std::vector< std::string > const & lines, int line_to_start_at ) {
 
   unsigned int current_line = line_to_start_at;
 
