@@ -17,9 +17,9 @@ WT_FLAGS=-lwthttp -lwt -lboost_signals
 ########
 # META #
 ########
-all: graph compile devel apps bin
+all: options graph compile devel apps bin
 
-all_no_wt: graph compile
+all_no_wt: options graph compile
 
 graph: Node.o Edge.o Graph.o
 

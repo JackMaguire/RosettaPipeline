@@ -40,6 +40,11 @@ bool cycleExists( Graph const & g ) {
   return false;
 }
 
+std::string
+compile_setup_script( graph::Graph const & g ){
+  std::string script = "";
 
+  return script;
+}
 
 };
