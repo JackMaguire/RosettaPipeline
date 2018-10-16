@@ -35,7 +35,7 @@ Edge.o: src/graph/Edge.cc src/graph/Node.hh src/graph/Graph.fwd.hh
 Graph.o: src/graph/Graph.cc src/graph/Node.hh src/graph/Edge.hh
 	${CXX} -c -o build/Graph.o src/graph/Graph.cc -O3 -Isrc -std=${std} ${WARN}
 
-graph: build/Graph.o build/Edge.o build/Node.o
+graph: Graph.o Edge.o Node.o
 	ld -r build/Graph.o build/Edge.o build/Node.o -o build/graph.o
 
 #########
