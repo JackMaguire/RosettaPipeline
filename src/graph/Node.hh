@@ -58,8 +58,8 @@ public://getters and setters:
   void setXMLScript( std::string setting ){ xml_script_ = std::move( setting ); }  
 
   int stage() const { return stage_; }//TODO check validity
-  void setStage( int setting ){ stage_ = setting; }
-  void setStageValidity( bool setting ){ stage_is_valid_ = setting; }
+  void setStage( int setting ) const { stage_ = setting; }
+  void setStageValidity( bool setting ) const { stage_is_valid_ = setting; }
 
 public://general compilation access
   std::string const & getEffectiveCommand() const;
@@ -71,6 +71,8 @@ public://general compilation access
   std::vector< std::string > determineAutoFlags() const;
 
   static std::vector< std::string > commonFlags();
+
+  std::vector< std::string > getAllRosettaFlags() const;
 
 public://edge access and modification
   int numUpstreamEdges() const;
@@ -139,8 +141,8 @@ private:
   // true, run methods that call stage_, and set stage_is_valid_ to false.
   // stage_is_valid_ is meant to prevent other methods from calling getStage()
   // and assuming it is the current stage when it is in fact unassigned
-  int stage_;
-  bool stage_is_valid_;
+  mutable int stage_;
+  mutable bool stage_is_valid_;
 
   std::vector< std::string > user_rosetta_flags_;
   std::string notes_;

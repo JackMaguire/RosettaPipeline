@@ -120,6 +120,23 @@ Node::commonFlags() {
   return vec;
 }
 
+std::vector< std::string >
+Node::getAllRosettaFlags() const {
+  std::vector< std::string > all_flags;
+
+  all_flags.emplace_back( "# Generated Flags:" );
+  for( auto const & s : determineAutoFlags() ) {
+    all_flags.emplace_back( s );
+  }
+
+  all_flags.emplace_back( "" );
+  all_flags.emplace_back( "# Your Additional Flags:" );
+  for( auto const & s : user_rosetta_flags_ ) {
+    all_flags.emplace_back( s );
+  }
+
+  return all_flags;
+}
 
 namespace {
 //Stolen from https://stackoverflow.com/questions/874134/find-if-string-ends-with-another-string-in-c
