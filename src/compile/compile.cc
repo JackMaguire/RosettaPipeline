@@ -59,23 +59,23 @@ compile( graph::Graph const & g ){
 
 std::string
 compile_setup_script( std::vector< graph::NodeCSP > const & nodes_in_order ){
-  std::stringstream script;
+  std::stringstream setup_script;
 
-  addGlobalIntroToScript( script );
+  addGlobalIntroToScript( setup_script );
   
   for( graph::NodeCSP const & node : nodes_in_order ){
-    addStageIntroToScript( node->stage(), script );
+    addStageIntroToScript( node->stage(), setup_script );
 
     std::string const dirname = node->dirname();
-    script << "mkdir " << dirname << "\n"
+    setup_script << "mkdir " << dirname << "\n"
       "cd " << dirname << "\n";
 
     if( node->numUpstreamEdges() > 0 ) {
-      script << "touch input_files\n";
+      setup_script << "touch input_files\n";
     }
 
     for( auto const & flag : node->getAllRosettaFlags() ) {
-      script << "echo \"" << flag << "\" >> flags\n";
+      setup_script << "echo \"" << flag << "\" >> flags\n";
     }
 
     if( ! node->useScriptFile() ) {
@@ -106,23 +106,23 @@ compile_setup_script( std::vector< graph::NodeCSP > const & nodes_in_order ){
 	}
       }
 
-      script << "printf " << xml_script << "script.xml\n";
+      setup_script << "printf " << xml_script << "script.xml\n";
     }
 
     if( global_data::Options::serialize_intermediate_poses ) {
       if( node->numUpstreamEdges() > 0 ) {
-	script << "echo \"-in:file:srlz_override 1\" >> flags\n";
+	setup_script << "echo \"-in:file:srlz_override 1\" >> flags\n";
       }
 
       if( node->numDownstreamEdges() > 0 ) {
-	script << "echo \"-out:file:srlz 1\" >> flags\n";
+	setup_script << "echo \"-out:file:srlz 1\" >> flags\n";
       }
     }
 
-    script << "cd ../\n";
+    setup_script << "cd ../\n";
   }
 
-  return script.str();
+  return setup_script.str();
 }
 
 std::string
