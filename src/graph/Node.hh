@@ -4,6 +4,8 @@
 #include <graph/Edge.fwd.hh>
 #include <graph/Graph.fwd.hh>
 
+#include <global_data/options.hh>
+
 #include <vector>
 #include <algorithm>
 #include <string>
@@ -152,9 +154,7 @@ inline
 std::string const &
 Node::getEffectiveCommand() const {
   if( use_default_command_ ) {
-    return command_;
-    //TODO
-    //return Options.getDefaultRunCommand();
+    return global_data::Options::default_run_command;
   } else {
     return command_;
   }

@@ -127,15 +127,91 @@ compile_setup_script( std::vector< graph::NodeCSP > const & nodes_in_order ){
 
 std::string
 compile_run_script( std::vector< graph::NodeCSP > const & nodes_in_order ){
-  std::stringstream script;
+  std::stringstream run_script;
 
-  addGlobalIntroToScript( script );
+  addGlobalIntroToScript( run_script );
   
   for( graph::NodeCSP const & node : nodes_in_order ){
-    addStageIntroToScript( node->stage(), script );
+    addStageIntroToScript( node->stage(), run_script );
+
+    std::string const dirname = node->dirname();
+    run_script << "cd " << dirname << "\n";
+
+    // THE COMMAND
+
+    run_script << "if " << node->getEffectiveCommand() << " ;then \n"
+      "    echo \"Done running " << dirname << "\" >> ../JD3BASH_runlog.txt\n"
+      "else\n"
+      "    echo \"Failed to run " << dirname << "\" >> ../JD3BASH_runlog.txt\n"
+      "    exit 1\n"
+      "fi\n";
+
+    run_script << "grep -v 'SEQUENCE:' score.sc > no_first_line.score.sc\n";
+    for( EdgeSP const & de : node->getDownstreamEdges() ) {
+      std::string const name_of_next_stage_directory = de->destinationNode().dirname();
+      std::string const & sort_column = de->columnNameToSortBy();
+      run_script << "\n#####\n" <<
+	"# Extract the best results for stage \"" <<
+	de->destinationNode().title() << "\"\n" <<
+	"# This awk command prints the data for the column with header " <<
+	sort_column << " along with the title for each result\n" <<
+	"awk -v c1=\"" << sort_column <<
+	"\" 'NR==1 {for (i=1; i<=NF; i++) {ix[$i] = i}}NR>1 {print $ix[c1] \" \" $NF}' no_first_line.score.sc > temp\n";
+
+      if( de->positiveScoresAreBetter() ) {
+	//TODO add support for scientific notation?
+	run_script << "sort -nrk1 temp > temp2\n";
+      } else {
+	run_script << "sort -nk1 temp > temp2\n";
+      }
+
+      run_script << "x=`cat no_first_line.score.sc | wc -l`\n";
+      if( de->usePercentageInsteadOfCount() ) {
+	run_script << "perc=\"" << de->percentageOfResultsToTransfer() << "\"\n";
+	run_script << "nresults=`echo \"($x - 1) * $perc / 1\" | bc`\n";
+      } else {
+	run_script << "nresults=\"" << de->numResultsToTransfer() << "\"\n";
+      }
+      run_script << "# Extract structures that will survive until the next stage\n";
+      run_script << "head -n $nresults temp2 | awk '{print $2}' > temp3\n";
+
+      run_script << "# move successful runs to next stage if not there already\n";
+      run_script << "destination=../" << name_of_next_stage_directory << "/input_files\n";
+
+      /*
+       * cat temp3 | while read line; do
+       *   if [[ `grep $line $destination | wc -l` -eq 0 ]]; then
+       *     echo `pwd`/$line.* >> $destination
+       *   fi
+       * done
+       */
+      run_script << "cat temp3 | while read line; do\n"
+	" if [[ `grep $line $destination | wc -l` -eq 0 ]]; then\n"
+	"  echo `pwd`/$line.* >> $destination\n"
+	" fi\n"
+	"done\n";
+
+      if( global_data::Options::delete_unused_intermediate_poses && node->numDownstreamEdges() > 0 ) {
+	// Save good files so that they do not get deleted later
+	run_script << "\n#Save good files so that they do not get deleted later\n";
+	run_script << "cat temp3 | while read line; do echo $line.* ; done > results_to_keep.txt\n";
+      }
+    }
+
+    if( global_data::Options::delete_unused_intermediate_poses && node->numDownstreamEdges() > 0 ) {
+      run_script << "\n# Delete poses not needed for future stages\n" <<
+	"awk '{print $2}' temp | while read line; do\n"
+	"    if [[ `grep $line temp3 | wc -l` -eq 0 ]]; then\n"
+	"        rm $line.*\n"
+	"    fi\n"
+	"done\n";
+    }
+
+    run_script << "\ncd ..\n";
+    run_script << "echo \"Done With " << dirname << "\" >> JD3BASH_runlog.txt\n";
   }
 
-  return script.str();
+  return run_script.str();
 }
 
 bool cycleExists( NodeCSP const & starting_node, std::set< NodeCSP > & nodes_already_visited ) {
