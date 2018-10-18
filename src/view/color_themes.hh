@@ -1,5 +1,8 @@
 #pragma once
 
+#include <memory>
+#include <Wt/WColor.h>
+
 /*
 Helpful links:
 https://coolors.co
@@ -8,7 +11,7 @@ https://www.canva.com/learn/website-color-schemes/
 
 namespace view {
 
-struct Color {
+/*struct Color {
   Color( uint16_t r, uint16_t g, uint16_t b ) :
     R( r ),
     G( g ),
@@ -18,26 +21,31 @@ struct Color {
   uint16_t R;
   uint16_t G;
   uint16_t B;
-};
+};*/
 
 struct ColorTheme {
-  virtual Color background() const = 0;
-  virtual Color grid_line() const = 0;
+  virtual Wt::WColor background() const = 0;
+  virtual Wt::WColor grid_line() const = 0;
 
-  virtual Color intermediate_node() const = 0;
-  virtual Color final_node() const = 0;
-  virtual Color edge() const = 0;
-  virtual Color selection_outline const = 0;
+  virtual Wt::WColor intermediate_node() const = 0;
+  virtual Wt::WColor final_node() const = 0;
+  virtual Wt::WColor edge() const = 0;
+  virtual Wt::WColor selection_outline const = 0;
 };
 
-struct Theme1 : public ColorTheme {
-  Color background() const override { return Color( 241, 247, 239 ) };//F1F7EF
-  Color grid_line() const override { return Color( 133, 150, 158 ) };//85969E
+using ColorThemeSP = std::shared_ptr< ColorTheme >;
+using ColorThemeCSP = std::shared_ptr< const ColorTheme >;
+using ColorThemeUP = std::unique_ptr< ColorTheme >;
+using ColorThemeCUP = std::unique_ptr< const ColorTheme >;
 
-  Color intermediate_node() const override { return Color( 88, 181, 163 ) };//58B5A3
-  Color final_node() const override { return Color( 30, 92, 111 ) };//1E5C6F
-  Color edge() const override { return Color( 23, 23, 23 ) };//171717
-  Color selection_outline() const override { return Color( 23, 23, 23 ) };//171717
+struct Theme1 : public ColorTheme {
+  Wt::WColor background() const override { return Wt::WColor( 241, 247, 239 ) };//F1F7EF
+  Wt::WColor grid_line() const override { return Wt::WColor( 133, 150, 158 ) };//85969E
+
+  Wt::WColor intermediate_node() const override { return Wt::WColor( 88, 181, 163 ) };//58B5A3
+  Wt::WColor final_node() const override { return Wt::WColor( 30, 92, 111 ) };//1E5C6F
+  Wt::WColor edge() const override { return Wt::WColor( 23, 23, 23 ) };//171717
+  Wt::WColor selection_outline() const override { return Wt::WColor( 23, 23, 23 ) };//171717
 }
 
 
