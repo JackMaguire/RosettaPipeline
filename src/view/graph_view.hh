@@ -1,8 +1,8 @@
 #pragma once
 
-#include <Wt/WContainerWidget>
 #include <Wt/WPaintDevice>
 #include <Wt/WPaintedWidget>
+#include <Wt/WPen>
 #include <Wt/WPainter>
 
 #include <graph/Graph.fwd.hh>
@@ -22,6 +22,15 @@ public:
 protected:
   void paintEvent( Wt::WPaintDevice * paintDevice ) override;
 
+  void
+  drawEdge(
+    graph::EdgeSP const & edge,
+    Wt::WPainter const & painter,
+    int const grid_size,
+    int const offset
+  ) const;
+
+
 private:
   graph::GraphSP graph_;
 
@@ -29,6 +38,11 @@ private:
 
   int width_;
   int height_;
+
+  int node_width_ = 3;
+
+  wt::WPen default_pen_;
+  Wt::WPen selected_edge_pen_;
 };
 
 }//namespace view
