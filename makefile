@@ -72,6 +72,13 @@ devel: DummyPanel.o
 #	ld -r build/DummyPanel.o -o build/devel.o
 
 ########
+# VIEW #
+########
+
+GraphWidget.o: src/view/graph_view.hh
+	${CXX} -c -o build/GraphWidget.o src/view/graph_view.cc ${GEN} ${WT_FLAGS}
+
+########
 # APPS #
 ########
 save_and_load_graph.o: src/apps/proof_of_concept/save_and_load_graph.cc graph global_data
