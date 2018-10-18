@@ -1,3 +1,6 @@
+#include <view/graph_view.hh>
+#include <global_data/options.hh>
+
 namespace view {
 
 GraphWidget::GraphWidget() :
@@ -15,8 +18,10 @@ GraphWidget::GraphWidget() :
 void
 GraphWidget::paintEvent( Wt::WPaintDevice * paintDevice ) {
   Wt::WPainter painter(paintDevice);
-  painter.setBrush( Wt::WBrush( Wt::WColor( Wt::blue ) ) );
-  //painter.drawRect( 0, 0, end_, 50 );
+  painter.setBrush( Wt::WBrush( theme_->background() ) );
+  painter.drawRect( 0, 0, width_, height_ );
+
+  int const grid_size = global_data::Options::grid_size;
 }
 
 
