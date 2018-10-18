@@ -12,8 +12,8 @@ GraphWidget::GraphWidget() :
   width_( 200 ),
   height_( 20 )
 {
-  width_ = width();
-  height_ = height();
+  width_ = width().toPixels();
+  height_ = height().toPixels();
 
   setLayoutSizeAware( true );
 
