@@ -23,7 +23,7 @@ GraphWidget::GraphWidget() :
 GraphWidget::~GraphWidget(){}
 
 void
-GraphWidget::layoutSizeChanged( int w, int h ) override {
+GraphWidget::layoutSizeChanged( int w, int h ) {
   width_ = w;
   height_ = h;
 }
