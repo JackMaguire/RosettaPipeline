@@ -10,8 +10,23 @@
 #include <graph/Node.fwd.hh>
 
 #include <view/color_themes.hh>
+#include <unordered_map>
 
 namespace view {
+
+struct hitbox {
+  hitbox( int x, int y, int w, int h ):
+    x_begin( x ),
+    y_begin( y ),
+    width( w ),
+    height( h )
+  {}
+
+  int x_begin;
+  int y_begin;
+  int width;
+  int height;
+};
 
 class GraphWidget : public Wt::WPaintedWidget
 {
@@ -45,6 +60,9 @@ private:
 
   Wt::WPen default_pen_;
   Wt::WPen selected_edge_pen_;
+
+  std::unordered_map< graph::NodeSP, hitbox > hitbox_for_node_;
+  std::unordered_map< graph::EdgeSP, hitbox > hitbox_for_edge_;
 };
 
 }//namespace view

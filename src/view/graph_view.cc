@@ -7,6 +7,8 @@
 
 #include <Wt/WLength>
 
+#include <math.h>
+
 namespace view {
 
 GraphWidget::GraphWidget() :
@@ -90,19 +92,40 @@ GraphWidget::drawEdge(
   double const Bx = grid_size * ( n_to.X() + n_from.X() ) / 2 + offset;
   double const By = grid_size * ( n_to.Y() + n_from.Y() ) / 2 + offset;
   double const arrow_length = grid_size;
-  /*Line2D line1 = new Line2D.Double( Bx, By, Bx + arrow_length,
-    By - arrow_length );
-  Line2D line2 = new Line2D.Double( Bx, By, Bx + arrow_length,
-    By + arrow_length );
 
-  double const theta = Math.atan2( source_y - By, source_x - Bx );
-  AffineTransform at = AffineTransform.getRotateInstance( theta,
-    line1.getX1(), line1.getY1() );
+  double const theta_in_radians = atan2( double(source_y) - By, double(source_x) - Bx );
 
-  g2D.draw( at.createTransformedShape( line1 ) );
-  g2D.draw( at.createTransformedShape( line2 ) );
-  box_for_edge_.put( e, new Box( (int) ( Bx - grid_size ),
-      (int) ( By - grid_size ), grid_size * 2, grid_size * 2 ) );*/
+  {//copied from https://gamedev.stackexchange.com/questions/121478/how-to-rotate-a-2d-line
+    int const x1 = (int) Bx;
+    int const y1 = (int) By;
+    int const x2 = int( Bx + arrow_length );
+    int const y2 = int( By - arrow_length );
+    int const dx = x2-x1;
+    int const dy = y2-y1;
+    int const nx = dx * cos( theta_in_radians ) - dy * sin( theta_in_radians ) + x1;
+    int const ny = dx * sin( theta_in_radians ) + dy * cos( theta_in_radians ) + y1;
+    painter.drawLine( x1, y1, nx, ny );
+  }
+
+  {//copied from https://gamedev.stackexchange.com/questions/121478/how-to-rotate-a-2d-line
+    int const x1 = (int) Bx;
+    int const y1 = (int) By;
+    int const x2 = int( Bx + arrow_length );
+    int const y2 = int( By + arrow_length );
+    int const dx = x2-x1;
+    int const dy = y2-y1;
+    int const nx = dx * cos( theta_in_radians ) - dy * sin( theta_in_radians ) + x1;
+    int const ny = dx * sin( theta_in_radians ) + dy * cos( theta_in_radians ) + y1;
+    painter.drawLine( x1, y1, nx, ny );
+  }
+
+  hitbox_for_edge_[ edge ] = hitbox(
+    (int) ( Bx - grid_size ),
+    (int) ( By - grid_size ),
+    grid_size * 2,
+    grid_size * 2
+  );
+
 }
 
 
