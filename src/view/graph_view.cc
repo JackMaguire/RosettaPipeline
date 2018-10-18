@@ -6,7 +6,7 @@ namespace view {
 GraphWidget::GraphWidget() :
   WPaintedWidget(),
   graph_( 0 ),
-  theme_( 0 )
+  theme_()
 {
   my_width_ = 200;
   my_height_ = 20;
