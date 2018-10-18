@@ -1,4 +1,5 @@
 #include <global_data/options.hh>
+#include <cassert>
 
 namespace global_data {
 
