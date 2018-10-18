@@ -4,14 +4,16 @@
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
 	include makefile_ubuntu
+	EXTRA=
 endif
 ifeq ($(UNAME_S),Darwin)
 	include makefile_mac
+	EXTRA=-arch ${ARCH}
 endif
 
 #include makefile_mac
 
-GEN=-flto -O3 -Isrc -std=${std} ${WARN} -arch ${ARCH}
+GEN=-flto -O3 -Isrc -std=${std} ${WARN} ${EXTRA}
 WT_FLAGS=-lwthttp -lwt -lboost_signals
 
 ########
