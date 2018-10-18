@@ -35,7 +35,7 @@ GraphWidget::layoutSizeChanged( int w, int h ) {
 void
 GraphWidget::paintEvent( Wt::WPaintDevice * paintDevice ) {
   Wt::WPainter painter( paintDevice );
-  painter.setPen( normal_pen_ );
+  painter.setPen( default_pen_ );
 
   //Background
   //
@@ -75,7 +75,7 @@ GraphWidget::drawEdge(
   if( edge == graph_.selectedEdge() ) {
     painter.setPen( selected_edge_pen_ );
   } else {
-    painter.setPen( normal_pen_ );
+    painter.setPen( default_pen_ );
   }
 
   // Draw main line
