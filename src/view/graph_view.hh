@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef AAA
-#define AAA
-
 #include <Wt/WContainerWidget>
 #include <Wt/WPaintDevice>
 #include <Wt/WPaintedWidget>
@@ -36,5 +33,3 @@ private:
 };
 
 }//namespace view
-
-#endif

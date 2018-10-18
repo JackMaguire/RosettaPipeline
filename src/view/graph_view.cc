@@ -6,10 +6,10 @@ namespace view {
 GraphWidget::GraphWidget() :
   WPaintedWidget(),
   graph_( 0 ),
-  theme_( 0 ),
-  my_width_( 200 ),
-  my_height_( 60 )
+  theme_( 0 )
 {
+  my_width_ = 200;
+  my_height_ = 20;
   //setLayoutSizeAware( true );
   resize( my_width_, my_height_ ); // Provide a default size.
 }
