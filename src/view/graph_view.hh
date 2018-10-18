@@ -27,7 +27,7 @@ protected:
   void paintEvent( Wt::WPaintDevice * paintDevice ) override;
 
 private:
-  GraphSP graph_;
+  graph::GraphSP graph_;
 
   ColorThemeCUP theme_;
 
