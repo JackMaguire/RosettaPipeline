@@ -11,6 +11,8 @@
 
 #include <view/color_themes.hh>
 
+#include <memory>
+
 namespace view {
 
 class GraphWidget : public Wt::WPaintedWidget
@@ -43,8 +45,8 @@ private:
 
   int node_width_ = 3;
 
-  Wt::WPen default_pen_;
-  Wt::WPen selected_edge_pen_;
+  std::shared_ptr< Wt::WPen > default_pen_;
+  std::shared_ptr< Wt::WPen > selected_edge_pen_;
 };
 
 }//namespace view
