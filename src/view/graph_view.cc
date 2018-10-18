@@ -58,7 +58,7 @@ GraphWidget::paintEvent( Wt::WPaintDevice * paintDevice ) {
   painter.setBrush( Wt::WBrush( theme_->edge() ) );
   int const edge_offset = ( node_width_ - ( node_width_ / 2 ) ) * grid_size;
   for( auto const & edge_sp : graph_->edges() ){
-    drawEdge( edge_sp, painter, grid_size, offset );
+    drawEdge( edge_sp, painter, grid_size, edge_offset );
   }
 }
 

@@ -33,7 +33,6 @@ protected:
     int const offset
   ) const;
 
-
 private:
   graph::GraphSP graph_;
 
