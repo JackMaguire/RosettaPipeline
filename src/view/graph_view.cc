@@ -69,10 +69,10 @@ GraphWidget::drawEdge(
   int const grid_size,
   int const offset
 ) const {
-  graph::Node const & n_from = edge.sourceNode();
-  graph::Node const & n_to = edge.destinationNode();
+  graph::Node const & n_from = edge->sourceNode();
+  graph::Node const & n_to = edge->destinationNode();
 
-  if( edge == graph_.selectedEdge() ) {
+  if( edge == graph_->selectedEdge() ) {
     painter.setPen( selected_edge_pen_ );
   } else {
     painter.setPen( default_pen_ );
