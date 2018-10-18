@@ -12,11 +12,19 @@ GraphWidget::GraphWidget() :
 {
   width_ = 200;
   height_ = 20;
-  //setLayoutSizeAware( true );
-  resize( width_, height_ ); // Provide a default size.
+
+  setLayoutSizeAware( true );
+
+  resize( WLength::auto, WLength::auto ); // Provide a default size.
 }
 
 GraphWidget::~GraphWidget(){}
+
+void
+GraphWidget::layoutSizeChanged( int w, int h ) override {
+  width_ = w;
+  height_ = h;
+}
 
 void
 GraphWidget::paintEvent( Wt::WPaintDevice * paintDevice ) {

@@ -17,8 +17,7 @@ public:
 
   virtual ~GraphWidget();
 
-  /*void layoutSizeChanged( int w, int h ) override {
-    }*/
+  void layoutSizeChanged( int w, int h ) override;
 
 protected:
   void paintEvent( Wt::WPaintDevice * paintDevice ) override;
