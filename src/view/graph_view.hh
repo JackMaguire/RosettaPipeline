@@ -13,12 +13,9 @@ namespace view {
 class GraphWidget : public Wt::WPaintedWidget
 {
 public:
-  GraphWidget() :
-    WPaintedWidget()
-  {
-    //setLayoutSizeAware( true );
-    //resize(200, 60);   // Provide a default size.
-  }
+  GraphWidget();
+
+  virtual ~GraphWidget();
 
   /*void layoutSizeChanged( int w, int h ) override {
     }*/

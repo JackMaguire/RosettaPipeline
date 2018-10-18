@@ -14,6 +14,7 @@ GraphWidget::GraphWidget() :
   resize( width_, height_ ); // Provide a default size.
 }
 
+GraphWidget::~GraphWidget(){}
 
 void
 GraphWidget::paintEvent( Wt::WPaintDevice * paintDevice ) {
