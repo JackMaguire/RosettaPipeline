@@ -39,13 +39,13 @@ using ColorThemeUP = std::unique_ptr< ColorTheme >;
 using ColorThemeCUP = std::unique_ptr< const ColorTheme >;
 
 struct Theme1 : public ColorTheme {
-  Wt::WColor background() const override { return Wt::WColor( 241, 247, 239 ) };//F1F7EF
-  Wt::WColor grid_line() const override { return Wt::WColor( 133, 150, 158 ) };//85969E
+  Wt::WColor background() const override { return Wt::WColor( 241, 247, 239 ); }//F1F7EF
+  Wt::WColor grid_line() const override { return Wt::WColor( 133, 150, 158 ); }//85969E
 
-  Wt::WColor intermediate_node() const override { return Wt::WColor( 88, 181, 163 ) };//58B5A3
-  Wt::WColor final_node() const override { return Wt::WColor( 30, 92, 111 ) };//1E5C6F
-  Wt::WColor edge() const override { return Wt::WColor( 23, 23, 23 ) };//171717
-  Wt::WColor selection_outline() const override { return Wt::WColor( 23, 23, 23 ) };//171717
+  Wt::WColor intermediate_node() const override { return Wt::WColor( 88, 181, 163 ); }//58B5A3
+  Wt::WColor final_node() const override { return Wt::WColor( 30, 92, 111 ); }//1E5C6F
+  Wt::WColor edge() const override { return Wt::WColor( 23, 23, 23 ); }//171717
+  Wt::WColor selection_outline() const override { return Wt::WColor( 23, 23, 23 ); }//171717
 };
 
 
