@@ -19,7 +19,7 @@ WT_FLAGS=-lwthttp -lwt -lboost_signals
 ########
 # META #
 ########
-all: options graph compile devel apps bin
+all: options graph compile devel view apps bin
 
 all_no_wt: options graph compile
 
@@ -80,13 +80,17 @@ devel: DummyPanel.o
 GraphWidget.o: src/view/graph_view.hh
 	${CXX} -c -o build/GraphWidget.o src/view/graph_view.cc ${GEN} ${WT_FLAGS}
 
+view: GraphWidget.o
+	cp build/GraphWidget.o build/view.o
+
+
 ########
 # APPS #
 ########
 save_and_load_graph.o: src/apps/proof_of_concept/save_and_load_graph.cc graph global_data
 	${CXX} -c -o build/save_and_load_graph.o src/apps/proof_of_concept/save_and_load_graph.cc ${GEN}
 
-testing_ground.o: graph
+testing_ground.o: graph 
 	${CXX} -c -o build/testing_ground.o src/apps/proof_of_concept/testing_ground.cc ${GEN}
 
 apps: save_and_load_graph.o testing_ground.o
