@@ -6,12 +6,14 @@ namespace view {
 GraphWidget::GraphWidget() :
   WPaintedWidget(),
   graph_( 0 ),
-  theme_()
+  theme_(),
+  width_( 200 ),
+  height_( 20 )
 {
-  my_width_ = 200;
-  my_height_ = 20;
+  width_ = 200;
+  height_ = 20;
   //setLayoutSizeAware( true );
-  resize( my_width_, my_height_ ); // Provide a default size.
+  resize( width_, height_ ); // Provide a default size.
 }
 
 GraphWidget::~GraphWidget(){}
@@ -20,7 +22,7 @@ void
 GraphWidget::paintEvent( Wt::WPaintDevice * paintDevice ) {
   Wt::WPainter painter(paintDevice);
   painter.setBrush( Wt::WBrush( theme_->background() ) );
-  painter.drawRect( 0, 0, my_width_, my_height_ );
+  painter.drawRect( 0, 0, width_, height_ );
 
   int const grid_size = global_data::Options::grid_size;
 }
