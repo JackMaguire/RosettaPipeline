@@ -1,6 +1,8 @@
 #include <view/graph_view.hh>
 #include <global_data/options.hh>
 
+#include <Wt/WLength>
+
 namespace view {
 
 GraphWidget::GraphWidget() :
