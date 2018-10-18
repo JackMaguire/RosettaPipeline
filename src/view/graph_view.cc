@@ -68,7 +68,7 @@ GraphWidget::drawEdge(
   Wt::WPainter const & painter,
   int const grid_size,
   int const offset
-) const {
+) {
   graph::Node const & n_from = edge->sourceNode();
   graph::Node const & n_to = edge->destinationNode();
 

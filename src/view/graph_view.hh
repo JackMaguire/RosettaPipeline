@@ -31,7 +31,7 @@ protected:
     Wt::WPainter const & painter,
     int const grid_size,
     int const offset
-  ) const;
+  );
 
 private:
   graph::GraphSP graph_;
