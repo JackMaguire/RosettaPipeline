@@ -87,10 +87,10 @@ GraphWidget::drawEdge(
 
   // Draw Arrow Heads
   // B is halfway point between two nodes
-  /*double const Bx = grid_size * ( n_to.x() + n_from.x() ) / 2 + offset;
-  double const By = grid_size * ( n_to.y() + n_from.y() ) / 2 + offset;
-  double const arrow_length = grid_size * arrow_length_coeff_;
-  Line2D line1 = new Line2D.Double( Bx, By, Bx + arrow_length,
+  double const Bx = grid_size * ( n_to.X() + n_from.X() ) / 2 + offset;
+  double const By = grid_size * ( n_to.Y() + n_from.Y() ) / 2 + offset;
+  double const arrow_length = grid_size;
+  /*Line2D line1 = new Line2D.Double( Bx, By, Bx + arrow_length,
     By - arrow_length );
   Line2D line2 = new Line2D.Double( Bx, By, Bx + arrow_length,
     By + arrow_length );
