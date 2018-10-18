@@ -28,8 +28,8 @@ private:
 
   ColorThemeCUP theme_;
 
-  int width_;
-  int height_;
+  int my_width_;
+  int my_height_;
 };
 
 }//namespace view
