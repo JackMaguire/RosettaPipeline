@@ -6,6 +6,9 @@
 #include <Wt/WPainter>
 
 #include <graph/Graph.fwd.hh>
+#include <graph/Edge.fwd.hh>
+#include <graph/Node.fwd.hh>
+
 #include <view/color_themes.hh>
 
 namespace view {
@@ -41,7 +44,7 @@ private:
 
   int node_width_ = 3;
 
-  wt::WPen default_pen_;
+  Wt::WPen default_pen_;
   Wt::WPen selected_edge_pen_;
 };
 
