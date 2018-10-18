@@ -17,7 +17,7 @@ GraphWidget::GraphWidget() :
 
   setLayoutSizeAware( true );
 
-  resize( Wt::WLength::auto, Wt::WLength::auto ); // Provide a default size.
+  resize( Wt::WLength::Auto, Wt::WLength::Auto ); // Provide a default size.
 }
 
 GraphWidget::~GraphWidget(){}
