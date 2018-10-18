@@ -15,6 +15,8 @@
 namespace view {
 
 struct hitbox {
+  hitbox(){}
+
   hitbox( int x, int y, int w, int h ):
     x_begin( x ),
     y_begin( y ),
