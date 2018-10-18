@@ -30,7 +30,7 @@ struct ColorTheme {
   virtual Wt::WColor intermediate_node() const = 0;
   virtual Wt::WColor final_node() const = 0;
   virtual Wt::WColor edge() const = 0;
-  virtual Wt::WColor selection_outline const = 0;
+  virtual Wt::WColor selection_outline() const = 0;
 };
 
 using ColorThemeSP = std::shared_ptr< ColorTheme >;
@@ -46,7 +46,7 @@ struct Theme1 : public ColorTheme {
   Wt::WColor final_node() const override { return Wt::WColor( 30, 92, 111 ) };//1E5C6F
   Wt::WColor edge() const override { return Wt::WColor( 23, 23, 23 ) };//171717
   Wt::WColor selection_outline() const override { return Wt::WColor( 23, 23, 23 ) };//171717
-}
+};
 
 
 };
