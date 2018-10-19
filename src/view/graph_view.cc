@@ -291,7 +291,7 @@ GraphWidget::getClosestPointForPoint( int point ) const {
   int const grid_size = global_data::Options::grid_size;
   int const offset = ( node_width_ - ( node_width_ / 2 ) ) * grid_size;
   double const new_point = ( point - offset ) / double( grid_size );
-  return (int) Math.rint( new_point );
+  return int( round( new_point ) );
 }
 
 }//namespace view
