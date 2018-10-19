@@ -80,8 +80,6 @@ GraphWidget::paintEvent( Wt::WPaintDevice * paintDevice ) {
     painter.drawLine( 0, y, width_, y );
   }
 
-  return;
-
   //Edges
   //
   painter.setBrush( Wt::WBrush( theme_->edge() ) );
@@ -90,6 +88,8 @@ GraphWidget::paintEvent( Wt::WPaintDevice * paintDevice ) {
     drawEdge( edge_sp, painter, grid_size, edge_offset );
   }
   painter.setPen( default_pen_ );
+
+  return;
 
   //Ghost Edge
   //
