@@ -22,7 +22,8 @@ GraphWidget::GraphWidget() :
   width_ = width().toPixels();
   height_ = height().toPixels();
 
-  node_label_font_.setFamily( Wt::FontFamily::Monospace, "'Courier New'" );
+  //TODO
+  //node_label_font_.setFamily( Wt::FontFamily::Monospace, "'Courier New'" );
 
   setLayoutSizeAware( true );
 
@@ -91,8 +92,8 @@ GraphWidget::drawNode(
   int const grid_size,
   int const selection_width
 ) {
-  int const x = n->X() * grid_size + ( grid_size / 2 );
-  int const y = n->Y() * grid_size + ( grid_size / 2 );
+  int const x = node->X() * grid_size + ( grid_size / 2 );
+  int const y = node->Y() * grid_size + ( grid_size / 2 );
   int const diameter = grid_size * 3;
   
   if( node == graph_->selectedNode() ){
