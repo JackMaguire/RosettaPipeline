@@ -8,6 +8,7 @@
 #include <Wt/WLength>
 #include <Wt/WGlobal>
 
+#include <iostream>
 #include <math.h>
 
 namespace view {
@@ -71,6 +72,8 @@ GraphWidget::mouseDown( Wt::WMouseEvent const & e ) {
   Wt::Coordinates c = e.widget();
   auto const x = c.x;
   auto const y = c.y;
+
+  std::cout << x << " " << y << std::endl;
 
   last_mouse_press_x_ = x;
   last_mouse_press_y_ = y;
