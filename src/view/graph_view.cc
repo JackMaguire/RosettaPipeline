@@ -98,7 +98,7 @@ GraphWidget::paintEvent( Wt::WPaintDevice * paintDevice ) {
 
   //Nodes
   //
-  node_label_font_.setSize( Wt::WLength( 2 * grid_size ) );
+  node_label_font_.setSize( Wt::WLength( 3 * grid_size ) );
   painter.setFont( node_label_font_ );
   int const selection_width = grid_size / 2;
   for( auto const & node_sp : graph_->nodes() ){
@@ -139,7 +139,7 @@ GraphWidget::drawNode(
     if( global_data::Options::put_node_titles_to_side ) {
       painter.drawText(
 	x + diameter + selection_width,
-	y + diameter / 2,
+	y,
 	100,//width
 	100,//height
 	Wt::WFlags< Wt::AlignmentFlag >(),
