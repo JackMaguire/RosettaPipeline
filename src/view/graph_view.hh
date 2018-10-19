@@ -22,14 +22,19 @@ struct hitbox {
   hitbox( int x, int y, int w, int h ):
     x_begin( x ),
     y_begin( y ),
-    width( w ),
-    height( h )
+    x_end( x + w ),
+    y_end( y + h )
   {}
 
   int x_begin;
   int y_begin;
-  int width;
-  int height;
+  int x_end;
+  int y_end;
+
+  bool pointIsInBox( int x, int y ) const {
+    return ( x >= x_begin ) && ( x < x_end ) && ( y >= y_begin )
+      && ( y < y_end );
+  }
 };
 
 class GraphWidget : public Wt::WPaintedWidget
@@ -99,6 +104,9 @@ private:
   //Controller
   int last_mouse_press_x_;
   int last_mouse_press_y_;
+  bool node_is_currently_being_dragged_;
+  bool edge_is_currently_being_created_;
+  bool shift_was_down_when_most_recent_object_was_selected_;
 };
 
 inline

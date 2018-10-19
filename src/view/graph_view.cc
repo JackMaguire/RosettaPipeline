@@ -55,6 +55,10 @@ GraphWidget::~GraphWidget(){}
 
 void
 GraphWidget::init_listeners(){
+  node_is_currently_being_dragged_ = false;
+  edge_is_currently_being_created_ = false;
+  shift_was_down_when_most_recent_object_was_selected_ = false;
+
   mouseWentDown().connect( this, & GraphWidget::mouseDown );
 }
 
@@ -70,6 +74,23 @@ GraphWidget::mouseDown( Wt::WMouseEvent const & e ) {
   bool const shift_is_down = e.modifiers() & Wt::ShiftModifier;
   bool const control_is_down = e.modifiers() & Wt::ControlModifier;
   bool const alt_is_down = e.modifiers() & Wt::AltModifier;
+
+  if( control_is_down ){//potentially create something
+
+  } else if( shift_is_down ){//potentially delete something
+
+  } else {//potentially select something
+    for( auto const & node : graph_->nodes() ) {
+      if( hitbox_for_node_.at( node ).pointIsInBox( x, y ) ) {
+	graph_->setSelectedNode( node );
+	shift_was_down_when_most_recent_object_was_selected_ = shift_is_down;
+	node_is_currently_being_dragged_ = true;
+	refresh();
+	//GlobalViewData.top_panel.repaint();
+	return;
+      }
+    }
+  }
 }
 
 void
@@ -258,6 +279,15 @@ GraphWidget::drawGhostEdge(
   int const source_x = n_from->X() * grid_size + offset;
   int const source_y = n_from->Y() * grid_size + offset;
   painter.drawLine( source_x, source_y, ghost_edge->cursor_x, ghost_edge->cursor_y );
+}
+
+//TODO this needs a better name
+int
+GraphWidget::getClosestPointForPoint( int point ) const {
+  int const grid_size = global_data::Options::grid_size;
+  int const offset = ( node_width_ - ( node_width_ / 2 ) ) * grid_size;
+  double const new_point = ( point - offset ) / double( grid_size );
+  return (int) Math.rint( new_point );
 }
 
 }//namespace view
