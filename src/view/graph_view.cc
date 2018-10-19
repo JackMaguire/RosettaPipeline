@@ -6,6 +6,7 @@
 #include <graph/Node.hh>
 
 #include <Wt/WLength>
+#include <Wt/WGlobal>
 
 #include <math.h>
 
@@ -21,7 +22,7 @@ GraphWidget::GraphWidget() :
   width_ = width().toPixels();
   height_ = height().toPixels();
 
-  node_label_font_.setFamily(FontFamily::Monospace, "'Courier New'");
+  node_label_font_.setFamily( Wt::FontFamily::Monospace, "'Courier New'" );
 
   setLayoutSizeAware( true );
 
