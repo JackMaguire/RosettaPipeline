@@ -64,7 +64,7 @@ compile: graph
 # VIEW #
 ########
 
-GraphWidget.o: src/view/graph_view.hh
+GraphWidget.o: src/view/graph_view.hh graph
 	${CXX} -c -o build/GraphWidget.o src/view/graph_view.cc ${GEN} ${WT_FLAGS}
 
 view: GraphWidget.o
@@ -89,5 +89,5 @@ apps: save_and_load_graph.o GraphApplication
 save_and_load_graph: save_and_load_graph.o graph global_data
 	${CXX} -o bin/save_and_load_graph build/save_and_load_graph.o build/global_data.o build/graph.o ${GEN}
 
-graph_view_app: GraphApplication
+graph_view_app: GraphApplication view 
 	${CXX} -o bin/graph_view_app build/graph_view_app.o build/graph.o build/view.o build/options.o ${GEN} ${WT_FLAGS}
