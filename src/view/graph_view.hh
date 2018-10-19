@@ -35,7 +35,7 @@ struct hitbox {
 class GraphWidget : public Wt::WPaintedWidget
 {
 public:
-  GraphWidget( WContainerWidget *root );
+  GraphWidget( Wt::WContainerWidget *root );
 
   virtual ~GraphWidget();
 

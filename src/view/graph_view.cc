@@ -12,7 +12,7 @@
 
 namespace view {
 
-GraphWidget::GraphWidget( WContainerWidget * root ) :
+GraphWidget::GraphWidget( Wt::WContainerWidget * root ) :
   WPaintedWidget( root ),
   graph_( 0 ),
   theme_(),
