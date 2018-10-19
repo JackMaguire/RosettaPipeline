@@ -82,6 +82,8 @@ protected:
 
   void mouseDown( Wt::WMouseEvent const & e );
 
+  int getClosestPointForPoint( int point ) const;
+
 private:
   graph::GraphSP graph_;
 

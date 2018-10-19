@@ -28,6 +28,8 @@ GraphWidget::GraphWidget( Wt::WContainerWidget * root ) :
   setLayoutSizeAware( true );
 
   resize( width_, height_ ); // Provide a default size.
+
+  init_listeners();
 }
 
 GraphWidget::GraphWidget(
@@ -49,6 +51,8 @@ GraphWidget::GraphWidget(
   setLayoutSizeAware( true );
 
   resize( width_, height_ ); // Provide a default size.
+
+  init_listeners();
 }
 
 GraphWidget::~GraphWidget(){}
