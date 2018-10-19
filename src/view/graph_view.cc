@@ -12,8 +12,8 @@
 
 namespace view {
 
-GraphWidget::GraphWidget() :
-  WPaintedWidget(),
+GraphWidget::GraphWidget( WContainerWidget * root ) :
+  WPaintedWidget( root ),
   graph_( 0 ),
   theme_(),
   width_( 200 ),

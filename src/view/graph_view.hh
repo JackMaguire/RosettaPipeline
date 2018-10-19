@@ -5,6 +5,7 @@
 #include <Wt/WPaintedWidget>
 #include <Wt/WPen>
 #include <Wt/WPainter>
+#include <Wt/WContainerWidget>
 
 #include <graph/Graph.fwd.hh>
 #include <graph/Edge.fwd.hh>
@@ -34,7 +35,7 @@ struct hitbox {
 class GraphWidget : public Wt::WPaintedWidget
 {
 public:
-  GraphWidget();
+  GraphWidget( WContainerWidget *root );
 
   virtual ~GraphWidget();
 
