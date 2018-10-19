@@ -37,6 +37,8 @@ class GraphWidget : public Wt::WPaintedWidget
 public:
   GraphWidget( Wt::WContainerWidget *root );
 
+  GraphWidget( Wt::WContainerWidget *root, view::GraphSP const & );
+
   virtual ~GraphWidget();
 
   void layoutSizeChanged( int w, int h ) override;

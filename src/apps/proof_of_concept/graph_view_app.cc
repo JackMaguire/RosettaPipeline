@@ -13,7 +13,6 @@ public:
   GraphApplication(const WEnvironment &env): WApplication(env) {
     setTitle("Graph example");
 
-    view::GraphWidget * widget = new view::GraphWidget( root() );
     graph::GraphSP graph = std::make_shared< graph::Graph >();
     graph::NodeSP previous = 0;
     for( int i=0; i<5; ++i ){
@@ -24,7 +23,8 @@ public:
       }
       previous = node;
     }
-    widget->setGraph( graph );
+
+    view::GraphWidget * widget = new view::GraphWidget( root(), graph );
   }
 
 //private:

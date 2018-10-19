@@ -15,7 +15,7 @@ namespace view {
 GraphWidget::GraphWidget( Wt::WContainerWidget * root ) :
   WPaintedWidget( root ),
   graph_( 0 ),
-  theme_(),
+  theme_( std::make_unique< Theme1 >() ),
   width_( 200 ),
   height_( 20 )
 {
@@ -28,6 +28,27 @@ GraphWidget::GraphWidget( Wt::WContainerWidget * root ) :
   setLayoutSizeAware( true );
 
   resize( Wt::WLength::Auto, Wt::WLength::Auto ); // Provide a default size.
+}
+
+GraphWidget::GraphWidget(
+  Wt::WContainerWidget * root,
+  view::GraphSP const & graph
+) :
+  WPaintedWidget( root ),
+  graph_( graph ),
+  theme_( std::make_unique< Theme1 >() ),
+  width_( 200 ),
+  height_( 20 )
+{
+  width_ = width().toPixels();
+  height_ = height().toPixels();
+
+  //TODO
+  //node_label_font_.setFamily( Wt::FontFamily::Monospace, "'Courier New'" );
+
+  setLayoutSizeAware( true );
+
+  resize( 200, 200 ); // Provide a default size.
 }
 
 GraphWidget::~GraphWidget(){}
