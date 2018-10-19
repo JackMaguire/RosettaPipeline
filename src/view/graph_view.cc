@@ -63,6 +63,7 @@ void
 GraphWidget::paintEvent( Wt::WPaintDevice * paintDevice ) {
   Wt::WPainter painter( paintDevice );
   painter.setPen( default_pen_ );
+  int const grid_size = global_data::Options::grid_size;
 
   /*
 
@@ -74,7 +75,6 @@ GraphWidget::paintEvent( Wt::WPaintDevice * paintDevice ) {
   //Grid
   //
   painter.setBrush( Wt::WBrush( theme_->grid_line() ) );
-  int const grid_size = global_data::Options::grid_size;
   for( int x = -1; x < width_; x += 2 * grid_size ) {
     painter.drawLine( x, 0, x, height_ );
   }
