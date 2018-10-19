@@ -16,18 +16,18 @@ GraphWidget::GraphWidget( Wt::WContainerWidget * root ) :
   WPaintedWidget( root ),
   graph_( 0 ),
   theme_( std::make_unique< Theme1 >() ),
-  width_( 200 ),
-  height_( 20 )
+  width_( 1000 ),
+  height_( 800 )
 {
-  width_ = width().toPixels();
-  height_ = height().toPixels();
+  //width_ = width().toPixels();
+  //height_ = height().toPixels();
 
   //TODO
   //node_label_font_.setFamily( Wt::FontFamily::Monospace, "'Courier New'" );
 
   setLayoutSizeAware( true );
 
-  resize( Wt::WLength::Auto, Wt::WLength::Auto ); // Provide a default size.
+  resize( width_, height_ ); // Provide a default size.
 }
 
 GraphWidget::GraphWidget(
@@ -37,18 +37,18 @@ GraphWidget::GraphWidget(
   WPaintedWidget( root ),
   graph_( graph ),
   theme_( std::make_unique< Theme1 >() ),
-  width_( 200 ),
-  height_( 20 )
+  width_( 1000 ),
+  height_( 800 )
 {
-  width_ = width().toPixels();
-  height_ = height().toPixels();
+  //width_ = width().toPixels();
+  //height_ = height().toPixels();
 
   //TODO
   //node_label_font_.setFamily( Wt::FontFamily::Monospace, "'Courier New'" );
 
   setLayoutSizeAware( true );
 
-  resize( 200, 200 ); // Provide a default size.
+  resize( width_, height_ ); // Provide a default size.
 }
 
 GraphWidget::~GraphWidget(){}
@@ -178,9 +178,9 @@ GraphWidget::drawEdge(
 
   // Draw main line
   int const source_x = n_from.X() * grid_size + offset;
-  int const source_y = n_from.X() * grid_size + offset;
+  int const source_y = n_from.Y() * grid_size + offset;
   int const dest_x = n_to.X() * grid_size + offset;
-  int const dest_y = n_to.X() * grid_size + offset;
+  int const dest_y = n_to.Y() * grid_size + offset;
   painter.drawLine( source_x, source_y, dest_x, dest_y );
 
   // Draw Arrow Heads
