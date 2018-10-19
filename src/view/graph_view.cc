@@ -121,7 +121,7 @@ GraphWidget::drawNode(
 	y + diameter / 2,
 	100,//width
 	100,//height
-	Wt::WFlags< Wt::AlignmentFlag >( Wt::AlignmentFlag::Left ),
+	Wt::WFlags< Wt::AlignmentFlag >(),
 	node->title()
       );
     } else {
