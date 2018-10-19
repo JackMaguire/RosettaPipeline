@@ -72,6 +72,11 @@ protected:
     int const offset
   );
 
+protected:
+  void init_listeners();
+
+  void mouseDown( Wt::WMouseEvent const & e );
+
 private:
   graph::GraphSP graph_;
 
@@ -89,6 +94,11 @@ private:
 
   std::unordered_map< graph::NodeSP, hitbox > hitbox_for_node_;
   std::unordered_map< graph::EdgeSP, hitbox > hitbox_for_edge_;
+
+
+  //Controller
+  int last_mouse_press_x_;
+  int last_mouse_press_y_;
 };
 
 inline

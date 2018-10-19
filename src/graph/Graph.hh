@@ -94,6 +94,10 @@ void
 Graph::addNode( NodeSP const & n ) {
   n->setID( getNextNodeID() );
   nodes_.push_back( n );
+
+  if( selected_node_ == 0 ){
+    setSelectedNode( n );
+  }
 }
 
 

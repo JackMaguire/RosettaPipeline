@@ -54,6 +54,25 @@ GraphWidget::GraphWidget(
 GraphWidget::~GraphWidget(){}
 
 void
+GraphWidget::init_listeners(){
+  mouseWentDown().connect( this, & GraphWidget::mouseDown );
+}
+
+void
+GraphWidget::mouseDown( Wt::WMouseEvent const & e ) {
+  Wt::Coordinates c = e.widget();
+  auto const x = c.x;
+  auto const y = c.y;
+
+  last_mouse_press_x_ = x;
+  last_mouse_press_y_ = y;
+
+  bool const shift_is_down = e.modifiers() & Wt::ShiftModifier;
+  bool const control_is_down = e.modifiers() & Wt::ControlModifier;
+  bool const alt_is_down = e.modifiers() & Wt::AltModifier;
+}
+
+void
 GraphWidget::layoutSizeChanged( int w, int h ) {
   width_ = w;
   height_ = h;
