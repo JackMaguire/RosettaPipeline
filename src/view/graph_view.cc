@@ -64,6 +64,8 @@ GraphWidget::paintEvent( Wt::WPaintDevice * paintDevice ) {
   Wt::WPainter painter( paintDevice );
   painter.setPen( default_pen_ );
 
+  /*
+
   //Background
   //
   painter.setBrush( Wt::WBrush( theme_->background() ) );
@@ -79,6 +81,8 @@ GraphWidget::paintEvent( Wt::WPaintDevice * paintDevice ) {
   for( int y = -1; y < height_; y += 2 * grid_size ) {
     painter.drawLine( 0, y, width_, y );
   }
+
+  */
 
   //Edges
   //
