@@ -143,7 +143,7 @@ GraphWidget::drawEdge(
 void
 GraphWidget::drawGhostEdge(
   graph::PreliminaryEdgeCSP const & ghost_edge,
-  Wt::WPainter const & painter,
+  Wt::WPainter & painter,
   int const grid_size,
   int const offset
 ) {
