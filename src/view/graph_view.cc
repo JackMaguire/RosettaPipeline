@@ -93,7 +93,8 @@ GraphWidget::mouseDown( Wt::WMouseEvent const & e ) {
 	graph_->setSelectedNode( node );
 	shift_was_down_when_most_recent_object_was_selected_ = shift_is_down;
 	node_is_currently_being_dragged_ = true;
-	refresh();
+	//refresh();
+	update(Wt::PaintFlag::Update);
 	//GlobalViewData.top_panel.repaint();
 	return;
       }
