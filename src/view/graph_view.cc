@@ -125,7 +125,14 @@ GraphWidget::drawNode(
 	node->title()
       );
     } else {
-      //g2D.drawString( n.title(), x, y - selection_width );
+      painter.drawText(
+	x,
+	y - selection_width,
+	100,//width
+	100,//height
+	Wt::WFlags< Wt::AlignmentFlag >(),
+	node->title()
+      );
     }
   }
 }
