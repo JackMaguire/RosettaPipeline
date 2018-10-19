@@ -15,7 +15,7 @@ public:
 
     graph::GraphSP graph = std::make_shared< graph::Graph >();
     graph::NodeSP previous = 0;
-    for( int i=0; i<5; ++i ){
+    for( int i=0; i < 2; ++i ){
       graph::NodeSP node = std::make_shared< graph::Node >( i*10, i*5);
       graph->addNode( node );
       if( i > 0 ){
