@@ -80,6 +80,8 @@ GraphWidget::paintEvent( Wt::WPaintDevice * paintDevice ) {
     painter.drawLine( 0, y, width_, y );
   }
 
+  return;
+
   //Edges
   //
   painter.setBrush( Wt::WBrush( theme_->edge() ) );
