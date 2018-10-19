@@ -89,8 +89,6 @@ GraphWidget::paintEvent( Wt::WPaintDevice * paintDevice ) {
   }
   painter.setPen( default_pen_ );
 
-  return;
-
   //Ghost Edge
   //
   graph::PreliminaryEdgeCSP ghost_edge = graph_->ghostEdge();
