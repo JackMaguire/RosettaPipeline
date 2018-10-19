@@ -78,7 +78,7 @@ save_and_load_graph.o: src/apps/proof_of_concept/save_and_load_graph.cc graph gl
 	${CXX} -c -o build/save_and_load_graph.o src/apps/proof_of_concept/save_and_load_graph.cc ${GEN}
 
 GraphApplication: src/apps/proof_of_concept/graph_view_app.cc
-	${CXX} -c -o build/graph_view_app.o src/apps/proof_of_concept/graph_view_app.cc ${GEN}
+	${CXX} -c -o build/graph_view_app.o src/apps/proof_of_concept/graph_view_app.cc ${GEN} ${WT_FLAGS}
 
 apps: save_and_load_graph.o GraphApplication
 
@@ -90,4 +90,4 @@ save_and_load_graph: build/save_and_load_graph.o graph global_data
 	${CXX} -o bin/save_and_load_graph build/save_and_load_graph.o build/global_data.o build/graph.o ${GEN}
 
 graph_view_app: GraphApplication
-	${CXX} -o bin/graph_view_app build/graph_view_app.o build/graph.o build/view.o build/options.o ${GEN}
+	${CXX} -o bin/graph_view_app build/graph_view_app.o build/graph.o build/view.o build/options.o ${GEN} ${WT_FLAGS}
