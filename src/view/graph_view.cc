@@ -73,7 +73,7 @@ GraphWidget::mouseDown( Wt::WMouseEvent const & e ) {
   auto const x = c.x;
   auto const y = c.y;
 
-  std::cout << x << " " << y << std::endl;
+  //std::cout << x << " " << y << std::endl;
 
   last_mouse_press_x_ = x;
   last_mouse_press_y_ = y;
@@ -89,13 +89,10 @@ GraphWidget::mouseDown( Wt::WMouseEvent const & e ) {
   } else {//potentially select something
     for( auto const & node : graph_->nodes() ) {
       if( hitbox_for_node_.at( node ).pointIsInBox( x, y ) ) {
-	std::cout << "Found a Node!" << std::endl;
 	graph_->setSelectedNode( node );
 	shift_was_down_when_most_recent_object_was_selected_ = shift_is_down;
 	node_is_currently_being_dragged_ = true;
-	//refresh();
 	update();
-	//GlobalViewData.top_panel.repaint();
 	return;
       }
     }
