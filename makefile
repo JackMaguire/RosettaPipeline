@@ -14,7 +14,7 @@ endif
 #include makefile_mac
 
 GEN=-flto -O3 -Isrc -std=${std} ${WARN} ${EXTRA}
-WT_FLAGS=-lwthttp -lwt -lboost_signals
+WT_FLAGS=-lwthttp -lwt -lboost_signals -DBOOST_SIGNALS_NO_DEPRECATION_WARNING
 
 ########
 # META #
