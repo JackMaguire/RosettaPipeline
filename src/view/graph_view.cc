@@ -32,7 +32,7 @@ GraphWidget::GraphWidget( Wt::WContainerWidget * root ) :
 
 GraphWidget::GraphWidget(
   Wt::WContainerWidget * root,
-  view::GraphSP const & graph
+  graph::GraphSP const & graph
 ) :
   WPaintedWidget( root ),
   graph_( graph ),
