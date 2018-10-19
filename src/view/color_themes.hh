@@ -39,8 +39,9 @@ using ColorThemeUP = std::unique_ptr< ColorTheme >;
 using ColorThemeCUP = std::unique_ptr< const ColorTheme >;
 
 struct Theme1 : public ColorTheme {
-  Wt::WColor background() const override { return Wt::WColor( 241, 247, 239 ); }//F1F7EF
-  Wt::WColor grid_line() const override { return Wt::WColor( 133, 150, 158 ); }//85969E
+  // https://coolors.co/f6f9f4-eff4ed-58b5a3-1e5c6f-171717
+  Wt::WColor background() const override { return Wt::WColor( 241, 247, 239 ); }//F6F9F4
+  Wt::WColor grid_line() const override { return Wt::WColor( 133, 150, 158 ); }//EFF4ED
 
   Wt::WColor intermediate_node() const override { return Wt::WColor( 88, 181, 163 ); }//58B5A3
   Wt::WColor final_node() const override { return Wt::WColor( 30, 92, 111 ); }//1E5C6F
