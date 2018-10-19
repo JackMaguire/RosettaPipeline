@@ -62,6 +62,18 @@ GraphWidget::paintEvent( Wt::WPaintDevice * paintDevice ) {
   for( auto const & edge_sp : graph_->edges() ){
     drawEdge( edge_sp, painter, grid_size, edge_offset );
   }
+  painter.setPen( default_pen_ );
+
+  //Ghost Edge
+  //
+  graph::PreliminaryEdgeCSP ghost_edge = graph_->ghostEdge();
+  if( ghost_edge ){
+    drawGhostEdge( ghost_edge, painter, grid_size, edge_offset );
+  }
+
+  //Nodes
+  //
+  painter.setBrush( Wt::WBrush( theme_->edge() ) );
 }
 
 void
@@ -128,5 +140,17 @@ GraphWidget::drawEdge(
 
 }
 
+void
+GraphWidget::drawGhostEdge(
+  graph::PreliminaryEdgeCSP const & ghost_edge,
+  Wt::WPainter const & painter,
+  int const grid_size,
+  int const offset
+) {
+  NodeSP const & n_from = ghost_edge->source_node;
+  int const source_x = n_from->X() * grid_size + offset;
+  int const source_y = n_from->Y() * grid_size + offset;
+  painter.drawLine( source_x, source_y, ghost_edge->cursor_x, ghost_edge->cursor_y );
+}
 
 }//namespace view

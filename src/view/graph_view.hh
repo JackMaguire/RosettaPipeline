@@ -50,6 +50,14 @@ protected:
     int const offset
   );
 
+  void
+  drawGhostEdge(
+    graph::PreliminaryEdgeCSP const & ghost_edge,
+    Wt::WPainter const & painter,
+    int const grid_size,
+    int const offset
+  );
+
 private:
   graph::GraphSP graph_;
 
