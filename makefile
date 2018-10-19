@@ -19,13 +19,13 @@ WT_FLAGS=-lwthttp -lwt -lboost_signals
 ########
 # META #
 ########
-all: options graph compile devel view apps bin
+all: options graph compile view apps bin
 
 all_no_wt: options graph compile
 
 graph: Node.o Edge.o Graph.o
 
-bin: save_and_load_graph graph_view_app testing_ground
+bin: save_and_load_graph graph_view_app
 
 ###########
 # OPTIONS #
@@ -60,19 +60,6 @@ graph: Graph.o Edge.o Node.o
 compile: graph
 	${CXX} -c -o build/compile.o src/compile/compile.cc ${GEN} 
 
-#########
-# DEVEL #
-#########
-
-DummyPanel.o: src/devel/DummyPanel.hh
-	${CXX} -c -o build/DummyPanel.o src/devel/DummyPanel.hh ${GEN} ${WT_FLAGS}
-
-devel: DummyPanel.o
-	cp build/DummyPanel.o build/devel.o
-
-#devel: build/DummyPanel.o
-#	ld -r build/DummyPanel.o -o build/devel.o
-
 ########
 # VIEW #
 ########
@@ -90,13 +77,10 @@ view: GraphWidget.o
 save_and_load_graph.o: src/apps/proof_of_concept/save_and_load_graph.cc graph global_data
 	${CXX} -c -o build/save_and_load_graph.o src/apps/proof_of_concept/save_and_load_graph.cc ${GEN}
 
-testing_ground.o: src/apps/proof_of_concept/testing_ground.cc graph
-	${CXX} -c -o build/testing_ground.o src/apps/proof_of_concept/testing_ground.cc ${GEN}
-
 GraphApplication: src/apps/proof_of_concept/graph_view_app.cc
 	${CXX} -c -o build/graph_view_app.o src/apps/proof_of_concept/graph_view_app.cc ${GEN}
 
-apps: save_and_load_graph.o testing_ground.o GraphApplication
+apps: save_and_load_graph.o GraphApplication
 
 #######
 # BIN #
@@ -104,9 +88,6 @@ apps: save_and_load_graph.o testing_ground.o GraphApplication
 
 save_and_load_graph: build/save_and_load_graph.o graph global_data
 	${CXX} -o bin/save_and_load_graph build/save_and_load_graph.o build/global_data.o build/graph.o ${GEN}
-
-testing_ground: build/graph.o build/testing_ground.o build/devel.o
-	${CXX} -o bin/testing_ground build/testing_ground.o build/graph.o build/devel.o ${GEN}
 
 graph_view_app: GraphApplication
 	${CXX} -o bin/graph_view_app build/graph_view_app.o build/graph.o build/view.o build/options.o ${GEN}
