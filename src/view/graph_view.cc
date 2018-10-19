@@ -21,6 +21,8 @@ GraphWidget::GraphWidget() :
   width_ = width().toPixels();
   height_ = height().toPixels();
 
+  node_label_font_.setFamily(FontFamily::Monospace, "'Courier New'");
+
   setLayoutSizeAware( true );
 
   resize( Wt::WLength::Auto, Wt::WLength::Auto ); // Provide a default size.
@@ -73,8 +75,60 @@ GraphWidget::paintEvent( Wt::WPaintDevice * paintDevice ) {
 
   //Nodes
   //
-  painter.setBrush( Wt::WBrush( theme_->edge() ) );
+  node_label_font_.setSize( Wt::WLength( 2 * grid_size ) );
+  painter.setFont( node_label_font_ );
+  int const selection_width = grid_size / 2;
+  for( auto const & node_sp : graph_->nodes() ){
+    drawNode( node_sp, painter, grid_size, selection_width );
+  }
 }
+
+void
+GraphWidget::drawNode(
+  graph::NodeSP const & node,
+  Wt::WPainter & painter,
+  int const grid_size,
+  int const selection_width
+) {
+  int const x = n->X() * grid_size + ( grid_size / 2 );
+  int const y = n->Y() * grid_size + ( grid_size / 2 );
+  int const diameter = grid_size * 3;
+  
+  if( node == graph_->selectedNode() ){
+    painter.setBrush( Wt::WBrush( theme_->selection_outline() ) );
+    int const sx = x - selection_width;
+    int const sy = y - selection_width;
+    int const sdiameter = diameter + 2 * selection_width;
+    painter.drawEllipse( sx, sy, sdiameter, sdiameter );
+  }
+
+  if( node->numDownstreamEdges() == 0 ) {
+    painter.setBrush( Wt::WBrush( theme_->final_node() ) );
+  } else {
+    painter.setBrush( Wt::WBrush( theme_->intermediate_node() ) );
+  }
+
+  painter.drawEllipse( x, y, diameter, diameter );
+  hitbox_for_node_[ node ] = hitbox( x, y, diameter, diameter );
+
+  if( global_data::Options::show_node_titles ) {
+    //g2D.setColor( Color.black );
+    if( global_data::Options::put_node_titles_to_side ) {
+      painter.drawText(
+	x + diameter + selection_width,
+	y + diameter / 2,
+	100,//width
+	100,//height
+	Wt::AlignmentFlag::Left | Wt::AlignmentFlag::Top,
+	node->title()
+      );
+    } else {
+      //g2D.drawString( n.title(), x, y - selection_width );
+    }
+  }
+}
+
+
 
 void
 GraphWidget::drawEdge(

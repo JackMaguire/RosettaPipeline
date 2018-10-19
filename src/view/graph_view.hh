@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Wt/WFont>
 #include <Wt/WPaintDevice>
 #include <Wt/WPaintedWidget>
 #include <Wt/WPen>
@@ -43,9 +44,17 @@ protected:
   void paintEvent( Wt::WPaintDevice * paintDevice ) override;
 
   void
+  drawNode(
+    graph::NodeSP const &,
+    Wt::WPainter &,
+    int const grid_size,
+    int const selection_width
+  );
+
+  void
   drawEdge(
-    graph::EdgeSP const & edge,
-    Wt::WPainter & painter,
+    graph::EdgeSP const &,
+    Wt::WPainter &,
     int const grid_size,
     int const offset
   );
@@ -53,7 +62,7 @@ protected:
   void
   drawGhostEdge(
     graph::PreliminaryEdgeCSP const & ghost_edge,
-    Wt::WPainter & painter,
+    Wt::WPainter &,
     int const grid_size,
     int const offset
   );
@@ -70,6 +79,8 @@ private:
 
   Wt::WPen default_pen_;
   Wt::WPen selected_edge_pen_;
+
+  Wt::WFont node_label_font_;
 
   std::unordered_map< graph::NodeSP, hitbox > hitbox_for_node_;
   std::unordered_map< graph::EdgeSP, hitbox > hitbox_for_edge_;
