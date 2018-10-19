@@ -90,10 +90,13 @@ view: GraphWidget.o
 save_and_load_graph.o: src/apps/proof_of_concept/save_and_load_graph.cc graph global_data
 	${CXX} -c -o build/save_and_load_graph.o src/apps/proof_of_concept/save_and_load_graph.cc ${GEN}
 
-testing_ground.o: graph 
+testing_ground.o: src/apps/proof_of_concept/testing_ground.cc graph
 	${CXX} -c -o build/testing_ground.o src/apps/proof_of_concept/testing_ground.cc ${GEN}
 
-apps: save_and_load_graph.o testing_ground.o
+GraphApplication: src/apps/proof_of_concept/graph_view_app.cc
+	${CXX} -c -o build/graph_view_app.o src/apps/proof_of_concept/graph_view_app.cc ${GEN}
+
+apps: save_and_load_graph.o testing_ground.o GraphApplication
 
 #######
 # BIN #
@@ -102,6 +105,8 @@ apps: save_and_load_graph.o testing_ground.o
 save_and_load_graph: build/save_and_load_graph.o graph global_data
 	${CXX} -o bin/save_and_load_graph build/save_and_load_graph.o build/global_data.o build/graph.o ${GEN}
 
-
 testing_ground: build/graph.o build/testing_ground.o build/devel.o
 	${CXX} -o bin/testing_ground build/testing_ground.o build/graph.o build/devel.o ${GEN}
+
+graph_view_app: GraphApplication
+	${CXX} -o bin/graph_view_app build/graph_view_app.o build/graph.o build/view.o build/options.o ${GEN}
