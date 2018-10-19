@@ -41,6 +41,8 @@ public:
 
   void layoutSizeChanged( int w, int h ) override;
 
+  void setGraph( graph::GraphSP const & );
+
 protected:
   void paintEvent( Wt::WPaintDevice * paintDevice ) override;
 
@@ -86,5 +88,11 @@ private:
   std::unordered_map< graph::NodeSP, hitbox > hitbox_for_node_;
   std::unordered_map< graph::EdgeSP, hitbox > hitbox_for_edge_;
 };
+
+inline
+void
+GraphWidget::setGraph( graph::GraphSP const & graph ) {
+  graph_ = graph;
+}
 
 }//namespace view

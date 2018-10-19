@@ -1,6 +1,9 @@
 #include <Wt/WApplication>
 
+#include <graph/Graph.hh>
 #include <view/graph_view.hh>
+
+#include <memory>
 
 using namespace Wt;
 
@@ -9,10 +12,19 @@ class GraphApplication: public WApplication
 public:
   GraphApplication(const WEnvironment &env): WApplication(env) {
     setTitle("Graph example");
-    
-    //useStyleSheet("painting.css");
-    
-    new view::GraphWidget( root() );
+
+    view::GraphWidget * widget = new view::GraphWidget( root() );
+    graph::GraphSP graph = std::make_shared< graph::Graph >();
+    graph::NodeSP previous = 0;
+    for( int i=0; i<5; ++i ){
+      graph::NodeSP node = std::make_shared< graph::Node >( i*10, i*5);
+      graph->addNode( node );
+      if( i > 0 ){
+	graph->addEdge( previous, node );
+      }
+      previous = node;
+    }
+    widget->setGraph( graph );
   }
 
 //private:
