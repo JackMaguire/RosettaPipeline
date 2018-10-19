@@ -147,7 +147,7 @@ GraphWidget::drawGhostEdge(
   int const grid_size,
   int const offset
 ) {
-  NodeSP const & n_from = ghost_edge->source_node;
+  graph::NodeSP const & n_from = ghost_edge->source_node;
   int const source_x = n_from->X() * grid_size + offset;
   int const source_y = n_from->Y() * grid_size + offset;
   painter.drawLine( source_x, source_y, ghost_edge->cursor_x, ghost_edge->cursor_y );
