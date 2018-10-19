@@ -86,7 +86,7 @@ apps: save_and_load_graph.o GraphApplication
 # BIN #
 #######
 
-save_and_load_graph: build/save_and_load_graph.o graph global_data
+save_and_load_graph: save_and_load_graph.o graph global_data
 	${CXX} -o bin/save_and_load_graph build/save_and_load_graph.o build/global_data.o build/graph.o ${GEN}
 
 graph_view_app: GraphApplication
