@@ -1,4 +1,8 @@
 #include <view/RightViewWidget.hh>
+
+#include <view/EditWidget.hh>
+#include <view/CompileWidget.hh>
+
 #include <global_data/options.hh>
 
 #include <graph/Graph.fwd.hh>
@@ -16,7 +20,7 @@ RightViewWidget::RightViewWidget(
   graph::GraphSP const & graph
 ) :
   WTabWidget( root ),
-  width_( 1000 ),
+  width_( 500 ),
   height_( 800 )
 {
   setLayoutSizeAware( true );
@@ -24,6 +28,8 @@ RightViewWidget::RightViewWidget(
 
   using namespace Wt;
 
+  addTab( new EditWidget( this, graph ), "Edit" );
+  addTab( new CompileWidget( this, graph), "Compile" );
 }
 
 RightViewWidget::~RightViewWidget(){}

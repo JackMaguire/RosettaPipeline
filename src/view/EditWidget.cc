@@ -16,7 +16,7 @@ EditWidget::EditWidget(
   graph::GraphSP const & graph
 ) :
   WTabWidget( root ),
-  width_( 1000 ),
+  width_( 500 ),
   height_( 800 )
 {
   setLayoutSizeAware( true );
