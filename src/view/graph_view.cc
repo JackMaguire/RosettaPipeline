@@ -235,8 +235,8 @@ GraphWidget::mouseDraggedImpl( Wt::WMouseEvent const & e ) {
 
   if( node_is_currently_being_dragged_ ) {
     auto const & selected_node = graph_->selectedNode();
-    selected_node.setX( graph_view_.getClosestPointForPoint( x ) );
-    selected_node.setY( graph_view_.getClosestPointForPoint( y ) );
+    selected_node->setX( graph_view_->getClosestPointForPoint( x ) );
+    selected_node->setY( graph_view_->getClosestPointForPoint( y ) );
     update();
     return;
   }
