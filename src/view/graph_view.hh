@@ -51,6 +51,8 @@ public:
   void setGraph( graph::GraphSP const & );
 
 protected:
+  void init_painint_tools();
+
   void paintEvent( Wt::WPaintDevice * paintDevice ) override;
 
   void
@@ -78,7 +80,6 @@ protected:
   );
 
 protected:
-  void init_painint_tools();
   void init_listeners();
 
   void mouseDown( Wt::WMouseEvent const & e );
