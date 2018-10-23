@@ -25,6 +25,15 @@ TopWidget::TopWidget(
 {
   setLayoutSizeAware( true );
   resize( width_, height_ ); // Provide a default size.
+
+
+  using namespace Wt;
+
+  WHBoxLayout * hbox = new WHBoxLayout();
+  setLayout(hbox);
+
+  GraphWidget * left_item = new GraphWidget( graph );
+  hbox->addWidget( left_item, 0.4 );
 }
 
 TopWidget::~TopWidget(){}

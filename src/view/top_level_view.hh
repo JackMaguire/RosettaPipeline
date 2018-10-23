@@ -7,7 +7,7 @@
 
 namespace view {
 
-class TopWidget : public Wt::WPaintedWidget
+class TopWidget : public Wt::WContainerWidget
 {
 public:
   TopWidget( Wt::WContainerWidget *root, graph::GraphSP const & );

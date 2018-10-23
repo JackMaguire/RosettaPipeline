@@ -67,8 +67,11 @@ compile: graph
 GraphWidget.o: src/view/graph_view.hh graph
 	${CXX} -c -o build/GraphWidget.o src/view/graph_view.cc ${GEN} ${WT_FLAGS}
 
-view: GraphWidget.o
-	cp build/GraphWidget.o build/view.o
+TopWidget.o: src/view/top_level_view.cc.hh GraphWidget.o
+	${CXX} -c -o build/TopWidget.o src/view/top_level_view.cc.hh ${GEN} ${WT_FLAGS}
+
+view: GraphWidget.o TopWidget.o
+	ld -r build/GraphWidget.o build/TopWidget.o -o build/view.o -arch ${ARCH}
 
 
 ########
