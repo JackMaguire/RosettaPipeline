@@ -77,9 +77,9 @@ GraphWidget::mouseClicked( Wt::WMouseEvent const & e ) {
   bool const control_is_down = e.modifiers() & Wt::ControlModifier;
   if( control_is_down ) {
     // create new node
-    int const x2 = getClosestPointForPoint( x );
-    int const y2 = getClosestPointForPoint( y );
-    graph_.addNode( std::make_shared< graph::Node( x2, y2 ) > );
+    auto const x2 = getClosestPointForPoint( x );
+    auto const y2 = getClosestPointForPoint( y );
+    graph_->addNode( std::make_shared< graph::Node( x2, y2 ) > );
     update();
     return;
   }
