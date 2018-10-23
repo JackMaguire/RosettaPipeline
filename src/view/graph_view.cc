@@ -154,7 +154,7 @@ GraphWidget::mouseReleased( Wt::WMouseEvent const & e ) {
 	  /*final Object[] options = { "Yes, delete",
 				     "No, don't delete" };
 	  int n = JOptionPane.showOptionDialog( new JFrame(),
-	    "Delete Node \"" + graph_.selectedNode().getTitle() + "\"?",
+	    "Delete Node \"" + graph_->selectedNode().getTitle() + "\"?",
 	    "Delete?",
 	    JOptionPane.YES_NO_OPTION,
 	    JOptionPane.QUESTION_MESSAGE,
@@ -163,8 +163,8 @@ GraphWidget::mouseReleased( Wt::WMouseEvent const & e ) {
 	    options[ 1 ] );
 	  if( n == 1 )
 	    return;*/
-	  graph_->removeNodeAndDeleteItsEdges( graph_.selectedNode() );
-	  graph_->setSelectedNode( graph_.getNode( 0 ) );
+	  graph_->removeNodeAndDeleteItsEdges( graph_->selectedNode() );
+	  graph_->setSelectedNode( graph_->getNode( 0 ) );
 	  update();
 	}
 	return;
@@ -194,7 +194,7 @@ GraphWidget::mouseReleased( Wt::WMouseEvent const & e ) {
   if( node_is_currently_being_dragged_ ) {
     node_is_currently_being_dragged_ = false;
     if( abs( x - last_mouse_press_x_ ) > 4 || abs( y - last_mouse_press_y_ ) > 4 ) {
-      auto const & sn = graph_.selectedNode();
+      auto const & sn = graph_->selectedNode();
       sn.setX( getClosestPointForPoint( x ) );
       sn.setY( getClosestPointForPoint( y ) );
       update();
@@ -204,15 +204,15 @@ GraphWidget::mouseReleased( Wt::WMouseEvent const & e ) {
 
   if( edge_is_currently_being_created_ ) {
     edge_is_currently_being_created_ = false;
-    graph_.setGhostEdge( 0 );
+    graph_->setGhostEdge( 0 );
     // Check to see if xy corresponds to a node
     for( auto const & node : graph_->nodes() ) {
       if( node == graph_->selectedNode() )
 	continue;
       if( hitbox_for_node_.at( node ).pointIsInBox( x, y ) ) {
-	auto const & new_edge = graph_.addEdge( graph_->selectedNode(), node );
-	graph_.setSelectedEdge( new_edge );
-	graph_.setSelectedNode( auto );
+	auto const & new_edge = graph_->addEdge( graph_->selectedNode(), node );
+	graph_->setSelectedEdge( new_edge );
+	graph_->setSelectedNode( auto );
 	break;
       }
     }
@@ -242,7 +242,7 @@ GraphWidget::mouseDragged( Wt::WMouseEvent const & e ) {
 
   if( edge_is_currently_being_created_ ) {
     graph_->ghostEdge()->cursor_x = x;
-    graph_.ghostEdge()->cursor_y = y;
+    graph_->ghostEdge()->cursor_y = y;
     update();
     return;
   }
