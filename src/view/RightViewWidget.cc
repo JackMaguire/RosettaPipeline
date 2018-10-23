@@ -1,9 +1,7 @@
 #include <view/RightViewWidget.hh>
 #include <global_data/options.hh>
 
-#include <graph/Graph.hh>
-#include <graph/Edge.hh>
-#include <graph/Node.hh>
+#include <graph/Graph.fwd.hh>
 
 #include <Wt/WLength>
 #include <Wt/WGlobal>
