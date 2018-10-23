@@ -29,7 +29,7 @@ RightViewWidget::RightViewWidget(
   using namespace Wt;
 
   addTab( new EditWidget( this, graph ), "Edit" );
-  addTab( new CompileWidget( this, graph), "Compile" );
+  addTab( new CompileWidget( this, graph ), "Compile" );
 }
 
 RightViewWidget::~RightViewWidget(){}
