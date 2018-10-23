@@ -65,7 +65,24 @@ GraphWidget::init_listeners(){
   edge_is_currently_being_created_ = false;
   shift_was_down_when_most_recent_object_was_selected_ = false;
 
+  clicked().connect( this, & GraphWidget::mouseClicked );
   mouseWentDown().connect( this, & GraphWidget::mouseDown );
+}
+
+void
+GraphWidget::mouseClicked( Wt::WMouseEvent const & e ) {
+  Wt::Coordinates c = e.widget();
+  auto const x = c.x;
+  auto const y = c.y;
+  bool const control_is_down = e.modifiers() & Wt::ControlModifier;
+  if( control_is_down ) {
+    // create new node
+    int const x2 = getClosestPointForPoint( x );
+    int const y2 = getClosestPointForPoint( y );
+    graph_.addNode( std::make_shared< graph::Node( x2, y2 ) > );
+    update();
+    return;
+  }
 }
 
 void
