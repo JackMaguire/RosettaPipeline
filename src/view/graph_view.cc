@@ -32,6 +32,7 @@ GraphWidget::GraphWidget( Wt::WContainerWidget * root ) :
   resize( width_, height_ ); // Provide a default size.
 
   init_listeners();
+  init_painting_tools();
 }
 
 GraphWidget::GraphWidget(
@@ -55,6 +56,7 @@ GraphWidget::GraphWidget(
   resize( width_, height_ ); // Provide a default size.
 
   init_listeners();
+  init_painting_tools();
 }
 
 GraphWidget::~GraphWidget(){}
@@ -65,29 +67,15 @@ GraphWidget::init_listeners(){
   edge_is_currently_being_created_ = false;
   shift_was_down_when_most_recent_object_was_selected_ = false;
 
-  //clicked().connect( this, & GraphWidget::mouseClicked );
   mouseWentDown().connect( this, & GraphWidget::mouseDown );
   mouseWentUp().connect( this, & GraphWidget::mouseReleased );
   mouseDragged().connect( this, & GraphWidget::mouseDraggedImpl );
 }
 
 void
-GraphWidget::mouseClicked( Wt::WMouseEvent const & e ) {
-  Wt::Coordinates c = e.widget();
-  auto const x = c.x;
-  auto const y = c.y;
-  /*
-  //bool const control_is_down = e.modifiers() & Wt::ControlModifier;
-  bool const alt_is_down = e.modifiers() & Wt::AltModifier;
-
-  if( alt_is_down ) {
-    // create new node
-    auto const x2 = getClosestPointForPoint( x );
-    auto const y2 = getClosestPointForPoint( y );
-    graph_->addNode( std::make_shared< graph::Node >( x2, y2 ) );
-    update();
-    return;
-  }*/
+GraphWidget::init_painint_tools(){
+  default_pen_.setWidth( 2 );
+  selected_edge_pen_.setWidth( 4 );
 }
 
 void

@@ -78,9 +78,9 @@ protected:
   );
 
 protected:
+  void init_painint_tools();
   void init_listeners();
 
-  void mouseClicked( Wt::WMouseEvent const & e );
   void mouseDown( Wt::WMouseEvent const & e );
   void mouseReleased( Wt::WMouseEvent const & e );
   void mouseDraggedImpl( Wt::WMouseEvent const & e );
