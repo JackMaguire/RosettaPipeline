@@ -30,7 +30,7 @@ TopWidget::TopWidget(
   WHBoxLayout * hbox = new WHBoxLayout();
   setLayout(hbox);
 
-  GraphWidget * left_item = new GraphWidget( graph );
+  GraphWidget * left_item = new GraphWidget( this, graph );
   hbox->addWidget( left_item, 0.4 );
 }
 
