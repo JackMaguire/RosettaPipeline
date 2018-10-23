@@ -48,7 +48,7 @@ public://edge access
   EdgeSP addEdge( NodeSP const & source, NodeSP const & destination );
 
 public://selection access
-  NodeSP selectedNode();
+  NodeSP & selectedNode();
   NodeCSP selectedNode() const;
   void setSelectedNode( NodeSP const & );
 
@@ -115,7 +115,7 @@ Graph::edges() const {
 }
 
 inline
-NodeSP
+NodeSP &
 Graph::selectedNode() {
   return selected_node_;
 }
