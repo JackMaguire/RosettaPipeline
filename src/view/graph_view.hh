@@ -80,7 +80,7 @@ protected:
 protected:
   void init_listeners();
 
-  void mouseDown( Wt::WMouseEvent const & e ) override;
+  void mouseDown( Wt::WMouseEvent const & e );
 
   int getClosestPointForPoint( int point ) const;
 
