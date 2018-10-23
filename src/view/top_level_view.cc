@@ -1,4 +1,5 @@
 #include <view/top_level_view.hh>
+#include <view/RightViewWidget.hh>
 #include <global_data/options.hh>
 
 #include <graph/Graph.hh>
@@ -33,7 +34,7 @@ TopWidget::TopWidget(
   GraphWidget * left_item = new GraphWidget( this, graph );
   hbox->addWidget( left_item, 0.4 );
 
-  GraphWidget * right_item = new GraphWidget( this, graph );
+  RightViewWidget * right_item = new RightViewWidget( this, graph );
   hbox->addWidget( right_item, 0.6 );
 
 }
