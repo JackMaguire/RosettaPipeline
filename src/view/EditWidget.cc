@@ -12,10 +12,9 @@
 namespace view {
 
 EditWidget::EditWidget(
-  Wt::WContainerWidget * root,
   graph::GraphSP const & graph
 ) :
-  WTabWidget( root ),
+  WTabWidget(),
   width_( 500 ),
   height_( 800 )
 {

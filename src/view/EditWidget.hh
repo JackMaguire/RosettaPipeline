@@ -8,7 +8,7 @@ namespace view {
 class EditWidget : public Wt::WTabWidget
 {
 public:
-  EditWidget( Wt::WContainerWidget *root, graph::GraphSP const & );
+  EditWidget( graph::GraphSP const & );
 
   virtual ~EditWidget();
 
