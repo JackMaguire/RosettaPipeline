@@ -196,8 +196,8 @@ GraphWidget::mouseReleased( Wt::WMouseEvent const & e ) {
   if( node_is_currently_being_dragged_ ) {
     node_is_currently_being_dragged_ = false;
     if( abs( x - last_mouse_press_x_ ) > 4 || abs( y - last_mouse_press_y_ ) > 4 ) {
-      graph_->selectedNode().setX( getClosestPointForPoint( x ) );
-      graph_->selectedNode().setY( getClosestPointForPoint( y ) );
+      graph_->selectedNode()->setX( getClosestPointForPoint( x ) );
+      graph_->selectedNode()->setY( getClosestPointForPoint( y ) );
       update();
     }
     return;
@@ -224,7 +224,7 @@ GraphWidget::mouseReleased( Wt::WMouseEvent const & e ) {
 }
 
 void
-GraphWidget::mouseDragged( Wt::WMouseEvent const & e ) {
+GraphWidget::mouseDraggedImpl( Wt::WMouseEvent const & e ) {
   Wt::Coordinates c = e.widget();
   auto const x = c.x;
   auto const y = c.y;
