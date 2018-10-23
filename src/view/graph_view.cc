@@ -83,7 +83,16 @@ GraphWidget::mouseDown( Wt::WMouseEvent const & e ) {
   bool const alt_is_down = e.modifiers() & Wt::AltModifier;
 
   if( control_is_down ){//potentially create something
-
+    // potentially create an edge
+    for( auto const & node : graph_->nodes() ) {
+      if( hitbox_for_node_.at( node ).pointIsInBox( x, y ) ) {
+	graph_->setSelectedNode( node );
+	edge_is_currently_being_created_ = true;
+	graph_->setGhostEdge( std::make_shared< graph::PreliminaryEdge( node, x, y ) >() );
+	update();
+	return;
+      }
+    }
   } else if( shift_is_down ){//potentially delete something
 
   } else {//potentially select something
