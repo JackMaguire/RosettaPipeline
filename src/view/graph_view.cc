@@ -74,8 +74,14 @@ GraphWidget::mouseClicked( Wt::WMouseEvent const & e ) {
   Wt::Coordinates c = e.widget();
   auto const x = c.x;
   auto const y = c.y;
-  bool const control_is_down = e.modifiers() & Wt::ControlModifier;
-  if( control_is_down ) {
+
+  //bool const control_is_down = e.modifiers() & Wt::ControlModifier;
+  bool const alt_is_down = e.modifiers() & Wt::AltModifier;
+
+  std::cout << 1 << std::endl;
+
+  if( alt_is_down ) {
+    std::cout << 2 << std::endl;
     // create new node
     auto const x2 = getClosestPointForPoint( x );
     auto const y2 = getClosestPointForPoint( y );
