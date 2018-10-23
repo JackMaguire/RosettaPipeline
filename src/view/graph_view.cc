@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include <math.h>
+#include <memory>
 
 namespace view {
 
@@ -88,7 +89,7 @@ GraphWidget::mouseDown( Wt::WMouseEvent const & e ) {
       if( hitbox_for_node_.at( node ).pointIsInBox( x, y ) ) {
 	graph_->setSelectedNode( node );
 	edge_is_currently_being_created_ = true;
-	graph_->setGhostEdge( std::make_shared< graph::PreliminaryEdge( node, x, y ) >() );
+	graph_->setGhostEdge( std::make_shared< graph::PreliminaryEdge >( node, x, y ) );
 	update();
 	return;
       }
