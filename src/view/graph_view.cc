@@ -184,7 +184,8 @@ GraphWidget::mouseReleased( Wt::WMouseEvent const & e ) {
 	  options[ 1 ] );
 	if( n == 1 )
 	  return;*/
-	graph_->removeEdgeAndNotifyItsNodes( graph_->selectedEdge() );
+	auto & selected_edge = graph_->selectedEdge();
+	graph_->removeEdgeAndNotifyItsNodes( selected_edge );
 	graph_->setSelectedNode( graph_->nodes()[ 0 ] );
 	update();
       }
