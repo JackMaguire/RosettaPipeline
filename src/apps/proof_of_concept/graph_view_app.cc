@@ -2,6 +2,7 @@
 
 #include <graph/Graph.hh>
 #include <view/graph_view.hh>
+#include <view/top_level_view.hh>
 
 #include <memory>
 
@@ -24,7 +25,8 @@ public:
       previous = node;
     }
 
-    view::GraphWidget * widget = new view::GraphWidget( root(), graph );
+    //view::GraphWidget * widget = new view::GraphWidget( root(), graph );
+    view::TopWidget * widget = new view::TopWidget( root(), graph );
   }
 
 //private:
