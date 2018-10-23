@@ -73,7 +73,7 @@ RightViewWidget.o: src/view/RightViewWidget.cc
 TopWidget.o: src/view/top_level_view.cc
 	${CXX} -c -o build/TopWidget.o src/view/top_level_view.cc ${GEN} ${WT_FLAGS}
 
-view: GraphWidget.o TopWidget.o
+view: GraphWidget.o TopWidget.o RightViewWidget.o
 	ld -r build/GraphWidget.o build/TopWidget.o build/RightViewWidget.o -o build/view.o -arch ${ARCH}
 
 
