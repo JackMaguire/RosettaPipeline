@@ -18,9 +18,9 @@ TopWidget::TopWidget(
   Wt::WContainerWidget * root,
   graph::GraphSP const & graph
 ) :
-  WPaintedWidget( root ),
+  WContainerWidget( root ),
   width_( 1000 ),
-  height( 800 )
+  height_( 800 )
 {
   setLayoutSizeAware( true );
   resize( width_, height_ ); // Provide a default size.
