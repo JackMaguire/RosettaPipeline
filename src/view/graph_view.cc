@@ -148,13 +148,14 @@ GraphWidget::mouseReleased( Wt::WMouseEvent const & e ) {
   bool const alt_is_down = e.modifiers() & Wt::AltModifier;
 
   if( shift_was_down_when_most_recent_object_was_selected_ && shift_is_down ) {
-    if( graph_->selectedNode() != 0 ) {
+    auto const & selected_node = graph_->selectedNode();
+    if( selected_node != 0 ) {
       if( graph_->getNumNodes() > 1 ) {// Don't want an empty graph
-	if( hitbox_for_node_.at( graph_->selectedNode() ).pointIsInBox( x, y ) ) {
+	if( hitbox_for_node_.at( selected_node ).pointIsInBox( x, y ) ) {
 	  /*final Object[] options = { "Yes, delete",
 				     "No, don't delete" };
 	  int n = JOptionPane.showOptionDialog( new JFrame(),
-	    "Delete Node \"" + graph_->selectedNode().getTitle() + "\"?",
+	    "Delete Node \"" + selected_node.getTitle() + "\"?",
 	    "Delete?",
 	    JOptionPane.YES_NO_OPTION,
 	    JOptionPane.QUESTION_MESSAGE,
@@ -163,8 +164,8 @@ GraphWidget::mouseReleased( Wt::WMouseEvent const & e ) {
 	    options[ 1 ] );
 	  if( n == 1 )
 	    return;*/
-	  graph_->removeNodeAndDeleteItsEdges( graph_->selectedNode() );
-	  graph_->setSelectedNode( graph_->getNode( 0 ) );
+	  graph_->removeNodeAndDeleteItsEdges( selected_node );
+	  graph_->setSelectedNode( graph_->nodes()[ 0 ] );
 	  update();
 	}
 	return;
@@ -184,7 +185,7 @@ GraphWidget::mouseReleased( Wt::WMouseEvent const & e ) {
 	if( n == 1 )
 	  return;*/
 	graph_->removeEdgeAndNotifyItsNodes( graph_->selectedEdge() );
-	graph_->setSelectedNode( graph_->getNode( 0 ) );
+	graph_->setSelectedNode( graph_->nodes()[ 0 ] );
 	update();
       }
     }
@@ -212,7 +213,7 @@ GraphWidget::mouseReleased( Wt::WMouseEvent const & e ) {
       if( hitbox_for_node_.at( node ).pointIsInBox( x, y ) ) {
 	auto const & new_edge = graph_->addEdge( graph_->selectedNode(), node );
 	graph_->setSelectedEdge( new_edge );
-	graph_->setSelectedNode( auto );
+	graph_->setSelectedNode( 0 );
 	break;
       }
     }
