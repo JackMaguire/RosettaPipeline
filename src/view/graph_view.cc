@@ -246,12 +246,6 @@ GraphWidget::mouseDraggedImpl( Wt::WMouseEvent const & e ) {
 }
 
 void
-GraphWidget::layoutSizeChanged( int w, int h ) {
-  width_ = w;
-  height_ = h;
-}
-
-void
 GraphWidget::paintEvent( Wt::WPaintDevice * paintDevice ) {
   Wt::WPainter painter( paintDevice );
   painter.setPen( default_pen_ );

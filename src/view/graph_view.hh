@@ -121,4 +121,11 @@ GraphWidget::setGraph( graph::GraphSP const & graph ) {
   graph_ = graph;
 }
 
+inline
+void
+GraphWidget::layoutSizeChanged( int w, int h ) {
+  width_ = w;
+  height_ = h;
+}
+
 }//namespace view

@@ -19,13 +19,11 @@ TopWidget::TopWidget(
   graph::GraphSP const & graph
 ) :
   WPaintedWidget( root ),
-  graph_( graph ),
   width_( 1000 ),
   height( 800 )
 {
   setLayoutSizeAware( true );
   resize( width_, height_ ); // Provide a default size.
-
 
   using namespace Wt;
 
