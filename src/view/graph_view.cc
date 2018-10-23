@@ -67,6 +67,7 @@ GraphWidget::init_listeners(){
 
   clicked().connect( this, & GraphWidget::mouseClicked );
   mouseWentDown().connect( this, & GraphWidget::mouseDown );
+  mouseWentUp().connect( this, & GraphWidget::mouseReleased );
 }
 
 void
@@ -182,7 +183,7 @@ GraphWidget::mouseReleased( Wt::WMouseEvent const & e ) {
 	if( n == 1 )
 	  return;*/
 	graph_->removeEdgeAndNotifyItsNodes( graph_->selectedEdge() );
-	graph_->setSelectedNode( graph_.getNode( 0 ) );
+	graph_->setSelectedNode( graph_->getNode( 0 ) );
 	update();
       }
     }
@@ -190,34 +191,31 @@ GraphWidget::mouseReleased( Wt::WMouseEvent const & e ) {
   }
 
   if( node_is_currently_being_dragged_ ) {
-    if( Math.abs( x - last_mouse_press_x_ ) > 4
-      || Math.abs( y - last_mouse_press_y_ ) > 4 ) {
-      Node sn = graph_.selectedNode();
-      sn.setX( graph_view_.getClosestPointForPoint( x ) );
-      sn.setY( graph_view_.getClosestPointForPoint( y ) );
-      GlobalViewData.top_panel.repaint();
-      }
     node_is_currently_being_dragged_ = false;
-    return;
+    if( abs( x - last_mouse_press_x_ ) > 4 || abs( y - last_mouse_press_y_ ) > 4 ) {
+      auto const & sn = graph_.selectedNode();
+      sn.setX( getClosestPointForPoint( x ) );
+      sn.setY( getClosestPointForPoint( y ) );
+      update();
     }
+    return;
+  }
 
   if( edge_is_currently_being_created_ ) {
     edge_is_currently_being_created_ = false;
-    graph_.setGhostEdge( null );
+    graph_.setGhostEdge( 0 );
     // Check to see if xy corresponds to a node
-    for( Node n : graph_.allNodes_const() ) {
-      if( n == graph_.selectedNode() )
+    for( auto const & node : graph_->nodes() ) {
+      if( node == graph_->selectedNode() )
 	continue;
-      if( graph_view_.boxForNode_const().get( n ).pointIsInBox( x, y ) ) {
-	Edge new_edge = graph_.addEdge( graph_.selectedNode(), n );
+      if( hitbox_for_node_.at( node ).pointIsInBox( x, y ) ) {
+	auto const & new_edge = graph_.addEdge( graph_->selectedNode(), node );
 	graph_.setSelectedEdge( new_edge );
-	graph_.setSelectedNode( null );
-	GlobalViewData.top_panel.repaint();
-	return;
-	}
+	graph_.setSelectedNode( auto );
+	break;
       }
-
-    GlobalViewData.top_panel.repaint();
+    }
+    update();
     return;
   }
 

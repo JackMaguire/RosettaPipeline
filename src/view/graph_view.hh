@@ -81,8 +81,8 @@ protected:
   void init_listeners();
 
   void mouseClicked( Wt::WMouseEvent const & e );
-
   void mouseDown( Wt::WMouseEvent const & e );
+  void mouseReleased( Wt::WMouseEvent const & e );
 
   int getClosestPointForPoint( int point ) const;
 
