@@ -70,8 +70,11 @@ GraphWidget.o: src/view/graph_view.hh graph
 TopWidget.o: src/view/top_level_view.cc GraphWidget.o
 	${CXX} -c -o build/TopWidget.o src/view/top_level_view.cc ${GEN} ${WT_FLAGS}
 
+RightViewWidget.o: src/view/RightViewWidget.cc GraphWidget.o
+	${CXX} -c -o build/RightViewWidget.o src/view/RightViewWidget.cc ${GEN} ${WT_FLAGS}
+
 view: GraphWidget.o TopWidget.o
-	ld -r build/GraphWidget.o build/TopWidget.o -o build/view.o -arch ${ARCH}
+	ld -r build/GraphWidget.o build/TopWidget.o build/RightViewWidget.o -o build/view.o -arch ${ARCH}
 
 
 ########
