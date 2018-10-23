@@ -78,10 +78,7 @@ GraphWidget::mouseClicked( Wt::WMouseEvent const & e ) {
   //bool const control_is_down = e.modifiers() & Wt::ControlModifier;
   bool const alt_is_down = e.modifiers() & Wt::AltModifier;
 
-  std::cout << 1 << std::endl;
-
   if( alt_is_down ) {
-    std::cout << 2 << std::endl;
     // create new node
     auto const x2 = getClosestPointForPoint( x );
     auto const y2 = getClosestPointForPoint( y );
@@ -103,10 +100,10 @@ GraphWidget::mouseDown( Wt::WMouseEvent const & e ) {
   last_mouse_press_y_ = y;
 
   bool const shift_is_down = e.modifiers() & Wt::ShiftModifier;
-  bool const control_is_down = e.modifiers() & Wt::ControlModifier;
+  // bool const control_is_down = e.modifiers() & Wt::ControlModifier;
   bool const alt_is_down = e.modifiers() & Wt::AltModifier;
 
-  if( control_is_down ){//potentially create something
+  if( alt_is_down ){//potentially create something
     // potentially create an edge
     for( auto const & node : graph_->nodes() ) {
       if( hitbox_for_node_.at( node ).pointIsInBox( x, y ) ) {
@@ -117,13 +114,11 @@ GraphWidget::mouseDown( Wt::WMouseEvent const & e ) {
 	return;
       }
     }
-  } else if( shift_is_down ){//potentially delete something
-
   } else {//potentially select something
     for( auto const & node : graph_->nodes() ) {
       if( hitbox_for_node_.at( node ).pointIsInBox( x, y ) ) {
 	graph_->setSelectedNode( node );
-	shift_was_down_when_most_recent_object_was_selected_ = false;
+	shift_was_down_when_most_recent_object_was_selected_ = shift_is_down;
 	node_is_currently_being_dragged_ = true;
 	update();
 	return;
@@ -133,12 +128,101 @@ GraphWidget::mouseDown( Wt::WMouseEvent const & e ) {
     for( auto const & edge : graph_->edges() ) {
       if( hitbox_for_edge_.at( edge ).pointIsInBox( x, y ) ) {
 	graph_->setSelectedEdge( edge );
-	shift_was_down_when_most_recent_object_was_selected_ = false;
+	shift_was_down_when_most_recent_object_was_selected_ = shift_is_down;
 	update();
       }
     }
   }
 }
+
+void
+GraphWidget::mouseReleased( Wt::WMouseEvent const & e ) {
+  Wt::Coordinates c = e.widget();
+  auto const x = c.x;
+  auto const y = c.y;
+
+  bool const shift_is_down = e.modifiers() & Wt::ShiftModifier;
+  // bool const control_is_down = e.modifiers() & Wt::ControlModifier;
+  bool const alt_is_down = e.modifiers() & Wt::AltModifier;
+
+  if( shift_was_down_when_most_recent_object_was_selected_ && shift_is_down ) {
+    if( graph_->selectedNode() != 0 ) {
+      if( graph_->getNumNodes() > 1 ) {// Don't want an empty graph
+	if( hitbox_for_node_.at( graph_->selectedNode() ).pointIsInBox( x, y ) ) {
+	  /*final Object[] options = { "Yes, delete",
+				     "No, don't delete" };
+	  int n = JOptionPane.showOptionDialog( new JFrame(),
+	    "Delete Node \"" + graph_.selectedNode().getTitle() + "\"?",
+	    "Delete?",
+	    JOptionPane.YES_NO_OPTION,
+	    JOptionPane.QUESTION_MESSAGE,
+	    null,
+	    options,
+	    options[ 1 ] );
+	  if( n == 1 )
+	    return;*/
+	  graph_->removeNodeAndDeleteItsEdges( graph_.selectedNode() );
+	  graph_->setSelectedNode( graph_.getNode( 0 ) );
+	  update();
+	}
+	return;
+      }
+    } else if( graph_->selectedEdge() != 0 ) {
+      if( hitbox_for_edge_.at( graph_->selectedEdge() ).pointIsInBox( x, y ) ) {
+	/*final Object[] options = { "Yes, delete",
+				   "No, don't delete" };
+	int n = JOptionPane.showOptionDialog( new JFrame(),
+	  "Delete Selected Edge?",
+	  "Delete?",
+	  JOptionPane.YES_NO_OPTION,
+	  JOptionPane.QUESTION_MESSAGE,
+	  null,
+	  options,
+	  options[ 1 ] );
+	if( n == 1 )
+	  return;*/
+	graph_->removeEdgeAndNotifyItsNodes( graph_->selectedEdge() );
+	graph_->setSelectedNode( graph_.getNode( 0 ) );
+	update();
+      }
+    }
+    return;
+  }
+
+  if( node_is_currently_being_dragged_ ) {
+    if( Math.abs( x - last_mouse_press_x_ ) > 4
+      || Math.abs( y - last_mouse_press_y_ ) > 4 ) {
+      Node sn = graph_.selectedNode();
+      sn.setX( graph_view_.getClosestPointForPoint( x ) );
+      sn.setY( graph_view_.getClosestPointForPoint( y ) );
+      GlobalViewData.top_panel.repaint();
+      }
+    node_is_currently_being_dragged_ = false;
+    return;
+    }
+
+  if( edge_is_currently_being_created_ ) {
+    edge_is_currently_being_created_ = false;
+    graph_.setGhostEdge( null );
+    // Check to see if xy corresponds to a node
+    for( Node n : graph_.allNodes_const() ) {
+      if( n == graph_.selectedNode() )
+	continue;
+      if( graph_view_.boxForNode_const().get( n ).pointIsInBox( x, y ) ) {
+	Edge new_edge = graph_.addEdge( graph_.selectedNode(), n );
+	graph_.setSelectedEdge( new_edge );
+	graph_.setSelectedNode( null );
+	GlobalViewData.top_panel.repaint();
+	return;
+	}
+      }
+
+    GlobalViewData.top_panel.repaint();
+    return;
+  }
+
+}
+
 
 void
 GraphWidget::layoutSizeChanged( int w, int h ) {
