@@ -68,6 +68,7 @@ GraphWidget::init_listeners(){
   clicked().connect( this, & GraphWidget::mouseClicked );
   mouseWentDown().connect( this, & GraphWidget::mouseDown );
   mouseWentUp().connect( this, & GraphWidget::mouseReleased );
+  mouseDragged().connect( this, & GraphWidget::mouseDraggedImpl );
 }
 
 void
@@ -221,6 +222,31 @@ GraphWidget::mouseReleased( Wt::WMouseEvent const & e ) {
 
 }
 
+void
+GraphWidget::mouseDragged( Wt::WMouseEvent const & e ) {
+  Wt::Coordinates c = e.widget();
+  auto const x = c.x;
+  auto const y = c.y;
+
+  bool const shift_is_down = e.modifiers() & Wt::ShiftModifier;
+  // bool const control_is_down = e.modifiers() & Wt::ControlModifier;
+  bool const alt_is_down = e.modifiers() & Wt::AltModifier;
+
+  if( node_is_currently_being_dragged_ ) {
+    auto const & selected_node = graph_->selectedNode();
+    selected_node.setX( graph_view_.getClosestPointForPoint( x ) );
+    selected_node.setY( graph_view_.getClosestPointForPoint( y ) );
+    update();
+    return;
+  }
+
+  if( edge_is_currently_being_created_ ) {
+    graph_->ghostEdge()->cursor_x = x;
+    graph_.ghostEdge()->cursor_y = y;
+    update();
+    return;
+  }
+}
 
 void
 GraphWidget::layoutSizeChanged( int w, int h ) {
