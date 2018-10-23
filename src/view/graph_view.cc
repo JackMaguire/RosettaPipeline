@@ -73,7 +73,7 @@ GraphWidget::init_listeners(){
 }
 
 void
-GraphWidget::init_paining_tools(){
+GraphWidget::init_painting_tools(){
   default_pen_.setWidth( 2 );
   selected_edge_pen_.setWidth( 4 );
 }

@@ -51,7 +51,7 @@ public:
   void setGraph( graph::GraphSP const & );
 
 protected:
-  void init_painint_tools();
+  void init_painting_tools();
 
   void paintEvent( Wt::WPaintDevice * paintDevice ) override;
 
