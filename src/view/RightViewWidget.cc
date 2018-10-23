@@ -12,7 +12,7 @@
 namespace view {
 
 RightViewWidget::RightViewWidget(
-  Wt::WTabWidget * root,
+  Wt::WContainerWidget * root,
   graph::GraphSP const & graph
 ) :
   WTabWidget( root ),
