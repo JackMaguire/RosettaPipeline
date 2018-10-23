@@ -18,7 +18,7 @@ GraphWidget::GraphWidget( Wt::WContainerWidget * root ) :
   WPaintedWidget( root ),
   graph_( 0 ),
   theme_( std::make_unique< Theme1 >() ),
-  width_( 1000 ),
+  width_( 500 ),
   height_( 800 )
 {
   //width_ = width().toPixels();
@@ -42,7 +42,7 @@ GraphWidget::GraphWidget(
   WPaintedWidget( root ),
   graph_( graph ),
   theme_( std::make_unique< Theme1 >() ),
-  width_( 1000 ),
+  width_( 500 ),
   height_( 800 )
 {
   //width_ = width().toPixels();
