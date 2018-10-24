@@ -1,7 +1,7 @@
 #pragma once
 
-#include <Wt/WContainerWidget>
-#include <Wt/WHBoxLayout>
+#include <Wt2/WContainerWidget.h>
+#include <Wt2/WHBoxLayout.h>
 
 #include <view/graph_view.hh>
 

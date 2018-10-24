@@ -3,8 +3,8 @@
 
 #include <graph/Graph.fwd.hh>
 
-#include <Wt/WLength>
-#include <Wt/WGlobal>
+#include <Wt2/WLength.h>
+#include <Wt2/WGlobal.h>
 
 #include <iostream>
 #include <memory>

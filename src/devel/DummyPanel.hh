@@ -1,9 +1,9 @@
-#include <Wt/WContainerWidget>
-#include <Wt/WPaintDevice>
-#include <Wt/WPaintedWidget>
-#include <Wt/WPainter>
-#include <Wt/WSpinBox>
-#include <Wt/WGlobal>
+#include <Wt2/WContainerWidget.h>
+#include <Wt2/WPaintDevice.h>
+#include <Wt2/WPaintedWidget.h>
+#include <Wt2/WPainter.h>
+#include <Wt2/WSpinBox.h>
+#include <Wt2/WGlobal.h>
 
 namespace devel {
 

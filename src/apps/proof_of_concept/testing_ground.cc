@@ -1,6 +1,6 @@
-#include <Wt/WContainerWidget>
-#include <Wt/WHBoxLayout>
-#include <Wt/WText>
+#include <Wt2/WContainerWidget.h>
+#include <Wt2/WHBoxLayout.h>
+#include <Wt2/WText.h>
 
 #include <devel/DummyPanel.hh>
 

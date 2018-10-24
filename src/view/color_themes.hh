@@ -1,7 +1,7 @@
 #pragma once
 
 #include <memory>
-#include <Wt/WColor>
+#include <Wt2/WColor.h>
 
 /*
 Helpful links:

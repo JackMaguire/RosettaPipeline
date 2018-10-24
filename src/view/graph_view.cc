@@ -5,8 +5,8 @@
 #include <graph/Edge.hh>
 #include <graph/Node.hh>
 
-#include <Wt/WLength>
-#include <Wt/WGlobal>
+#include <Wt2/WLength.h>
+#include <Wt2/WGlobal.h>
 
 #include <iostream>
 #include <math.h>

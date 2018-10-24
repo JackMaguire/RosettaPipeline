@@ -1,17 +1,17 @@
-#include <Wt/WApplication>
-#include <Wt/WBreak>
-#include <Wt/WContainerWidget>
-#include <Wt/WLineEdit>
-#include <Wt/WPushButton>
-#include <Wt/WText>
+#include <Wt2/WApplication.h>
+#include <Wt2/WBreak.h>
+#include <Wt2/WContainerWidget.h>
+#include <Wt2/WLineEdit.h>
+#include <Wt2/WPushButton.h>
+#include <Wt2/WText.h>
 
-//#include <Wt/WDoubleSpinBox>
-//#include <Wt/Chart/WCartesianChart>
+//#include <Wt2/WDoubleSpinBox.h>
+//#include <Wt2/Chart/WCartesianChart.h>
 
-#include <Wt/WPaintDevice>
-#include <Wt/WPaintedWidget>
-#include <Wt/WPainter>
-#include <Wt/WSpinBox>
+#include <Wt2/WPaintDevice.h>
+#include <Wt2/WPaintedWidget.h>
+#include <Wt2/WPainter.h>
+#include <Wt2/WSpinBox.h>
 
 #include <string>
 

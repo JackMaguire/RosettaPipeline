@@ -1,4 +1,4 @@
-#include <Wt/WApplication>
+#include <Wt2/WApplication.h>
 
 #include <graph/Graph.hh>
 #include <view/graph_view.hh>
