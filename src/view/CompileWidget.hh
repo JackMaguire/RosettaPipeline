@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Wt2/WTabWidget.h>
+#include <Wt/WTabWidget.h>
 #include <graph/Graph.fwd.hh>
 
 namespace view {

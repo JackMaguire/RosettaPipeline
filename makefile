@@ -15,7 +15,7 @@ endif
 
 GEN=-flto -O3 -Isrc -std=${std} ${WARN} ${EXTRA}
 #WT_FLAGS=-lwthttp -lwt -lboost_signals -DBOOST_SIGNALS_NO_DEPRECATION_WARNING
-WT_FLAGS=-lwthttp2 -lwt2 -lboost_signals -DBOOST_SIGNALS_NO_DEPRECATION_WARNING -Iwt_src
+WT_FLAGS=-lwthttp -lwt -lboost_signals -DBOOST_SIGNALS_NO_DEPRECATION_WARNING -Iwt_src
 
 ########
 # META #

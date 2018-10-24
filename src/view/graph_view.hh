@@ -1,11 +1,11 @@
 #pragma once
 
-#include <Wt2/WFont.h>
-#include <Wt2/WPaintDevice.h>
-#include <Wt2/WPaintedWidget.h>
-#include <Wt2/WPen.h>
-#include <Wt2/WPainter.h>
-#include <Wt2/WContainerWidget.h>
+#include <Wt/WFont.h>
+#include <Wt/WPaintDevice.h>
+#include <Wt/WPaintedWidget.h>
+#include <Wt/WPen.h>
+#include <Wt/WPainter.h>
+#include <Wt/WContainerWidget.h>
 
 #include <graph/Graph.fwd.hh>
 #include <graph/Edge.fwd.hh>
