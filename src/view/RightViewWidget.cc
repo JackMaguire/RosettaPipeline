@@ -18,7 +18,7 @@ namespace view {
 RightViewWidget::RightViewWidget(
   graph::GraphSP const & graph
 ) :
-  WTabWidget( root ),
+  WTabWidget(),
   width_( 500 ),
   height_( 800 )
 {
@@ -27,8 +27,8 @@ RightViewWidget::RightViewWidget(
 
   using namespace Wt;
 
-  addTab( new EditWidget( graph ), "Edit" );
-  addTab( new CompileWidget( graph ), "Compile" );
+  addTab( Wt::cpp14::make_unique< EditWidget >( graph ), "Edit" );
+  addTab( Wt::cpp14::make_unique< CompileWidget >( graph ), "Compile" );
 }
 
 RightViewWidget::~RightViewWidget(){}

@@ -8,34 +8,25 @@
 
 using namespace Wt;
 
-class GraphApplication: public WApplication
+std::unique_ptr<WApplication> createApplication(const WEnvironment& env)
 {
-public:
-  GraphApplication(const WEnvironment &env): WApplication(env) {
-    setTitle("Graph example");
-
-    graph::GraphSP graph = std::make_shared< graph::Graph >();
-    graph::NodeSP previous = 0;
-    for( int i=0; i < 3; ++i ){
-      graph::NodeSP node = std::make_shared< graph::Node >( i*10, i*5);
-      graph->addNode( node );
-      if( i > 0 ){
-	graph->addEdge( previous, node );
-      }
-      previous = node;
+  graph::GraphSP graph = std::make_shared< graph::Graph >();
+  graph::NodeSP previous = 0;
+  for( int i=0; i < 3; ++i ){
+    graph::NodeSP node = std::make_shared< graph::Node >( i*10, i*5);
+    graph->addNode( node );
+    if( i > 0 ){
+      graph->addEdge( previous, node );
     }
-
-    //view::GraphWidget * widget = new view::GraphWidget( root(), graph );
-    view::TopWidget * widget = new view::TopWidget( root(), graph );
+    previous = node;
   }
 
-//private:
-  //std::unique_ptr< PaintExample >;
-};
-
-WApplication * createApplication( const WEnvironment&  env )
-{
-  return new GraphApplication(env);
+  std::unique_ptr<WApplication> app = Wt::cpp14::make_unique<WApplication>(env);
+  app->setTitle("Rosetta Pipeline");
+  app->root()->setStyleClass("root");
+  app->root()->addWidget( cpp14::make_unique< view::TopWidget >( graph ) );
+  //app->useStyleSheet("dragdrop.css");
+  return app;
 }
 
 int main(int argc, char **argv)
