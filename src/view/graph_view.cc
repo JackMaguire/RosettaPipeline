@@ -89,9 +89,9 @@ GraphWidget::mouseDown( Wt::WMouseEvent const & e ) {
   last_mouse_press_x_ = x;
   last_mouse_press_y_ = y;
 
-  bool const shift_is_down = e.modifiers() & Wt::ShiftModifier;
+  bool const shift_is_down = e.modifiers().test( Wt::KeyboardModifier::Shift );
   // bool const control_is_down = e.modifiers() & Wt::ControlModifier;
-  bool const alt_is_down = e.modifiers() & Wt::AltModifier;
+  bool const alt_is_down = e.modifiers().test( Wt::KeyboardModifier::Alt );
 
   if( alt_is_down ){//potentially create something
     // potentially create an edge
@@ -131,9 +131,9 @@ GraphWidget::mouseReleased( Wt::WMouseEvent const & e ) {
   auto const x = c.x;
   auto const y = c.y;
 
-  bool const shift_is_down = e.modifiers() & Wt::ShiftModifier;
+  bool const shift_is_down = e.modifiers().test( Wt::KeyboardModifier::Shift );
   // bool const control_is_down = e.modifiers() & Wt::ControlModifier;
-  bool const alt_is_down = e.modifiers() & Wt::AltModifier;
+  bool const alt_is_down = e.modifiers().test( Wt::KeyboardModifier::Alt );
 
   if( shift_was_down_when_most_recent_object_was_selected_ && shift_is_down ) {
     auto & selected_node = graph_->selectedNode();
@@ -225,9 +225,9 @@ GraphWidget::mouseDraggedImpl( Wt::WMouseEvent const & e ) {
   auto const x = c.x;
   auto const y = c.y;
 
-  bool const shift_is_down = e.modifiers() & Wt::ShiftModifier;
+  bool const shift_is_down = e.modifiers().test( Wt::KeyboardModifier::Shift );
   // bool const control_is_down = e.modifiers() & Wt::ControlModifier;
-  bool const alt_is_down = e.modifiers() & Wt::AltModifier;
+  bool const alt_is_down = e.modifiers().test( Wt::KeyboardModifier::Alt );
 
   if( node_is_currently_being_dragged_ ) {
     auto const & selected_node = graph_->selectedNode();
