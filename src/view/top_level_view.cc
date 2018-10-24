@@ -16,10 +16,9 @@
 namespace view {
 
 TopWidget::TopWidget(
-  Wt::WContainerWidget * root,
   graph::GraphSP const & graph
 ) :
-  WContainerWidget( root ),
+  WContainerWidget(),
   width_( 1000 ),
   height_( 800 )
 {
@@ -28,14 +27,17 @@ TopWidget::TopWidget(
 
   using namespace Wt;
 
-  WHBoxLayout * hbox = new WHBoxLayout();
-  setLayout(hbox);
+  auto hbox = setLayout( Wt::cpp14::make_unique< Wt::WHBoxLayout >() );
+  /*WHBoxLayout * hbox = new WHBoxLayout();
+  setLayout(hbox);*/
 
-  GraphWidget * left_item = new GraphWidget( this, graph );
-  hbox->addWidget( left_item, 0.4 );
+  //GraphWidget * left_item = new GraphWidget( graph );
+  //hbox->addWidget( left_item, 0.4 );
+  hbox->addWidget( Wt::cpp14::make_unique< GraphWidget >( graph ) );
 
-  RightViewWidget * right_item = new RightViewWidget( this, graph );
-  hbox->addWidget( right_item, 0.6 );
+  //RightViewWidget * right_item = new RightViewWidget( graph );
+  //hbox->addWidget( right_item, 0.6 );
+  hbox->addWidget( Wt::cpp14::make_unique< RightViewWidget >( graph ) );
 
 }
 

@@ -14,7 +14,7 @@
 
 namespace view {
 
-GraphWidget::GraphWidget( Wt::WContainerWidget * root ) :
+GraphWidget::GraphWidget() :
   WPaintedWidget(),
   graph_( 0 ),
   theme_( std::make_unique< Theme1 >() ),
@@ -36,7 +36,6 @@ GraphWidget::GraphWidget( Wt::WContainerWidget * root ) :
 }
 
 GraphWidget::GraphWidget(
-  Wt::WContainerWidget * root,
   graph::GraphSP const & graph
 ) :
   WPaintedWidget(),

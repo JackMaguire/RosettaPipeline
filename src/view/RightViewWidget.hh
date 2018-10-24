@@ -8,7 +8,7 @@ namespace view {
 class RightViewWidget : public Wt::WTabWidget
 {
 public:
-  RightViewWidget( Wt::WContainerWidget *root, graph::GraphSP const & );
+  RightViewWidget( graph::GraphSP const & );
 
   virtual ~RightViewWidget();
 

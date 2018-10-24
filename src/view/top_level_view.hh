@@ -10,7 +10,7 @@ namespace view {
 class TopWidget : public Wt::WContainerWidget
 {
 public:
-  TopWidget( Wt::WContainerWidget *root, graph::GraphSP const & );
+  TopWidget( graph::GraphSP const & );
 
   virtual ~TopWidget();
 

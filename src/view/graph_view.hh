@@ -40,9 +40,9 @@ struct hitbox {
 class GraphWidget : public Wt::WPaintedWidget
 {
 public:
-  GraphWidget( Wt::WContainerWidget *root );
+  GraphWidget();
 
-  GraphWidget( Wt::WContainerWidget *root, graph::GraphSP const & );
+  GraphWidget( graph::GraphSP const & );
 
   virtual ~GraphWidget();
 

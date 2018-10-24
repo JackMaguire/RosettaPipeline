@@ -16,7 +16,6 @@
 namespace view {
 
 RightViewWidget::RightViewWidget(
-  Wt::WContainerWidget * root,
   graph::GraphSP const & graph
 ) :
   WTabWidget( root ),
