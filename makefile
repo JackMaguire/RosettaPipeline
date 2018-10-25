@@ -1,4 +1,4 @@
-B1;95;0c# This is my first makefile ever so be nice!
+# This is my first makefile ever so be nice!
 
 #logic stolen from https://stackoverflow.com/questions/714100/os-detecting-makefile
 UNAME_S := $(shell uname -s)
