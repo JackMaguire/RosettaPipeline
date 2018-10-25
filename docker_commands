@@ -1,0 +1,8 @@
+Build:
+docker build . -t testname
+
+Run:
+docker run -t testname:latest -p 8080:8080
+(add -d for daemon)
+
+(eventually substitute testname with jbmaguire/rosettapipeline)
