@@ -21,5 +21,6 @@ RUN apt-get -y install git cmake g++-5 libboost-all-dev build-essential && \
     ln -s ../wt/resources/ && \
     make all -j8
 
+EXPOSE 8080
 
-CMD RosettaPipeline/bin/save_and_load_graph
+CMD cd RosettaPipeline && bin/graph_view_app --docroot . --http-address 0.0.0.0 --http-port 8080
