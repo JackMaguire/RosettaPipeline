@@ -27,8 +27,10 @@ RightViewWidget::RightViewWidget(
 
   using namespace Wt;
 
-  addTab( Wt::cpp14::make_unique< EditWidget >( graph ), "Edit" );
-  addTab( Wt::cpp14::make_unique< CompileWidget >( graph ), "Compile" );
+  addTab( Wt::cpp14::make_unique< EditWidget >( graph ), "Edit", Wt::ContentLoading::Eager );
+  addTab( Wt::cpp14::make_unique< CompileWidget >( graph ), "Compile", Wt::ContentLoading::Eager );
+
+  setStyleClass("tabwidget");
 }
 
 RightViewWidget::~RightViewWidget(){}
