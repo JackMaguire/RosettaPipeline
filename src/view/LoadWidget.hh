@@ -1,12 +1,12 @@
 #pragma once
 
 //#include <Wt/WTabWidget.h>
-#include <Wt/WFileUpload.h>
+#include <Wt/WContainerWidget.h>
 #include <graph/Graph.fwd.hh>
 
 namespace view {
 
-class LoadWidget : public Wt::WFileUpload
+class LoadWidget : public Wt::WContainerWidget
 {
 public:
   LoadWidget( graph::GraphSP const & );
