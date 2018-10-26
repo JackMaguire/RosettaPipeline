@@ -47,7 +47,7 @@ LoadWidget::LoadWidget(
     [=] {
       uploadButton->enable();
       out->setText( "File upload is finished. Total num files uploaded: " +
-	std::to_string( uploadedFiles().size() ) );
+	std::to_string( fu->uploadedFiles().size() ) );
     }
   );
 
