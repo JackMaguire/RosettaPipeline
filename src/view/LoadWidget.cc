@@ -1,7 +1,7 @@
 #include <view/LoadWidget.hh>
 
 #include <global_data/options.hh>
-#include <graph/Graph.fwd.hh>
+#include <graph/Graph.hh>
 
 //#include <Wt/WLength.h>
 #include <Wt/WGlobal.h>
@@ -49,7 +49,7 @@ std::string load(
   }
   current_line = graph->loadSelfNodesAndEdges( file_lines, current_line ) + 1;
 
-  return "load successful"
+  return "load successful";
 }
 
 }
