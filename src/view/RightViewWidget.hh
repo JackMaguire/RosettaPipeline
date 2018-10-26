@@ -2,13 +2,17 @@
 
 #include <Wt/WTabWidget.h>
 #include <graph/Graph.fwd.hh>
+#include <view/graph_view.fwd.hh>
 
 namespace view {
 
 class RightViewWidget : public Wt::WTabWidget
 {
 public:
-  RightViewWidget( graph::GraphSP const & );
+  RightViewWidget(
+    graph::GraphSP const &,
+    GraphWidget * graph_widget
+  );
 
   virtual ~RightViewWidget();
 

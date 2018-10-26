@@ -3,13 +3,17 @@
 //#include <Wt/WTabWidget.h>
 #include <Wt/WContainerWidget.h>
 #include <graph/Graph.fwd.hh>
+#include <view/graph_view.fwd.hh>
 
 namespace view {
 
 class LoadWidget : public Wt::WContainerWidget
 {
 public:
-  LoadWidget( graph::GraphSP const & );
+  LoadWidget(
+    graph::GraphSP const &,
+    GraphWidget * graph_widget
+  );
 
   virtual ~LoadWidget();
 

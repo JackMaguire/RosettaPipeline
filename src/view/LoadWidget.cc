@@ -2,6 +2,8 @@
 
 #include <global_data/options.hh>
 #include <graph/Graph.hh>
+#include <view/graph_view.hh>
+
 
 //#include <Wt/WLength.h>
 #include <Wt/WGlobal.h>
@@ -55,7 +57,8 @@ std::string load_file(
 }
 
 LoadWidget::LoadWidget(
-  graph::GraphSP const & graph
+  graph::GraphSP const & graph,
+  GraphWidget * graph_widget
 ) :
   WContainerWidget(),
   width_( 500 ),
@@ -91,8 +94,9 @@ LoadWidget::LoadWidget(
       if( filename.size() > 1 ){
 	std::vector< std::string > lines = get_file_lines( filename );
 	if( lines.size() > 1 ){
+	  //TODO clear maps in graph view
 	  out->setText( load_file( lines, graph ) );
-	  update();
+	  graph_widget->update();
 	}
       }
     }

@@ -7,6 +7,7 @@
 #include <global_data/options.hh>
 
 #include <graph/Graph.fwd.hh>
+//#include <view/graph_view.hh>
 
 #include <Wt/WLength.h>
 #include <Wt/WGlobal.h>
@@ -17,7 +18,8 @@
 namespace view {
 
 RightViewWidget::RightViewWidget(
-  graph::GraphSP const & graph
+  graph::GraphSP const & graph,
+  GraphWidget * graph_widget
 ) :
   WTabWidget(),
   width_( 500 ),
@@ -30,7 +32,7 @@ RightViewWidget::RightViewWidget(
 
   addTab( Wt::cpp14::make_unique< EditWidget >( graph ), "Edit", Wt::ContentLoading::Eager );
   addTab( Wt::cpp14::make_unique< CompileWidget >( graph ), "Compile", Wt::ContentLoading::Eager );
-  addTab( Wt::cpp14::make_unique< LoadWidget >( graph ), "Load", Wt::ContentLoading::Eager );
+  addTab( Wt::cpp14::make_unique< LoadWidget >( graph, graph_widget ), "Load", Wt::ContentLoading::Eager );
 
   setStyleClass("tabwidget");
 }

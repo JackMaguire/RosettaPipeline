@@ -33,11 +33,12 @@ TopWidget::TopWidget(
 
   //GraphWidget * left_item = new GraphWidget( graph );
   //hbox->addWidget( left_item, 0.4 );
-  hbox->addWidget( Wt::cpp14::make_unique< GraphWidget >( graph ) );
+  GraphWidget * left_item =
+    hbox->addWidget( Wt::cpp14::make_unique< GraphWidget >( graph ) );
 
   //RightViewWidget * right_item = new RightViewWidget( graph );
   //hbox->addWidget( right_item, 0.6 );
-  hbox->addWidget( Wt::cpp14::make_unique< RightViewWidget >( graph ) );
+  hbox->addWidget( Wt::cpp14::make_unique< RightViewWidget >( graph, left_item ) );
 
 }
 
