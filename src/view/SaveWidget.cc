@@ -26,7 +26,7 @@ SaveWidget::SaveWidget(
   graph::GraphSP const & graph
 ) :
   WContainerWidget(),
-  save_filename_ ( std::tmpfile() )
+  save_filename_ ( std::tmpnam() )
 {
   Wt::WLineEdit * line_edit = addWidget( Wt::cpp14::make_unique< Wt::WLineEdit >( "MyProtocol.rpf" ) );
 
