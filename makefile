@@ -71,6 +71,9 @@ GraphWidget.o: src/view/graph_view.hh graph
 EditWidget.o: src/view/EditWidget.cc
 	${CXX} -c -o build/EditWidget.o src/view/EditWidget.cc ${GEN} ${WT_FLAGS}
 
+LoadWidget.o: src/view/LoadWidget.cc
+	${CXX} -c -o build/LoadWidget.o src/view/LoadWidget.cc ${GEN} ${WT_FLAGS}
+
 CompileWidget.o: src/view/CompileWidget.cc
 	${CXX} -c -o build/CompileWidget.o src/view/CompileWidget.cc ${GEN} ${WT_FLAGS}
 
@@ -81,7 +84,7 @@ TopWidget.o: src/view/top_level_view.cc
 	${CXX} -c -o build/TopWidget.o src/view/top_level_view.cc ${GEN} ${WT_FLAGS}
 
 view: GraphWidget.o TopWidget.o RightViewWidget.o EditWidget.o CompileWidget.o
-	ld -r build/GraphWidget.o build/TopWidget.o build/RightViewWidget.o build/EditWidget.o build/CompileWidget.o -o build/view.o -arch ${ARCH}
+	ld -r build/GraphWidget.o build/TopWidget.o build/RightViewWidget.o build/EditWidget.o build/LoadWidget.o build/CompileWidget.o -o build/view.o -arch ${ARCH}
 
 
 ########
