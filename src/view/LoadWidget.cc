@@ -92,6 +92,7 @@ LoadWidget::LoadWidget(
 	std::vector< std::string > lines = get_file_lines( filename );
 	if( lines.size() > 1 ){
 	  out->setText( load_file( lines, graph ) );
+	  update();
 	}
       }
     }
