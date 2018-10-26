@@ -2,6 +2,7 @@
 
 #include <view/EditWidget.hh>
 #include <view/CompileWidget.hh>
+#include <view/LoadWidget.hh>
 
 #include <global_data/options.hh>
 
@@ -29,6 +30,7 @@ RightViewWidget::RightViewWidget(
 
   addTab( Wt::cpp14::make_unique< EditWidget >( graph ), "Edit", Wt::ContentLoading::Eager );
   addTab( Wt::cpp14::make_unique< CompileWidget >( graph ), "Compile", Wt::ContentLoading::Eager );
+  addTab( Wt::cpp14::make_unique< LoadWidget >( graph ), "Load", Wt::ContentLoading::Eager );
 
   setStyleClass("tabwidget");
 }
