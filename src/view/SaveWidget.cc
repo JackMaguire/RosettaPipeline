@@ -42,7 +42,7 @@ SaveWidget::SaveWidget(
       graph->saveSelfNodesAndEdges( save_lines );
 
       for( std::string const & line : save_lines ){
-	std::fputs( line.c_str(), file );
+	std::fputs( line.c_str(), save_file_ );
       }
     }
   );
