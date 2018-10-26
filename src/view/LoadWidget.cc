@@ -11,11 +11,39 @@
 #include <Wt/WProgressBar.h>
 #include <Wt/WBreak.h>
 
+#include <fstream>
 #include <iostream>
 #include <memory>
 #include <string>
+#include <vector>
 
 namespace view {
+
+namespace {
+
+std::vector< std::string > get_file_lines( std::string const & filename ){
+  std::vector< std::string > myLines;
+  std::ifstream myFile( filename );
+  if( myFile.good() ){
+    for( std::string line; std::getline( myFile, line ); ) {
+      myLines.push_back(line);
+    }
+  }
+  return myLines;
+}
+
+void load(
+  std::vector< std::string > const & file_lines,
+  graph::GraphSP const & graph
+){
+  //First, options
+  int current_line = 0;
+  current_line = global_data::Options::load( file_lines, current_line );
+
+  //Graph
+}
+
+}
 
 LoadWidget::LoadWidget(
   graph::GraphSP const & graph
@@ -42,15 +70,22 @@ LoadWidget::LoadWidget(
     [=] {
       fu->upload();
       uploadButton->disable();
-      out->setText("File upload is finished.");
+      out->setText("File upload has begun.");
     }
   );
 
   fu->uploaded().connect(
     [=] {
       uploadButton->enable();
-      out->setText( "File upload is finished. Total num files uploaded: " +
-	std::to_string( fu->uploadedFiles().size() ) );
+      out->setText( "File upload is finished." );
+
+      auto const filename = fu->spoolFileName();
+      if( filename.size() > 1 ){
+	std::vector< std::string > lines = get_file_lines( filename );
+	if( lines.size() > 1 ){
+	  load_file( lines, graph );
+	}
+      }
     }
   );
 

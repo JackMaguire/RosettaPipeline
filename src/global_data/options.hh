@@ -23,7 +23,7 @@ struct Options {
   ///////////
   //SAVE/LOAD
   static void save( std::vector< std::string > & output_lines );
-  static void load( std::vector< std::string > const & lines, int line_to_start_at );
+  static int load( std::vector< std::string > const & lines, int line_to_start_at );
 
 };
 

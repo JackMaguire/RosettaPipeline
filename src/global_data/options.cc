@@ -33,9 +33,9 @@ void Options::load( std::vector< std::string > const & lines, int line_to_start_
 
   unsigned int current_line = line_to_start_at;
 
-  assert( lines[ current_line ] == "START_NODE" );
+  assert( lines[ current_line ] == "START_OPTIONS" );
 
-  while( lines[ ++current_line ] != "END_NODE" ){
+  while( lines[ ++current_line ] != "END_OPTIONS" ){
     std::string const line = lines[ current_line ];
 
     std::vector< std::string > tokens;
@@ -95,6 +95,8 @@ void Options::load( std::vector< std::string > const & lines, int line_to_start_
     }
 
   }//while not "END_NODE"
+
+  return current_line;
 }
 
 
