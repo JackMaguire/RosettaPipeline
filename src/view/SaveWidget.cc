@@ -53,6 +53,7 @@ SaveWidget::SaveWidget(
 }
 
 SaveWidget::~SaveWidget(){
+  std::remove( save_filename_ );
 }
 
 }//namespace view
