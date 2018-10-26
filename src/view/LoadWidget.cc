@@ -9,6 +9,7 @@
 #include <Wt/WText.h>
 #include <Wt/WFileUpload.h>
 #include <Wt/WProgressBar.h>
+#include <Wt/WBreak.h>
 
 #include <iostream>
 #include <memory>
@@ -29,8 +30,10 @@ LoadWidget::LoadWidget(
   //largely copied from https://github.com/emweb/wt/blob/29ae91638e197013f67e7c826317529615d10749/examples/widgetgallery/examples/FileUpload.cpp
 
   Wt::WFileUpload * fu = addWidget( Wt::cpp14::make_unique< Wt::WFileUpload >() );
-  fu->setFileTextSize( 50 );//Set the maximum file size to 50 kB.
-  fu->setProgressBar( Wt::cpp14::make_unique< Wt::WProgressBar >() );
+  fu->setFileTextSize( 1000 );//Set the maximum file size to 1000 kB.
+  //fu->setProgressBar( Wt::cpp14::make_unique< Wt::WProgressBar >() );
+
+  addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
 
   Wt::WPushButton * uploadButton = addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Load" ) );
   Wt::WText * out = addWidget( Wt::cpp14::make_unique< Wt::WText >() );
