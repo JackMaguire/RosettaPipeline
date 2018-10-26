@@ -2,6 +2,7 @@
 
 #include <Wt/WContainerWidget.h>
 #include <graph/Graph.fwd.hh>
+#include <cstdio> //std::tmpfile
 
 namespace view {
 
@@ -13,6 +14,9 @@ public:
   );
 
   virtual ~SaveWidget();
+
+private:
+  std::FILE * save_file_;
 };
 
 

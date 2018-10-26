@@ -69,9 +69,9 @@ LoadWidget::LoadWidget(
 
   //largely copied from https://github.com/emweb/wt/blob/29ae91638e197013f67e7c826317529615d10749/examples/widgetgallery/examples/FileUpload.cpp
 
+  //todo look into WFileDropWidget
   Wt::WFileUpload * fu = addWidget( Wt::cpp14::make_unique< Wt::WFileUpload >() );
   fu->setFileTextSize( 1000 );//Set the maximum file size to 1000 kB.
-  //fu->setProgressBar( Wt::cpp14::make_unique< Wt::WProgressBar >() );
 
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
 

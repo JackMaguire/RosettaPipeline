@@ -1,8 +1,9 @@
 #include <view/RightViewWidget.hh>
 
 #include <view/EditWidget.hh>
-#include <view/CompileWidget.hh>
+#include <view/SaveWidget.hh>
 #include <view/LoadWidget.hh>
+#include <view/CompileWidget.hh>
 
 #include <global_data/options.hh>
 
@@ -28,11 +29,10 @@ RightViewWidget::RightViewWidget(
   setLayoutSizeAware( true );
   resize( width_, height_ ); // Provide a default size.
 
-  using namespace Wt;
-
   addTab( Wt::cpp14::make_unique< EditWidget >( graph ), "Edit", Wt::ContentLoading::Eager );
-  addTab( Wt::cpp14::make_unique< CompileWidget >( graph ), "Compile", Wt::ContentLoading::Eager );
+  addTab( Wt::cpp14::make_unique< SaveWidget >( graph ), "Save", Wt::ContentLoading::Eager );
   addTab( Wt::cpp14::make_unique< LoadWidget >( graph, graph_widget ), "Load", Wt::ContentLoading::Eager );
+  addTab( Wt::cpp14::make_unique< CompileWidget >( graph ), "Compile", Wt::ContentLoading::Eager );
 
   setStyleClass("tabwidget");
 }
