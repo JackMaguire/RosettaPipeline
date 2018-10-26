@@ -8,6 +8,7 @@
 #include <Wt/WPushButton.h>
 #include <Wt/WText.h>
 #include <Wt/WFileUpload.h>
+#include <Wt/WProgressBar.h>
 
 #include <iostream>
 #include <memory>
