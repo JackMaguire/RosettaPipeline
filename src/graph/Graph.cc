@@ -94,7 +94,7 @@ Graph::saveSelfNodesAndEdges( std::vector< std::string > & output_lines ) const 
   output_lines.emplace_back( "END_GRAPH" );
 }
 
-void
+int
 Graph::loadSelfNodesAndEdges( std::vector< std::string > & lines, int line_to_start_at ) {
   // First, Delete everything!
   selected_node_ = 0;
@@ -157,6 +157,8 @@ Graph::loadSelfNodesAndEdges( std::vector< std::string > & lines, int line_to_st
 
   assert( nodes_.size() > 0 );
   selected_node_ = nodes_[ 0 ];
+
+  return current_line;
 }// load self
 
 

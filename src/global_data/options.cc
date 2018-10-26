@@ -29,7 +29,7 @@ void Options::save( std::vector< std::string > & output_lines ) {
   output_lines.emplace_back( "END_OPTIONS" );
 }
 
-void Options::load( std::vector< std::string > const & lines, int line_to_start_at ) {
+int Options::load( std::vector< std::string > const & lines, int line_to_start_at ) {
 
   unsigned int current_line = line_to_start_at;
 
@@ -94,7 +94,7 @@ void Options::load( std::vector< std::string > const & lines, int line_to_start_
       continue;
     }
 
-  }//while not "END_NODE"
+  }//while not "END_OPTINS"
 
   return current_line;
 }

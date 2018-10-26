@@ -32,15 +32,24 @@ std::vector< std::string > get_file_lines( std::string const & filename ){
   return myLines;
 }
 
-void load(
+std::string load(
   std::vector< std::string > const & file_lines,
   graph::GraphSP const & graph
 ){
   //First, options
   int current_line = 0;
-  current_line = global_data::Options::load( file_lines, current_line );
+  if( file_lines[ current_line ] != "START_OPTIONS" ) {
+    return "Error, expected first line to say \"START_OPTIONS\"";
+  }
+  current_line = global_data::Options::load( file_lines, current_line ) + 1;
 
   //Graph
+  if( file_lines[ current_line ] != "START_GRAPH" ) {
+    return "Error, expected first line to say \"START_OPTIONS\"";
+  }
+  current_line = graph->loadSelfNodesAndEdges( file_lines, current_line ) + 1;
+
+  return "load successful"
 }
 
 }
@@ -77,13 +86,12 @@ LoadWidget::LoadWidget(
   fu->uploaded().connect(
     [=] {
       uploadButton->enable();
-      out->setText( "File upload is finished." );
 
       auto const filename = fu->spoolFileName();
       if( filename.size() > 1 ){
 	std::vector< std::string > lines = get_file_lines( filename );
 	if( lines.size() > 1 ){
-	  load_file( lines, graph );
+	  out->setText( load_file( lines, graph ) );
 	}
       }
     }
