@@ -25,7 +25,8 @@ namespace {
 SaveWidget::SaveWidget(
   graph::GraphSP const & graph
 ) :
-  WContainerWidget()
+  WContainerWidget(),
+  save_filename_ ( std::tmpfile() )
 {
   Wt::WLineEdit * line_edit = addWidget( Wt::cpp14::make_unique< Wt::WLineEdit >( "MyProtocol.rpf" ) );
 
@@ -33,23 +34,25 @@ SaveWidget::SaveWidget(
 
   Wt::WPushButton * downloadButton = addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Save" ) );
 
+  std::cout << "save_filename_: " << save_filename_ << std::endl;
+
   downloadButton->clicked().connect(
     [=] {
-      save_file_ = std::tmpfile();
-
       std::vector< std::string > save_lines;
       global_data::Options::save( save_lines );
       graph->saveSelfNodesAndEdges( save_lines );
 
+      std::ofstream myfile;
+      myfile.open( save_filename_ );
       for( std::string const & line : save_lines ){
-	std::fputs( line.c_str(), save_file_ );
+	myfile << line << "\n";
       }
+      myfile.close();
     }
   );
 }
 
 SaveWidget::~SaveWidget(){
-  std::fclose( save_file_ );
 }
 
 }//namespace view
