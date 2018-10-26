@@ -32,7 +32,7 @@ std::vector< std::string > get_file_lines( std::string const & filename ){
   return myLines;
 }
 
-std::string load(
+std::string load_file(
   std::vector< std::string > const & file_lines,
   graph::GraphSP const & graph
 ){
