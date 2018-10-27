@@ -8,6 +8,9 @@
 #include <Wt/WText.h>
 #include <Wt/WBreak.h>
 #include <Wt/WLineEdit.h>
+#include <Wt/WLink.h>
+#include <Wt/WAnchor.h>
+#include <Wt/WFileResource.h>
 
 #include <fstream>
 #include <iostream>
@@ -34,6 +37,10 @@ SaveWidget::SaveWidget(
 
   Wt::WPushButton * downloadButton = addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Save" ) );
 
+  addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
+
+  Wt::WAnchor * downloadLink = addWidget( cpp14::make_unique< Wt::WAnchor >() );
+
   std::cout << "save_filename_: " << save_filename_ << std::endl;
 
   downloadButton->clicked().connect(
@@ -48,6 +55,12 @@ SaveWidget::SaveWidget(
 	myfile << line << "\n";
       }
       myfile.close();
+
+      //Wt::WFileResource
+      auto local_file = std::make_shared< Wt::WFileResource >( save_filename_ );
+      local_file->suggestFileName( line_edit->text() );
+      local_file->setDispositionType( Wt::Attachment );
+      downloadLink->setLink( Wt::WLink( Wt::Resource, local_file ) );
     }
   );
 }
