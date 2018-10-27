@@ -19,12 +19,9 @@
 #include <string>
 #include <vector>
 #include <cstdio> //std::tmpfile
+#include <stdio.h>//remove
 
 namespace view {
-
-namespace {
-
-}
 
 SaveWidget::SaveWidget(
   graph::GraphSP const & graph
@@ -67,7 +64,7 @@ SaveWidget::SaveWidget(
 }
 
 SaveWidget::~SaveWidget(){
-  std::remove( save_filename_ );
+  remove( save_filename_ );
 }
 
 }//namespace view
