@@ -39,7 +39,7 @@ SaveWidget::SaveWidget(
 
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
 
-  Wt::WAnchor * downloadLink = addWidget( cpp14::make_unique< Wt::WAnchor >() );
+  Wt::WAnchor * downloadLink = addWidget( Wt::cpp14::make_unique< Wt::WAnchor >() );
 
   std::cout << "save_filename_: " << save_filename_ << std::endl;
 
