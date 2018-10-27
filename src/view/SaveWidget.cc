@@ -64,7 +64,7 @@ SaveWidget::SaveWidget(
 }
 
 SaveWidget::~SaveWidget(){
-  remove( save_filename_ );
+  remove( save_filename_.c_str() );
 }
 
 }//namespace view
