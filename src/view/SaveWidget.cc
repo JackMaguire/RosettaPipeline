@@ -11,6 +11,7 @@
 #include <Wt/WLink.h>
 #include <Wt/WAnchor.h>
 #include <Wt/WFileResource.h>
+//#include <Wt/WResource.h>
 
 #include <fstream>
 #include <iostream>
@@ -59,8 +60,8 @@ SaveWidget::SaveWidget(
       //Wt::WFileResource
       auto local_file = std::make_shared< Wt::WFileResource >( save_filename_ );
       local_file->suggestFileName( line_edit->text() );
-      local_file->setDispositionType( Wt::Attachment );
-      downloadLink->setLink( Wt::WLink( Wt::Resource, local_file ) );
+      local_file->setDispositionType( Wt::ContentDisposition::Attachment );
+      downloadLink->setLink( Wt::WLink( Wt::LinkType::Resource, local_file ) );
     }
   );
 }
