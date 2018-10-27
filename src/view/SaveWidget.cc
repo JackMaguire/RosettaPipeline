@@ -58,7 +58,7 @@ SaveWidget::SaveWidget(
       auto local_file = std::make_shared< Wt::WFileResource >( save_filename_ );
       local_file->suggestFileName( line_edit->text() );
       local_file->setDispositionType( Wt::ContentDisposition::Attachment );
-      downloadLink->setLink( Wt::WLink( Wt::LinkType::Resource, local_file ) );
+      downloadLink->setLink( Wt::WLink( local_file ) );
     }
   );
 }
