@@ -24,7 +24,7 @@ public:
 
 public://getters and setters:
   int ID() const { return id_; }
-  void setID( int id ){ id_ = id; }
+  void setID( int id );
 
   int X() const { return x_; }
   void setX( int x ){ x_ = x; }
@@ -48,7 +48,7 @@ public://getters and setters:
   void setCommand( std::string command ){ command_ = std::move( command ); }
 
   std::string const & title() const { return title_; }
-  void setTitle( std::string title ){ title_ = std::move( title ); }  
+  void setTitle( std::string title );
 
   bool useScriptFile() const { return use_script_file_; }
   void setUseScriptFile( bool setting ){ use_script_file_ = setting; }
@@ -134,6 +134,7 @@ private:
   bool use_default_command_;
   std::string command_;
   std::string title_;
+  bool still_using_default_title_;
 
   bool use_script_file_;
   std::string xml_script_filename_;
@@ -226,5 +227,20 @@ void Node::removeDownstreamEdge( EdgeSP const & edge ) {
   }
 }
 
+inline
+void
+Node::setID( int id ){
+  id_ = id;
+  if( still_using_default_title_ ){
+    title_ = "Node_" + std::to_string( id_ );
+  }
+}
+
+inline
+void
+Node::setTitle( std::string title ){
+  title_ = std::move( title );
+  still_using_default_title_ = false;
+}  
 
 }//namespace graph

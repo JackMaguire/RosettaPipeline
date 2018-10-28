@@ -6,7 +6,7 @@
 namespace graph {
 
 Node::Node( int x, int y ) {
-  title_ = "Node_" + std::to_string( id_ );
+  title_ = "Node_0";
   x_ = x;
   y_ = y;
   init();
