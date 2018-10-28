@@ -31,11 +31,12 @@ SaveWidget::SaveWidget(
 {
   addWidget( Wt::cpp14::make_unique< Wt::WText >( "Save functionality works but is still ugly." ) );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
-  addWidget( Wt::cpp14::make_unique< Wt::WText >( "EVERY time you want to save, you need to hit the \"Save\" button," ) );
+  addWidget( Wt::cpp14::make_unique< Wt::WText >( "EVERY time you want to save, you need to hit the \"Save\"" ) );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
-  addWidget( Wt::cpp14::make_unique< Wt::WText >( "which will update the link at the bottom." ) );
+  addWidget( Wt::cpp14::make_unique< Wt::WText >( "button to update the link at the bottom." ) );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
   addWidget( Wt::cpp14::make_unique< Wt::WText >( "To save, right-click the link below and hit 'save as'" ) );
+  addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
   
   //Wt::WLineEdit * line_edit = addWidget( Wt::cpp14::make_unique< Wt::WLineEdit >( "MyProtocol.rpf" ) );
