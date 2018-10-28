@@ -18,8 +18,8 @@ EditWidget::EditWidget(
   width_( 500 ),
   height_( 800 )
 {
-  setLayoutSizeAware( true );
-  resize( width_, height_ ); // Provide a default size.
+  //setLayoutSizeAware( true );
+  //resize( width_, height_ ); // Provide a default size.
 
   using namespace Wt;
 

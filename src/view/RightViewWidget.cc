@@ -26,8 +26,8 @@ RightViewWidget::RightViewWidget(
   width_( 500 ),
   height_( 800 )
 {
-  setLayoutSizeAware( true );
-  resize( width_, height_ ); // Provide a default size.
+  //setLayoutSizeAware( true );
+  //resize( width_, height_ ); // Provide a default size.
 
   addTab( Wt::cpp14::make_unique< EditWidget >( graph ), "Edit", Wt::ContentLoading::Eager );
   addTab( Wt::cpp14::make_unique< SaveWidget >( graph ), "Save", Wt::ContentLoading::Eager );
