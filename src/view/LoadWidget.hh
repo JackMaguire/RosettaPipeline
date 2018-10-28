@@ -3,7 +3,7 @@
 //#include <Wt/WTabWidget.h>
 #include <Wt/WContainerWidget.h>
 #include <graph/Graph.fwd.hh>
-#include <view/graph_view.fwd.hh>
+#include <view/GraphWidget.fwd.hh>
 
 namespace view {
 

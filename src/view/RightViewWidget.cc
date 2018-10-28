@@ -8,7 +8,7 @@
 #include <global_data/options.hh>
 
 #include <graph/Graph.fwd.hh>
-//#include <view/graph_view.hh>
+//#include <view/GraphWidget.hh>
 
 #include <Wt/WLength.h>
 #include <Wt/WGlobal.h>

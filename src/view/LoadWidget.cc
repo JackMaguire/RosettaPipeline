@@ -2,7 +2,7 @@
 
 #include <global_data/options.hh>
 #include <graph/Graph.hh>
-#include <view/graph_view.hh>
+#include <view/GraphWidget.hh>
 
 
 //#include <Wt/WLength.h>

@@ -1,4 +1,4 @@
-#include <view/graph_view.hh>
+#include <view/GraphWidget.hh>
 #include <global_data/options.hh>
 
 #include <graph/Graph.hh>
