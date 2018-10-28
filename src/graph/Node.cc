@@ -162,6 +162,7 @@ void Node::save( std::vector< std::string > & output_lines ) const {
   output_lines.emplace_back( "script " + xml_script_filename_ );
   output_lines.emplace_back( std::string( "use_script_file " ) + ( use_script_file_ ? "1" : "0" ) );
   output_lines.emplace_back( std::string( "use_default_command " ) + ( use_default_command_ ? "1" : "0" ) );
+  output_lines.emplace_back( std::string( "still_using_default_title " ) + ( still_using_default_title_ ? "1" : "0" ) );
 
   output_lines.emplace_back( "START_FLAGS" );
   for( std::string const & flag : user_rosetta_flags_ ) {
@@ -297,6 +298,11 @@ Node::Node( std::vector< std::string > const & lines, int line_to_start_at ) {
 
     if( tokens[ 0 ] == "use_script_file" ) {
       use_script_file_ = ( tokens[ 1 ] == "1" );
+      continue;
+    }
+
+    if( tokens[ 0 ] == "still_using_default_title" ) {
+      still_using_default_title_ = ( tokens[ 1 ] == "1" );
       continue;
     }
 
