@@ -35,12 +35,11 @@ SaveWidget::SaveWidget(
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
   addWidget( Wt::cpp14::make_unique< Wt::WText >( "which will update the link at the bottom." ) );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
-  addWidget( Wt::cpp14::make_unique< Wt::WText >( "I recommend right-clicking the li" ) );
+  addWidget( Wt::cpp14::make_unique< Wt::WText >( "To save, right-click the link below and hit 'save as'" ) );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
   
-  Wt::WLineEdit * line_edit = addWidget( Wt::cpp14::make_unique< Wt::WLineEdit >( "MyProtocol.rpf" ) );
-
-  addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
+  //Wt::WLineEdit * line_edit = addWidget( Wt::cpp14::make_unique< Wt::WLineEdit >( "MyProtocol.rpf" ) );
+  //addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
 
   Wt::WPushButton * downloadButton = addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Save" ) );
 
@@ -66,7 +65,7 @@ SaveWidget::SaveWidget(
 
       //Wt::WFileResource
       auto local_file = std::make_shared< Wt::WFileResource >( save_filename_ );
-      local_file->suggestFileName( line_edit->text() );
+      //local_file->suggestFileName( line_edit->text() );
       local_file->setDispositionType( Wt::ContentDisposition::Attachment );
       downloadLink->setLink( Wt::WLink( local_file ) );
     }
