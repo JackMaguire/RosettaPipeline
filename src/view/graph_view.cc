@@ -49,9 +49,9 @@ GraphWidget::GraphWidget(
   //TODO
   //node_label_font_.setFamily( Wt::FontFamily::Monospace, "'Courier New'" );
 
-  //setLayoutSizeAware( true );
+  setLayoutSizeAware( true );
 
-  //resize( width_, height_ ); // Provide a default size.
+  resize( width_, height_ ); // Provide a default size.
 
   init_listeners();
   init_painting_tools();
