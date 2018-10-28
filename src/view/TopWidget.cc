@@ -1,4 +1,4 @@
-#include <view/top_level_view.hh>
+#include <view/TopWidget.hh>
 #include <view/RightViewWidget.hh>
 #include <global_data/options.hh>
 
