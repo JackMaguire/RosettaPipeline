@@ -65,8 +65,8 @@ compile: graph
 # VIEW #
 ########
 
-GraphWidget.o: src/view/graph_view.hh graph
-	${CXX} -c -o build/GraphWidget.o src/view/graph_view.cc ${GEN} ${WT_FLAGS}
+GraphWidget.o: src/view/GraphWidget.hh graph
+	${CXX} -c -o build/GraphWidget.o src/view/GraphWidget.cc ${GEN} ${WT_FLAGS}
 
 EditWidget.o: src/view/EditWidget.cc
 	${CXX} -c -o build/EditWidget.o src/view/EditWidget.cc ${GEN} ${WT_FLAGS}
@@ -83,8 +83,8 @@ CompileWidget.o: src/view/CompileWidget.cc
 RightViewWidget.o: src/view/RightViewWidget.cc
 	${CXX} -c -o build/RightViewWidget.o src/view/RightViewWidget.cc ${GEN} ${WT_FLAGS}
 
-TopWidget.o: src/view/top_level_view.cc
-	${CXX} -c -o build/TopWidget.o src/view/top_level_view.cc ${GEN} ${WT_FLAGS}
+TopWidget.o: src/view/TopWidget.cc
+	${CXX} -c -o build/TopWidget.o src/view/TopWidget.cc ${GEN} ${WT_FLAGS}
 
 view: GraphWidget.o TopWidget.o RightViewWidget.o EditWidget.o CompileWidget.o LoadWidget.o SaveWidget.o
 	ld -r build/GraphWidget.o build/TopWidget.o build/RightViewWidget.o build/EditWidget.o \
