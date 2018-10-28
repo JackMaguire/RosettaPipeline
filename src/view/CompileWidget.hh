@@ -1,30 +1,16 @@
 #pragma once
 
-#include <Wt/WTabWidget.h>
+#include <Wt/WContainerWidget.h>
 #include <graph/Graph.fwd.hh>
 
 namespace view {
 
-class CompileWidget : public Wt::WTabWidget
+class CompileWidget : public Wt::WContainerWidget
 {
 public:
   CompileWidget( graph::GraphSP const & );
 
   virtual ~CompileWidget();
-
-  void layoutSizeChanged( int w, int h ) override;
-
-private:
-  int width_;
-  int height_;
 };
-
-inline
-void
-CompileWidget::layoutSizeChanged( int w, int h ) {
-  width_ = w;
-  height_ = h;
-}
-
 
 }//namespace view

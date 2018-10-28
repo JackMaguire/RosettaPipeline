@@ -14,15 +14,8 @@ namespace view {
 CompileWidget::CompileWidget(
   graph::GraphSP const & graph
 ) :
-  WTabWidget( ),
-  width_( 500 ),
-  height_( 800 )
+  WContainerWidget( )
 {
-  setLayoutSizeAware( true );
-  resize( width_, height_ ); // Provide a default size.
-
-  using namespace Wt;
-
 }
 
 CompileWidget::~CompileWidget(){}
