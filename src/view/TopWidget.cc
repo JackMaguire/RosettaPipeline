@@ -23,7 +23,7 @@ TopWidget::TopWidget(
   height_( 800 )
 {
   setLayoutSizeAware( true );
-  resize( width_, height_ ); // Provide a default size.
+  //resize( width_, height_ ); // Provide a default size.
 
   using namespace Wt;
 
