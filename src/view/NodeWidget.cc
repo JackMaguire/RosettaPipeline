@@ -73,12 +73,16 @@ NodeWidget::construct_segment1(
   Wt::WLineEdit * command_edit =
     container->addWidget( Wt::cpp14::make_unique< Wt::WLineEdit >( node_->command() ) );
 
-  //command_edit->keyPressed().connect(
-  //    [=] ( Wt::WKeyEvent const & e ) {
   command_edit->changed().connect(
     [=] {
-      std::cout << "PRESSED " << command_edit->text() << std::endl;
-      //std::cout << "E " << e.text() << std::endl;
+      std::cout << "Changed " << command_edit->text() << std::endl;
+      node_->setCommand( command_edit->text().narrow() );
+    }
+  );
+
+  command_edit->validated().connect(
+    [=] {
+      std::cout << "Validated " << command_edit->text() << std::endl;
       node_->setCommand( command_edit->text().narrow() );
     }
   );
