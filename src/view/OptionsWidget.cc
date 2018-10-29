@@ -9,6 +9,8 @@
 #include <Wt/WCheckBox.h>
 #include <Wt/WSpinBox.h>
 
+#include <misc/type_deduction.hh>
+
 #include <iostream>
 #include <memory>
 
@@ -146,7 +148,9 @@ OptionsWidget::setup_run_options(){
 
   //num_proc_spin_box
   num_proc_spin_box->setValue( Options::num_processors );
-  num_proc_spin_box->setMinimum( 0 );
+  num_proc_spin_box->setMinimum( 1 );
+  int const max = std::numeric_limits< first_agument_t< decltype( num_proc_spin_box::setMaximum ) > >::max();
+  num_proc_spin_box->setMaximum( max );
   num_proc_spin_box->changed().connect(
     [=] {
       if( num_proc_spin_box->validate() == Wt::ValidationState::Valid ){
