@@ -1,12 +1,12 @@
 #pragma once
 
 #include <Wt/WTabWidget.h>
-#include <graph/Graph.fwd.hh>
+#include <graph/Graph.hh>
 #include <view/GraphWidget.fwd.hh>
 
 namespace view {
 
-class RightViewWidget : public Wt::WTabWidget
+class RightViewWidget : public Wt::WTabWidget, graph::SelectionChangeListener
 {
 public:
   RightViewWidget(
@@ -18,7 +18,10 @@ public:
 
   void layoutSizeChanged( int w, int h ) override;
 
+  void noteChangeInSelection() override;
+
 private:
+  graph::GraphSP graph_;
   int width_;
   int height_;
 };
