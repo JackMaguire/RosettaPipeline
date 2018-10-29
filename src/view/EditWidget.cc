@@ -43,8 +43,7 @@ EditWidget::~EditWidget(){}
 
 void
 EditWidget::noteChangeInSelection(){
-  auto uniq_ptr = layout_->removeWidget( current_ );
-  uniq_ptr = 0;
+  //layout_->removeWidget( current_ ) = 0;//freeing unique_ptr
 
   graph::NodeSP selected_node = graph_->selectedNode();
   if( selected_node ){
