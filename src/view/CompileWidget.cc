@@ -1,5 +1,4 @@
 #include <view/CompileWidget.hh>
-//#include <global_data/options.hh>
 #include <compile/compile.hh>
 
 #include <graph/Graph.fwd.hh>
@@ -52,7 +51,6 @@ Notation
 */
 
 namespace view {
-
 
 namespace {
 
