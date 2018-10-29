@@ -70,9 +70,9 @@ public://general compilation access
 
   std::string dirname() const;
 
-  std::vector< std::string > determineAutoFlags() const;
+  std::string determineAutoFlags() const;
 
-  static std::vector< std::string > commonFlags();
+  static std::string commonFlags();
 
   std::vector< std::string > getAllRosettaFlags() const;
 

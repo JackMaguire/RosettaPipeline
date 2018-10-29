@@ -83,16 +83,14 @@ Node::dirname() const {
   return "stage" + std::to_string( stage() ) + "_" + title;
 }
 
-std::vector< std::string >
+std::string
 Node::determineAutoFlags() const {
-  std::vector< std::string > vec;
+  std::stringstream ss;
 
   if( upstream_edges_.size() > 0 ) {
-    vec.emplace_back( "-l input_files" );
-    // vec.emplace_back( "# -in:file:srlz 1 # Activate this by checking the 'Serialize
-    // Intermediate Poses' box in the compile tab" );
+    ss <<  "-l input_files\n";
   } else {
-    vec.emplace_back( "# Don't forget to add input file flags (-s, -l, etc)" );
+    ss << "# Don't forget to add input file flags (-s, -l, etc)\n";
   }
 
   if( downstream_edges_.size() > 0 ) {
@@ -102,22 +100,22 @@ Node::determineAutoFlags() const {
   }
 
   if( use_script_file_ ) {
-    vec.emplace_back( "-parser:protocol ../" + xml_script_filename_ );
+    ss << "-parser:protocol ../" << xml_script_filename_ << "n";
     } else {
-    vec.emplace_back( "-parser:protocol script.xml" );
+    ss << "-parser:protocol script.xml\n";
   }
 
-  return vec;
+  return ss.str();
 }
 
-std::vector< std::string >
+std::string
 Node::commonFlags() {
-  std::vector< std::string > vec;
-  vec.emplace_back( "-linmem_ig 10                   # save time and memory during packing" );
-  vec.emplace_back( "-ignore_unrecognized_res true   # false by default" );
-  vec.emplace_back( "-ignore_waters false            # true by default" );
-  vec.emplace_back( "-mpi_tracer_to_file mpi_" );
-  return vec;
+  std::stringstream ss;
+  ss << "-linmem_ig 10                   # save time and memory during packing\n";
+  ss << "-ignore_unrecognized_res true   # false by default\n";
+  ss << "-ignore_waters false            # true by default\n";
+  ss << "-mpi_tracer_to_file mpi_\n";
+  return ss.str();
 }
 
 std::vector< std::string >

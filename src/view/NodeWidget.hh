@@ -18,6 +18,8 @@ protected:
 
   void construct_segment2( Wt::WContainerWidget & container );
 
+  void construct_segment3( Wt::WContainerWidget & container );
+
 private:
   graph::NodeSP node_;
 };
