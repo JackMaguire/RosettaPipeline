@@ -27,6 +27,24 @@
 
 
 
+Notation
+
+|--------------
+|     A              Compile Button
+|--------------
+|     B              Setup Title
+|-------------
+|
+|     C              Setup Script
+|
+|--------------
+|     D              Run Title
+|-------------
+|
+|     E              Run Script
+|
+|--------------
+
 */
 
 namespace view {
@@ -40,7 +58,7 @@ struct LayoutsAndContainers {
       root->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
 
     center_container =
-      border_layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
+      border_layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >(), Wt::LayoutPosition::Center );
 
     center_layout =
       center_container->setLayout( Wt::cpp14::make_unique< Wt::WVBoxLayout >() );
