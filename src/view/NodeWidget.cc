@@ -48,7 +48,7 @@ NodeWidget::~NodeWidget(){
 void
 NodeWidget::construct_segment1(
   GraphWidget * graph_widget,
-  Wt::WLayout & layout
+  Wt::WVBoxLayout & layout
 ){
   Wt::WContainerWidget * container =
     layout.addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
@@ -84,7 +84,7 @@ NodeWidget::construct_segment1(
 
 void
 NodeWidget::construct_segment2(
-  Wt::WLayout & outer_layout
+  Wt::WVBoxLayout & outer_layout
 ){
   auto container = outer_layout.addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
   auto layout =
@@ -99,7 +99,7 @@ NodeWidget::construct_segment2(
 
 void
 NodeWidget::construct_segment3(
-  Wt::WContainerWidget & outer_layout
+  Wt::WVBoxWidget & outer_layout
 ){
   auto container =
     outer_layout.addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
