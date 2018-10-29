@@ -76,6 +76,7 @@ NodeWidget::construct_segment1(
   command_edit->keyPressed().connect(
     [=] ( Wt::WKeyEvent const & e ) {
       std::cout << "PRESSED " << command_edit->text() << std::endl;
+      std::cout << "E " << e.text() << std::endl;
       node_->setCommand( command_edit->text().narrow() );
     }
   );
