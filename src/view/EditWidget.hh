@@ -1,11 +1,11 @@
 #pragma once
 
-#include <Wt/WTabWidget.h>
+#include <Wt/WContainerWidget.h>
 #include <graph/Graph.fwd.hh>
 
 namespace view {
 
-class EditWidget : public Wt::WTabWidget
+class EditWidget : public Wt::WContainerWidget
 {
 public:
   EditWidget( graph::GraphSP );

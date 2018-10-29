@@ -19,7 +19,7 @@ namespace view {
 EditWidget::EditWidget(
   graph::GraphSP graph
 ) :
-  WTabWidget(),
+  WContainerWidget(),
   graph_( std::move( graph ) ),
   width_( 500 ),
   height_( 800 )
