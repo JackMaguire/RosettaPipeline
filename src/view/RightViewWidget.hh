@@ -10,7 +10,7 @@ class RightViewWidget : public Wt::WTabWidget, graph::SelectionChangeListener
 {
 public:
   RightViewWidget(
-    graph::GraphSP const &,
+    graph::GraphSP,
     GraphWidget * graph_widget
   );
 

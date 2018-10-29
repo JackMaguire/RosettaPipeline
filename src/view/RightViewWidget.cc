@@ -1,6 +1,7 @@
 #include <view/RightViewWidget.hh>
 
-#include <view/EditWidget.hh>
+#include <view/NodeWidget.hh>
+#include <view/EdgeWidget.hh>
 #include <view/SaveWidget.hh>
 #include <view/LoadWidget.hh>
 #include <view/CompileWidget.hh>
