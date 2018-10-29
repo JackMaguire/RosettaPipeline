@@ -5,6 +5,7 @@
 
 #include <Wt/WGlobal.h>
 #include <Wt/WPushButton.h>
+#include <Wt/WBreak.h>
 
 #include <iostream>
 #include <memory>
