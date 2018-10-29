@@ -36,7 +36,7 @@ RightViewWidget::RightViewWidget(
 
   graph::NodeSP selected_node = graph_->selectedNode();
   if( selected_node ){
-    addTab( Wt::cpp14::make_unique< NodeWidget >( selected_node ), "Edit", Wt::ContentLoading::Eager );
+    addTab( Wt::cpp14::make_unique< NodeWidget >( selected_node, graph_widget ), "Edit", Wt::ContentLoading::Eager );
   } else {
     graph::EdgeSP selected_edge = graph_->selectedEdge();
     assert( selected_edge );
@@ -61,7 +61,7 @@ RightViewWidget::noteChangeInSelection(){
 
   graph::NodeSP selected_node = graph_->selectedNode();
   if( selected_node ){
-    insertTab( 0, Wt::cpp14::make_unique< NodeWidget >( selected_node ), "Edit", Wt::ContentLoading::Eager );
+    insertTab( 0, Wt::cpp14::make_unique< NodeWidget >( selected_node, graph_widget ), "Edit", Wt::ContentLoading::Eager );
   } else {
     graph::EdgeSP selected_edge = graph_->selectedEdge();
     assert( selected_edge );

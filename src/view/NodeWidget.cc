@@ -2,6 +2,7 @@
 
 #include <global_data/options.hh>
 #include <graph/Node.hh>
+#include <view/GraphWidget.hh>
 
 #include <Wt/WGlobal.h>
 #include <Wt/WPushButton.h>
@@ -11,14 +12,34 @@
 
 namespace view {
 
-NodeWidget::NodeWidget( graph::NodeSP node ) :
+NodeWidget::NodeWidget(
+  graph::NodeSP node,
+  GraphWidget * graph_widget
+) :
   WContainerWidget(),
   node_( std::move( node ) )
 {
-  addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( node_->title() ) );
+  contruct_segment1( graph_widget );
 }
 
 NodeWidget::~NodeWidget(){
+}
+
+void
+NodeWidget::contruct_segment1( GraphWidget * graph_widget ){
+  addWidget( Wt::cpp14::make_unique< Wt::WText >( "Title: " ) );
+
+  Wt::WLineEdit * title_edit =
+    addWidget( Wt::cpp14::make_unique< Wt::WLineEdit >() );
+
+  title_edit->keyPressed().connect(
+    [=] ( Wt::WKeyEvent const & e ) {
+      node_->setTitle( e.text() );
+      graph_widget->update();
+    }
+  );
+
+  addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
 }
 
 }//namespace view
