@@ -109,7 +109,7 @@ OptionsWidget::setup_run_options(){
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
 
   Wt::WSpinBox * num_proc_spin_box =
-    addWidget( Wt::cpp14::make_unique< Wt::WCheckBox >( "Number Of Processors" ) );
+    addWidget( Wt::cpp14::make_unique< Wt::WSpinBox >( "Number Of Processors" ) );
   addWidget( Wt::cpp14::make_unique< Wt::WText >( " This value is saved as $nproc in the run.sh script" ) );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
 
