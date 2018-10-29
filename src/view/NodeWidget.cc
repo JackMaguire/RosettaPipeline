@@ -86,7 +86,7 @@ NodeWidget::construct_segment2(
   container.addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
   auto flag_area =
     container.addWidget( Wt::cpp14::make_unique< Wt::WTextArea >( node_->userRosettaFlags() ) );
-  flag_area->setMinimumWidth( 500 );
+  flag_area->setMinimumSize( 500, 200 );
   //std::cout << flag_area->width().toPixels() << std::endl;
   container.addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
 }
