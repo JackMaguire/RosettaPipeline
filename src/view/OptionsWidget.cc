@@ -97,6 +97,16 @@ OptionsWidget::setup_run_options(){
   addWidget( Wt::cpp14::make_unique< Wt::WText >( "Run Options:" ) );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
 
+  Wt::WCheckBox * serialize_intermediate_poses_box =
+    addWidget( Wt::cpp14::make_unique< Wt::WCheckBox >( "Serialize Intermediate Poses" ) );
+  addWidget( Wt::cpp14::make_unique< Wt::WText >( "This option can speed up runs by saving poses in a faster-to-read format. This format cannot be read by any software other than Rosetta, so we will not apply this option to terminal stages (stages with no nodes after). Requires Rosetta to be built with extras=serialization." ) );
+  addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
+
+  Wt::WCheckBox * delete_unused_intermediate_poses_box =
+    addWidget( Wt::cpp14::make_unique< Wt::WCheckBox >( "Delete Unused Intermediate Poses" ) );
+  addWidget( Wt::cpp14::make_unique< Wt::WText >( "This option can save disk space by deleting poses that are no longer needed. We will not delete any poses that result from terminal stages becase we assume you might want to look at those. We will also not delete any input structures." ) );
+  addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
+
 }
 
 }//namespace view
