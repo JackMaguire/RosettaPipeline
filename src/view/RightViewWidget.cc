@@ -57,7 +57,7 @@ void
 RightViewWidget::noteChangeInSelection(){
 
   bool const selected_new_tab = currentIndex() == 0;
-  removeTab( itemAt( 0 ) );
+  removeTab( widget( 0 ) );
 
   graph::NodeSP selected_node = graph_->selectedNode();
   if( selected_node ){
