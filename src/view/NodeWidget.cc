@@ -104,7 +104,7 @@ NodeWidget::construct_segment3(
   auto container =
     outer_layout.addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
   auto layout =
-    inner_container->setLayout( Wt::cpp14::make_unique< Wt::WHBoxLayout >() );
+    container->setLayout( Wt::cpp14::make_unique< Wt::WHBoxLayout >() );
 
   auto left_container =
     layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
