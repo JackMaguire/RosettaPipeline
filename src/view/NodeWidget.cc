@@ -98,7 +98,7 @@ NodeWidget::construct_segment2(
 
   flag_area->changed().connect(
     [=] {
-      node_->setUserRosettaFlags( flag_area->text() );
+      node_->setUserRosettaFlags( flag_area->text().short() );
     }
   );
 }
