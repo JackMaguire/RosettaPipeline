@@ -34,7 +34,7 @@ NodeWidget::contruct_segment1( GraphWidget * graph_widget ){
 
   title_edit->keyPressed().connect(
     [=] ( Wt::WKeyEvent const & e ) {
-      node_->setTitle( e.text().value() );
+      node_->setTitle( e.text().narrow() );
       graph_widget->update();
     }
   );
