@@ -41,7 +41,7 @@ public://getters and setters:
   int Blue() const { return blue_; }
   void setBlue( int b ){ blue_ = b; }
   
-  bool useDefaultCommad() const { return use_default_command_; }
+  bool useDefaultCommand() const { return use_default_command_; }
   void setUseDefaultCommand( bool setting ){ use_default_command_ = setting; }
 
   std::string const & command() const { return command_; }

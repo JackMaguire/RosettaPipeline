@@ -4,15 +4,16 @@
 #include <graph/Node.hh>
 #include <view/GraphWidget.hh>
 
+#include <Wt/WBorderLayout.h>
+#include <Wt/WBreak.h>
+#include <Wt/WCheckBox.h>
 #include <Wt/WGlobal.h>
+#include <Wt/WHBoxLayout.h>
+#include <Wt/WLineEdit.h>
 #include <Wt/WPushButton.h>
 #include <Wt/WText.h>
-#include <Wt/WBreak.h>
-#include <Wt/WLineEdit.h>
-#include <Wt/WVBoxLayout.h>
-#include <Wt/WHBoxLayout.h>
-#include <Wt/WBorderLayout.h>
 #include <Wt/WTextEdit.h>
+#include <Wt/WVBoxLayout.h>
 
 namespace view {
 
@@ -75,6 +76,26 @@ NodeWidget::construct_segment1(
   command_edit->keyPressed().connect(
     [=] ( Wt::WKeyEvent const & e ) {
       node_->setCommand( command_edit->text().narrow() );
+    }
+  );
+
+  Wt::WCheckBox use_default_command_box =
+    conatiner->addWidget( Wt::cpp14::make_unique< Wt::WCheckBox >( "Use Default Command" ) );
+
+  use_default_command_box->setChecked( node_->useDefaultCommand() );
+  command_edit->setHidden(node_->useDefaultCommand() );
+
+  use_default_command_box->checked().connect (
+    [=] {
+      node_->setUseDefaultCommand( true );
+      command_edit->setHidden( true );
+    }
+  );
+
+  use_default_command_box->unchecked().connect (
+    [=] {
+      node_->setUseDefaultCommand( false );
+      command_edit->setHidden( false );
     }
   );
 
