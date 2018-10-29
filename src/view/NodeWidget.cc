@@ -95,6 +95,12 @@ NodeWidget::construct_segment2(
   auto flag_area =
     layout->addWidget( Wt::cpp14::make_unique< Wt::WTextArea >( node_->userRosettaFlags() ),
       Wt::LayoutPosition::Center);
+
+  flag_area->changed().connect(
+    [=] {
+      node_->setUserRosettaFlags( flag_area->text() );
+    }
+  );
 }
 
 void
@@ -123,6 +129,7 @@ NodeWidget::construct_segment3(
   auto left_text_area =
     left_layout->addWidget( Wt::cpp14::make_unique< Wt::WTextArea >( node_->determineAutoFlags() ),
       Wt::LayoutPosition::Center );
+  left_text_area->setReadOnly( true );
 
 
   right_layout->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Commonly Used Flags:" ),
@@ -130,6 +137,7 @@ NodeWidget::construct_segment3(
   auto right_text_area =
     right_layout->addWidget( Wt::cpp14::make_unique< Wt::WTextArea >( graph::Node::commonFlags() ),
       Wt::LayoutPosition::Center );
+  right_text_area->setReadOnly( true );
 
 }
 
