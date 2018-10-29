@@ -92,7 +92,7 @@ NodeWidget::construct_segment1(
     }
   );
 
-  use_default_command_box->unchecked().connect (
+  use_default_command_box->unChecked().connect (
     [=] {
       node_->setUseDefaultCommand( false );
       command_edit->setHidden( false );
