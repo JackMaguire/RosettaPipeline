@@ -13,7 +13,7 @@ public:
   virtual ~EdgeWidget();
 
 private:
-  graph::EdgeSP node_;
+  graph::EdgeSP edge_;
 };
 
 

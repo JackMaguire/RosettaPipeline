@@ -11,11 +11,11 @@
 
 namespace view {
 
-EdgeWidget::EdgeWidget( graph::EdgeSP node ) :
+EdgeWidget::EdgeWidget( graph::EdgeSP edge ) :
   WContainerWidget(),
-  node_( std::move( node ) )
+  edge_( std::move( edge ) )
 {
-  addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( node_->title() ) );
+  addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Edge" ) );
 }
 
 EdgeWidget::~EdgeWidget(){
