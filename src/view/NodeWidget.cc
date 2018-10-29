@@ -83,19 +83,29 @@ NodeWidget::construct_segment1(
     container->addWidget( Wt::cpp14::make_unique< Wt::WCheckBox >( "Use Default Command" ) );
 
   use_default_command_box->setChecked( node_->useDefaultCommand() );
-  command_edit->setHidden(node_->useDefaultCommand() );
+  command_edit->setText( node_->getEffectiveCommand() );
+  if( node_->useDefaultCommand() ){
+    command_edit->setReadOnly( true );
+  } else {
+    command_edit->setReadOnly( false );
+  }
+  //command_edit->setHidden(node_->useDefaultCommand() );
 
   use_default_command_box->checked().connect (
     [=] {
       node_->setUseDefaultCommand( true );
-      command_edit->setHidden( true );
+      command_edit->setText( node_->getEffectiveCommand() );
+      command_edit->setReadOnly( true );
+      //command_edit->setHidden( true );
     }
   );
 
   use_default_command_box->unChecked().connect (
     [=] {
       node_->setUseDefaultCommand( false );
-      command_edit->setHidden( false );
+      command_edit->setText( node_->getEffectiveCommand() );
+      command_edit->setReadOnly( false );
+      //command_edit->setHidden( false );
     }
   );
 
