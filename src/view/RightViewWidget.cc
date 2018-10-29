@@ -55,6 +55,7 @@ RightViewWidget::~RightViewWidget(){}
 void
 RightViewWidget::noteChangeInSelection(){
 
+  bool const selected_new_tab = currentIndex() == 0;
   removeTab( itemAt( 0 ) );
 
   graph::NodeSP selected_node = graph_->selectedNode();
@@ -64,6 +65,10 @@ RightViewWidget::noteChangeInSelection(){
     graph::EdgeSP selected_edge = graph_->selectedEdge();
     assert( selected_edge );
     insertTab( 0, Wt::cpp14::make_unique< EdgeWidget >( selected_edge ), "Edit", Wt::ContentLoading::Eager );
+  }
+
+  if( selected_new_tab ) {
+    setCurrentIndex( 0 );
   }
 
 }
