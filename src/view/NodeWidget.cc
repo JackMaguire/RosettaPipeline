@@ -79,8 +79,8 @@ NodeWidget::construct_segment1(
     }
   );
 
-  Wt::WCheckBox use_default_command_box =
-    conatiner->addWidget( Wt::cpp14::make_unique< Wt::WCheckBox >( "Use Default Command" ) );
+  Wt::WCheckBox * use_default_command_box =
+    container->addWidget( Wt::cpp14::make_unique< Wt::WCheckBox >( "Use Default Command" ) );
 
   use_default_command_box->setChecked( node_->useDefaultCommand() );
   command_edit->setHidden(node_->useDefaultCommand() );
