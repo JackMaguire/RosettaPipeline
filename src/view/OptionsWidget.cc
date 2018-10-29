@@ -59,25 +59,33 @@ OptionsWidget::setup_view_options( GraphWidget * graph_widget ){
 
   show_node_titles_box->checked().connect (
     [=] {
+      std::cout << "!1" << std::endl;
       Options::show_node_titles = true;
+      graph_widget->update();
     }
   );
 
   show_node_titles_box->unChecked().connect (
     [=] {
+      std::cout << "!2" << std::endl;
       Options::show_node_titles = false;
+      graph_widget->update();
     }
   );
 
   orient_node_titles_box->checked().connect (
     [=] {
+      std::cout << "!3" << std::endl;
       Options::put_node_titles_to_side = true;
+      graph_widget->update();
     }
   );
 
   orient_node_titles_box->unChecked().connect (
     [=] {
+      std::cout << "!4" << std::endl;
       Options::put_node_titles_to_side = false;
+      graph_widget->update();
     }
   );
 
@@ -85,7 +93,7 @@ OptionsWidget::setup_view_options( GraphWidget * graph_widget ){
 
 void
 OptionsWidget::setup_run_options(){
-  addWidget( Wt::cpp14::make_unique< Wt::WText >( "View Options:" ) );
+  addWidget( Wt::cpp14::make_unique< Wt::WText >( "Run Options:" ) );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
 
 }
