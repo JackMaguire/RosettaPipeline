@@ -92,7 +92,7 @@ RightViewWidget.o: src/view/RightViewWidget.cc
 TopWidget.o: src/view/TopWidget.cc
 	${CXX} -c -o build/TopWidget.o src/view/TopWidget.cc ${GEN} ${WT_FLAGS}
 
-view: GraphWidget.o TopWidget.o RightViewWidget.o EditWidget.o CompileWidget.o LoadWidget.o SaveWidget.o
+view: GraphWidget.o NodeWidget.o EdgeWidget.o TopWidget.o RightViewWidget.o EditWidget.o CompileWidget.o LoadWidget.o SaveWidget.o
 	ld -r build/GraphWidget.o build/TopWidget.o build/RightViewWidget.o build/EditWidget.o \
 		build/NodeWidget.o build/EdgeWidget.o build/SaveWidget.o \
 		build/LoadWidget.o build/CompileWidget.o -o build/view.o -arch ${ARCH}
