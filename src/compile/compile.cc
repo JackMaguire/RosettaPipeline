@@ -74,8 +74,14 @@ compile_setup_script( std::vector< graph::NodeCSP > const & nodes_in_order ){
       setup_script << "touch input_files\n";
     }
 
-    for( auto const & flag : node->getAllRosettaFlags() ) {
-      setup_script << "echo \"" << flag << "\" >> flags\n";
+    //flags
+    {//https://stackoverflow.com/questions/13172158/c-split-string-by-line
+      std::stringstream ss( node->getAllRosettaFlags() );
+      std::string to;
+      while( std::getline( ss, to, '\n' ) ){
+	setup_script << "echo \"" << to << "\" >> flags\n";
+      }
+      ss.close();
     }
 
     if( ! node->useScriptFile() ) {

@@ -74,7 +74,7 @@ public://general compilation access
 
   static std::string commonFlags();
 
-  std::vector< std::string > getAllRosettaFlags() const;
+  std::string getAllRosettaFlags() const;
 
 public://edge access and modification
   int numUpstreamEdges() const;

@@ -118,23 +118,9 @@ Node::commonFlags() {
   return ss.str();
 }
 
-std::vector< std::string >
+std::string
 Node::getAllRosettaFlags() const {
-  std::vector< std::string > all_flags;
-
-  all_flags.emplace_back( "# Generated Flags:" );
-  for( auto const & s : determineAutoFlags() ) {
-    all_flags.emplace_back( s );
-  }
-
-  all_flags.emplace_back( "" );
-  all_flags.emplace_back( "# Your Additional Flags:" );
-  /*for( auto const & s : user_rosetta_flags_ ) {
-    all_flags.emplace_back( s );
-  }*/
-  all_flags.emplace_back( user_rosetta_flags_ );
-
-  return all_flags;
+  return determineAutoFlags() + "\n" + user_rosetta_flags_;
 }
 
 namespace {
