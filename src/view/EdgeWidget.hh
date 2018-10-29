@@ -1,23 +1,19 @@
 #pragma once
 
 #include <Wt/WContainerWidget.h>
-#include <graph/Graph.fwd.hh>
-#include <string>
-//#include <cstdio> //std::tmpfile
+#include <graph/Edge.fwd.hh>
 
 namespace view {
 
 class EdgeWidget : public Wt::WContainerWidget
 {
 public:
-  EdgeWidget(
-    graph::GraphSP const &
-  );
+  EdgeWidget( graph::EdgeSP );
 
   virtual ~EdgeWidget();
 
 private:
-  std::string save_filename_;
+  graph::EdgeSP node_;
 };
 
 

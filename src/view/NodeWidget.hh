@@ -1,23 +1,19 @@
 #pragma once
 
 #include <Wt/WContainerWidget.h>
-#include <graph/Graph.fwd.hh>
-#include <string>
-//#include <cstdio> //std::tmpfile
+#include <graph/Node.fwd.hh>
 
 namespace view {
 
 class NodeWidget : public Wt::WContainerWidget
 {
 public:
-  NodeWidget(
-    graph::GraphSP const &
-  );
+  NodeWidget( graph::NodeSP );
 
   virtual ~NodeWidget();
 
 private:
-  std::string save_filename_;
+  graph::NodeSP node_;
 };
 
 
