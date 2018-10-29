@@ -22,6 +22,8 @@ protected:
 
   void construct_segment3( Wt::WVBoxLayout & layout );
 
+  void construct_segment4( Wt::WVBoxLayout & layout );
+
 private:
   graph::NodeSP node_;
 };

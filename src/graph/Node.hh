@@ -63,6 +63,9 @@ public://getters and setters:
   void setStage( int setting ) const { stage_ = setting; }
   void setStageValidity( bool setting ) const { stage_is_valid_ = setting; }
 
+  std::string const & notes() const { return notes_; }
+  void setNotes( std::string setting ){ notes_ = std::move( setting ); }
+
 public://general compilation access
   std::string const & getEffectiveCommand() const;
 

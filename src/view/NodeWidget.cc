@@ -33,6 +33,7 @@ NodeWidget::NodeWidget(
   construct_segment1( graph_widget, * top_layout );
   construct_segment2( * top_layout );
   construct_segment3( * top_layout );
+  construct_segment4( * top_layout );
 
   auto bottom_layout =
     bottom_container->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
@@ -73,7 +74,7 @@ NodeWidget::construct_segment1(
   Wt::WLineEdit * command_edit =
     container->addWidget( Wt::cpp14::make_unique< Wt::WLineEdit >( node_->command() ) );
 
-  command_edit->changed().connect(
+  /*command_edit->changed().connect(
     [=] {
       std::cout << "Changed " << command_edit->text() << std::endl;
       node_->setCommand( command_edit->text().narrow() );
@@ -85,11 +86,11 @@ NodeWidget::construct_segment1(
       std::cout << "Validated " << command_edit->text() << std::endl;
       node_->setCommand( command_edit->text().narrow() );
     }
-  );
+  );*/
 
   command_edit->textInput().connect(
     [=] {
-      std::cout << "textInput " << command_edit->text() << std::endl;
+      //std::cout << "textInput " << command_edit->text() << std::endl;
       node_->setCommand( command_edit->text().narrow() );
     }
   );
@@ -185,6 +186,56 @@ NodeWidget::construct_segment3(
       Wt::LayoutPosition::Center );
   right_text_area->setReadOnly( true );
 
+}
+
+void
+NodeWidget::construct_segment4 (
+  Wt::WVBoxLayout & outer_layout
+){
+  auto container =
+    outer_layout.addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
+  auto layout =
+    container->setLayout( Wt::cpp14::make_unique< Wt::WHBoxLayout >() );
+
+  auto left_container =
+    layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
+  auto right_container =
+    layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
+
+  auto left_layout =
+    left_container->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
+  auto right_layout =
+    right_container->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
+
+
+
+  left_layout->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Help:" ),
+    Wt::LayoutPosition::North );
+
+  std::string help_message =
+    "Click on a node to select a node\n"
+    "Click on the arrow of an edge to select that edge\n"
+    "Shift+Click on a node/edge to delete it\n"
+    "Alt+Click to create a node\n"
+    "Alt+Click on a node and drag to another node to create an edge\n";
+
+  auto left_text_area =
+    left_layout->addWidget( Wt::cpp14::make_unique< Wt::WTextArea >( help_message ),
+      Wt::LayoutPosition::Center );
+  left_text_area->setReadOnly( true );
+
+
+  right_layout->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Notes:" ),
+    Wt::LayoutPosition::North );
+  auto right_text_area =
+    right_layout->addWidget( Wt::cpp14::make_unique< Wt::WTextArea >( node_->notes() ),
+      Wt::LayoutPosition::Center );
+
+  right_text_area->changed().connect(
+    [=] {
+      node_->setNotes( right_text_area->text() );
+    }
+  );
 }
 
 
