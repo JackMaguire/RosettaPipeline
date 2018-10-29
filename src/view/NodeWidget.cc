@@ -27,6 +27,7 @@ NodeWidget::NodeWidget(
 
   construct_segment1( graph_widget, * top_container );
 
+  bottom_container->resize( Wt::WLength::Auto, 600 );
   auto script_editor =
     bottom_container->addWidget( Wt::cpp14::make_unique< Wt::WTextEdit >( node_->xmlScript() ) );
 }
