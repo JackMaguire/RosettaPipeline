@@ -113,7 +113,7 @@ save_and_load_graph: save_and_load_graph.o graph global_data
 	${CXX} -o bin/save_and_load_graph build/save_and_load_graph.o build/global_data.o build/graph.o ${GEN}
 
 graph_view_app: GraphApplication view 
-	${CXX} -o bin/graph_view_app build/graph_view_app.o build/graph.o build/view.o build/options.o ${GEN} ${WT_FLAGS}
+	${CXX} -o bin/graph_view_app build/graph_view_app.o build/graph.o build/view.o build/options.o build/compile.o ${GEN} ${WT_FLAGS}
 
 tab_testing_app: tab_testing
 	${CXX} -o bin/tab_testing_app build/tab_testing.o ${GEN} ${WT_FLAGS}
