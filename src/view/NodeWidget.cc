@@ -29,6 +29,9 @@ NodeWidget::NodeWidget(
   construct_segment1( graph_widget, * top_container );
   construct_segment2( * top_container );
 
+  std::cout << width().pixels() << std::endl;
+  std::cout << top_container->width().pixels() << std::endl;
+
   //bottom_container->resize( Wt::WLength::Auto, 600 );
   auto bottom_layout =
     bottom_container->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
