@@ -25,8 +25,8 @@ std::unique_ptr< Wt::WApplication > createApplication( Wt::WEnvironment const & 
   app->setTitle( "Rosetta Pipeline" );
   app->root()->setStyleClass( "root" );
   app->root()->addWidget( Wt::cpp14::make_unique< view::TopWidget >( graph ) );
-  //app->setCssTheme("polished");
-  app->setTheme( std::make_shared< Wt::WBootstrapTheme >() ) ;
+  app->setCssTheme("polished");
+  //app->setTheme( std::make_shared< Wt::WBootstrapTheme >() ) ;
   //app->useStyleSheet("dragdrop.css");
   return app;
 }
