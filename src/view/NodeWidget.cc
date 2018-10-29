@@ -87,6 +87,13 @@ NodeWidget::construct_segment1(
     }
   );
 
+  command_edit->textInput().connect(
+    [=] {
+      std::cout << "textInput " << command_edit->text() << std::endl;
+      node_->setCommand( command_edit->text().narrow() );
+    }
+  );
+
   Wt::WCheckBox * use_default_command_box =
     container->addWidget( Wt::cpp14::make_unique< Wt::WCheckBox >( "Use Default Command" ) );
 
