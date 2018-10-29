@@ -50,7 +50,8 @@ NodeWidget::construct_segment1(
   GraphWidget * graph_widget,
   Wt::WLayout & layout
 ){
-  auto container = layout.addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
+  Wt::WContainerWidget * container =
+    layout.addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
 
   container->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Title: " ) );
 
