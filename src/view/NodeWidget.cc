@@ -29,7 +29,7 @@ NodeWidget::NodeWidget(
   construct_segment1( graph_widget, * top_container );
 
   //bottom_container->resize( Wt::WLength::Auto, 600 );
-  bottom_layout =
+  auto bottom_layout =
     bottom_container->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
 
   auto script_editor =
