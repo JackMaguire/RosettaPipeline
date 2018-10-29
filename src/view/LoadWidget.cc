@@ -65,7 +65,7 @@ LoadWidget::LoadWidget(
   height_( 800 )
 {
   setLayoutSizeAware( true );
-  resize( width_, height_ ); // Provide a default size.
+  //resize( width_, height_ ); // Provide a default size.
 
   //largely copied from https://github.com/emweb/wt/blob/29ae91638e197013f67e7c826317529615d10749/examples/widgetgallery/examples/FileUpload.cpp
 
@@ -75,20 +75,20 @@ LoadWidget::LoadWidget(
 
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
 
-  Wt::WPushButton * uploadButton = addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Load" ) );
+  Wt::WPushButton * upload_button = addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Load" ) );
   Wt::WText * out = addWidget( Wt::cpp14::make_unique< Wt::WText >() );
 
-  uploadButton->clicked().connect(
+  upload_button->clicked().connect(
     [=] {
       fu->upload();
-      uploadButton->disable();
+      upload_button->disable();
       out->setText("File upload has begun.");
     }
   );
 
   fu->uploaded().connect(
     [=] {
-      uploadButton->enable();
+      upload_button->enable();
 
       auto const filename = fu->spoolFileName();
       if( filename.size() > 1 ){
@@ -104,7 +104,7 @@ LoadWidget::LoadWidget(
 
   fu->fileTooLarge().connect(
     [=] {
-      uploadButton->enable();
+      upload_button->enable();
       out->setText("File is too large.");
     }
   );

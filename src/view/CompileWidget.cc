@@ -11,28 +11,62 @@
 #include <iostream>
 #include <memory>
 
+/*
+                    BorderLayout    VBox     Border x2
+|----------------|  --------------
+| Compile Button |  NORTH
+|----------------|  --------------  ------   ------
+|    title       |                           North
+|    Setup.sh    |                  Top      Center
+|                |
+|----------------|   CENTER         ------   ------
+|    title       |                           North
+|    Run.sh      |                  Bottom   Center
+|                |
+|----------------|  --------------  ------   ------
+
+
+
+*/
+
 namespace view {
+
+
+namespace {
+
+struct LayoutsAndContainers {
+  LayoutsAndContainers( Wt::WContainerWidget * root ){
+    border_layout =
+      root->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
+
+    center_container =
+      border_layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
+
+    center_layout =
+      center_container->setLayout( Wt::cpp14::make_unique< Wt::WVBoxLayout >() );
+
+    top_center_container =
+      center_layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
+
+  }
+
+  Wt::WBorderLayout * border_layout;
+  Wt::WContainerWidget * center_container;
+  Wt::WVBoxLayout * center_layout;
+  Wt::WContainerWidget * top_center_container;
+};
+
+}
+
 
 CompileWidget::CompileWidget(
   graph::GraphSP const & graph
 ) :
   WContainerWidget( )
 {
-  auto vbox = setLayout( Wt::cpp14::make_unique< Wt::WVBoxLayout >() );
-
-  Wt::WContainerWidget * const setup_container =
-    vbox->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
-
-  Wt::WBorderLayout * const setup_layout =
-    setup_container->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
-
-
-  Wt::WContainerWidget * const run_container =
-    vbox->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
-
-  Wt::WBorderLayout * const run_layout =
-    run_container->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
-
+  Wt::WPushButton * compile_button = addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Load" ) );
+ 
+  LayoutsAndContainers elements( this );
 }
 
 CompileWidget::~CompileWidget(){}
