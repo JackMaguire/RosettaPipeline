@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+#include <sstream>
+
 namespace graph {
 
 Node::Node( int x, int y ) {
@@ -49,11 +51,9 @@ void Node::init(){
   command_ = "TODO";
   notes_ = "";
 
-  user_rosetta_flags_.emplace_back( "# Keep in mind that all commands will be run one directory deeper." );
-  user_rosetta_flags_.emplace_back(
-    "# You would need to pass '-s ../pose.pdb' instead of '-s pose.pdb'" );
-  user_rosetta_flags_.emplace_back( "" );
-  user_rosetta_flags_.emplace_back( "# -nstruct 1" );
+  user_rosetta_flags_ = "# Keep in mind that all commands will be run one directory deeper.\n"
+    "# You would need to pass '-s ../pose.pdb' instead of '-s pose.pdb'\n"
+    "\n# -nstruct 1\n";
 
   //TODO
   //command_ = Options.getDefaultRunCommand();
@@ -131,9 +131,10 @@ Node::getAllRosettaFlags() const {
 
   all_flags.emplace_back( "" );
   all_flags.emplace_back( "# Your Additional Flags:" );
-  for( auto const & s : user_rosetta_flags_ ) {
+  /*for( auto const & s : user_rosetta_flags_ ) {
     all_flags.emplace_back( s );
-  }
+  }*/
+  all_flags.emplace_back( user_rosetta_flags_ );
 
   return all_flags;
 }
@@ -165,9 +166,7 @@ void Node::save( std::vector< std::string > & output_lines ) const {
   output_lines.emplace_back( std::string( "still_using_default_title " ) + ( still_using_default_title_ ? "1" : "0" ) );
 
   output_lines.emplace_back( "START_FLAGS" );
-  for( std::string const & flag : user_rosetta_flags_ ) {
-    output_lines.emplace_back( flag );
-  }
+  output_lines.emplace_back( user_rosetta_flags_ );
   output_lines.emplace_back( "END_FLAGS" );
 
   output_lines.emplace_back( "START_NOTES" );
@@ -202,10 +201,12 @@ Node::Node( std::vector< std::string > const & lines, int line_to_start_at ) {
     std::string const line = lines[ current_line ];
 
     if( line == "START_FLAGS" ) {
+      std::stringstream ss;
       while( lines[ ++current_line ] != "END_FLAGS" ){
 	//std::move this?
-	user_rosetta_flags_.emplace_back( lines[ current_line ] );
+	ss << lines[ current_line ] << "\n";
       }
+      user_rosetta_flags_ = ss.str();
       continue;
     }
 

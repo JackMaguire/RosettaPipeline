@@ -104,8 +104,8 @@ public://container access
   std::vector< EdgeSP > & getDownstreamEdges() { return downstream_edges_; }
   std::vector< EdgeSP > const & getDownstreamEdges() const { return downstream_edges_; }
 
-  std::vector< std::string > const & userRosettaFlags() const { return user_rosetta_flags_; }
-  void setUserRosettaFlags( std::vector< std::string > new_flags ){
+  std::string const & userRosettaFlags() const { return user_rosetta_flags_; }
+  void setUserRosettaFlags( std::string new_flags ){
     user_rosetta_flags_ = std::move( new_flags );
   }
 
@@ -147,7 +147,7 @@ private:
   mutable int stage_;
   mutable bool stage_is_valid_;
 
-  std::vector< std::string > user_rosetta_flags_;
+  std::string user_rosetta_flags_;
   std::string notes_;
 };
 

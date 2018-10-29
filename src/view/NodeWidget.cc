@@ -74,4 +74,15 @@ NodeWidget::construct_segment1(
 
 }
 
+void
+NodeWidget::construct_segment2(
+  Wt::WContainerWidget & container
+){
+  container.addWidget( Wt::cpp14::make_unique< Wt::WText >( "Your Rosetta Flags:" ) );
+  container.addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
+  container.addWidget( Wt::cpp14::make_unique< Wt::WTextArea >( node_->userRosettaFlags() ) );
+  container.addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
+}
+
+
 }//namespace view
