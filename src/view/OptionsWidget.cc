@@ -9,7 +9,7 @@
 #include <Wt/WCheckBox.h>
 #include <Wt/WSpinBox.h>
 
-#include <misc/type_deduction.hh>
+//#include <misc/type_deduction.hh>
 
 #include <iostream>
 #include <memory>
@@ -117,6 +117,12 @@ OptionsWidget::setup_run_options(){
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
 
 
+  Wt::WLineEdit * command_edit =
+    addWidget( Wt::cpp14::make_unique< Wt::WLineEdit >( Options::default_run_command ) );
+  addWidget( Wt::cpp14::make_unique< Wt::WText >( "<b>Default Run Command.</b> This is the command that is executed for each node unless otherwise specified." ) )->setTextFormat( Wt::TextFormat::XHTML );
+  addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
+
+
   //delete_unused_intermediate_poses_box
   delete_unused_intermediate_poses_box->setChecked( Options::delete_unused_intermediate_poses );
   delete_unused_intermediate_poses_box->setTextFormat( Wt::TextFormat::XHTML );
@@ -160,6 +166,15 @@ OptionsWidget::setup_run_options(){
       }
     }
   );
+
+
+  //command_edit
+  command_edit->textInput().connect(
+    [=] {
+      Options::default_run_command = command_edit->text().toUTF8();
+    }
+  );
+
 }
 
 }//namespace view
