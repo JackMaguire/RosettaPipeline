@@ -14,6 +14,7 @@ public:
 
 protected:
   void setup_view_options( GraphWidget * );
+  void setup_run_options();
 
 };
 

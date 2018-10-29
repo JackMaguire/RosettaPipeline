@@ -18,7 +18,7 @@ OptionsWidget::OptionsWidget( GraphWidget * graph_widget ) :
   WContainerWidget()
 {
   setup_view_options( graph_widget );
-
+  setup_run_options();
 }
 
 OptionsWidget::~OptionsWidget(){}
@@ -27,10 +27,17 @@ void
 OptionsWidget::setup_view_options( GraphWidget * graph_widget ){
   addWidget( Wt::cpp14::make_unique< Wt::WText >( "View Options:" ) );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
+
   Wt::WPushButton * zoom_out_button =
     addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Zoom Out" ) );
   Wt::WPushButton * zoom_in_button =
     addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Zoom In" ) );
+  Wt::WCheckBox * show_node_titles_box =
+    addWidget( Wt::cpp14::make_unique< Wt::WCheckBox >( "Show Node Titles" ) );
+  Wt::WCheckBox * orient_node_titles_box =
+    addWidget( Wt::cpp14::make_unique< Wt::WCheckBox >( "Put Node Titles To Side" ) );
+
+  addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
 
   zoom_out_button->clicked().connect(
     [=](){
@@ -47,6 +54,38 @@ OptionsWidget::setup_view_options( GraphWidget * graph_widget ){
       graph_widget->update();
     }
   );
+
+
+  show_node_titles_box->checked().connect (
+    [=] {
+      Options::show_node_titles = true;
+    }
+  );
+
+  show_node_titles_box->unChecked().connect (
+    [=] {
+      Options::show_node_titles = false;
+    }
+  );
+
+  orient_node_titles_box->checked().connect (
+    [=] {
+      Options::put_node_titles_to_side = true;
+    }
+  );
+
+  orient_node_titles_box->unChecked().connect (
+    [=] {
+      Options::put_node_titles_to_side = false;
+    }
+  );
+
+}
+
+void
+OptionsWidget::setup_run_options(){
+  addWidget( Wt::cpp14::make_unique< Wt::WText >( "View Options:" ) );
+  addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
 
 }
 

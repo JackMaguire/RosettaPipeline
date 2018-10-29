@@ -12,6 +12,7 @@
 #include <graph/Node.fwd.hh>
 
 #include <view/color_themes.hh>
+
 #include <unordered_map>
 
 namespace view {
