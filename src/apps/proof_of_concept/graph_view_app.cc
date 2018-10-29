@@ -1,4 +1,5 @@
 #include <Wt/WApplication.h>
+#include <Wt/WBootstrapTheme.h>
 
 #include <graph/Graph.hh>
 //#include <view/GraphWidget.hh>
@@ -24,7 +25,8 @@ std::unique_ptr< Wt::WApplication > createApplication( Wt::WEnvironment const & 
   app->setTitle( "Rosetta Pipeline" );
   app->root()->setStyleClass( "root" );
   app->root()->addWidget( Wt::cpp14::make_unique< view::TopWidget >( graph ) );
-  app->setCssTheme("polished");
+  //app->setCssTheme("polished");
+  app->setTheme(new WBootstrapTheme()) 
   //app->useStyleSheet("dragdrop.css");
   return app;
 }
