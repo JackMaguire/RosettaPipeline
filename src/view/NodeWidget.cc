@@ -34,6 +34,7 @@ NodeWidget::NodeWidget(
 
   auto script_editor =
     bottom_layout->addWidget( Wt::cpp14::make_unique< Wt::WTextEdit >( node_->xmlScript() ), Wt::LayoutPosition::Center );
+  script_editor->setExtraPlugins( "advcode" );
 }
 
 NodeWidget::~NodeWidget(){
