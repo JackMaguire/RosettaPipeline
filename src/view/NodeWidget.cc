@@ -235,7 +235,7 @@ NodeWidget::construct_segment4 (
 
   right_text_area->changed().connect(
     [=] {
-      node_->setNotes( right_text_area->text() );
+      node_->setNotes( right_text_area->text().toUTF8() );
     }
   );
 }
