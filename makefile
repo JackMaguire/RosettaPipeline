@@ -74,6 +74,9 @@ NodeWidget.o: src/view/NodeWidget.hh graph
 EdgeWidget.o: src/view/EdgeWidget.hh graph
 	${CXX} -c -o build/EdgeWidget.o src/view/EdgeWidget.cc ${GEN} ${WT_FLAGS}
 
+OptionsWidget.o: src/view/OptionsWidget.cc
+	${CXX} -c -o build/OptionsWidget.o src/view/OptionsWidget.cc ${GEN} ${WT_FLAGS}
+
 SaveWidget.o: src/view/SaveWidget.cc
 	${CXX} -c -o build/SaveWidget.o src/view/SaveWidget.cc ${GEN} ${WT_FLAGS}
 
@@ -89,9 +92,9 @@ RightViewWidget.o: src/view/RightViewWidget.cc
 TopWidget.o: src/view/TopWidget.cc
 	${CXX} -c -o build/TopWidget.o src/view/TopWidget.cc ${GEN} ${WT_FLAGS}
 
-view: GraphWidget.o NodeWidget.o EdgeWidget.o TopWidget.o RightViewWidget.o CompileWidget.o LoadWidget.o SaveWidget.o
+view: GraphWidget.o NodeWidget.o EdgeWidget.o TopWidget.o RightViewWidget.o CompileWidget.o LoadWidget.o SaveWidget.o OptionsWidget.o
 	ld -r build/GraphWidget.o build/TopWidget.o build/RightViewWidget.o \
-		build/NodeWidget.o build/EdgeWidget.o build/SaveWidget.o \
+		build/NodeWidget.o build/EdgeWidget.o build/SaveWidget.o build/OptionsWidget.o \
 		build/LoadWidget.o build/CompileWidget.o -o build/view.o -arch ${ARCH}
 
 
