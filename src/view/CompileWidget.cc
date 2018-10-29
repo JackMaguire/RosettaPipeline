@@ -1,5 +1,6 @@
 #include <view/CompileWidget.hh>
-#include <global_data/options.hh>
+//#include <global_data/options.hh>
+#include <compile/compile.hh>
 
 #include <graph/Graph.fwd.hh>
 
@@ -121,6 +122,14 @@ CompileWidget::CompileWidget(
   WContainerWidget( )
 { 
   LayoutsAndContainers elements( this );
+
+  elements.compile_button->clicked().connect(
+    [=](){
+      compile::script_pair scripts = compile::compile( * graph );
+      setup_script_area->setText( scripts.setup_script );
+      run_script_area->setText( scripts.run_script );
+    }
+  );
 }
 
 CompileWidget::~CompileWidget(){}

@@ -14,6 +14,9 @@ struct script_pair {
   std::string run_script;
 };
 
+script_pair
+compile( graph::Graph const & g );
+
 std::string
 compile_setup_script( std::vector< graph::NodeCSP > const & nodes_in_order );
 

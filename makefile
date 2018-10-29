@@ -77,7 +77,7 @@ SaveWidget.o: src/view/SaveWidget.cc
 LoadWidget.o: src/view/LoadWidget.cc
 	${CXX} -c -o build/LoadWidget.o src/view/LoadWidget.cc ${GEN} ${WT_FLAGS}
 
-CompileWidget.o: src/view/CompileWidget.cc
+CompileWidget.o: src/view/CompileWidget.cc compile
 	${CXX} -c -o build/CompileWidget.o src/view/CompileWidget.cc ${GEN} ${WT_FLAGS}
 
 RightViewWidget.o: src/view/RightViewWidget.cc
