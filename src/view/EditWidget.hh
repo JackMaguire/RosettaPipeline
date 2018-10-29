@@ -1,11 +1,12 @@
 #pragma once
 
+#include <Wt/WBorderLayout.h>
 #include <Wt/WContainerWidget.h>
-#include <graph/Graph.fwd.hh>
+#include <graph/Graph.hh>
 
 namespace view {
 
-class EditWidget : public Wt::WContainerWidget
+class EditWidget : public Wt::WContainerWidget, graph::SelectionChangeListener
 {
 public:
   EditWidget( graph::GraphSP );
@@ -14,9 +15,14 @@ public:
 
   void layoutSizeChanged( int w, int h ) override;
 
+  void noteChangeInSelection() override;
+
 private:
   graph::GraphSP graph_;
+
+  Wt::WBorderLayout * layout_;
   Wt::WContainerWidget * current_;
+
   int width_;
   int height_;
 };

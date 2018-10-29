@@ -21,6 +21,11 @@ struct PreliminaryEdge {
   {}
 };
 
+class SelectionChangeListener {
+public:
+  virtual void noteChangeInSelection() = 0;
+};
+
 class Graph {
 public:
   Graph();
@@ -47,6 +52,8 @@ public://edge access
   EdgeSP addEdge( NodeSP const & source, NodeSP const & destination );
 
 public://selection access
+  void registerNewChangeListener( SelectionChangeListener * );
+
   NodeSP & selectedNode();
   NodeCSP selectedNode() const;
   void setSelectedNode( NodeSP const & );
@@ -73,6 +80,8 @@ private:
 
   //represents edges that are in the middle of being drawn
   PreliminaryEdgeSP ghost_edge_;
+
+  std::vector< SelectionChangeListener * > change_listeners_;
 };
 
 
@@ -132,6 +141,10 @@ Graph::setSelectedNode( NodeSP const & n ) {
   if( n != 0 ) {
     selected_edge_ = 0;
   }
+
+  for( SelectionChangeListener * ptr : change_listeners_ ){
+    ptr->noteChangeInSelection();
+  }
 }
 
 inline
@@ -153,6 +166,10 @@ Graph::setSelectedEdge( EdgeSP const & e ) {
   if( e != 0 ) {
     selected_node_ = 0;
   }
+
+  for( SelectionChangeListener * ptr : change_listeners_ ){
+    ptr->noteChangeInSelection();
+  }
 }
 
 inline
@@ -171,6 +188,12 @@ inline
 void
 Graph::setGhostEdge( PreliminaryEdgeSP const & e ) {
   ghost_edge_ = e;
+}
+
+inline
+void
+Graph::registerNewChangeListener( SelectionChangeListener * ptr ) {
+  change_listeners_.push_back( ptr );
 }
 
 
