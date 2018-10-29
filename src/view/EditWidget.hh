@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Wt/WTabWidget.h>
-#include <graph/Edge.fwd.hh>
+#include <graph/Graph.fwd.hh>
 
 namespace view {
 
