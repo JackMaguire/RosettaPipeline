@@ -126,8 +126,8 @@ CompileWidget::CompileWidget(
   elements.compile_button->clicked().connect(
     [=](){
       compile::script_pair scripts = compile::compile( * graph );
-      setup_script_area->setText( scripts.setup_script );
-      run_script_area->setText( scripts.run_script );
+      elements.setup_script_area->setText( scripts.setup_script );
+      elements.run_script_area->setText( scripts.run_script );
     }
   );
 }
