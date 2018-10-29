@@ -26,9 +26,9 @@ TopWidget::TopWidget(
   auto hbox = setLayout( Wt::cpp14::make_unique< Wt::WHBoxLayout >() );
 
   GraphWidget * left_item =
-    hbox->addWidget( Wt::cpp14::make_unique< GraphWidget >( graph ), 0.3 );
+    hbox->addWidget( Wt::cpp14::make_unique< GraphWidget >( graph ), 1 );
 
-  hbox->addWidget( Wt::cpp14::make_unique< RightViewWidget >( graph, left_item ), 0.7 );
+  hbox->addWidget( Wt::cpp14::make_unique< RightViewWidget >( graph, left_item ), 2, Wt::AlignmentFlag::Center );
 
 }
 
