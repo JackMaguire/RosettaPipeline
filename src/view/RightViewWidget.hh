@@ -22,6 +22,7 @@ public:
 
 private:
   graph::GraphSP graph_;
+  GraphWidget * graph_widget_;
   int width_;
   int height_;
 };

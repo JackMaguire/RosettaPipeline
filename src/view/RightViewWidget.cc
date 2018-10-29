@@ -26,6 +26,7 @@ RightViewWidget::RightViewWidget(
 ) :
   WTabWidget(),
   graph_( std::move( graph ) ),
+  graph_widget_( graph_widget ),
   width_( 500 ),
   height_( 800 )
 {
@@ -61,7 +62,7 @@ RightViewWidget::noteChangeInSelection(){
 
   graph::NodeSP selected_node = graph_->selectedNode();
   if( selected_node ){
-    insertTab( 0, Wt::cpp14::make_unique< NodeWidget >( selected_node, graph_widget ), "Edit", Wt::ContentLoading::Eager );
+    insertTab( 0, Wt::cpp14::make_unique< NodeWidget >( selected_node, graph_widget_ ), "Edit", Wt::ContentLoading::Eager );
   } else {
     graph::EdgeSP selected_edge = graph_->selectedEdge();
     assert( selected_edge );
