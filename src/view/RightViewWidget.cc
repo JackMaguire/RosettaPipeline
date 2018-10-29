@@ -4,6 +4,7 @@
 #include <view/EdgeWidget.hh>
 #include <view/SaveWidget.hh>
 #include <view/LoadWidget.hh>
+#include <view/OptionsWidget.hh>
 #include <view/CompileWidget.hh>
 
 #include <global_data/options.hh>
@@ -44,7 +45,7 @@ RightViewWidget::RightViewWidget(
     addTab( Wt::cpp14::make_unique< EdgeWidget >( selected_edge ), "Edit", Wt::ContentLoading::Eager );
   }
 
-  //addTab( Wt::cpp14::make_unique< EditWidget >( graph_ ), "Edit", Wt::ContentLoading::Eager );
+  addTab( Wt::cpp14::make_unique< OptionsWidget >( graph_, graph_widget ), "Options", Wt::ContentLoading::Eager );
   addTab( Wt::cpp14::make_unique< SaveWidget >( graph_ ), "Save", Wt::ContentLoading::Eager );
   addTab( Wt::cpp14::make_unique< LoadWidget >( graph_, graph_widget ), "Load", Wt::ContentLoading::Eager );
   addTab( Wt::cpp14::make_unique< CompileWidget >( graph_ ), "Compile", Wt::ContentLoading::Eager );
@@ -57,7 +58,7 @@ RightViewWidget::~RightViewWidget(){}
 void
 RightViewWidget::noteChangeInSelection(){
 
-  bool const selected_new_tab = currentIndex() == 0;
+  auto const starting_index = currentIndex();
   removeTab( widget( 0 ) );
 
   graph::NodeSP selected_node = graph_->selectedNode();
@@ -69,10 +70,7 @@ RightViewWidget::noteChangeInSelection(){
     insertTab( 0, Wt::cpp14::make_unique< EdgeWidget >( selected_edge ), "Edit", Wt::ContentLoading::Eager );
   }
 
-  if( selected_new_tab ) {
-    setCurrentIndex( 0 );
-  }
-
+  setCurrentIndex( starting_index );
 }
 
 }//namespace view
