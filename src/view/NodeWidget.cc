@@ -29,6 +29,7 @@ NodeWidget::NodeWidget(
 
   construct_segment1( graph_widget, * top_container );
   construct_segment2( * top_container );
+  construct_segment3( * top_container );
 
   auto bottom_layout =
     bottom_container->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
