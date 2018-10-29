@@ -25,11 +25,13 @@ NodeWidget::NodeWidget(
 {
   auto layout = setLayout( Wt::cpp14::make_unique< Wt::WVBoxLayout >() );
   auto top_container = layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
+  auto top_layout =
+    top_container->setLayout( Wt::cpp14::make_unique< Wt::WVBoxLayout >() );
   auto bottom_container = layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
 
-  construct_segment1( graph_widget, * top_container );
-  construct_segment2( * top_container );
-  construct_segment3( * top_container );
+  construct_segment1( graph_widget, * top_layout );
+  construct_segment2( * top_layout );
+  construct_segment3( * top_layout );
 
   auto bottom_layout =
     bottom_container->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
@@ -46,12 +48,14 @@ NodeWidget::~NodeWidget(){
 void
 NodeWidget::construct_segment1(
   GraphWidget * graph_widget,
-  Wt::WContainerWidget & container
+  Wt::WLayout & layout
 ){
-  container.addWidget( Wt::cpp14::make_unique< Wt::WText >( "Title: " ) );
+  auto container = layout.addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
+
+  container->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Title: " ) );
 
   Wt::WLineEdit * title_edit =
-    container.addWidget( Wt::cpp14::make_unique< Wt::WLineEdit >( node_->title() ) );
+    container->addWidget( Wt::cpp14::make_unique< Wt::WLineEdit >( node_->title() ) );
 
   title_edit->keyPressed().connect(
     [=] ( Wt::WKeyEvent const & e ) {
@@ -60,12 +64,12 @@ NodeWidget::construct_segment1(
     }
   );
 
-  container.addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
+  container->addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
 
-  container.addWidget( Wt::cpp14::make_unique< Wt::WText >( "Command: " ) );
+  container->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Command: " ) );
 
   Wt::WLineEdit * command_edit =
-    container.addWidget( Wt::cpp14::make_unique< Wt::WLineEdit >( node_->command() ) );
+    container->addWidget( Wt::cpp14::make_unique< Wt::WLineEdit >( node_->command() ) );
 
   command_edit->keyPressed().connect(
     [=] ( Wt::WKeyEvent const & e ) {
@@ -73,29 +77,31 @@ NodeWidget::construct_segment1(
     }
   );
 
-  container.addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
+  container->addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
 
 }
 
 void
 NodeWidget::construct_segment2(
-  Wt::WContainerWidget & container
+  Wt::WLayout & outer_layout
 ){
-  container.addWidget( Wt::cpp14::make_unique< Wt::WText >( "Your Rosetta Flags:" ) );
-  container.addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
+  auto container = outer_layout.addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
+  auto layout =
+    container->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
+
+  layout->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Your Rosetta Flags:" ),
+    Wt::LayoutPosition::North );
   auto flag_area =
-    container.addWidget( Wt::cpp14::make_unique< Wt::WTextArea >( node_->userRosettaFlags() ) );
-  flag_area->setMinimumSize( 500, 100 );
-  //std::cout << flag_area->width().toPixels() << std::endl;
-  container.addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
+    layout.addWidget( Wt::cpp14::make_unique< Wt::WTextArea >( node_->userRosettaFlags() ),
+      Wt::LayoutPosition::Center);
 }
 
 void
 NodeWidget::construct_segment3(
-  Wt::WContainerWidget & outer_container
+  Wt::WContainerWidget & outer_layout
 ){
   auto container =
-    outer_container.addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
+    outer_layout.addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
   auto layout =
     inner_container->setLayout( Wt::cpp14::make_unique< Wt::WHBoxLayout >() );
 
