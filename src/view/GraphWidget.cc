@@ -337,7 +337,7 @@ GraphWidget::drawNode(
     } else {
       painter.drawText(
 	x,
-	y - selection_width,
+	y - selection_width * 2,
 	100,//width
 	100,//height
 	Wt::WFlags< Wt::AlignmentFlag >(),
