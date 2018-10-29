@@ -10,6 +10,7 @@
 #include <Wt/WBreak.h>
 #include <Wt/WLineEdit.h>
 #include <Wt/WVBoxLayout.h>
+#include <Wt/WBorderLayout.h>
 #include <Wt/WTextEdit.h>
 
 namespace view {
@@ -27,9 +28,12 @@ NodeWidget::NodeWidget(
 
   construct_segment1( graph_widget, * top_container );
 
-  bottom_container->resize( Wt::WLength::Auto, 600 );
+  //bottom_container->resize( Wt::WLength::Auto, 600 );
+  bottom_layout =
+    bottom_container->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
+
   auto script_editor =
-    bottom_container->addWidget( Wt::cpp14::make_unique< Wt::WTextEdit >( node_->xmlScript() ) );
+    bottom_layout->addWidget( Wt::cpp14::make_unique< Wt::WTextEdit >( node_->xmlScript() ), Wt::LayoutPosition::Center );
 }
 
 NodeWidget::~NodeWidget(){
