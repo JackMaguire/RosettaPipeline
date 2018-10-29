@@ -57,9 +57,10 @@ OptionsWidget::setup_view_options( GraphWidget * graph_widget ){
   );
 
 
+  show_node_titles_box->setChecked( Options::show_node_titles );
+
   show_node_titles_box->checked().connect (
     [=] {
-      std::cout << "!1" << std::endl;
       Options::show_node_titles = true;
       graph_widget->update();
     }
@@ -67,15 +68,16 @@ OptionsWidget::setup_view_options( GraphWidget * graph_widget ){
 
   show_node_titles_box->unChecked().connect (
     [=] {
-      std::cout << "!2" << std::endl;
       Options::show_node_titles = false;
       graph_widget->update();
     }
   );
 
+
+  orient_node_titles_box->setChecked( Options::put_node_titles_to_side );
+
   orient_node_titles_box->checked().connect (
     [=] {
-      std::cout << "!3" << std::endl;
       Options::put_node_titles_to_side = true;
       graph_widget->update();
     }
@@ -83,7 +85,6 @@ OptionsWidget::setup_view_options( GraphWidget * graph_widget ){
 
   orient_node_titles_box->unChecked().connect (
     [=] {
-      std::cout << "!4" << std::endl;
       Options::put_node_titles_to_side = false;
       graph_widget->update();
     }
