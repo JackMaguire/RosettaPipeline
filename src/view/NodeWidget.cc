@@ -29,8 +29,8 @@ NodeWidget::NodeWidget(
   construct_segment1( graph_widget, * top_container );
   construct_segment2( * top_container );
 
-  std::cout << width().pixels() << std::endl;
-  std::cout << top_container->width().pixels() << std::endl;
+  std::cout << width().toPixels() << std::endl;
+  std::cout << top_container->width().toPixels() << std::endl;
 
   //bottom_container->resize( Wt::WLength::Auto, 600 );
   auto bottom_layout =
@@ -84,7 +84,9 @@ NodeWidget::construct_segment2(
 ){
   container.addWidget( Wt::cpp14::make_unique< Wt::WText >( "Your Rosetta Flags:" ) );
   container.addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
-  container.addWidget( Wt::cpp14::make_unique< Wt::WTextArea >( node_->userRosettaFlags() ) );
+  auto flag_area =
+    container.addWidget( Wt::cpp14::make_unique< Wt::WTextArea >( node_->userRosettaFlags() ) );
+  std::cout << flag_area->width().toPixels() << std::endl;
   container.addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
 }
 
