@@ -13,6 +13,7 @@
 
 #include <iostream>
 #include <memory>
+#include <limits>
 
 using namespace global_data;
 
