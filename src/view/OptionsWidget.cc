@@ -150,7 +150,7 @@ OptionsWidget::setup_run_options(){
   num_proc_spin_box->changed().connect(
     [=] {
       if( num_proc_spin_box->validate() == Wt::ValidationState::Valid ){
-	Options::num_processors = std::stoi();
+	Options::num_processors = num_proc_spin_box->value();
       }
     }
   );
