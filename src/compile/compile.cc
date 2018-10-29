@@ -81,7 +81,6 @@ compile_setup_script( std::vector< graph::NodeCSP > const & nodes_in_order ){
       while( std::getline( ss, to, '\n' ) ){
 	setup_script << "echo \"" << to << "\" >> flags\n";
       }
-      ss.close();
     }
 
     if( ! node->useScriptFile() ) {
