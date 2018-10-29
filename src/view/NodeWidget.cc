@@ -93,13 +93,13 @@ NodeWidget::construct_segment2(
   layout->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Your Rosetta Flags:" ),
     Wt::LayoutPosition::North );
   auto flag_area =
-    layout.addWidget( Wt::cpp14::make_unique< Wt::WTextArea >( node_->userRosettaFlags() ),
+    layout->addWidget( Wt::cpp14::make_unique< Wt::WTextArea >( node_->userRosettaFlags() ),
       Wt::LayoutPosition::Center);
 }
 
 void
 NodeWidget::construct_segment3(
-  Wt::WVBoxWidget & outer_layout
+  Wt::WVBoxLayout & outer_layout
 ){
   auto container =
     outer_layout.addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
