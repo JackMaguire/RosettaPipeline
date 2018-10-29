@@ -11,6 +11,10 @@ public:
   OptionsWidget( GraphWidget * );
 
   virtual ~OptionsWidget();
+
+protected:
+  void setup_view_options( GraphWidget * );
+
 };
 
 
