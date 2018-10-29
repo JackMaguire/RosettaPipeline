@@ -25,7 +25,7 @@ NodeWidget::NodeWidget(
   auto top_container = layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
   auto bottom_container = layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
 
-  contruct_segment1( graph_widget, * top_container );
+  construct_segment1( graph_widget, * top_container );
 
   auto script_editor =
     bottom_container->addWidget( Wt::cpp14::make_unique< Wt::WTextEdit >( node_->xmlScript() ) );
