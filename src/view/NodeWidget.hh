@@ -14,10 +14,9 @@ public:
   virtual ~NodeWidget();
 
 protected:
-  void construct_segment1(
-    GraphWidget *,
-    Wt::WContainerWidget & container
-  );
+  void construct_segment1( GraphWidget *, Wt::WContainerWidget & container );
+
+  void construct_segment2( Wt::WContainerWidget & container );
 
 private:
   graph::NodeSP node_;
