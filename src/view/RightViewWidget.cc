@@ -45,7 +45,7 @@ RightViewWidget::RightViewWidget(
     addTab( Wt::cpp14::make_unique< EdgeWidget >( selected_edge ), "Edit", Wt::ContentLoading::Eager );
   }
 
-  addTab( Wt::cpp14::make_unique< OptionsWidget >( graph_, graph_widget ), "Options", Wt::ContentLoading::Eager );
+  addTab( Wt::cpp14::make_unique< OptionsWidget >( graph_widget ), "Options", Wt::ContentLoading::Eager );
   addTab( Wt::cpp14::make_unique< SaveWidget >( graph_ ), "Save", Wt::ContentLoading::Eager );
   addTab( Wt::cpp14::make_unique< LoadWidget >( graph_, graph_widget ), "Load", Wt::ContentLoading::Eager );
   addTab( Wt::cpp14::make_unique< CompileWidget >( graph_ ), "Compile", Wt::ContentLoading::Eager );
