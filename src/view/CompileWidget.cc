@@ -8,6 +8,7 @@
 #include <Wt/WVBoxLayout.h>
 #include <Wt/WBorderLayout.h>
 #include <Wt/WTextArea.h>
+#include <Wt/WText.h>
 #include <Wt/WPushButton.h>
 
 #include <iostream>
