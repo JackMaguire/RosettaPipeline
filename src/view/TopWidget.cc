@@ -31,7 +31,7 @@ TopWidget::TopWidget( graph::GraphSP const & graph ) :
     setLayout( Wt::cpp14::make_unique< Wt::WHBoxLayout >() );
 
   LeftViewWidget * const left_item =
-    hbox->addWidget( Wt::cpp14::make_unique< LeftViewWidget >(), 1 );
+    hbox->addWidget( Wt::cpp14::make_unique< LeftViewWidget >( graph ), 1 );
 
   Wt::WContainerWidget * const right_container =
     hbox->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >(), 2 );
