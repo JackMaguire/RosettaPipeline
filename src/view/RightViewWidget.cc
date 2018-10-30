@@ -50,7 +50,7 @@ RightViewWidget::RightViewWidget(
   addTab( Wt::cpp14::make_unique< CompileWidget >( graph_ ), "Compile", Wt::ContentLoading::Eager );
 
   setStyleClass("tabwidget");
-  setCurrentIndex( starting_index );
+  setCurrentIndex( 0 );
 }
 
 RightViewWidget::~RightViewWidget(){}
