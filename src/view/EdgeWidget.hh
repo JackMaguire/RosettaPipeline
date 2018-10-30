@@ -20,6 +20,7 @@ protected:
   void construct_segment2( Wt::WVBoxLayout * outer_layout );
   void construct_segment3( Wt::WVBoxLayout * outer_layout );
   void construct_segment4( Wt::WVBoxLayout * outer_layout );
+  void construct_dummy_segment( Wt::WVBoxLayout * outer_layout );
 
 private:
   graph::EdgeSP edge_;

@@ -29,17 +29,21 @@ EdgeWidget::EdgeWidget( graph::EdgeSP edge ) :
     setLayout( Wt::cpp14::make_unique< Wt::WVBoxLayout >() );
 
   add_intro( layout );
+  construct_segment1( layout );
+  construct_segment2( layout );
+  construct_segment3( layout );
+  construct_segment4( layout );
+  construct_dummy_segment( layout );
+  construct_dummy_segment( layout );
 
+  /*
   Wt::WContainerWidget * const segments1and2container =
     layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
   Wt::WVBoxLayout * const segments1and2layout =
     segments1and2container->setLayout( Wt::cpp14::make_unique< Wt::WVBoxLayout >() );
   construct_segment1( segments1and2layout );
   construct_segment2( segments1and2layout );
-
-  construct_segment3( layout );
-
-  construct_segment4( layout );
+  */
 }
 
 EdgeWidget::~EdgeWidget(){
@@ -208,6 +212,17 @@ EdgeWidget::construct_segment4(
     layout->addWidget( Wt::cpp14::make_unique< Wt::WTextArea >( help_message ),
       Wt::LayoutPosition::Center );
   text_area->setMinimumSize( 400, 100 );
+}
+
+void
+EdgeWidget::construct_dummy_segment(
+  Wt::WVBoxLayout * const outer_layout
+){
+  Wt::WContainerWidget * const container =
+    outer_layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
+  Wt::WBorderLayout * const layout =
+    container->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
+  layout->addWidget( Wt::cpp14::make_unique< Wt::WText >( "" ), Wt::LayoutPosition::Center );
 }
 
 }//namespace view
