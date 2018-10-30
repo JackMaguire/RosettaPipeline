@@ -78,10 +78,10 @@ NodeWidget::construct_segment1(
   Wt::WBorderLayout * const cmd_layout =
     cmd_container->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
 
-  cmd_container->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Command: " ), Wt::LayoutPosition::West );
+  cmd_layout->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Command: " ), Wt::LayoutPosition::West );
 
   Wt::WLineEdit * const command_edit =
-    cmd_container->addWidget( Wt::cpp14::make_unique< Wt::WLineEdit >( node_->command() ), Wt::LayoutPosition::Center );
+    cmd_layout->addWidget( Wt::cpp14::make_unique< Wt::WLineEdit >( node_->command() ), Wt::LayoutPosition::Center );
 
   /*command_edit->changed().connect(
     [=] {
