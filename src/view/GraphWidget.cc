@@ -19,7 +19,7 @@ GraphWidget::GraphWidget() :
   graph_( 0 ),
   theme_( std::make_unique< Theme1 >() ),
   width_( 500 ),
-  height_( 600 )
+  height_( 1000 )
 {
   //width_ = width().toPixels();
   //height_ = height().toPixels();
@@ -42,7 +42,7 @@ GraphWidget::GraphWidget(
   graph_( graph ),
   theme_( std::make_unique< Theme1 >() ),
   width_( 500 ),
-  height_( 600 )
+  height_( 1000 )
 {
   //width_ = width().toPixels();
   //height_ = height().toPixels();
