@@ -68,6 +68,9 @@ compile: graph
 GraphWidget.o: src/view/GraphWidget.hh graph
 	${CXX} -c -o build/GraphWidget.o src/view/GraphWidget.cc ${GEN} ${WT_FLAGS}
 
+GraphToolbarWidget.o: src/view/GraphToolbarWidget.hh graph
+	${CXX} -c -o build/GraphToolbarWidget.o src/view/GraphToolbarWidget.cc ${GEN} ${WT_FLAGS}
+
 NodeWidget.o: src/view/NodeWidget.hh graph
 	${CXX} -c -o build/NodeWidget.o src/view/NodeWidget.cc ${GEN} ${WT_FLAGS}
 
@@ -95,8 +98,8 @@ LeftViewWidget.o: src/view/LeftViewWidget.cc
 TopWidget.o: src/view/TopWidget.cc
 	${CXX} -c -o build/TopWidget.o src/view/TopWidget.cc ${GEN} ${WT_FLAGS}
 
-view: GraphWidget.o NodeWidget.o EdgeWidget.o TopWidget.o LeftViewWidget.o RightViewWidget.o CompileWidget.o LoadWidget.o SaveWidget.o OptionsWidget.o
-	ld -r build/GraphWidget.o build/TopWidget.o build/RightViewWidget.o build/LeftViewWidget.o \
+view: GraphWidget.o GraphToolbarWidget.o NodeWidget.o EdgeWidget.o TopWidget.o LeftViewWidget.o RightViewWidget.o CompileWidget.o LoadWidget.o SaveWidget.o OptionsWidget.o
+	ld -r build/GraphWidget.o build/GraphToolbarWidget.o build/TopWidget.o build/RightViewWidget.o build/LeftViewWidget.o \
 		build/NodeWidget.o build/EdgeWidget.o build/SaveWidget.o build/OptionsWidget.o \
 		build/LoadWidget.o build/CompileWidget.o -o build/view.o -arch ${ARCH}
 
