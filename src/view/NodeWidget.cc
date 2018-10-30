@@ -25,6 +25,7 @@ NodeWidget::NodeWidget(
   node_( std::move( node ) )
 {
   auto layout = setLayout( Wt::cpp14::make_unique< Wt::WVBoxLayout >() );
+  layout->setSpacing( 1 );
   auto top_container = layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
   auto top_layout =
     top_container->setLayout( Wt::cpp14::make_unique< Wt::WVBoxLayout >() );
