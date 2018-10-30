@@ -26,10 +26,10 @@ TopWidget::TopWidget( graph::GraphSP const & graph ) :
     setLayout( Wt::cpp14::make_unique< Wt::WHBoxLayout >() );
 
   GraphWidget * const left_item =
-    hbox->addWidget( Wt::cpp14::make_unique< GraphWidget >( graph ) );
+    hbox->addWidget( Wt::cpp14::make_unique< GraphWidget >( graph ), 1 );
 
   Wt::WContainerWidget * const right_container =
-    hbox->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
+    hbox->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >(), 1 );
   Wt::WBorderLayout * const right_layout =
     right_container->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
   right_layout->addWidget( Wt::cpp14::make_unique< RightViewWidget >( graph, left_item ), Wt::LayoutPosition::Center );
