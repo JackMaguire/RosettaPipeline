@@ -127,6 +127,7 @@ OptionsWidget::setup_run_options(){
   Wt::WLineEdit * command_edit =
     addWidget( Wt::cpp14::make_unique< Wt::WLineEdit >( Options::default_run_command ) );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
+  command_edit->setMinimumSize( 400, command_edit->height() );
 
 
   //delete_unused_intermediate_poses_box
