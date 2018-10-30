@@ -23,12 +23,25 @@ namespace view {
 GraphToolbarWidget::GraphToolbarWidget() :
   WContainerWidget()
 {
-  Wt::WPushButton * const delete_button =
+  /*Wt::WPushButton * const delete_button =
     addWidget( Wt::cpp14::make_unique< Wt::WPushButton >() );
   delete_button->setIcon( Wt::WLink( "media/trash.png" ) );
   delete_button->setMinimumSize( 25, 25 );
-  delete_button->setMaximumSize( 25, 25 );
+  delete_button->setMaximumSize( 25, 25 );*/
 
+  Wt::WVBoxLayout * const layout =
+    setLayout( Wt::cpp14::make_unique< Wt::WVBoxLayout >() );
+
+  Wt::WPushButton * const select_button =
+    layout->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Select" ) );
+  Wt::WPushButton * const add_button =
+    layout->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Add" ) );
+  Wt::WPushButton * const delete_button =
+    layout->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Delete" ) );
+
+  select_button->setCheckable( true );
+  add_button->setCheckable( true );
+  delete_button->setCheckable( true );
 }
 
 GraphToolbarWidget::~GraphToolbarWidget(){}
