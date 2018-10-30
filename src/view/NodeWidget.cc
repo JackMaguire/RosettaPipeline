@@ -151,6 +151,8 @@ NodeWidget::construct_segment2(
       node_->setUserRosettaFlags( flag_area->text().narrow() );
     }
   );
+
+  flag_area->setMinimumSize( 100, 100 );
 }
 
 void
