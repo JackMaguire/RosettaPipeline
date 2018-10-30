@@ -8,6 +8,7 @@
 #include <Wt/WLength.h>
 #include <Wt/WGlobal.h>
 #include <Wt/WHBoxLayout.h>
+#include <Wt/WVBoxLayout.h>
 #include <Wt/WBorderLayout.h>
 
 #include <iostream>
@@ -30,8 +31,13 @@ TopWidget::TopWidget( graph::GraphSP const & graph ) :
 //  LeftViewWidget * const left_item =
 //   hbox->addWidget( Wt::cpp14::make_unique< LeftViewWidget >( graph ), 1 );
 
+
+  Wt::WContainerWidget * const left_cont =
+    hbox->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >(), 1 );
+  Wt::WVBoxLayout * const left_vbox =
+    left_cont->setLayout( Wt::cpp14::make_unique< Wt::WVBoxLayout >() );
   GraphWidget * const left_item =
-    hbox->addWidget( Wt::cpp14::make_unique< GraphWidget >( graph ), 1 );
+    left_vbox->addWidget( Wt::cpp14::make_unique< GraphWidget >( graph ) );
 
   Wt::WContainerWidget * const right_container =
     hbox->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >(), 2 );
