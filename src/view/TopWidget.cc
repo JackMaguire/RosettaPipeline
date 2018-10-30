@@ -2,6 +2,7 @@
 #include <view/RightViewWidget.hh>
 #include <view/LeftViewWidget.hh>
 #include <view/GraphWidget.hh>
+#include <view/GraphToolbarWidget.hh>
 
 //#include <global_data/options.hh>
 
@@ -39,6 +40,8 @@ TopWidget::TopWidget( graph::GraphSP const & graph ) :
   image->setMaximumSize( 605, 167 );//605 × 167
   GraphWidget * const left_item =
     left_vbox->addWidget( Wt::cpp14::make_unique< GraphWidget >( graph ) );
+  GraphToolbarWidget * const toolbar =
+    left_vbox->addWidget( Wt::cpp14::make_unique< GraphToolbarWidget >( ) );
 
   Wt::WContainerWidget * const right_container =
     hbox->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >(), 2 );

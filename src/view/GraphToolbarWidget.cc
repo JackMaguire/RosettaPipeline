@@ -12,6 +12,7 @@
 #include <Wt/WVBoxLayout.h>
 #include <Wt/WBorderLayout.h>
 #include <Wt/WLink.h>
+#include <Wt/WPushButton.h>
 
 #include <iostream>
 #include <math.h>
@@ -22,6 +23,9 @@ namespace view {
 GraphToolbarWidget::GraphToolbarWidget() :
   WContainerWidget()
 {
+  Wt::WPushButton * const delete_button =
+    addWidget( Wt::cpp14::make_unique< Wt::WPushButton >() );
+  delete_button->setIcon( Wt::WLink( "media/trash.png" ) );
 }
 
 GraphToolbarWidget::~GraphToolbarWidget(){}
