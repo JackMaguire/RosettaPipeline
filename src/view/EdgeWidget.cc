@@ -127,7 +127,7 @@ EdgeWidget::construct_segment2(
   combo_box->setMaximumSize( combo_box->maximumWidth(), 30 );
   spin_box->setMaximumSize( spin_box->maximumWidth(), 30 );
 
-  //TODO WStackedWidget 
+  //TODO WStackedWidget
 
   combo_box->addItem( "Maximum Number of Results to Transfer:" );
   combo_box->addItem( "Fraction of Results to Transfer:" );
