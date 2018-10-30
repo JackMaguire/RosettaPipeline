@@ -19,7 +19,7 @@
 
 namespace view {
 
-GraphToolbarWidget::GraphToolbarWidget( graph::GraphSP const & graph ) :
+GraphToolbarWidget::GraphToolbarWidget() :
   WContainerWidget()
 {
 }

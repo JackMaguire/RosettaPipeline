@@ -8,7 +8,7 @@ namespace view {
 class GraphToolbarWidget : public Wt::WContainerWidget
 {
 public:
-  GraphToolbarWidget( graph::GraphSP const & );
+  GraphToolbarWidget();
 
   virtual ~GraphToolbarWidget();
 };
