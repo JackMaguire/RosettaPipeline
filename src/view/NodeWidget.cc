@@ -43,6 +43,7 @@ NodeWidget::NodeWidget(
     bottom_layout->addWidget( Wt::cpp14::make_unique< Wt::WTextEdit >( node_->xmlScript() ), Wt::LayoutPosition::Center );
   script_editor->setMinimumSize( 500, 200 );
   //script_editor->setExtraPlugins( "advcode" );
+  script_editor->setExtraPlugins( "code" );
 }
 
 NodeWidget::~NodeWidget(){
