@@ -26,14 +26,14 @@ class HybridSpinBox : public Wt::WDoubleSpinBox {
 public:
 
   HybridSpinBox( bool start_with_int ) :
-    DoubleSpinBox()
-    {
-      if( start_with_int ){
-	setValidator( Wt::WSpinBox::createValidator() );
-      } else {
-	setValidator( Wt::WDoubleSpinBox::createValidator() );
-      }
+    WDoubleSpinBox()
+  {
+    if( start_with_int ){
+      setValidator( Wt::WSpinBox::createValidator() );
+    } else {
+      setValidator( Wt::WDoubleSpinBox::createValidator() );
     }
+  }
 
   ~HybridSpinBox() = default;
 
