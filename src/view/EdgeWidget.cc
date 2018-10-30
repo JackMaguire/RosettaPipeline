@@ -22,7 +22,7 @@ namespace view {
 
 namespace {
 
-class HybridSpinBox : public Wt::WDoubleSpinBox() {
+class HybridSpinBox : public Wt::WDoubleSpinBox {
 public:
 
   HybridSpinBox( bool start_with_int ) :
