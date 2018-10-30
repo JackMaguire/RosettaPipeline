@@ -62,9 +62,12 @@ EdgeWidget::construct_segment1(
 
   Wt::WLineEdit * const column_name_to_sort_by_line =
     layout->addWidget( Wt::cpp14::make_unique< Wt::WLineEdit >( edge_->columnNameToSortBy() ), Wt::LayoutPosition::Center );
+
   Wt::WCheckBox * const positive_scores_are_better_box =
     layout->addWidget( Wt::cpp14::make_unique< Wt::WCheckBox >( "Positive Scores Are Better" ), Wt::LayoutPosition::East );
 
+
+  column_name_to_sort_by_line->setMaximumSize( column_name_to_sort_by_line->maximumWidth(), 30 );
 
   column_name_to_sort_by_line->textInput().connect(
     [=] {
