@@ -243,7 +243,7 @@ NodeWidget::construct_segment4 (
   auto right_text_area =
     right_layout->addWidget( Wt::cpp14::make_unique< Wt::WTextArea >( node_->notes() ),
       Wt::LayoutPosition::Center );
-  right_text_area->setMinimumSize( 100, 100 );
+  right_text_area->setMinimumSize( 400, 100 );
 
   right_text_area->changed().connect(
     [=] {
