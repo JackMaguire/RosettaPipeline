@@ -171,8 +171,8 @@ compile_run_script( std::vector< graph::NodeCSP > const & nodes_in_order ){
       }
 
       run_script << "x=`cat no_first_line.score.sc | wc -l`\n";
-      if( de->usePercentageInsteadOfCount() ) {
-	run_script << "perc=\"" << de->percentageOfResultsToTransfer() << "\"\n";
+      if( de->useFractionInsteadOfCount() ) {
+	run_script << "perc=\"" << de->fractionOfResultsToTransfer() << "\"\n";
 	run_script << "nresults=`echo \"($x - 1) * $perc / 1\" | bc`\n";
       } else {
 	run_script << "nresults=\"" << de->numResultsToTransfer() << "\"\n";

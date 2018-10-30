@@ -26,8 +26,8 @@ void Edge::init(){
   positive_scores_are_better_ = false;
 
   num_results_to_transfer_ = 0;
-  percentage_of_results_to_transfer_ = 50;
-  use_percentage_instead_of_count_ = false;
+  fraction_of_results_to_transfer_ = 50;
+  use_fraction_instead_of_count_ = false;
 
   notes_ = "";
 }
@@ -54,9 +54,9 @@ void Edge::save( std::vector< std::string > & output_lines ) const {
     ( positive_scores_are_better_ ? "1" : "0" ) );
 
   output_lines.emplace_back( "num " + std::to_string( num_results_to_transfer_ ) );
-  output_lines.emplace_back( "perc " + std::to_string( percentage_of_results_to_transfer_ ) );
-  output_lines.emplace_back( std::string( "use_perc " ) +
-    ( use_percentage_instead_of_count_ ? "1" : "0" ) );
+  output_lines.emplace_back( "frac " + std::to_string( fraction_of_results_to_transfer_ ) );
+  output_lines.emplace_back( std::string( "use_frac " ) +
+    ( use_fraction_instead_of_count_ ? "1" : "0" ) );
 
   output_lines.emplace_back( "START_NOTES" );
   if( hasEnding( notes_, "\n") ){
@@ -67,7 +67,6 @@ void Edge::save( std::vector< std::string > & output_lines ) const {
   output_lines.emplace_back( "END_NOTES" );
 
   output_lines.emplace_back( "END_EDGE" );
-
 }
 
 void
@@ -153,13 +152,13 @@ Edge::load(
       continue;
     }
 
-    if( tokens[ 0 ] == "perc" ) {
-      percentage_of_results_to_transfer_ = std::stod( tokens[ 1 ] );
+    if( tokens[ 0 ] == "frac" ) {
+      fraction_of_results_to_transfer_ = std::stod( tokens[ 1 ] );
       continue;
     }
 
-    if( tokens[ 0 ] == "use_perc" ) {
-      use_percentage_instead_of_count_ = ( tokens[ 1 ] == "1" );
+    if( tokens[ 0 ] == "use_frac" ) {
+      use_fraction_instead_of_count_ = ( tokens[ 1 ] == "1" );
       continue;
     }
 

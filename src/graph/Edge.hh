@@ -49,13 +49,13 @@ public://Getters and setters for transfer options
   int getNumResultsToTransfer() const;
   void setNumResultsToTransfer( int setting );
 
-  double percentageOfResultsToTransfer() const;
-  double getPercentageOfResultsToTransfer() const;
-  void setPercentageOfResultsToTransfer( double setting );
+  double fractionOfResultsToTransfer() const;
+  double getFractionOfResultsToTransfer() const;
+  void setFractionOfResultsToTransfer( double setting );
 
-  bool usePercentageInsteadOfCount() const;
-  bool getUsePercentageInsteadOfCount() const;
-  void setUsePercentageInsteadOfCount( bool setting );
+  bool useFractionInsteadOfCount() const;
+  bool getUseFractionInsteadOfCount() const;
+  void setUseFractionInsteadOfCount( bool setting );
 
 public://Getters and setters for "other"
   std::string const & notes() const;
@@ -82,8 +82,8 @@ private:
   bool positive_scores_are_better_;
 
   int num_results_to_transfer_;
-  double percentage_of_results_to_transfer_;
-  bool use_percentage_instead_of_count_;
+  double fraction_of_results_to_transfer_;
+  bool use_fraction_instead_of_count_;
 
   std::string notes_;
 };
@@ -220,38 +220,38 @@ Edge::setNumResultsToTransfer( int setting ) {
 
 inline
 double
-Edge::percentageOfResultsToTransfer() const {
-  return percentage_of_results_to_transfer_;
+Edge::fractionOfResultsToTransfer() const {
+  return fraction_of_results_to_transfer_;
 }
 
 inline
 double
-Edge::getPercentageOfResultsToTransfer() const {
-  return percentage_of_results_to_transfer_;
+Edge::getFractionOfResultsToTransfer() const {
+  return fraction_of_results_to_transfer_;
 }
 
 inline
 void
-Edge::setPercentageOfResultsToTransfer( double setting ) {
-  percentage_of_results_to_transfer_ = setting;
+Edge::setFractionOfResultsToTransfer( double setting ) {
+  fraction_of_results_to_transfer_ = setting;
 }
 
 inline
 bool
-Edge::usePercentageInsteadOfCount() const {
-  return use_percentage_instead_of_count_;
+Edge::useFractionInsteadOfCount() const {
+  return use_fraction_instead_of_count_;
 }
 
 inline
 bool
-Edge::getUsePercentageInsteadOfCount() const {
-  return use_percentage_instead_of_count_;
+Edge::getUseFractionInsteadOfCount() const {
+  return use_fraction_instead_of_count_;
 }
 
 inline
 void
-Edge::setUsePercentageInsteadOfCount( bool setting ) {
-  use_percentage_instead_of_count_ = setting;
+Edge::setUseFractionInsteadOfCount( bool setting ) {
+  use_fraction_instead_of_count_ = setting;
 }
 
 inline
