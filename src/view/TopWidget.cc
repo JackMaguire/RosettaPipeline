@@ -30,18 +30,8 @@ TopWidget::TopWidget( graph::GraphSP const & graph ) :
   Wt::WHBoxLayout * const hbox =
     setLayout( Wt::cpp14::make_unique< Wt::WHBoxLayout >() );
 
-  Wt::WContainerWidget * const left_cont =
-    hbox->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >(), 1 );
-  Wt::WVBoxLayout * const left_vbox =
-    left_cont->setLayout( Wt::cpp14::make_unique< Wt::WVBoxLayout >() );
-  Wt::WImage * const image =
-    left_vbox->addWidget( Wt::cpp14::make_unique<Wt::WImage>( Wt::WLink( "media/RosettaPipeline.png" ) ) );
-  image->setMinimumSize( 605, 167 );//605 × 167
-  image->setMaximumSize( 605, 167 );//605 × 167
-  GraphWidget * const left_item =
-    left_vbox->addWidget( Wt::cpp14::make_unique< GraphWidget >( graph ) );
-  GraphToolbarWidget * const toolbar =
-    left_vbox->addWidget( Wt::cpp14::make_unique< GraphToolbarWidget >( ) );
+  LeftViewWidget * const left_item =
+    hbox->addWidget( Wt::cpp14::make_unique< LeftViewWidget >(), 1 );
 
   Wt::WContainerWidget * const right_container =
     hbox->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >(), 2 );
@@ -52,7 +42,7 @@ TopWidget::TopWidget( graph::GraphSP const & graph ) :
   right_layout->setSpacing( 0 );
   //right_layout->
 
-  right_layout->addWidget( Wt::cpp14::make_unique< RightViewWidget >( graph, left_item ),
+  right_layout->addWidget( Wt::cpp14::make_unique< RightViewWidget >( graph, left_item->graphWidget() ),
     Wt::LayoutPosition::Center );
 
 }
