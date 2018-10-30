@@ -27,9 +27,8 @@ EdgeWidget::EdgeWidget( graph::EdgeSP edge ) :
   Wt::WVBoxLayout * const layout =
     setLayout( Wt::cpp14::make_unique< Wt::WVBoxLayout >() );
 
-  
-  //Column Name To Sort By
   construct_segment1( layout );
+  construct_segment2( layout );
 }
 
 EdgeWidget::~EdgeWidget(){
