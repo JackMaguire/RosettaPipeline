@@ -20,10 +20,10 @@ public:
 
   GraphInteraction currentInteraction() const {
     return current_interaction_;
-   }
+  }
 
-// private:
-//   GraphInteraction current_interaction_;
+private:
+  GraphInteraction current_interaction_;
 };
 
 
