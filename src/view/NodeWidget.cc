@@ -190,7 +190,7 @@ NodeWidget::construct_segment3(
     left_layout->addWidget( Wt::cpp14::make_unique< Wt::WTextArea >( node_->determineAutoFlags() ),
       Wt::LayoutPosition::Center );
   left_text_area->setReadOnly( true );
-  left_text_area->setMinimumSize( 100, 100 );
+  left_text_area->setMinimumSize( 200, 100 );
 
   right_layout->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Commonly Used Flags:" ),
     Wt::LayoutPosition::North );
@@ -198,7 +198,7 @@ NodeWidget::construct_segment3(
     right_layout->addWidget( Wt::cpp14::make_unique< Wt::WTextArea >( graph::Node::commonFlags() ),
       Wt::LayoutPosition::Center );
   right_text_area->setReadOnly( true );
-  right_text_area->setMinimumSize( 100, 100 );
+  right_text_area->setMinimumSize( 200, 100 );
 }
 
 void
@@ -236,14 +236,14 @@ NodeWidget::construct_segment4 (
     left_layout->addWidget( Wt::cpp14::make_unique< Wt::WTextArea >( help_message ),
       Wt::LayoutPosition::Center );
   left_text_area->setReadOnly( true );
-  left_text_area->setMinimumSize( 100, 100 );
+  left_text_area->setMinimumSize( 200, 100 );
 
   right_layout->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Notes:" ),
     Wt::LayoutPosition::North );
   auto right_text_area =
     right_layout->addWidget( Wt::cpp14::make_unique< Wt::WTextArea >( node_->notes() ),
       Wt::LayoutPosition::Center );
-  right_text_area->setMinimumSize( 400, 100 );
+  right_text_area->setMinimumSize( 200, 100 );
 
   right_text_area->changed().connect(
     [=] {
