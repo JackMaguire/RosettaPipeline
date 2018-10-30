@@ -222,7 +222,7 @@ EdgeWidget::construct_dummy_segment(
     outer_layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
   Wt::WBorderLayout * const layout =
     container->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
-  layout->addWidget( Wt::cpp14::make_unique< Wt::WText >( "" ), Wt::LayoutPosition::Center );
+  layout->addWidget( Wt::cpp14::make_unique< Wt::WText >( "" ), Wt::LayoutPosition::Center )->setMinimumSize( 400, 200 );
 }
 
 }//namespace view
