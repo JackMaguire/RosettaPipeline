@@ -30,9 +30,9 @@ public:
     WDoubleSpinBox()
   {
     if( start_with_int ){
-      setValidator( Wt::WSpinBox::createValidator() );
+      setValidator( WSpinBox::createValidator() );
     } else {
-      setValidator( Wt::WDoubleSpinBox::createValidator() );
+      setValidator( WDoubleSpinBox::createValidator() );
     }
   }
 
@@ -40,9 +40,9 @@ public:
 
   void changeType( bool use_int ){
     if( use_int ){
-      setValidator( Wt::WSpinBox::createValidator() );
+      setValidator( WSpinBox::createValidator() );
     } else {
-      setValidator( Wt::WDoubleSpinBox::createValidator() );
+      setValidator( WDoubleSpinBox::createValidator() );
     }
   }
 };
