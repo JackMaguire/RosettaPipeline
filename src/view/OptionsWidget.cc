@@ -37,7 +37,7 @@ OptionsWidget::setup_view_options( GraphWidget * graph_widget ){
     addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Zoom Out" ) );
   Wt::WPushButton * zoom_in_button =
     addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Zoom In" ) );
-  addWidget( Wt::cpp14::make_unique< Wt::WText >( "   " ) );
+  addWidget( Wt::cpp14::make_unique< Wt::WText >( "        " ) );
   Wt::WCheckBox * show_node_titles_box =
     addWidget( Wt::cpp14::make_unique< Wt::WCheckBox >( "Show Node Titles" ) );
   Wt::WCheckBox * orient_node_titles_box =
