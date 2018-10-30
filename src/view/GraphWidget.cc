@@ -19,7 +19,7 @@ GraphWidget::GraphWidget() :
   graph_( 0 ),
   theme_( std::make_unique< Theme1 >() ),
   width_( 500 ),
-  height_( 1000 )
+  height_( 800 )
 {
   //width_ = width().toPixels();
   //height_ = height().toPixels();
@@ -30,6 +30,8 @@ GraphWidget::GraphWidget() :
   setLayoutSizeAware( true );
 
   resize( width_, height_ ); // Provide a default size.
+  setMinimumSize( width_, height_ );
+  setMaximumSize( width_, height_ );
 
   init_listeners();
   init_painting_tools();
@@ -42,7 +44,7 @@ GraphWidget::GraphWidget(
   graph_( graph ),
   theme_( std::make_unique< Theme1 >() ),
   width_( 500 ),
-  height_( 1000 )
+  height_( 800 )
 {
   //width_ = width().toPixels();
   //height_ = height().toPixels();
@@ -53,6 +55,8 @@ GraphWidget::GraphWidget(
   setLayoutSizeAware( true );
 
   resize( width_, height_ ); // Provide a default size.
+  setMinimumSize( width_, height_ );
+  setMaximumSize( width_, height_ );
 
   init_listeners();
   init_painting_tools();
