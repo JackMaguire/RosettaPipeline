@@ -34,7 +34,6 @@ EdgeWidget::EdgeWidget( graph::EdgeSP edge ) :
   construct_segment3( layout );
   construct_segment4( layout );
   construct_dummy_segment( layout );
-  construct_dummy_segment( layout );
 
   /*
   Wt::WContainerWidget * const segments1and2container =
@@ -54,7 +53,14 @@ EdgeWidget::add_intro(
   Wt::WVBoxLayout * const outer_layout
 ) {
   std::string const description =
-    "TODO"
+    "An edge represents the process of migrating one node's results into the input pool for the downstream node. "
+    "You likely only want to transfer the best results, and the options on this page let you determine which results to keep. "
+    "First, you'll want to decided which column in the score.sc file you want to use to measure quality. "
+    "We do not offer a way to combine multiple metrics, "
+    "but you can use tools such as CalculatorFilter and FilterReportAsPoseExtraScoresMover "
+    "within your script to create a custom column in the score.sc file.\n"
+    "You then need to decide how many results from the upstream node you want to keep. "
+    "You can either declare a maximum number (any integer larger than 0) or a fraction of the results (between 0.0 and 1.0)."
     ;
 
   outer_layout->addWidget( Wt::cpp14::make_unique< Wt::WText >( description )  );
