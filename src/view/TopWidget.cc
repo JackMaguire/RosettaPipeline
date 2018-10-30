@@ -32,6 +32,7 @@ TopWidget::TopWidget( graph::GraphSP const & graph ) :
     hbox->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >(), 2 );
   Wt::WBorderLayout * const right_layout =
     right_container->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
+  right_layout->setSpacing( 0 );
   right_layout->addWidget( Wt::cpp14::make_unique< RightViewWidget >( graph, left_item ), Wt::LayoutPosition::Center );
 
 }
