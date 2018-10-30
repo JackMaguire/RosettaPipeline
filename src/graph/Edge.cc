@@ -26,7 +26,7 @@ void Edge::init(){
   positive_scores_are_better_ = false;
 
   num_results_to_transfer_ = 0;
-  fraction_of_results_to_transfer_ = 50;
+  fraction_of_results_to_transfer_ = 0.25;
   use_fraction_instead_of_count_ = false;
 
   notes_ = "";
