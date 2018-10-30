@@ -33,12 +33,12 @@ TopWidget::TopWidget( graph::GraphSP const & graph ) :
     hbox->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >(), 1 );
   Wt::WVBoxLayout * const left_vbox =
     left_cont->setLayout( Wt::cpp14::make_unique< Wt::WVBoxLayout >() );
-  GraphWidget * const left_item =
-    left_vbox->addWidget( Wt::cpp14::make_unique< GraphWidget >( graph ) );
   Wt::WImage * const image =
     left_vbox->addWidget( Wt::cpp14::make_unique<Wt::WImage>( Wt::WLink( "media/RosettaPipeline.png" ) ) );
   image->setMinimumSize( 605, 167 );//605 × 167
   image->setMaximumSize( 605, 167 );//605 × 167
+  GraphWidget * const left_item =
+    left_vbox->addWidget( Wt::cpp14::make_unique< GraphWidget >( graph ) );
 
   Wt::WContainerWidget * const right_container =
     hbox->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >(), 2 );
