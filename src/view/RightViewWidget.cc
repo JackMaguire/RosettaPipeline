@@ -32,7 +32,6 @@ RightViewWidget::RightViewWidget(
   height_( 800 )
 {
   setLayoutSizeAware( true );
-  //resize( width_, height_ ); // Provide a default size.
 
   graph_->registerNewChangeListener( this );
 
@@ -51,6 +50,7 @@ RightViewWidget::RightViewWidget(
   addTab( Wt::cpp14::make_unique< CompileWidget >( graph_ ), "Compile", Wt::ContentLoading::Eager );
 
   setStyleClass("tabwidget");
+  setCurrentIndex( starting_index );
 }
 
 RightViewWidget::~RightViewWidget(){}
