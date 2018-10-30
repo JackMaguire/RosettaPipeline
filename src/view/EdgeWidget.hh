@@ -15,7 +15,8 @@ public:
   virtual ~EdgeWidget();
 
 protected:
-void construct_segment1 ( Wt::WVBoxLayout * const outer_layout );
+  void construct_segment1( Wt::WVBoxLayout * const outer_layout );
+  void construct_segment2( Wt::WVBoxLayout * const outer_layout );
 
 
 private:

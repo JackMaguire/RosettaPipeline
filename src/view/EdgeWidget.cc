@@ -13,7 +13,10 @@
 #include <Wt/WText.h>
 #include <Wt/WTextEdit.h>
 #include <Wt/WVBoxLayout.h>
+#include <Wt/WComboBox.h>
+#include <Wt/WDoubleSpinBox.h>
 
+#include <limits>
 
 namespace view {
 
@@ -70,7 +73,56 @@ EdgeWidget::construct_segment1(
     }
   );
 
+}
 
+
+void
+EdgeWidget::construct_segment2(
+  Wt::WVBoxLayout * const outer_layout
+){
+  Wt::WContainerWidget * const container =
+    outer_layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
+  Wt::WBorderLayout * const layout =
+    container->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
+
+  Wt::WComboBox * const combo_box =
+    layout->addWidget( Wt::cpp14::make_unique< Wt::WComboBox >(), Wt::LayoutPosition::West );
+  Wt::WDoubleSpinBox * const spin_box =
+    layout->addWidget( Wt::cpp14::make_unique< Wt::WSpinBox >(), Wt::LayoutPosition::East );
+
+  combo_box->addItem( "Maximum Number of Results to Transfer:" );
+  combo_box->addItem( "Fraction of Results to Transfer:" );
+  spin_box->setMinimum( 0 );
+
+  if( edge_->useFractionInsteadOfCount() ){
+    combo_box->setCurrentIndex( 1 );
+    spin_box->setValue( edge_->fractionOfResultsToTransfer() );
+    spin_box->setMaximum( 1.0 );
+    spin_box->setSingleStep( 0.01 );
+  } else {
+    combo_box->setCurrentIndex( 0 );
+    spin_box->setValue( edge_->numResultsToTransfer() );
+    spin_box->setMaximum( std::numeric_limits< int >::max() );
+    spin_box->setSingleStep( 1 );
+  }
+
+  combo_box->changed().connect(
+    [=] {
+      bool const use_frac = combo_box->currentIndex() == 1;
+      edge_->setUseFractionInsteadOfCount( use_frac );
+
+      if( use_frac ){
+	spin_box->setValue( edge_->fractionOfResultsToTransfer() );
+	spin_box->setMaximum( 1.0 );
+	spin_box->setSingleStep( 0.01 );
+      } else {
+	spin_box->setValue( edge_->numResultsToTransfer() );
+	spin_box->setMaximum( std::numeric_limits< int >::max() );
+	spin_box->setSingleStep( 1 );
+      }
+
+    }
+  );
 }
 
 }//namespace view
