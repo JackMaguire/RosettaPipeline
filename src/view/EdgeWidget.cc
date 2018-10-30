@@ -28,11 +28,23 @@ EdgeWidget::EdgeWidget( graph::EdgeSP edge ) :
   Wt::WVBoxLayout * const layout =
     setLayout( Wt::cpp14::make_unique< Wt::WVBoxLayout >() );
 
+  add_intro( layout );
   construct_segment1( layout );
   construct_segment2( layout );
 }
 
 EdgeWidget::~EdgeWidget(){
+}
+
+void
+EdgeWidget::add_intro(
+  Wt::WVBoxLayout * const outer_layout
+) {
+  std::string const description =
+    "TODO"
+    ;
+
+  outer_layout->addWidget( Wt::cpp14::make_unique< Wt::WText >( description )  );
 }
 
 void
