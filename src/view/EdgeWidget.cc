@@ -20,6 +20,34 @@
 
 namespace view {
 
+namespace {
+
+class HybridSpinBox : public Wt::WDoubleSpinBox() {
+public:
+
+  HybridSpinBox( bool start_with_int ) :
+    DoubleSpinBox()
+    {
+      if( start_with_int ){
+	setValidator( Wt::WSpinBox::createValidator() );
+      } else {
+	setValidator( Wt::WDoubleSpinBox::createValidator() );
+      }
+    }
+
+  ~HybridSpinBox() = default;
+
+  void changeType( bool use_int ){
+    if( use_int ){
+      setValidator( Wt::WSpinBox::createValidator() );
+    } else {
+      setValidator( Wt::WDoubleSpinBox::createValidator() );
+    }
+  }
+};
+
+}
+
 EdgeWidget::EdgeWidget( graph::EdgeSP edge ) :
   WContainerWidget(),
   edge_( std::move( edge ) )
@@ -86,8 +114,8 @@ EdgeWidget::construct_segment2(
 
   Wt::WComboBox * const combo_box =
     layout->addWidget( Wt::cpp14::make_unique< Wt::WComboBox >(), Wt::LayoutPosition::West );
-  Wt::WDoubleSpinBox * const spin_box =
-    layout->addWidget( Wt::cpp14::make_unique< Wt::WDoubleSpinBox >(), Wt::LayoutPosition::East );
+  HybridSpinBox * const spin_box =
+    layout->addWidget( Wt::cpp14::make_unique< HybridSpinBox >(), Wt::LayoutPosition::East );
 
   combo_box->addItem( "Maximum Number of Results to Transfer:" );
   combo_box->addItem( "Fraction of Results to Transfer:" );
@@ -98,11 +126,13 @@ EdgeWidget::construct_segment2(
     spin_box->setValue( edge_->fractionOfResultsToTransfer() );
     spin_box->setMaximum( 1.0 );
     spin_box->setSingleStep( 0.01 );
+    spin_box->changeType( false );
   } else {
     combo_box->setCurrentIndex( 0 );
     spin_box->setValue( edge_->numResultsToTransfer() );
     spin_box->setMaximum( std::numeric_limits< int >::max() );
     spin_box->setSingleStep( 1 );
+    spin_box->changeType( true );
   }
 
   combo_box->changed().connect(
@@ -120,6 +150,12 @@ EdgeWidget::construct_segment2(
 	spin_box->setSingleStep( 1 );
       }
 
+    }
+  );
+
+  spin_box->changed().connect(
+    [=] {
+      
     }
   );
 }
