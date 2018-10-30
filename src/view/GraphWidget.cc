@@ -254,6 +254,24 @@ GraphWidget::paintEvent( Wt::WPaintDevice * paintDevice ) {
   painter.setPen( default_pen_ );
   int const grid_size = global_data::Options::grid_size;
 
+  //Outline
+  painter.setBrush( Wt::WBrush( theme_->grid_line() ) );
+  //top left
+  painter.drawLine( 0, 0, 0, 5 );
+  painter.drawLine( 0, 0, 5, 0 );
+
+  //top right
+  painter.drawLine( width_, 0, width_, 5 );
+  painter.drawLine( width_, 0, width_ - 5, 0 );
+
+  //bottom right
+  painter.drawLine( width_, height_, width_, height_ - 5 );
+  painter.drawLine( width_, height_, width_ - 5, height_ );
+
+  //bottom left
+  painter.drawLine( 0, height_, 0, height_ - 5 );
+  painter.drawLine( 0, height_, 5, height_ );
+
   /*
 
   //Background
