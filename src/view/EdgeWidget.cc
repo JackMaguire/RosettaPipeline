@@ -21,8 +21,6 @@
 
 namespace view {
 
-namespace {
-
 EdgeWidget::EdgeWidget( graph::EdgeSP edge ) :
   WContainerWidget(),
   edge_( std::move( edge ) )
