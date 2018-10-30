@@ -29,9 +29,16 @@ EdgeWidget::EdgeWidget( graph::EdgeSP edge ) :
     setLayout( Wt::cpp14::make_unique< Wt::WVBoxLayout >() );
 
   add_intro( layout );
-  construct_segment1( layout );
-  construct_segment2( layout );
+
+  Wt::WContainerWidget * const segments1and2container =
+    layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
+  Wt::WVBoxLayout * const segments1and2layout =
+    segments1and2container->setLayout( Wt::cpp14::make_unique< Wt::WVBoxLayout >() );
+  construct_segment1( segments1and2layout );
+  construct_segment2( segments1and2layout );
+
   construct_segment3( layout );
+
   construct_segment4( layout );
 }
 
