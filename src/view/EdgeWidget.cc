@@ -43,7 +43,7 @@ EdgeWidget::construct_segment1(
   layout->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Column Name To Sort By: " ), Wt::LayoutPosition::West );*/
 
   Wt::WLineEdit * const column_name_to_sort_by_line =
-    outer_layout->addWidget( Wt::cpp14::make_unique< Wt::WLineEdit >( "Column Name To Sort By" ), Wt::LayoutPosition::Center );
+    outer_layout->addWidget( Wt::cpp14::make_unique< Wt::WLineEdit >( "Column Name To Sort By" ) );
 
 }
 
