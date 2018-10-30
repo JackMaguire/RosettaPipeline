@@ -118,13 +118,14 @@ OptionsWidget::setup_run_options(){
 
   Wt::WSpinBox * num_proc_spin_box =
     addWidget( Wt::cpp14::make_unique< Wt::WSpinBox >() );
-  addWidget( Wt::cpp14::make_unique< Wt::WText >( "<b>Number of processors.</b> This value is saved as $nproc in the run.sh script" ) )->setTextFormat( Wt::TextFormat::XHTML );
+  addWidget( Wt::cpp14::make_unique< Wt::WText >( "   <b>Number of processors.</b> This value is saved as $nproc in the run.sh script" ) )->setTextFormat( Wt::TextFormat::XHTML );
+  addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
 
-
+  addWidget( Wt::cpp14::make_unique< Wt::WText >( "   <b>Default Run Command.</b> This is the command that is executed for each node unless otherwise specified." ) )->setTextFormat( Wt::TextFormat::XHTML );
+  addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
   Wt::WLineEdit * command_edit =
     addWidget( Wt::cpp14::make_unique< Wt::WLineEdit >( Options::default_run_command ) );
-  addWidget( Wt::cpp14::make_unique< Wt::WText >( "<b>Default Run Command.</b> This is the command that is executed for each node unless otherwise specified." ) )->setTextFormat( Wt::TextFormat::XHTML );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
 
 
