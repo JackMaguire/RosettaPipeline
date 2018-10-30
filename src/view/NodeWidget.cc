@@ -19,7 +19,7 @@ namespace view {
 
 NodeWidget::NodeWidget(
   graph::NodeSP node,
-  GraphWidget * graph_widget
+  GraphWidget * const graph_widget
 ) :
   WContainerWidget(),
   node_( std::move( node ) )
@@ -50,15 +50,15 @@ NodeWidget::~NodeWidget(){
 
 void
 NodeWidget::construct_segment1(
-  GraphWidget * graph_widget,
+  GraphWidget * const graph_widget,
   Wt::WVBoxLayout & layout
 ){
-  Wt::WContainerWidget * container =
+  Wt::WContainerWidget * const container =
     layout.addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
 
   container->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Title: " ) );
 
-  Wt::WLineEdit * title_edit =
+  Wt::WLineEdit * const title_edit =
     container->addWidget( Wt::cpp14::make_unique< Wt::WLineEdit >( node_->title() ) );
 
   title_edit->keyPressed().connect(
@@ -106,8 +106,8 @@ NodeWidget::construct_segment1(
     }
   );
 
-  Wt::WCheckBox * use_default_command_box =
-    layout->addWidget( Wt::cpp14::make_unique< Wt::WCheckBox >( "Use Default Command" ), Wt::LayoutPosition::East );
+  Wt::WCheckBox * const use_default_command_box =
+    cmd_layout->addWidget( Wt::cpp14::make_unique< Wt::WCheckBox >( "Use Default Command" ), Wt::LayoutPosition::East );
 
   use_default_command_box->setChecked( node_->useDefaultCommand() );
   command_edit->setText( node_->getEffectiveCommand() );
