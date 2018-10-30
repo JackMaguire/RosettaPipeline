@@ -107,6 +107,9 @@ EdgeWidget::construct_segment2(
   Wt::WDoubleSpinBox * const spin_box =
     layout->addWidget( Wt::cpp14::make_unique< Wt::WDoubleSpinBox >(), Wt::LayoutPosition::East );
 
+  combo_box->setMaximumSize( combo_box->maximumWidth(), 30 );
+  spin_box->setMaximumSize( spin_box->maximumWidth(), 30 );
+
   combo_box->addItem( "Maximum Number of Results to Transfer:" );
   combo_box->addItem( "Fraction of Results to Transfer:" );
   spin_box->setMinimum( 0 );
