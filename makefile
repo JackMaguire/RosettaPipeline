@@ -89,11 +89,14 @@ CompileWidget.o: src/view/CompileWidget.cc compile
 RightViewWidget.o: src/view/RightViewWidget.cc
 	${CXX} -c -o build/RightViewWidget.o src/view/RightViewWidget.cc ${GEN} ${WT_FLAGS}
 
+LeftViewWidget.o: src/view/LeftViewWidget.cc
+	${CXX} -c -o build/LeftViewWidget.o src/view/LeftViewWidget.cc ${GEN} ${WT_FLAGS}
+
 TopWidget.o: src/view/TopWidget.cc
 	${CXX} -c -o build/TopWidget.o src/view/TopWidget.cc ${GEN} ${WT_FLAGS}
 
-view: GraphWidget.o NodeWidget.o EdgeWidget.o TopWidget.o RightViewWidget.o CompileWidget.o LoadWidget.o SaveWidget.o OptionsWidget.o
-	ld -r build/GraphWidget.o build/TopWidget.o build/RightViewWidget.o \
+view: GraphWidget.o NodeWidget.o EdgeWidget.o TopWidget.o LeftViewWidget.o RightViewWidget.o CompileWidget.o LoadWidget.o SaveWidget.o OptionsWidget.o
+	ld -r build/GraphWidget.o build/TopWidget.o build/RightViewWidget.o build/LeftViewWidget.o \
 		build/NodeWidget.o build/EdgeWidget.o build/SaveWidget.o build/OptionsWidget.o \
 		build/LoadWidget.o build/CompileWidget.o -o build/view.o -arch ${ARCH}
 
