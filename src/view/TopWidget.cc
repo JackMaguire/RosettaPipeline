@@ -1,5 +1,6 @@
 #include <view/TopWidget.hh>
 #include <view/RightViewWidget.hh>
+#include <view/LeftViewWidget.hh>
 #include <view/GraphWidget.hh>
 
 //#include <global_data/options.hh>
@@ -25,8 +26,8 @@ TopWidget::TopWidget( graph::GraphSP const & graph ) :
   Wt::WHBoxLayout * const hbox =
     setLayout( Wt::cpp14::make_unique< Wt::WHBoxLayout >() );
 
-  GraphWidget * const left_item =
-    hbox->addWidget( Wt::cpp14::make_unique< GraphWidget >( graph ), 1 );
+  LeftViewWidget * const left_item =
+    hbox->addWidget( Wt::cpp14::make_unique< LeftViewWidget >( graph ), 1 );
 
   Wt::WContainerWidget * const right_container =
     hbox->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >(), 2 );
@@ -37,7 +38,8 @@ TopWidget::TopWidget( graph::GraphSP const & graph ) :
   right_layout->setSpacing( 0 );
   //right_layout->
 
-  right_layout->addWidget( Wt::cpp14::make_unique< RightViewWidget >( graph, left_item ), Wt::LayoutPosition::Center );
+  right_layout->addWidget( Wt::cpp14::make_unique< RightViewWidget >( graph, left_item->graphWidget() ),
+    Wt::LayoutPosition::Center );
 
 }
 
