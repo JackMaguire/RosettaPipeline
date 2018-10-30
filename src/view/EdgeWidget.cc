@@ -31,6 +31,8 @@ EdgeWidget::EdgeWidget( graph::EdgeSP edge ) :
   add_intro( layout );
   construct_segment1( layout );
   construct_segment2( layout );
+  construct_segment3( layout );
+  construct_segment4( layout );
 }
 
 EdgeWidget::~EdgeWidget(){
@@ -148,6 +150,51 @@ EdgeWidget::construct_segment2(
       } catch (...){}
     }
   );
+}
+
+void
+EdgeWidget::construct_segment3(
+  Wt::WVBoxLayout * const outer_layout
+){
+  Wt::WContainerWidget * const container =
+    outer_layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
+  Wt::WBorderLayout * const layout =
+    container->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
+  layout->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Notes:" ),
+    Wt::LayoutPosition::North );
+  Wt::WTextArea * const text_area =
+    layout->addWidget( Wt::cpp14::make_unique< Wt::WTextArea >( edge_->notes() ),
+      Wt::LayoutPosition::Center );
+  text_area->setMinimumSize( 400, 100 );
+
+  text_area->changed().connect(
+    [=] {
+      edge_->setNotes( text_area->text().toUTF8() );
+    }
+  );
+}
+
+void
+EdgeWidget::construct_segment4(
+  Wt::WVBoxLayout * const outer_layout
+){
+  Wt::WContainerWidget * const container =
+    outer_layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
+  Wt::WBorderLayout * const layout =
+    container->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
+  layout->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Help:" ),
+    Wt::LayoutPosition::North );
+
+  std::string const help_message =
+    "Click on a node to select a node\n"
+    "Click on the arrow of an edge to select that edge\n"
+    "Shift+Click on a node/edge to delete it\n"
+    "Alt+Click to create a node\n"
+    "Alt+Click on a node and drag to another node to create an edge\n";
+  Wt::WTextArea * const text_area =
+    layout->addWidget( Wt::cpp14::make_unique< Wt::WTextArea >( help_message ),
+      Wt::LayoutPosition::Center );
+  text_area->setMinimumSize( 400, 100 );
 }
 
 }//namespace view
