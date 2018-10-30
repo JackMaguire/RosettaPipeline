@@ -26,8 +26,8 @@ GraphToolbarWidget::GraphToolbarWidget() :
   Wt::WPushButton * const delete_button =
     addWidget( Wt::cpp14::make_unique< Wt::WPushButton >() );
   delete_button->setIcon( Wt::WLink( "media/trash.png" ) );
-  delete_button->setMinimumSize( 15, 15 );
-  delete_button->setMaximumSize( 15, 15 );
+  delete_button->setMinimumSize( 25, 25 );
+  delete_button->setMaximumSize( 25, 25 );
 
 }
 
