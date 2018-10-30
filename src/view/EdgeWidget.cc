@@ -15,6 +15,7 @@
 #include <Wt/WVBoxLayout.h>
 #include <Wt/WComboBox.h>
 #include <Wt/WDoubleSpinBox.h>
+#include <Wt/WSpinBox.h>
 
 #include <limits>
 
