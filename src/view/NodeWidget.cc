@@ -73,7 +73,7 @@ NodeWidget::construct_segment1(
 
 
   Wt::WContainerWidget * const cmd_container =
-    container.addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
+    container->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
     
   Wt::WBorderLayout * const cmd_layout =
     cmd_container->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
