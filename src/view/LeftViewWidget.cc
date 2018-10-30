@@ -1,12 +1,17 @@
 #include <view/LeftViewWidget.hh>
 
 #include <view/GraphWidget.hh>
+#include <view/GraphToolbarWidget.hh>
+
 #include <global_data/options.hh>
 #include <graph/Graph.hh>
 
 #include <Wt/WLength.h>
 #include <Wt/WGlobal.h>
 #include <Wt/WBorderLayout.h>
+#include <Wt/WVBoxLayout.h>
+#include <Wt/WLink.h>
+#include <Wt/WImage.h>
 
 #include <iostream>
 #include <memory>
@@ -23,7 +28,7 @@ LeftViewWidget::LeftViewWidget(
 
   //LOGO
   Wt::WImage * const image =
-    vbox->addWidget( Wt::cpp14::make_unique<Wt::WImage>( Wt::WLink( "media/RosettaPipeline.png" ) ) );
+    vbox->addWidget( Wt::cpp14::make_unique< Wt::WImage >( Wt::WLink( "media/RosettaPipeline.png" ) ) );
   image->setMinimumSize( 605, 167 );//605 × 167
   image->setMaximumSize( 605, 167 );//605 × 167
 
