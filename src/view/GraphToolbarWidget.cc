@@ -42,6 +42,35 @@ GraphToolbarWidget::GraphToolbarWidget() :
   select_button->setCheckable( true );
   add_button->setCheckable( true );
   delete_button->setCheckable( true );
+
+  select_button->setChecked( true );
+  add_button->setChecked( false );
+  delete_button->setChecked( false );
+
+  select_button->checked().connect(
+    [add_button,delete_button,&current_interaction_] {
+      add_button->setChecked( false );
+      delete_button->setChecked( false );
+      current_interaction_ = GraphInteraction::SELECT;
+    }
+  );
+
+  add_button->checked().connect(
+    [select_button,delete_button,&current_interaction_] {
+      select_button->setChecked( false );
+      delete_button->setChecked( false );
+      current_interaction_ = GraphInteraction::ADD;
+    }
+  );
+
+  delete_button->checked().connect(
+    [add_button,select_button,&current_interaction_] {
+      add_button->setChecked( false );
+      select_button->setChecked( false );
+      current_interaction_ = GraphInteraction::DELETE;
+    }
+  );
+
 }
 
 GraphToolbarWidget::~GraphToolbarWidget(){}
