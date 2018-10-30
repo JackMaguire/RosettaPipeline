@@ -36,16 +36,15 @@ void
 EdgeWidget::construct_segment1(
   Wt::WVBoxLayout * const outer_layout
 ){
-  /*Wt::WContainerWidget * const container =
+  Wt::WContainerWidget * const container =
     outer_layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
   Wt::WBorderLayout * const layout =
     container->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
 
-  layout->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Column Name To Sort By: " ), Wt::LayoutPosition::West );*/
+  layout->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Column Name To Sort By: " ), Wt::LayoutPosition::West );
 
   Wt::WLineEdit * const column_name_to_sort_by_line =
-    outer_layout->addWidget( Wt::cpp14::make_unique< Wt::WLineEdit >( "Column Name To Sort By" ) );
-
+    layout->addWidget( Wt::cpp14::make_unique< Wt::WLineEdit >( edge_->columnNameToSortBy() ), Wt::LayoutPosition::Center );
 }
 
 }//namespace view
