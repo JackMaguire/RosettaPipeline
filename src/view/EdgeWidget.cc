@@ -26,6 +26,7 @@ EdgeWidget::EdgeWidget( graph::EdgeSP edge ) :
 
   
   //Column Name To Sort By
+  construct_segment1( layout );
 }
 
 EdgeWidget::~EdgeWidget(){
