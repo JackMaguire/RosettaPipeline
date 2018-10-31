@@ -11,7 +11,7 @@
 #include <Wt/WLink.h>
 #include <Wt/WAnchor.h>
 #include <Wt/WFileResource.h>
-//#include <Wt/WResource.h>
+#include <Wt/WStreamResource.h>
 
 #include <fstream>
 #include <iostream>
@@ -20,8 +20,30 @@
 #include <vector>
 #include <cstdio> //std::tmpfile
 #include <stdio.h>//remove
+#include <sstream>
 
 namespace view {
+
+namespace {
+
+class OnTheFlyFileResource : public Wt::WStreamResource {
+
+  OnTheFlyFileResource( std::string contents ) :
+    contents_( contents )
+  {}
+
+  ~OnTheFlyFileResource() = default;
+
+  void WFileResource::handleRequest( Http::Request const & request, Http::Response & response ) {
+    std::istringstream iss( contents_ );
+    handleRequestPiecewise( request, response, iss );
+  }
+
+private:
+  std::string contents_;
+};
+
+}
 
 SaveWidget::SaveWidget(
   graph::GraphSP const & graph
