@@ -13,7 +13,7 @@
 #include <iostream>
 //#include <stdio.h>//remove
 #include <filesystem>//remove
-#include <cstdlib>
+#include <cstdlib>//system
 
 using namespace graph;
 
@@ -80,7 +80,10 @@ compile( graph::Graph const & g ){
     node->setStageValidity( false );
   }
 
-  std::filesystem::remove_all( directory_name );
+  std::string command = "tar -czf " + directory_name + "/rosetta_pipeline.tar.gz " + directory_name + "/rosetta_pipeline";
+  std::system( command.c_str() );
+
+  //std::filesystem::remove_all( directory_name );
   return scripts;
 }
 
@@ -88,9 +91,17 @@ std::string
 setup_working_directory(
   std::vector< graph::NodeCSP > const & nodes_in_order
 ){
-  std::string directory_name = "/tmp/" + generate_random_string( 16 );
+  std::string const directory_name = "/tmp/" + generate_random_string( 16 );
   std::filesystem::create_directory( directory_name );
-  std::cout << directory_name << std::endl;
+  std::cout << "creating " << directory_name << std::endl;
+
+  std::string const subdirectory_name = directory_name + "/rosetta_pipeline";
+  std::filesystem::create_directory( subdirectory_name );
+
+  for( graph::NodeCSP const & node : nodes_in_order ){
+    std::filesystem::create_directory( subdirectory_name + "/" + node->dirname() );
+  }
+
   return directory_name;
 }
 
@@ -104,8 +115,7 @@ compile_setup_script( std::vector< graph::NodeCSP > const & nodes_in_order ){
     addStageIntroToScript( node->stage(), setup_script );
 
     std::string const dirname = node->dirname();
-    setup_script << "mkdir " << dirname << "\n"
-      "cd " << dirname << "\n";
+    setup_script << "cd " << dirname << "\n";
 
     if( node->numUpstreamEdges() > 0 ) {
       setup_script << "touch input_files\n";
