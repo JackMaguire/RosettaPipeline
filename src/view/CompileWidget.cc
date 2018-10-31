@@ -93,13 +93,13 @@ CompileWidget::CompileWidget(
 
   /////
   //top
-  CompileElements( top );
+  CompileElements( top_container );
 
 
   ////////
   //bottom
 
-  PreviewElements preview_elements( bottom );
+  PreviewElements preview_elements( bottom_container );
 
   preview_elements.preview_button->clicked().connect(
     [=](){
