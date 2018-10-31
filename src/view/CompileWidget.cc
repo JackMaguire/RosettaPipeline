@@ -93,7 +93,7 @@ CompileWidget::CompileWidget(
 
   /////
   //top
-  CompileElements( top_container );
+  CompileElements compile_elements( top_container );
 
 
   ////////
