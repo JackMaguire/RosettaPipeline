@@ -13,6 +13,7 @@
 #include <Wt/WStreamResource.h>
 #include <Wt/WBreak.h>
 #include <Wt/WPushButton.h>
+#include <Wt/WMessageBox.h>
 
 #include <iostream>
 #include <memory>
