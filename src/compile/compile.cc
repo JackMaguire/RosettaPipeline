@@ -343,9 +343,9 @@ std::vector< graph::NodeCSP > determineOrderOfNodes( graph::Graph const & g ) {
 }
 
 void addGlobalIntroToScript( std::ostream & run_script ) {
-  run_script << "# Script was created using JD3BASH\n";
+  run_script << "# Script was created using RosettaPipeline\n";
   run_script << "# Version number: " << global_data::Version::number << "\n";
-  run_script << "# Visit github.com/JackMaguire/JD3Bash for details\n\n";
+  run_script << "# Visit github.com/JackMaguire/RosettaPipeline for details\n\n";
 }
 
 void addStageIntroToScript( int stage, std::ostream & run_script ) {
