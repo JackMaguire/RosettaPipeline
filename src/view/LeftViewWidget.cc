@@ -34,10 +34,14 @@ LeftViewWidget::LeftViewWidget(
   image->setMaximumSize( 605, 167 );//605 × 167
 
   //Edit Area
-  Wt::WContainerWidget * const edit_container =
+  Wt::WContainerWidget * const outer_edit_container =
     vbox->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
+  Wt::WBorderLayout * const outer_edit_layout =
+    outer_edit_container->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
+  Wt::WContainerWidget * const inner_edit_container =
+    outer_edit_layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >(), Wt::LayoutPosition::East );
   Wt::WHBoxLayout * const edit_layout =
-    edit_container->setLayout( Wt::cpp14::make_unique< Wt::WHBoxLayout >() );
+    inner_edit_container->setLayout( Wt::cpp14::make_unique< Wt::WHBoxLayout >() );
   GraphToolbarWidget * const toolbar =
     edit_layout->addWidget( Wt::cpp14::make_unique< GraphToolbarWidget >() );
   graph_widget_ =

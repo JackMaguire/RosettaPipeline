@@ -23,14 +23,14 @@ namespace view {
 GraphToolbarWidget::GraphToolbarWidget() :
   WContainerWidget()
 {
-  Wt::WBorderLayout * const topmost_layout =
+  /*Wt::WBorderLayout * const topmost_layout =
     setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
   Wt::WContainerWidget * const container =
     topmost_layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >(),
-      Wt::LayoutPosition::East );
+      Wt::LayoutPosition::East );*/
 
   Wt::WVBoxLayout * const layout =
-    container->setLayout( Wt::cpp14::make_unique< Wt::WVBoxLayout >() );
+    setLayout( Wt::cpp14::make_unique< Wt::WVBoxLayout >() );
 
   Wt::WPushButton * const select_button =
     layout->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >() );
