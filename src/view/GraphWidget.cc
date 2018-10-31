@@ -164,7 +164,7 @@ GraphWidget::mouseReleased( Wt::WMouseEvent const & e ) {
     break;
   case GraphInteraction::DELETE:
     if( shift_was_down_when_most_recent_object_was_selected_ ){
-      auto & selected_node = graph_->selectedNode();
+      auto selected_node = graph_->selectedNode();
       if( selected_node != 0 ) {
 	if( graph_->getNumNodes() > 1 ) {// Don't want an empty graph
 	  if( hitbox_for_node_.at( selected_node ).pointIsInBox( x, y ) ) {
