@@ -22,7 +22,6 @@ namespace view {
 
 namespace {
 
-template < typename T >
 class OnTheFlyFileResource : public Wt::WStreamResource {
 public:
   OnTheFlyFileResource(
