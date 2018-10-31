@@ -79,6 +79,34 @@ GraphToolbarWidget::GraphToolbarWidget() :
     }
   );
 
+
+
+  select_button->unChecked().connect(
+    [=] {
+      select_button->setChecked( true );
+      add_button->setChecked( false );
+      delete_button->setChecked( false );
+      this->current_interaction_ = GraphInteraction::SELECT;
+    }
+  );
+
+  add_button->unChecked().connect(
+    [=] {
+      select_button->setChecked( true );
+      delete_button->setChecked( false );
+      this->current_interaction_ = GraphInteraction::SELECT;
+    }
+  );
+
+  delete_button->unChecked().connect(
+    [=] {
+      select_button->setChecked( true );
+      add_button->setChecked( false );
+      this->current_interaction_ = GraphInteraction::SELECT;
+    }
+  );
+
+
 }
 
 GraphToolbarWidget::~GraphToolbarWidget(){}
