@@ -21,6 +21,32 @@
 
 namespace view {
 
+namespace {
+
+class SaveAndLoadWidget : public Wt::WContainerWidget {
+public:
+
+  SaveAndLoadWidget(
+    graph::GraphSP const & graph,
+    GraphWidget * graph_widget
+  ) {
+
+    //addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
+    //addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
+    //addWidget( Wt::cpp14::make_unique< Wt::WText >( "Title" ) );
+    addWidget( Wt::cpp14::make_unique< SaveWidget >( graph ), "Save", Wt::ContentLoading::Eager );
+    addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
+    addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
+    addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
+    addWidget( Wt::cpp14::make_unique< LoadWidget >( graph, graph_widget ), "Load", Wt::ContentLoading::Eager );
+  }
+
+  ~SaveAndLoadWidget = default;
+
+};
+
+}
+
 RightViewWidget::RightViewWidget(
   graph::GraphSP graph,
   GraphWidget * graph_widget
@@ -45,8 +71,9 @@ RightViewWidget::RightViewWidget(
   }
 
   addTab( Wt::cpp14::make_unique< OptionsWidget >( graph_widget ), "Options", Wt::ContentLoading::Eager );
-  addTab( Wt::cpp14::make_unique< SaveWidget >( graph_ ), "Save", Wt::ContentLoading::Eager );
-  addTab( Wt::cpp14::make_unique< LoadWidget >( graph_, graph_widget ), "Load", Wt::ContentLoading::Eager );
+  //addTab( Wt::cpp14::make_unique< SaveWidget >( graph_ ), "Save", Wt::ContentLoading::Eager );
+  //addTab( Wt::cpp14::make_unique< LoadWidget >( graph_, graph_widget ), "Load", Wt::ContentLoading::Eager );
+  addTab( Wt::cpp14::make_unique< SaveAndLoadWidget >( graph_, graph_widget ), "Save/Load", Wt::ContentLoading::Eager );
   addTab( Wt::cpp14::make_unique< CompileWidget >( graph_ ), "Compile", Wt::ContentLoading::Eager );
 
   setStyleClass("tabwidget");
