@@ -29,16 +29,14 @@ namespace {
 template < typename T >
 class OnTheFlyFileResource : public Wt::WStreamResource {
 
-  OnTheFlyFileResource(
-    T string_generating_func
-  ) :
+  OnTheFlyFileResource( T string_generating_func ) :
     string_generating_func_( string_generating_func )
   {}
 
   ~OnTheFlyFileResource() = default;
 
   void handleRequest( Wt::Http::Request const & request, Wt::Http::Response & response ) override {
-    std::istringstream iss( string_generating_func() );
+    std::istringstream iss( string_generating_func_() );
     handleRequestPiecewise( request, response, iss );
   }
 
