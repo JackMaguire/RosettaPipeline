@@ -28,7 +28,7 @@ namespace {
 
 template < typename T >
 class OnTheFlyFileResource : public Wt::WStreamResource {
-
+public:
   OnTheFlyFileResource( T string_generating_func ) :
     string_generating_func_( string_generating_func )
   {}
