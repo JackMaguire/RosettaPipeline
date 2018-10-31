@@ -90,24 +90,7 @@ SaveWidget::SaveWidget(
   auto local_file = std::make_shared< OnTheFlyFileResource< decltype(string_generating_func) > >( string_generating_func );
   local_file->setDispositionType( Wt::ContentDisposition::Attachment );
   downloadLink->setLink( Wt::WLink( local_file ) );
-
-
-  downloadButton->clicked().connect(
-    [=] {
-
-     /* std::vector< std::string > save_lines;
-      global_data::Options::save( save_lines );
-      graph->saveSelfNodesAndEdges( save_lines );
-
-      std::ofstream myfile;
-      myfile.open( save_filename_ );
-      for( std::string const & line : save_lines ){
-	myfile << line << "\n";
-      }
-      myfile.close();*/
-
-    }
-  );
+  downloadButton->setLink( Wt::WLink( local_file ) );
 }
 
 SaveWidget::~SaveWidget(){
