@@ -45,10 +45,10 @@ bool cycleExists( graph::Graph const & g );
 std::vector< graph::NodeCSP >
 determineOrderOfNodes( graph::Graph const & g );
 
-void addGlobalIntroToScript( std::stringstream & script );
+void addGlobalIntroToScript( std::ostream & run_script );
 
-void addStageIntroToScript( int stage, std::stringstream & script );
+void addStageIntroToScript( int stage, std::ostream & run_script );
 
-void addGlobalVariablesToRunScript( std::stringstream & script );
+void addGlobalVariablesToRunScript( std::ostream & run_script );
 
 }//namespace compile
