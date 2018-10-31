@@ -173,8 +173,9 @@ GraphWidget::mouseReleased( Wt::WMouseEvent const & e ) {
 	  continue;
 	if( hitbox_for_node_.at( node ).pointIsInBox( x, y ) ) {
 	  auto const & new_edge = graph_->addEdge( graph_->selectedNode(), node );
-	  graph_->setSelectedEdge( new_edge );
-	  graph_->setSelectedNode( 0 );
+	  if( new_edge ){
+	    graph_->setSelectedEdge( new_edge );
+	  }
 	  break;
 	}
       }
