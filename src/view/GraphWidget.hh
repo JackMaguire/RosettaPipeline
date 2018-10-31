@@ -86,9 +86,18 @@ protected:
   void init_listeners();
 
   GraphInteraction determineInteractionType( Wt::WMouseEvent const & e ) const;
+
   void mouseDown( Wt::WMouseEvent const & e );
+  void fingerDown( Wt::WTouchEvent const & e );
+  void down( int x, int y, GraphInteraction );
+
   void mouseReleased( Wt::WMouseEvent const & e );
+  void fingerUp( Wt::WTouchEvent const & e );
+  void up( int x, int y, GraphInteraction );
+
   void mouseDraggedImpl( Wt::WMouseEvent const & e );
+  void fingerDrag( Wt::WTouchEvent const & e );
+  void drag( int x, int y );
 
   //TODO this needs a better name
   int getClosestPointForPoint( int point ) const;

@@ -50,6 +50,10 @@ GraphWidget::init_listeners(){
   mouseWentDown().connect( this, & GraphWidget::mouseDown );
   mouseWentUp().connect( this, & GraphWidget::mouseReleased );
   mouseDragged().connect( this, & GraphWidget::mouseDraggedImpl );
+
+  touchStarted().connect( this, & GraphWidget::fingerDown );
+  touchEnded().connect( this, & GraphWidget::fingerUp );
+  touchMoved().connect( this, & GraphWidget::fingerDrag );
 }
 
 void
@@ -78,12 +82,20 @@ GraphWidget::determineInteractionType( Wt::WMouseEvent const & e ) const {
 void
 GraphWidget::mouseDown( Wt::WMouseEvent const & e ) {
   Wt::Coordinates c = e.widget();
-  auto const x = c.x;
-  auto const y = c.y;
+  down( c.x, c.y, determineInteractionType(e) );
+}
+
+void
+GraphWidget::fingerDown( Wt::WTouchEvent const & e ) {
+  Wt::Coordinates c = e.touches()[0].widget();
+  assert( toolbar_ );
+  down( c.x, c.y, toolbar_->currentInteraction() );
+}
+
+void
+GraphWidget::down( int x, int y, GraphInteraction interaction_type ) {
   last_mouse_press_x_ = x;
   last_mouse_press_y_ = y;
-
-  GraphInteraction const interaction_type = determineInteractionType( e );
 
   switch( interaction_type ){
   case GraphInteraction::SELECT:
@@ -169,10 +181,18 @@ GraphWidget::createPromptForEdgeDeletion(){
 void
 GraphWidget::mouseReleased( Wt::WMouseEvent const & e ) {
   Wt::Coordinates c = e.widget();
-  auto const x = c.x;
-  auto const y = c.y;
+  up( c.x, c.y, determineInteractionType(e) );
+}
 
-  GraphInteraction const interaction_type = determineInteractionType( e );
+void
+GraphWidget::fingerUp( Wt::WTouchEvent const & e ) {
+  Wt::Coordinates c = e.touches()[0].widget();
+  assert( toolbar_ );
+  up( c.x, c.y, toolbar_->currentInteraction() );
+}
+
+void
+GraphWidget::up( int x, int y, GraphInteraction interaction_type ) {
 
   switch( interaction_type ){
   case GraphInteraction::SELECT:
@@ -234,8 +254,18 @@ GraphWidget::mouseReleased( Wt::WMouseEvent const & e ) {
 void
 GraphWidget::mouseDraggedImpl( Wt::WMouseEvent const & e ) {
   Wt::Coordinates c = e.widget();
-  auto const x = c.x;
-  auto const y = c.y;
+  drag( c.x, c.y, determineInteractionType(e) );
+}
+
+void
+GraphWidget::fingerDrag( Wt::WTouchEvent const & e ) {
+  Wt::Coordinates c = e.touches()[0].widget();
+  assert( toolbar_ );
+  drag( c.x, c.y, toolbar_->currentInteraction() );
+}
+
+void
+GraphWidget::drag( int x, int y ) {
 
   if( node_is_currently_being_dragged_ ) {
     auto const & selected_node = graph_->selectedNode();
