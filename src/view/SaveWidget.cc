@@ -50,8 +50,8 @@ private:
 SaveWidget::SaveWidget(
   graph::GraphSP graph
 ) :
-  WContainerWidget(),
-  save_filename_ ( std::tmpnam(nullptr) )
+  WContainerWidget()
+  //save_filename_ ( std::tmpnam(nullptr) )
 {
   addWidget( Wt::cpp14::make_unique< Wt::WText >( "Tip:" ) );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
