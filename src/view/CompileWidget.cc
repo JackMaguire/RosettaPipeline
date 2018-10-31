@@ -30,8 +30,8 @@ struct LayoutsAndContainers {
     Wt::WContainerWidget * const center_container =
       border_layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >(), Wt::LayoutPosition::Center );
 
-    Wt::WVBoxLayout * const center_layout =
-      center_container->setLayout( Wt::cpp14::make_unique< Wt::WVBoxLayout >() );
+    Wt::WBorderLayout * const center_layout =
+      center_container->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
 
     //B
     center_layout->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Run.sh" ), Wt::LayoutPosition::North );
