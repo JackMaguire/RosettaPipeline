@@ -47,8 +47,8 @@ LeftViewWidget::LeftViewWidget(
   graph_widget_ =
     edit_layout->addWidget( Wt::cpp14::make_unique< GraphWidget >( graph, toolbar ) );
 
-  Wt::WContainerWidget * const dummy_container =
-    outer_edit_layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >(), Wt::LayoutPosition::Center );
+  //Wt::WContainerWidget * const dummy_container =
+  outer_edit_layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >(), Wt::LayoutPosition::Center );
 
 }
 
