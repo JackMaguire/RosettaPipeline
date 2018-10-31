@@ -8,7 +8,7 @@ namespace view {
 class CompileWidget : public Wt::WContainerWidget
 {
 public:
-  CompileWidget( graph::GraphSP const & );
+  CompileWidget( graph::GraphSP );
 
   virtual ~CompileWidget();
 };

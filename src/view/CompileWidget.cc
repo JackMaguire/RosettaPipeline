@@ -9,6 +9,8 @@
 #include <Wt/WBorderLayout.h>
 #include <Wt/WTextArea.h>
 #include <Wt/WText.h>
+#include <Wt/WLink.h>
+#include <Wt/WStreamResource.h>
 #include <Wt/WBreak.h>
 #include <Wt/WPushButton.h>
 
@@ -18,6 +20,63 @@
 namespace view {
 
 namespace {
+
+template < typename T >
+class OnTheFlyFileResource : public Wt::WStreamResource {
+public:
+  OnTheFlyFileResource(
+    graph::GraphSP graph,
+    Wt::WContainerWidget * root
+  ) :
+    graph_( std::move( graph ) ),
+    root_( root )
+  {}
+
+  ~OnTheFlyFileResource() = default;
+
+  void handleRequest(
+    Wt::Http::Request const & request,
+    Wt::Http::Response & response
+  ) override {
+
+    if( ! request.continuation() ){
+      CompilationResult const compilation_result = compile::compile( * graph );
+      if( compilation_result.success ){
+	iss_for_most_recent_request_ = std::make_unique< std::istringstream >( compilation_result.result );
+      } else {
+	handleFailure( compilation_result.result );
+	return;
+      }
+    }
+
+    handleRequestPiecewise( request, response, * iss_for_most_recent_request_ );
+  }
+
+  void
+  handleFailure( std::string const & message ){
+    Wt::WMessageBox * const messageBox = root_->addChild(
+      Wt::cpp14::make_unique< Wt::WMessageBox >(
+	"Error",
+	"Compilation failed with message: " + message,
+	Wt::Icon::Critical, Wt::StandardButton::Ok
+      )
+    );
+    messageBox->setModal( false );
+    messageBox->buttonClicked().connect(
+      [=] {
+	root_->removeChild( messageBox );
+      }
+    );
+    messageBox->show();
+  }
+
+
+private:
+  graph::GraphSP graph_;
+  Wt::WContainerWidget * root_;
+  std::unique_ptr< std::istringstream > iss_for_most_recent_request_;
+};
+
 
 struct CompileElements {
   CompileElements( Wt::WContainerWidget * root ){
@@ -79,9 +138,7 @@ struct PreviewElements {
 }
 
 
-CompileWidget::CompileWidget(
-  graph::GraphSP const & graph
-) :
+CompileWidget::CompileWidget( graph::GraphSP graph ) :
   WContainerWidget( )
 { 
   Wt::WVBoxLayout * const layout =
@@ -95,6 +152,11 @@ CompileWidget::CompileWidget(
   //top
   CompileElements compile_elements( top_container );
 
+  using ResourceSP = std::shared_ptr< OnTheFlyFileResource >;
+  ResourceSP file = std::make_shared< OnTheFlyFileResource >( graph, this );
+  local_file->setDispositionType( Wt::ContentDisposition::Attachment );
+  local_file->suggestFileName( "rosetta_pipeline.tar.gz" );
+  compile_elements.compile_button->setLink( Wt::WLink( file ) );
 
   ////////
   //bottom
