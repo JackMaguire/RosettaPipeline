@@ -154,8 +154,8 @@ CompileWidget::CompileWidget( graph::GraphSP graph ) :
 
   using ResourceSP = std::shared_ptr< OnTheFlyFileResource >;
   ResourceSP file = std::make_shared< OnTheFlyFileResource >( graph, this );
-  local_file->setDispositionType( Wt::ContentDisposition::Attachment );
-  local_file->suggestFileName( "rosetta_pipeline.tar.gz" );
+  file->setDispositionType( Wt::ContentDisposition::Attachment );
+  file->suggestFileName( "rosetta_pipeline.tar.gz" );
   compile_elements.compile_button->setLink( Wt::WLink( file ) );
 
   ////////
