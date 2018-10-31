@@ -92,8 +92,6 @@ GraphWidget::determineInteractionType( Wt::WMouseEvent const & e ) const {
     return GraphInteraction::DELETE;
   } else if( alt_is_down ){
     return GraphInteraction::ADD;
-  } else {
-    return GraphInteraction::SELECT;
   }
 
   assert( toolbar_ );
