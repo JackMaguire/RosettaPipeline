@@ -14,17 +14,20 @@ struct script_pair {
   std::string run_script;
 };
 
-script_pair
+std::string
 compile( graph::Graph const & g );
+
+std::string
+just_compile_run_script( graph::Graph const & g );
 
 std::string
 setup_working_directory( std::vector< graph::NodeCSP > const & nodes_in_order );
 
-std::string
-compile_setup_script( std::vector< graph::NodeCSP > const & nodes_in_order );
-
-std::string
-compile_run_script( std::vector< graph::NodeCSP > const & nodes_in_order );
+void
+compile_run_script(
+  std::vector< graph::NodeCSP > const & nodes_in_order,
+  std::ostream & run_script
+);
 
 //utility
 bool cycleExists( graph::Graph const & g );

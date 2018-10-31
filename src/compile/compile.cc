@@ -14,6 +14,9 @@
 //#include <stdio.h>//remove
 #include <filesystem>//remove
 #include <cstdlib>//system
+#include <time.h>
+#include <fstream>
+#include <string>
 
 using namespace graph;
 
@@ -23,6 +26,8 @@ namespace {
 
 std::string
 generate_random_string( int size ){
+  srand( time(NULL) );
+
   std::string chars =
         "0123456789"
         "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -71,21 +76,79 @@ compile( graph::Graph const & g ){
     nodes_in_order[ stage - 1 ]->setStageValidity( true );
   }
 
-  std::string directory_name = setup_working_directory( nodes_in_order );
-  scripts.setup_script = compile_setup_script( nodes_in_order ); 
-  scripts.run_script = compile_run_script( nodes_in_order ); 
+  std::string const directory_name = setup_working_directory( nodes_in_order );
+  std::string const subdirectory_name = directory_name + "/rosetta_pipeline";
 
+  {//run script
+    std::string const run_script_filename = subdirectory_name + "/run.sh";
+    std::ofstream run_script;
+    run_script.open( run_script_filename );
+    compile_run_script( nodes_in_order, run_script );
+    run_script.close();
+  }
 
   for( graph::NodeCSP const & node : nodes_in_order ) {
     node->setStageValidity( false );
   }
 
-  std::string command = "tar -czf " + directory_name + "/rosetta_pipeline.tar.gz " + directory_name + "/rosetta_pipeline";
-  std::system( command.c_str() );
+  std::string const tar_file = directory_name + "/rosetta_pipeline.tar.gz";
+  std::string const command = "tar -czf " + tar_file + " " + directory_name + "/rosetta_pipeline";
+  int const system_result = std::system( command.c_str() );
+  assert( system_result == 0 );
 
-  //std::filesystem::remove_all( directory_name );
+
+  std::string tar_file_contents;
+  {
+    std::ifstream in( tar_file, std::ios::in | std::ios::binary );
+    assert( in );
+    std::ostringstream contents;
+    contents << in.rdbuf();
+    in.close();
+    tar_file_contents = contents.str();
+  }
+ 
+
+  std::filesystem::remove_all( directory_name );
   return scripts;
 }
+
+std::string
+just_compile_run_script( graph::Graph const & g ) {
+  if( cycleExists( g ) ){
+    return "Error: could not compile, cycle exists in graph";
+  }
+
+  auto const nproc = global_data::Options::num_processors;
+
+  if( nproc == 0 ){
+    return "Error: could not compile, num_processors value is not set."
+      "Please go to the 'Options' tab and select a number larger than 0";
+  }
+
+  if( nproc < 0 ){
+    return std::to_string( nproc ) +
+      "is an invalid value for num_processors. Please set this to a positive number.";
+  }
+
+
+  std::vector< graph::NodeCSP > const nodes_in_order = determineOrderOfNodes( g );
+
+  for( uint stage = 1; stage <= nodes_in_order.size(); ++stage ) {
+    nodes_in_order[ stage - 1 ]->setStage( stage );
+    nodes_in_order[ stage - 1 ]->setStageValidity( true );
+  }
+
+  std::string const run_script_filename = subdirectory_name + "/run.sh";
+  std::stringstream run_script;
+  compile_run_script( nodes_in_order, run_script );
+
+  for( graph::NodeCSP const & node : nodes_in_order ) {
+    node->setStageValidity( false );
+  }
+
+  return run_script.str();
+}
+
 
 std::string
 setup_working_directory(
@@ -99,87 +162,57 @@ setup_working_directory(
   std::filesystem::create_directory( subdirectory_name );
 
   for( graph::NodeCSP const & node : nodes_in_order ){
-    std::filesystem::create_directory( subdirectory_name + "/" + node->dirname() );
+    std::string const subsubdirectory = subdirectory_name + "/" + node->dirname();
+    std::filesystem::create_directory( subsubdirectory );
+
+    {//xml script
+      std::string const & xml_script = node->xmlScript();
+      std::string const script_filename = subsubdirectory + "/script.xml";
+      std::ofstream script_file;
+      script_file.open( script_filename );
+      script_file << xml_script << "\n";
+      script_file.close();
+    }
+
+    {//flags
+      //std::stringstream ss( node->getAllRosettaFlags() );
+      std::string const all_flags = node->getAllRosettaFlags();
+      std::string const flags_filename = subsubdirectory + "/flags";
+      std::ofstream flags_file;
+      flags_file.open( flags_filename );
+      flags_file << all_flags << "\n";
+
+      if( global_data::Options::serialize_intermediate_poses ) {
+	if( node->numUpstreamEdges() > 0 ) {
+	  flags_file << "-in:file:srlz_override 1\n";
+	}
+
+	if( node->numDownstreamEdges() > 0 ) {
+	  flags_file << "-out:file:srlz 1\n";
+	}
+      }
+      
+      flags_file.close();
+    }
+
+    if( node->numUpstreamEdges() > 0 ) {//input files
+      //create empty file
+      std::string const input_filename = subsubdirectory + "/input_filename";
+      std::ofstream input_file;
+      input_file.open( input_filename );
+      input_file << "";
+      input_file.close();
+    }    
   }
 
   return directory_name;
 }
 
-std::string
-compile_setup_script( std::vector< graph::NodeCSP > const & nodes_in_order ){
-  std::stringstream setup_script;
-
-  addGlobalIntroToScript( setup_script );
-  
-  for( graph::NodeCSP const & node : nodes_in_order ){
-    addStageIntroToScript( node->stage(), setup_script );
-
-    std::string const dirname = node->dirname();
-    setup_script << "cd " << dirname << "\n";
-
-    if( node->numUpstreamEdges() > 0 ) {
-      setup_script << "touch input_files\n";
-    }
-
-    //flags
-    {//https://stackoverflow.com/questions/13172158/c-split-string-by-line
-      std::stringstream ss( node->getAllRosettaFlags() );
-      std::string to;
-      while( std::getline( ss, to, '\n' ) ){
-	setup_script << "echo \"" << to << "\" >> flags\n";
-      }
-    }
-
-    if( ! node->useScriptFile() ) {
-      // Write out custom file
-      std::string xml_script = node->xmlScript();
-
-      {//replace \n with \\n
-	std::string const search = "\n";
-	std::string const replace = "\\n";
-
-	size_t pos = xml_script.find( search, 0 );
-	while( pos != std::string::npos ) {
-	  xml_script.replace( pos, search.length(), replace );
-	  pos += replace.length();
-	  pos = xml_script.find( search, pos );
-	}
-      }
-
-      {//replace ' with "
-	std::string const search = "'";
-	std::string const replace = "\"";
-
-	size_t pos = xml_script.find( search, 0 );
-	while( pos != std::string::npos ) {
-	  xml_script.replace( pos, search.length(), replace );
-	  pos += replace.length();
-	  pos = xml_script.find( search, pos );
-	}
-      }
-
-      setup_script << "printf " << xml_script << "script.xml\n";
-    }
-
-    if( global_data::Options::serialize_intermediate_poses ) {
-      if( node->numUpstreamEdges() > 0 ) {
-	setup_script << "echo \"-in:file:srlz_override 1\" >> flags\n";
-      }
-
-      if( node->numDownstreamEdges() > 0 ) {
-	setup_script << "echo \"-out:file:srlz 1\" >> flags\n";
-      }
-    }
-
-    setup_script << "cd ../\n";
-  }
-
-  return setup_script.str();
-}
-
-std::string
-compile_run_script( std::vector< graph::NodeCSP > const & nodes_in_order ){
-  std::stringstream run_script;
+void
+compile_run_script(
+  std::vector< graph::NodeCSP > const & nodes_in_order,
+  std::ostream & run_script
+){
 
   addGlobalIntroToScript( run_script );
   
@@ -262,8 +295,6 @@ compile_run_script( std::vector< graph::NodeCSP > const & nodes_in_order ){
     run_script << "\ncd ..\n";
     run_script << "echo \"Done With " << dirname << "\" >> JD3BASH_runlog.txt\n";
   }
-
-  return run_script.str();
 }
 
 bool cycleExists( NodeCSP const & starting_node, std::set< NodeCSP > & nodes_already_visited ) {
