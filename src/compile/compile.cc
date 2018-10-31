@@ -72,6 +72,7 @@ setup_working_directory(
   std::string directory_name = std::filesystem::temp_directory_path();
   std::cout << directory_name << std::endl;
   //std::filesystem::remove_all( directory_name );
+  return directory_name;
 }
 
 std::string
