@@ -41,7 +41,7 @@ struct CompileElements {
     root->addWidget( Wt::cpp14::make_unique< Wt::WText >( description3 ) );
     root->addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
 
-    compile_button = addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Compile" ) );
+    compile_button = root->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Compile" ) );
     compile_button->setStyleClass( "btn-primary" );
   }
 
