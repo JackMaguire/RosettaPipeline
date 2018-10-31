@@ -18,7 +18,7 @@ script_pair
 compile( graph::Graph const & g );
 
 std::string
-setup_working_directory( std::vector< graph::NodeCSP > const & nodes_in_order )
+setup_working_directory( std::vector< graph::NodeCSP > const & nodes_in_order );
 
 std::string
 compile_setup_script( std::vector< graph::NodeCSP > const & nodes_in_order );
