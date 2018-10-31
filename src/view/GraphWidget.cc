@@ -118,7 +118,7 @@ GraphWidget::mouseDown( Wt::WMouseEvent const & e ) {
     for( auto const & node : graph_->nodes() ) {
       if( hitbox_for_node_.at( node ).pointIsInBox( x, y ) ) {
 	graph_->setSelectedNode( node );
-	shift_was_down_when_most_recent_object_was_selected_ = shift_is_down;
+	shift_was_down_when_most_recent_object_was_selected_ = false;
 	node_is_currently_being_dragged_ = true;
 	update();
 	return;
@@ -128,7 +128,7 @@ GraphWidget::mouseDown( Wt::WMouseEvent const & e ) {
     for( auto const & edge : graph_->edges() ) {
       if( hitbox_for_edge_.at( edge ).pointIsInBox( x, y ) ) {
 	graph_->setSelectedEdge( edge );
-	shift_was_down_when_most_recent_object_was_selected_ = shift_is_down;
+	shift_was_down_when_most_recent_object_was_selected_ = false;
 	update();
       }
     }
