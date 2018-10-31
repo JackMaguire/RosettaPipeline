@@ -54,6 +54,8 @@ GraphWidget::init_listeners(){
   touchStarted().connect( this, & GraphWidget::fingerDown );
   touchEnded().connect( this, & GraphWidget::fingerUp );
   touchMoved().connect( this, & GraphWidget::fingerDrag );
+
+  //TODO WGestureEvent, scale()
 }
 
 void
@@ -254,14 +256,13 @@ GraphWidget::up( int x, int y, GraphInteraction interaction_type ) {
 void
 GraphWidget::mouseDraggedImpl( Wt::WMouseEvent const & e ) {
   Wt::Coordinates c = e.widget();
-  drag( c.x, c.y, determineInteractionType(e) );
+  drag( c.x, c.y );
 }
 
 void
 GraphWidget::fingerDrag( Wt::WTouchEvent const & e ) {
   Wt::Coordinates c = e.touches()[0].widget();
-  assert( toolbar_ );
-  drag( c.x, c.y, toolbar_->currentInteraction() );
+  drag( c.x, c.y );
 }
 
 void
