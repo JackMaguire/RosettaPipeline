@@ -343,19 +343,19 @@ std::vector< graph::NodeCSP > determineOrderOfNodes( graph::Graph const & g ) {
 }
 
 void addGlobalIntroToScript( std::ostream & run_script ) {
-  script << "# Script was created using JD3BASH\n";
-  script << "# Version number: " << global_data::Version::number << "\n";
-  script << "# Visit github.com/JackMaguire/JD3Bash for details\n\n";
+  run_script << "# Script was created using JD3BASH\n";
+  run_script << "# Version number: " << global_data::Version::number << "\n";
+  run_script << "# Visit github.com/JackMaguire/JD3Bash for details\n\n";
 }
 
 void addStageIntroToScript( int stage, std::ostream & run_script ) {
-  script << "\n###########\n";
-  script << "# STAGE " << stage << " #\n";
-  script << "###########\n\n";
+  run_script << "\n###########\n";
+  run_script << "# STAGE " << stage << " #\n";
+  run_script << "###########\n\n";
 }
 
 void addGlobalVariablesToRunScript( std::ostream & run_script ) {
-  script << "nproc=" << global_data::Options::num_processors << "\n";
+  run_script << "nproc=" << global_data::Options::num_processors << "\n";
 }
 
 
