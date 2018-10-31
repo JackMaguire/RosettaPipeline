@@ -13,10 +13,29 @@
 #include <iostream>
 //#include <stdio.h>//remove
 #include <filesystem>//remove
+#include <cstdlib>
 
 using namespace graph;
 
 namespace compile {
+
+namespace {
+
+std::string
+generate_random_string( int size ){
+  std::string chars =
+        "0123456789"
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        "abcdefghijklmnopqrstuvwxyz";
+
+  std::string out = "";
+  for (int i = 0; i < size; ++i) {
+    out += chars[ rand() % chars.size() ];
+  }
+  return out;
+}
+
+}
 
 script_pair
 compile( graph::Graph const & g ){
@@ -52,7 +71,7 @@ compile( graph::Graph const & g ){
     nodes_in_order[ stage - 1 ]->setStageValidity( true );
   }
 
-  setup_working_directory( nodes_in_order );
+  std::string directory_name = setup_working_directory( nodes_in_order );
   scripts.setup_script = compile_setup_script( nodes_in_order ); 
   scripts.run_script = compile_run_script( nodes_in_order ); 
 
@@ -61,6 +80,7 @@ compile( graph::Graph const & g ){
     node->setStageValidity( false );
   }
 
+  //std::filesystem::remove_all( directory_name );
   return scripts;
 }
 
@@ -68,10 +88,9 @@ std::string
 setup_working_directory(
   std::vector< graph::NodeCSP > const & nodes_in_order
 ){
-  //std::string directory_name( mkstemp( "/tmp/fileXXXXXX" ) );
-  std::string directory_name = std::filesystem::temp_directory_path();
+  std::string directory_name = std::filesystem::temp_directory_path() + "/" + generate_random_string( 8 );
+  std::filesystem::create_directory( directory_name );
   std::cout << directory_name << std::endl;
-  //std::filesystem::remove_all( directory_name );
   return directory_name;
 }
 
