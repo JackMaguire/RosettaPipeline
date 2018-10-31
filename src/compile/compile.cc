@@ -88,7 +88,7 @@ std::string
 setup_working_directory(
   std::vector< graph::NodeCSP > const & nodes_in_order
 ){
-  std::string directory_name = std::filesystem::temp_directory_path() + "/" + generate_random_string( 8 );
+  std::string directory_name = "/tmp/" + generate_random_string( 8 );
   std::filesystem::create_directory( directory_name );
   std::cout << directory_name << std::endl;
   return directory_name;
