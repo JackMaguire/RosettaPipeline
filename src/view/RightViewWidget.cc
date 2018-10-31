@@ -74,7 +74,7 @@ RightViewWidget::RightViewWidget(
   //addTab( Wt::cpp14::make_unique< SaveWidget >( graph_ ), "Save", Wt::ContentLoading::Eager );
   //addTab( Wt::cpp14::make_unique< LoadWidget >( graph_, graph_widget ), "Load", Wt::ContentLoading::Eager );
   addTab( Wt::cpp14::make_unique< SaveAndLoadWidget >( graph_, graph_widget ), "Save/Load", Wt::ContentLoading::Eager );
-  addTab( Wt::cpp14::make_unique< CompileWidget >( graph_ ), "Compile", Wt::ContentLoading::Eager );
+  addTab( Wt::cpp14::make_unique< CompileWidget >( graph_ ), "Preview", Wt::ContentLoading::Eager );
 
   setStyleClass("tabwidget");
   setCurrentIndex( 0 );
