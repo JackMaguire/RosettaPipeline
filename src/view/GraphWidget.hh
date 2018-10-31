@@ -12,6 +12,7 @@
 #include <graph/Node.fwd.hh>
 
 #include <view/color_themes.hh>
+#include <view/GraphToolbarWidget.hh>
 
 #include <unordered_map>
 
@@ -41,9 +42,10 @@ struct hitbox {
 class GraphWidget : public Wt::WPaintedWidget
 {
 public:
-  GraphWidget();
-
-  GraphWidget( graph::GraphSP const & );
+  GraphWidget(
+    graph::GraphSP const &,
+    GraphToolbarWidget *
+  );
 
   virtual ~GraphWidget();
 
@@ -83,16 +85,20 @@ protected:
 protected:
   void init_listeners();
 
+  GraphInteraction determineInteractionType( Wt::WMouseEvent const & e ) const;
   void mouseDown( Wt::WMouseEvent const & e );
   void mouseReleased( Wt::WMouseEvent const & e );
   void mouseDraggedImpl( Wt::WMouseEvent const & e );
 
+  //TODO this needs a better name
   int getClosestPointForPoint( int point ) const;
 
 private:
   graph::GraphSP graph_;
 
   ColorThemeCUP theme_;
+
+  GraphToolbarWidget * toolbar_;
 
   int width_;
   int height_;
