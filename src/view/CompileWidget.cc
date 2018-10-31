@@ -85,7 +85,7 @@ CompileWidget::CompileWidget(
   WContainerWidget( )
 { 
   Wt::WVBoxLayout const * layout =
-    root->setLayout( Wt::cpp14::make_unique< Wt::WVBoxLayout >() );
+    setLayout( Wt::cpp14::make_unique< Wt::WVBoxLayout >() );
   Wt::WContainerWidget const * top_container =
     layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
   Wt::WContainerWidget const * bottom_container =
