@@ -9,12 +9,22 @@
 
 namespace compile {
 
+struct CompilationResult {
+  CompilationResult( bool s, std::string r ) :
+    success( s ),
+    result( std::move( r ) )
+  {}
+
+  bool success;
+  std::string result;
+}
+
 struct script_pair {
   std::string setup_script;
   std::string run_script;
 };
 
-std::string
+CompilationResult
 compile( graph::Graph const & g );
 
 std::string

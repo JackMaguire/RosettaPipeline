@@ -42,32 +42,24 @@ generate_random_string( int size ){
 
 }
 
-script_pair
+CompilationResult
 compile( graph::Graph const & g ){
-  script_pair scripts;
 
   if( cycleExists( g ) ){
-    scripts.setup_script = "Error: could not compile, cycle exists in graph";
-    scripts.run_script = scripts.setup_script;
-    return scripts;
+    return CompilationResult( false, "Error: could not compile, cycle exists in graph" );
   }
 
   auto const nproc = global_data::Options::num_processors;
 
   if( nproc == 0 ){
-    scripts.setup_script = "Error: could not compile, num_processors value is not set."
-      "Please go to the 'Options' tab and select a number larger than 0";
-    scripts.run_script = scripts.setup_script;
-    return scripts;
+    return CompilationResult( false, "Error: could not compile, num_processors value is not set."
+      "Please go to the 'Options' tab and select a number larger than 0" );
   }
 
   if( nproc < 0 ){
-    scripts.setup_script = std::to_string( nproc ) +
-      "is an invalid value for num_processors. Please set this to a positive number.";
-    scripts.run_script = scripts.setup_script;
-    return scripts;
+    return CompilationResult( false, std::to_string( nproc ) +
+      "is an invalid value for num_processors. Please set this to a positive number." );
   }
-
 
   std::vector< graph::NodeCSP > const nodes_in_order = determineOrderOfNodes( g );
 
@@ -109,7 +101,7 @@ compile( graph::Graph const & g ){
  
 
   std::filesystem::remove_all( directory_name );
-  return scripts;
+  return CompilationResult( true, tar_file_contents );
 }
 
 std::string
