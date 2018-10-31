@@ -188,7 +188,7 @@ setup_working_directory(
 
     if( node->numUpstreamEdges() > 0 ) {//input files
       //create empty file
-      std::string const input_filename = subsubdirectory + "/input_filename";
+      std::string const input_filename = subsubdirectory + "/input_files";
       std::ofstream input_file;
       input_file.open( input_filename );
       input_file << "";
