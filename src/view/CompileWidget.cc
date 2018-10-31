@@ -84,11 +84,11 @@ CompileWidget::CompileWidget(
 ) :
   WContainerWidget( )
 { 
-  Wt::WVBoxLayout const * layout =
+  Wt::WVBoxLayout * const layout =
     setLayout( Wt::cpp14::make_unique< Wt::WVBoxLayout >() );
-  Wt::WContainerWidget const * top_container =
+  Wt::WContainerWidget * const top_container =
     layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
-  Wt::WContainerWidget const * bottom_container =
+  Wt::WContainerWidget * const bottom_container =
     layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
 
   /////
