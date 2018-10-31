@@ -17,7 +17,7 @@ struct CompilationResult {
 
   bool success;
   std::string result;
-}
+};
 
 struct script_pair {
   std::string setup_script;
