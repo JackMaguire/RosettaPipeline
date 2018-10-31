@@ -16,6 +16,7 @@
 #include <Wt/WLength.h>
 #include <Wt/WGlobal.h>
 #include <Wt/WBreak.h>
+#include <Wt/WText.h>
 
 #include <iostream>
 #include <memory>
