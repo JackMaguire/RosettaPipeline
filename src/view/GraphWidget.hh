@@ -93,6 +93,10 @@ protected:
   //TODO this needs a better name
   int getClosestPointForPoint( int point ) const;
 
+  void createPromptForNodeDeletion();
+  void createPromptForEdgeDeletion();
+
+
 private:
   graph::GraphSP graph_;
 
