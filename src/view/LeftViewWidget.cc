@@ -9,6 +9,7 @@
 #include <Wt/WLength.h>
 #include <Wt/WGlobal.h>
 #include <Wt/WBorderLayout.h>
+#include <Wt/WHBoxLayout.h>
 #include <Wt/WVBoxLayout.h>
 #include <Wt/WLink.h>
 #include <Wt/WImage.h>
@@ -32,10 +33,15 @@ LeftViewWidget::LeftViewWidget(
   image->setMinimumSize( 605, 167 );//605 × 167
   image->setMaximumSize( 605, 167 );//605 × 167
 
-  graph_widget_ =
-    vbox->addWidget( Wt::cpp14::make_unique< GraphWidget >( graph ) );
+  //Edit Area
+  Wt::WContainerWidget * const edit_container =
+    vbox->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >( ) );
+  Wt::WHBoxLayout * const edit_layout =
+    edit_container->setLayout( Wt::cpp14::make_unique< Wt::WHBoxLayout >() );
   GraphToolbarWidget * const toolbar =
-    vbox->addWidget( Wt::cpp14::make_unique< GraphToolbarWidget >( ) );
+    edit_layout->addWidget( Wt::cpp14::make_unique< GraphToolbarWidget >( ) );
+  graph_widget_ =
+    edit_layout->addWidget( Wt::cpp14::make_unique< GraphWidget >( graph ) );
 
 }
 
