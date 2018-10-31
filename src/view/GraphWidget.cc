@@ -168,27 +168,24 @@ GraphWidget::mouseReleased( Wt::WMouseEvent const & e ) {
       if( selected_node != 0 ) {
 	if( graph_->getNumNodes() > 1 ) {// Don't want an empty graph
 	  if( hitbox_for_node_.at( selected_node ).pointIsInBox( x, y ) ) {
-	    addChild(
+	    Wt::WMessageBox * const messageBox = addChild(
 	      Wt::cpp14::make_unique< Wt::WMessageBox >(
 		"Delete",
 		"<p>Permanently delete node with title " + selected_node->title() + "?</p>",
 		Wt::Icon::Warning, Wt::StandardButton::Yes | Wt::StandardButton::No)
 	    );
-	    /*final Object[] options = { "Yes, delete",
-	      "No, don't delete" };
-	      int n = JOptionPane.showOptionDialog( new JFrame(),
-	      "Delete Node \"" + selected_node.getTitle() + "\"?",
-	      "Delete?",
-	      JOptionPane.YES_NO_OPTION,
-	      JOptionPane.QUESTION_MESSAGE,
-	      null,
-	      options,
-	      options[ 1 ] );
-	      if( n == 1 )
-	      return;*/
-	    graph_->removeNodeAndDeleteItsEdges( selected_node );
-	    graph_->setSelectedNode( graph_->nodes()[ 0 ] );
-	    update();
+	    messageBox->setModal(false);
+	    messageBox->buttonClicked().connect(
+	      [=] {
+		if( messageBox->buttonResult() == Wt::StandardButton::Yes) {
+		  graph_->removeNodeAndDeleteItsEdges( selected_node );
+		  graph_->setSelectedNode( graph_->nodes()[ 0 ] );
+		  update();
+		}
+		this->removeChild(messageBox);
+	      }
+	    );
+	    messageBox->show();
 	  }
 	  return;
 	}
