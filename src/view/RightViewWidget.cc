@@ -34,11 +34,11 @@ public:
     //addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
     //addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
     //addWidget( Wt::cpp14::make_unique< Wt::WText >( "Title" ) );
-    addWidget( Wt::cpp14::make_unique< SaveWidget >( graph ), "Save", Wt::ContentLoading::Eager );
+    addWidget( Wt::cpp14::make_unique< SaveWidget >( graph ) );
     addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
     addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
     addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
-    addWidget( Wt::cpp14::make_unique< LoadWidget >( graph, graph_widget ), "Load", Wt::ContentLoading::Eager );
+    addWidget( Wt::cpp14::make_unique< LoadWidget >( graph, graph_widget ) );
   }
 
   ~SaveAndLoadWidget() = default;
