@@ -26,9 +26,12 @@ namespace view {
 
 namespace {
 
+template < typename T >
 class OnTheFlyFileResource : public Wt::WStreamResource {
 
-  OnTheFlyFileResource( std::string contents ) :
+  OnTheFlyFileResource(
+    T string_generating_func
+  ) :
     contents_( contents )
   {}
 
@@ -40,13 +43,14 @@ class OnTheFlyFileResource : public Wt::WStreamResource {
   }
 
 private:
-  std::string contents_;
+  //std::string contents_;
+  T string_generating_func_;
 };
 
 }
 
 SaveWidget::SaveWidget(
-  graph::GraphSP const & graph
+  graph::GraphSP graph
 ) :
   WContainerWidget(),
   save_filename_ ( std::tmpnam(nullptr) )
@@ -73,9 +77,27 @@ SaveWidget::SaveWidget(
 
   std::cout << "save_filename_: " << save_filename_ << std::endl;
 
+  auto string_generating_func = [=] {
+    std::vector< std::string > save_lines;
+    global_data::Options::save( save_lines );
+    graph->saveSelfNodesAndEdges( save_lines );
+    
+    std::stringstream ss;
+    for( std::string const & line : save_lines ){
+      ss << line << "\n";
+    }
+    return ss.str();
+  };
+  //auto local_file = std::make_shared< Wt::WFileResource >( save_filename_ );
+  auto local_file = std::make_shared< OnTheFlyFileResource< decltype(string_generating_func) > >( string_generating_func );
+  local_file->setDispositionType( Wt::ContentDisposition::Attachment );
+  downloadLink->setLink( Wt::WLink( local_file ) );
+
+
   downloadButton->clicked().connect(
     [=] {
-      std::vector< std::string > save_lines;
+
+     /* std::vector< std::string > save_lines;
       global_data::Options::save( save_lines );
       graph->saveSelfNodesAndEdges( save_lines );
 
@@ -84,13 +106,8 @@ SaveWidget::SaveWidget(
       for( std::string const & line : save_lines ){
 	myfile << line << "\n";
       }
-      myfile.close();
+      myfile.close();*/
 
-      //Wt::WFileResource
-      auto local_file = std::make_shared< Wt::WFileResource >( save_filename_ );
-      //local_file->suggestFileName( line_edit->text() );
-      local_file->setDispositionType( Wt::ContentDisposition::Attachment );
-      downloadLink->setLink( Wt::WLink( local_file ) );
     }
   );
 }

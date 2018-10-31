@@ -10,9 +10,7 @@ namespace view {
 class SaveWidget : public Wt::WContainerWidget
 {
 public:
-  SaveWidget(
-    graph::GraphSP const &
-  );
+  SaveWidget( graph::GraphSP );
 
   virtual ~SaveWidget();
 
