@@ -178,7 +178,7 @@ GraphWidget::mouseReleased( Wt::WMouseEvent const & e ) {
 	    messageBox->buttonClicked().connect(
 	      [=] {
 		if( messageBox->buttonResult() == Wt::StandardButton::Yes) {
-		  graph_->removeNodeAndDeleteItsEdges( selected_node );
+		  graph_->removeNodeAndDeleteItsEdges( graph_->selectedNode() );
 		  graph_->setSelectedNode( graph_->nodes()[ 0 ] );
 		  update();
 		}
