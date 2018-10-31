@@ -34,7 +34,7 @@ class OnTheFlyFileResource : public Wt::WStreamResource {
 
   ~OnTheFlyFileResource() = default;
 
-  void WFileResource::handleRequest( Http::Request const & request, Http::Response & response ) {
+  void handleRequest( Http::Request const & request, Http::Response & response ) override {
     std::istringstream iss( contents_ );
     handleRequestPiecewise( request, response, iss );
   }
