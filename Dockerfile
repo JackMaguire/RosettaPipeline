@@ -32,4 +32,5 @@ RUN apt-get install tinymce && \
 
 EXPOSE 8080
 
-CMD cd RosettaPipeline && git pull origin master && make all -j4 && bin/graph_view_app --docroot . --http-address 0.0.0.0 --http-port 8080
+#CMD cd RosettaPipeline && git pull origin master && make all -j4 && bin/graph_view_app --docroot . --http-address 0.0.0.0 --http-port 8080
+CMD bin/graph_view_app --docroot . --http-address 0.0.0.0 --http-port 8080
