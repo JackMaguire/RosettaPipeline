@@ -23,11 +23,11 @@ namespace view {
 GraphToolbarWidget::GraphToolbarWidget() :
   WContainerWidget()
 {
-  /*Wt::WPushButton * const delete_button =
+  Wt::WPushButton * const delete_button1 =
     addWidget( Wt::cpp14::make_unique< Wt::WPushButton >() );
-  delete_button->setIcon( Wt::WLink( "media/trash.png" ) );
-  delete_button->setMinimumSize( 25, 25 );
-  delete_button->setMaximumSize( 25, 25 );*/
+  delete_button1->setIcon( Wt::WLink( "media/trash.png" ) );
+  //delete_button->setMinimumSize( 25, 25 );
+  //delete_button->setMaximumSize( 25, 25 );
 
   Wt::WVBoxLayout * const layout =
     setLayout( Wt::cpp14::make_unique< Wt::WVBoxLayout >() );
