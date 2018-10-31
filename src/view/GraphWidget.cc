@@ -168,8 +168,7 @@ GraphWidget::mouseReleased( Wt::WMouseEvent const & e ) {
       if( selected_node != 0 ) {
 	if( graph_->getNumNodes() > 1 ) {// Don't want an empty graph
 	  if( hitbox_for_node_.at( selected_node ).pointIsInBox( x, y ) ) {
-	    auto c = get();
-	    c->addChild(
+	    addChild(
 	      Wt::cpp14::make_unique< Wt::WMessageBox >(
 		"Delete",
 		"<p>Permanently delete node with title " + selected_node->title() + "?</p>",
