@@ -84,7 +84,7 @@ compile( graph::Graph const & g ){
   }
 
   std::string const tar_file = directory_name + "/rosetta_pipeline.tar.gz";
-  std::string const command = "tar -czf " + tar_file + " " + directory_name + "/rosetta_pipeline";
+  std::string const command = "tar -czf " + tar_file + " -C " + directory_name + "/rosetta_pipeline .";
   int const system_result = std::system( command.c_str() );
   assert( system_result == 0 );
 
