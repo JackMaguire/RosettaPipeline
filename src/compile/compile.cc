@@ -130,7 +130,6 @@ just_compile_run_script( graph::Graph const & g ) {
     nodes_in_order[ stage - 1 ]->setStageValidity( true );
   }
 
-  std::string const run_script_filename = subdirectory_name + "/run.sh";
   std::stringstream run_script;
   compile_run_script( nodes_in_order, run_script );
 
