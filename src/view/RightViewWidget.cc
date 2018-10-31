@@ -41,7 +41,7 @@ public:
     addWidget( Wt::cpp14::make_unique< LoadWidget >( graph, graph_widget ), "Load", Wt::ContentLoading::Eager );
   }
 
-  ~SaveAndLoadWidget = default;
+  ~SaveAndLoadWidget() = default;
 
 };
 
