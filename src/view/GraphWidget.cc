@@ -63,8 +63,10 @@ GraphWidget::determineInteractionType( Wt::WMouseEvent const & e ) const {
   //first check keyboard shortcuts
   bool const shift_is_down = e.modifiers().test( Wt::KeyboardModifier::Shift );
   bool const alt_is_down = e.modifiers().test( Wt::KeyboardModifier::Alt );
-  if( shift_is_down ){
+  if( shift_is_down && alt_is_down ){
     return GraphInteraction::DELETE;
+  } else if( shift_is_down ){
+    return GraphInteraction::SELECT;
   } else if( alt_is_down ){
     return GraphInteraction::ADD;
   }
@@ -172,17 +174,18 @@ GraphWidget::mouseReleased( Wt::WMouseEvent const & e ) {
 	      Wt::cpp14::make_unique< Wt::WMessageBox >(
 		"Delete",
 		"<p>Permanently delete node with title " + selected_node->title() + "?</p>",
-		Wt::Icon::Warning, Wt::StandardButton::Yes | Wt::StandardButton::No)
+		Wt::Icon::Warning, Wt::StandardButton::Yes | Wt::StandardButton::No
+	      )
 	    );
-	    messageBox->setModal(false);
+	    messageBox->setModal( false );
 	    messageBox->buttonClicked().connect(
 	      [=] {
-		if( messageBox->buttonResult() == Wt::StandardButton::Yes) {
+		if( messageBox->buttonResult() == Wt::StandardButton::Yes ) {
 		  graph_->removeNodeAndDeleteItsEdges( graph_->selectedNode() );
 		  graph_->setSelectedNode( graph_->nodes()[ 0 ] );
 		  update();
 		}
-		this->removeChild(messageBox);
+		this->removeChild( messageBox );
 	      }
 	    );
 	    messageBox->show();
@@ -191,22 +194,25 @@ GraphWidget::mouseReleased( Wt::WMouseEvent const & e ) {
 	}
       } else if( graph_->selectedEdge() != 0 ) {
 	if( hitbox_for_edge_.at( graph_->selectedEdge() ).pointIsInBox( x, y ) ) {
-	  /*final Object[] options = { "Yes, delete",
-	    "No, don't delete" };
-	    int n = JOptionPane.showOptionDialog( new JFrame(),
-	    "Delete Selected Edge?",
-	    "Delete?",
-	    JOptionPane.YES_NO_OPTION,
-	    JOptionPane.QUESTION_MESSAGE,
-	    null,
-	    options,
-	    options[ 1 ] );
-	    if( n == 1 )
-	    return;*/
-	  auto & selected_edge = graph_->selectedEdge();
-	  graph_->removeEdgeAndNotifyItsNodes( selected_edge );
-	  graph_->setSelectedNode( graph_->nodes()[ 0 ] );
-	  update();
+	    Wt::WMessageBox * const messageBox = addChild(
+	      Wt::cpp14::make_unique< Wt::WMessageBox >(
+		"Delete",
+		"<p>Permanently delete edge?</p>",
+		Wt::Icon::Warning, Wt::StandardButton::Yes | Wt::StandardButton::No
+	      )
+	    );
+	    messageBox->setModal( false );
+	    messageBox->buttonClicked().connect(
+	      [=] {
+		if( messageBox->buttonResult() == Wt::StandardButton::Yes ) {
+		  graph_->removeEdgeAndNotifyItsNodes( graph_->selectedEdge() );
+		  graph_->setSelectedNode( graph_->nodes()[ 0 ] );
+		  update();
+		}
+		this->removeChild( messageBox );
+	      }
+	    );
+	    messageBox->show();
 	}
       }
       return;
