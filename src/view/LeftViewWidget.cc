@@ -35,11 +35,11 @@ LeftViewWidget::LeftViewWidget(
 
   //Edit Area
   Wt::WContainerWidget * const edit_container =
-    vbox->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >( ) );
+    vbox->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
   Wt::WHBoxLayout * const edit_layout =
     edit_container->setLayout( Wt::cpp14::make_unique< Wt::WHBoxLayout >() );
   GraphToolbarWidget * const toolbar =
-    edit_layout->addWidget( Wt::cpp14::make_unique< GraphToolbarWidget >( ) );
+    edit_layout->addWidget( Wt::cpp14::make_unique< GraphToolbarWidget >() );
   graph_widget_ =
     edit_layout->addWidget( Wt::cpp14::make_unique< GraphWidget >( graph ) );
 
