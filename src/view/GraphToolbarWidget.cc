@@ -23,8 +23,14 @@ namespace view {
 GraphToolbarWidget::GraphToolbarWidget() :
   WContainerWidget()
 {
+  Wt::WBorderLayout * const topmost_layout =
+    setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
+  Wt::WContainerWidget * const container =
+    topmost_layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >(),
+      Wt::LayoutPosition::East );
+
   Wt::WVBoxLayout * const layout =
-    setLayout( Wt::cpp14::make_unique< Wt::WVBoxLayout >() );
+    container->setLayout( Wt::cpp14::make_unique< Wt::WVBoxLayout >() );
 
   Wt::WPushButton * const select_button =
     layout->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >() );
@@ -34,11 +40,11 @@ GraphToolbarWidget::GraphToolbarWidget() :
     layout->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >() );
 
   select_button->setIcon( Wt::WLink( "media/mouse.png" ) );
-  select_button->setMaximumSize( 50, 50 );
+  select_button->setMaximumSize( 45, 45 );
   add_button->setIcon( Wt::WLink( "media/plus.png" ) );
-  add_button->setMaximumSize( 50, 50 );
+  add_button->setMaximumSize( 45, 45 );
   delete_button->setIcon( Wt::WLink( "media/trash.png" ) );
-  delete_button->setMaximumSize( 50, 50 );
+  delete_button->setMaximumSize( 45, 45 );
 
   select_button->setCheckable( true );
   add_button->setCheckable( true );
