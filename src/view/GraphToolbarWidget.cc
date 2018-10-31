@@ -55,6 +55,7 @@ GraphToolbarWidget::GraphToolbarWidget() :
   add_button->setChecked( false );
   delete_button->setChecked( false );
 
+
   select_button->checked().connect(
     [=] {
       add_button->setChecked( false );

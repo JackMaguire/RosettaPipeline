@@ -85,22 +85,19 @@ GraphWidget::init_painting_tools(){
 
 GraphInteraction
 GraphWidget::determineInteractionType( Wt::WMouseEvent const & e ) const {
-  GraphInteraction interaction_type;
-  if( toolbar_ ){
-    interaction_type = toolbar_->currentInteraction();
+  //first check keyboard shortcuts
+  bool const shift_is_down = e.modifiers().test( Wt::KeyboardModifier::Shift );
+  bool const alt_is_down = e.modifiers().test( Wt::KeyboardModifier::Alt );
+  if( shift_is_down ){
+    return GraphInteraction::DELETE;
+  } else if( alt_is_down ){
+    return GraphInteraction::ADD;
   } else {
-    bool const shift_is_down = e.modifiers().test( Wt::KeyboardModifier::Shift );
-    bool const alt_is_down = e.modifiers().test( Wt::KeyboardModifier::Alt );
-
-    if( shift_is_down ){
-      interaction_type = GraphInteraction::DELETE;
-    } else if( alt_is_down ){
-      interaction_type = GraphInteraction::ADD;
-    } else {
-      interaction_type = GraphInteraction::SELECT;
-    }
+    return GraphInteraction::SELECT;
   }
-  return interaction_type;
+
+  assert( toolbar_ );
+  return toolbar_->currentInteraction();
 }
 
 void
@@ -115,10 +112,11 @@ GraphWidget::mouseDown( Wt::WMouseEvent const & e ) {
 
   switch( interaction_type ){
   case GraphInteraction::SELECT:
+  case GraphInteraction::DELETE:
     for( auto const & node : graph_->nodes() ) {
       if( hitbox_for_node_.at( node ).pointIsInBox( x, y ) ) {
 	graph_->setSelectedNode( node );
-	shift_was_down_when_most_recent_object_was_selected_ = false;
+	shift_was_down_when_most_recent_object_was_selected_ = ( interaction_type == GraphInteraction::DELETE );
 	node_is_currently_being_dragged_ = true;
 	update();
 	return;
@@ -128,7 +126,7 @@ GraphWidget::mouseDown( Wt::WMouseEvent const & e ) {
     for( auto const & edge : graph_->edges() ) {
       if( hitbox_for_edge_.at( edge ).pointIsInBox( x, y ) ) {
 	graph_->setSelectedEdge( edge );
-	shift_was_down_when_most_recent_object_was_selected_ = false;
+	shift_was_down_when_most_recent_object_was_selected_ = ( interaction_type == GraphInteraction::DELETE );
 	update();
       }
     }
@@ -143,8 +141,6 @@ GraphWidget::mouseDown( Wt::WMouseEvent const & e ) {
 	return;
       }
     }
-    break;
-  case GraphInteraction::DELETE:
     break;
   }
 }
