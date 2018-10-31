@@ -53,13 +53,10 @@ SaveWidget::SaveWidget(
   WContainerWidget()
   //save_filename_ ( std::tmpnam(nullptr) )
 {
-  addWidget( Wt::cpp14::make_unique< Wt::WText >( "Tip:" ) );
+  Wt::WPushButton * const downloadButton =
+    addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Download" ) );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
-  
-  //Wt::WLineEdit * line_edit = addWidget( Wt::cpp14::make_unique< Wt::WLineEdit >( "MyProtocol.rpf" ) );
-  //addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
-
-  Wt::WPushButton * downloadButton = addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Download" ) );
+  addWidget( Wt::cpp14::make_unique< Wt::WText >( "Tip: Right-click the button and choose \"Save As...\" to pick a filename and save location." ) );
 
   auto string_generating_func = [=] {
     std::vector< std::string > save_lines;
@@ -78,7 +75,7 @@ SaveWidget::SaveWidget(
 
   Resource_TSP local_file = std::make_shared< Resource_T >( string_generating_func );
   local_file->setDispositionType( Wt::ContentDisposition::Attachment );
-  local_file->suggestFileName( "TEST.txt" );
+  local_file->suggestFileName( "MyRosettaPipeline.txt" );
   downloadButton->setLink( Wt::WLink( local_file ) );
 }
 
