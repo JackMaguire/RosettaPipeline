@@ -74,7 +74,9 @@ SaveWidget::SaveWidget(
   };
 
   using Resource_T = OnTheFlyFileResource< decltype(string_generating_func) >;
-  Resource_T local_file = std::make_shared< Resource_T >( string_generating_func );
+  using Resource_TSP = std::shared_ptr< Resource_T >;
+
+  Resource_TSP local_file = std::make_shared< Resource_T >( string_generating_func );
   local_file->setDispositionType( Wt::ContentDisposition::Attachment );
   local_file->suggestFileName( "TEST.txt" );
   downloadButton->setLink( Wt::WLink( local_file ) );
