@@ -7,35 +7,13 @@
 
 #include <Wt/WLength.h>
 #include <Wt/WGlobal.h>
+#include <Wt/WMessageBox.h>
 
 #include <iostream>
 #include <math.h>
 #include <memory>
 
 namespace view {
-
-/*GraphWidget::GraphWidget() :
-  WPaintedWidget(),
-  graph_( 0 ),
-  theme_( std::make_unique< Theme1 >() ),
-  width_( 500 ),
-  height_( 600 )
-{
-  //width_ = width().toPixels();
-  //height_ = height().toPixels();
-
-  //TODO
-  //node_label_font_.setFamily( Wt::FontFamily::Monospace, "'Courier New'" );
-
-  setLayoutSizeAware( true );
-
-  resize( width_, height_ ); // Provide a default size.
-  setMinimumSize( width_, height_ );
-  setMaximumSize( width_, height_ );
-
-  init_listeners();
-  init_painting_tools();
-}*/
 
 GraphWidget::GraphWidget(
   graph::GraphSP const & graph,
@@ -48,9 +26,6 @@ GraphWidget::GraphWidget(
   width_( 500 ),
   height_( 600 )
 {
-  //width_ = width().toPixels();
-  //height_ = height().toPixels();
-
   //TODO
   //node_label_font_.setFamily( Wt::FontFamily::Monospace, "'Courier New'" );
 
@@ -193,6 +168,13 @@ GraphWidget::mouseReleased( Wt::WMouseEvent const & e ) {
       if( selected_node != 0 ) {
 	if( graph_->getNumNodes() > 1 ) {// Don't want an empty graph
 	  if( hitbox_for_node_.at( selected_node ).pointIsInBox( x, y ) ) {
+	    auto c = get();
+	    c->addChild(
+	      Wt::cpp14::make_unique< Wt::WMessageBox >(
+		"Delete",
+		"<p>Permanently delete node with title " + selected_node->title() + "?</p>",
+		Wt::Icon::Warning, Wt::StandardButton::Yes | Wt::StandardButton::No)
+	    );
 	    /*final Object[] options = { "Yes, delete",
 	      "No, don't delete" };
 	      int n = JOptionPane.showOptionDialog( new JFrame(),
