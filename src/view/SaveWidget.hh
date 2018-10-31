@@ -13,9 +13,6 @@ public:
   SaveWidget( graph::GraphSP );
 
   virtual ~SaveWidget();
-
-private:
-  std::string save_filename_;
 };
 
 

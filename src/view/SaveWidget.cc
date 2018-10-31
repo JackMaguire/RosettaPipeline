@@ -53,27 +53,13 @@ SaveWidget::SaveWidget(
   WContainerWidget(),
   save_filename_ ( std::tmpnam(nullptr) )
 {
-  addWidget( Wt::cpp14::make_unique< Wt::WText >( "Save functionality works but is still ugly." ) );
-  addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
-  addWidget( Wt::cpp14::make_unique< Wt::WText >( "EVERY time you want to save, you need to hit the \"Save\"" ) );
-  addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
-  addWidget( Wt::cpp14::make_unique< Wt::WText >( "button to update the link at the bottom." ) );
-  addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
-  addWidget( Wt::cpp14::make_unique< Wt::WText >( "To save, right-click the link below and hit 'save as'" ) );
-  addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
+  addWidget( Wt::cpp14::make_unique< Wt::WText >( "Tip:" ) );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
   
   //Wt::WLineEdit * line_edit = addWidget( Wt::cpp14::make_unique< Wt::WLineEdit >( "MyProtocol.rpf" ) );
   //addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
 
-  Wt::WPushButton * downloadButton = addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Save" ) );
-
-  addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
-
-  Wt::WAnchor * downloadLink = addWidget( Wt::cpp14::make_unique< Wt::WAnchor >() );
-  downloadLink->setText( "Download" );
-
-  std::cout << "save_filename_: " << save_filename_ << std::endl;
+  Wt::WPushButton * downloadButton = addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Download" ) );
 
   auto string_generating_func = [=] {
     std::vector< std::string > save_lines;
@@ -86,15 +72,14 @@ SaveWidget::SaveWidget(
     }
     return ss.str();
   };
-  //auto local_file = std::make_shared< Wt::WFileResource >( save_filename_ );
-  auto local_file = std::make_shared< OnTheFlyFileResource< decltype(string_generating_func) > >( string_generating_func );
+
+  using Resource_T = OnTheFlyFileResource< decltype(string_generating_func) >;
+  Resource_T local_file = std::make_shared< Resource_T >( string_generating_func );
   local_file->setDispositionType( Wt::ContentDisposition::Attachment );
-  downloadLink->setLink( Wt::WLink( local_file ) );
+  local_file->suggestFileName( "TEST.txt" );
   downloadButton->setLink( Wt::WLink( local_file ) );
 }
 
-SaveWidget::~SaveWidget(){
-  remove( save_filename_.c_str() );
-}
+SaveWidget::~SaveWidget(){}
 
 }//namespace view
