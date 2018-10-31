@@ -32,18 +32,19 @@ GraphToolbarWidget::GraphToolbarWidget() :
   Wt::WVBoxLayout * const layout =
     container->setLayout( Wt::cpp14::make_unique< Wt::WVBoxLayout >() );
 
-  Wt::WPushButton * const delete_button1 =
-    layout->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >() );
-  delete_button1->setIcon( Wt::WLink( "media/trash.png" ) );
-  //delete_button->setMinimumSize( 50, 50 );
-  delete_button1->setMaximumSize( 50, 50 );
-
   Wt::WPushButton * const select_button =
-    layout->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Select" ) );
+    layout->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >() );
   Wt::WPushButton * const add_button =
-    layout->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Add" ) );
+    layout->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >() );
   Wt::WPushButton * const delete_button =
-    layout->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Delete" ) );
+    layout->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >() );
+
+  select_button->setIcon( Wt::WLink( "media/mouse.png" ) );
+  select_button->setMaximumSize( 50, 50 );
+  add_button->setIcon( Wt::WLink( "media/plus.png" ) );
+  add_button->setMaximumSize( 50, 50 );
+  delete_button->setIcon( Wt::WLink( "media/trash.png" ) );
+  delete_button->setMaximumSize( 50, 50 );
 
   select_button->setCheckable( true );
   add_button->setCheckable( true );
