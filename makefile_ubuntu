@@ -1,6 +1,7 @@
 # This is my first makefile ever so be nice!
 
-CXX=g++-5
+#CXX=g++-5
+CXX=g++-8
 std=c++1z
 WARN=-Wall
 ARCH=x86_64

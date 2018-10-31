@@ -3,7 +3,7 @@ FROM ubuntu:bionic
 RUN apt-get update
 
 # WT
-RUN apt-get -y install git cmake g++-5 libboost-all-dev build-essential && \
+RUN apt-get -y install git cmake g++-8 libboost-all-dev build-essential && \
     git clone https://github.com/emweb/wt.git && \
     cd wt && \
     mkdir build && \
