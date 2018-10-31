@@ -32,13 +32,13 @@ class OnTheFlyFileResource : public Wt::WStreamResource {
   OnTheFlyFileResource(
     T string_generating_func
   ) :
-    contents_( contents )
+    string_generating_func_( string_generating_func )
   {}
 
   ~OnTheFlyFileResource() = default;
 
   void handleRequest( Wt::Http::Request const & request, Wt::Http::Response & response ) override {
-    std::istringstream iss( contents_ );
+    std::istringstream iss( string_generating_func() );
     handleRequestPiecewise( request, response, iss );
   }
 
