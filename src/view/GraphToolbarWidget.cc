@@ -21,7 +21,8 @@
 namespace view {
 
 GraphToolbarWidget::GraphToolbarWidget() :
-  WContainerWidget()
+  WContainerWidget(),
+  current_interaction_( GraphInteraction::SELECT )
 {
   /*Wt::WBorderLayout * const topmost_layout =
     setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
