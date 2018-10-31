@@ -9,7 +9,7 @@
 
 #include <set>
 #include <sstream>
-#include <stdlib.h>
+//#include <stdlib.h>
 #include <iostream>
 //#include <stdio.h>//remove
 #include <filesystem>//remove
@@ -68,7 +68,8 @@ std::string
 setup_working_directory(
   std::vector< graph::NodeCSP > const & nodes_in_order
 ){
-  std::string directory_name( mkstemp( "/tmp/fileXXXXXX" ) );
+  //std::string directory_name( mkstemp( "/tmp/fileXXXXXX" ) );
+  std::string directory_name = std::filesystem::temp_directory_path();
   std::cout << directory_name << std::endl;
   //std::filesystem::remove_all( directory_name );
 }
