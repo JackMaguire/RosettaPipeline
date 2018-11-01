@@ -8,6 +8,7 @@
 #include <Wt/WBorderLayout.h>
 #include <Wt/WLink.h>
 #include <Wt/WText.h>
+#include <Wt/WBreak.h>
 
 #include <iostream>
 #include <fstream>
@@ -30,12 +31,22 @@ potentially_add_temporary_message( Wt::WBorderLayout * layout ){
   }
 }
 
-std::string
-welcome_message(){
-  return
-    "Welcome to Rosetta Pipeline!\n\n\nTest"
-    ;
-}
+//TODO describe
+class CustomLayout : public Wt::WVBoxLayout {
+public:
+  CustomLayout *
+  addMessage( std::string const & message ){
+    addWidget( Wt::cpp14::make_unique< Wt::WText >( message ) );
+    addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
+    return this;
+  }
+
+  CustomLayout *
+  addExtraBreak(){
+    addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
+    return this;
+  }
+};
 
 }
 
@@ -47,8 +58,15 @@ WelcomeWidget::WelcomeWidget() :
 
   potentially_add_temporary_message( layout );
 
-  layout->addWidget( Wt::cpp14::make_unique< Wt::WText >( welcome_message() ),
-    Wt::LayoutPosition::Center );
+  Wt::WContainerWidget * const main_container =
+    layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >(), Wt::LayoutPosition::Center );
+  CustomLayout * const main_layout =
+    main_container->setLayout( Wt::cpp14::make_unique< CustomLayout >() );
+
+  main_layout->addMessage( "Welcome to RosettaPipeline" )
+    ->addMessage( "Test" )
+    ;
+  
 }
 
 WelcomeWidget::~WelcomeWidget(){}
