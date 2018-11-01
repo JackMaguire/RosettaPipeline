@@ -63,12 +63,14 @@ NodeWidget::construct_segment1(
 
   container->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Title: " ) );
 
-  //Wt::WLineEdit * const title_edit =
-  //container->addWidget( Wt::cpp14::make_unique< Wt::WLineEdit >( node_->title() ) );
-
   Wt::WLineEdit * const title_edit =
+    container->addWidget( Wt::cpp14::make_unique< Wt::WLineEdit >( node_->title() ) );
+  title_edit->setInline(true);
+  title_edit->setFormObject(true);
+
+  /*Wt::WLineEdit * const title_edit =
     container->addWidget( Wt::cpp14::make_unique< Wt::WLineEdit >() );
-  title_edit->setText( node_->title() );
+  title_edit->setText( node_->title() );*/
 
   title_edit->keyPressed().connect(
     [=] ( Wt::WKeyEvent const & e ) {
