@@ -35,7 +35,7 @@ ExamplesWidget::ExamplesWidget( graph::GraphSP graph ) :
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
 
   batch_relax_upload_button->clicked().connect(
-    [=graph] {
+    [=,graph] {
       std::string const filename = util::getPathToTopDirectory() + "examples/BatchRelax.txt";
       std::cout << filename << std::endl;
       std::string const load_result = load_file( filename, * graph );

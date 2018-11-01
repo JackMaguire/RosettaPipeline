@@ -13,7 +13,7 @@ namespace util {
 std::string
 getPathToTopDirectory(){
   //std::string path_to_this_file = STRING( __FILE__ );//Users/.../RosettaPipeline/src/util.hh
-  std::string const path_to_this_file( FILE_STRING );//Users/.../RosettaPipeline/src/util.hh
+  std::string path_to_this_file( FILE_STRING );//Users/.../RosettaPipeline/src/util.hh
   std::string const toErase = "src/util.hh";
   size_t pos = path_to_this_file.find( toErase );
   assert( pos != std::string::npos );
