@@ -1,6 +1,8 @@
 #include <view/ExamplesWidget.hh>
 #include <view/LoadWidget.hh>
 
+#include <view/GraphWidget.hh>
+
 #include <util.hh>
 
 #include <Wt/WLength.h>
