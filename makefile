@@ -92,6 +92,9 @@ CompileWidget.o: src/view/CompileWidget.cc compile
 WelcomeWidget.o: src/view/WelcomeWidget.cc
 	${CXX} -c -o build/WelcomeWidget.o src/view/WelcomeWidget.cc ${GEN} ${WT_FLAGS}
 
+ExamplesWidget.o: src/view/ExamplesWidget.cc
+	${CXX} -c -o build/ExamplesWidget.o src/view/ExamplesWidget.cc ${GEN} ${WT_FLAGS}
+
 RightViewWidget.o: src/view/RightViewWidget.cc
 	${CXX} -c -o build/RightViewWidget.o src/view/RightViewWidget.cc ${GEN} ${WT_FLAGS}
 
@@ -101,10 +104,10 @@ LeftViewWidget.o: src/view/LeftViewWidget.cc
 TopWidget.o: src/view/TopWidget.cc
 	${CXX} -c -o build/TopWidget.o src/view/TopWidget.cc ${GEN} ${WT_FLAGS}
 
-view: GraphWidget.o GraphToolbarWidget.o NodeWidget.o EdgeWidget.o TopWidget.o LeftViewWidget.o RightViewWidget.o CompileWidget.o LoadWidget.o SaveWidget.o OptionsWidget.o WelcomeWidget.o
+view: GraphWidget.o GraphToolbarWidget.o NodeWidget.o EdgeWidget.o TopWidget.o LeftViewWidget.o RightViewWidget.o CompileWidget.o LoadWidget.o SaveWidget.o OptionsWidget.o WelcomeWidget.o ExamplesWidget.o
 	ld -r build/GraphWidget.o build/GraphToolbarWidget.o build/TopWidget.o build/RightViewWidget.o build/LeftViewWidget.o \
 		build/NodeWidget.o build/EdgeWidget.o build/SaveWidget.o build/OptionsWidget.o build/WelcomeWidget.o\
-		build/LoadWidget.o build/CompileWidget.o -o build/view.o -arch ${ARCH}
+		build/LoadWidget.o build/CompileWidget.o build/ExamplesWidget.o -o build/view.o -arch ${ARCH}
 
 
 ########
