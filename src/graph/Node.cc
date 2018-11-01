@@ -9,6 +9,17 @@
 
 namespace graph {
 
+namespace {
+//Stolen from https://stackoverflow.com/questions/874134/find-if-string-ends-with-another-string-in-c
+bool hasEnding ( std::string const & fullString, std::string const & ending ) {
+  if( fullString.length() < ending.length() ) {
+    return false;
+  }
+
+  return fullString.compare ( fullString.length() - ending.length(), ending.length(), ending ) == 0;
+}
+}
+
 Node::Node( int x, int y ) {
   title_ = "Node_0";
   x_ = x;
@@ -26,6 +37,8 @@ Node::Node( std::string title, int x, int y ) {//pass-by-value on purpose
 Node::~Node(){}
 
 void Node::init(){
+  assert( hasEnding( uniqueToken(), "_NODE" ) );
+
   use_default_command_ = true;
 
   use_script_file_ = false;
@@ -125,19 +138,8 @@ Node::getAllRosettaFlags() const {
   return determineAutoFlags() + "\n" + user_rosetta_flags_;
 }
 
-namespace {
-//Stolen from https://stackoverflow.com/questions/874134/find-if-string-ends-with-another-string-in-c
-bool hasEnding ( std::string const & fullString, std::string const & ending ) {
-  if( fullString.length() < ending.length() ) {
-    return false;
-  }
-
-  return fullString.compare ( fullString.length() - ending.length(), ending.length(), ending ) == 0;
-}
-}
-
 void Node::save( std::vector< std::string > & output_lines ) const {
-  output_lines.emplace_back( "START_NODE" );
+  output_lines.emplace_back( "START_" + uniqueToken() );
   output_lines.emplace_back( "id " + std::to_string( id_ ) );
   output_lines.emplace_back( "x " + std::to_string( x_ ) );
   output_lines.emplace_back( "y " + std::to_string( y_ ) );
@@ -171,7 +173,7 @@ void Node::save( std::vector< std::string > & output_lines ) const {
   }
   output_lines.emplace_back( "END_SCRIPT" );
 
-  output_lines.emplace_back( "END_NODE" );
+  output_lines.emplace_back( "END_" + uniqueToken() );
 }
 
 

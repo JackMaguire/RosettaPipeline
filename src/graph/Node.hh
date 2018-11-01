@@ -22,6 +22,11 @@ public:
   Node( std::string title, int x, int y );//pass-by-value on purpose
   ~Node();
 
+  virtual std::string
+  uniqueToken(){
+    return "RS_NODE";
+  }
+
 public://getters and setters:
   int ID() const { return id_; }
   void setID( int id );
