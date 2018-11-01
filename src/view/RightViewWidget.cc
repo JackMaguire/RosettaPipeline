@@ -33,12 +33,12 @@ public:
     graph::GraphSP const & graph,
     GraphWidget * graph_widget
   ) {
-    addWidget( Wt::cpp14::make_unique< Wt::WText >( "Save" ) );
+    addWidget( Wt::cpp14::make_unique< Wt::WText >( "<b>Save</b>" ) );
     addWidget( Wt::cpp14::make_unique< SaveWidget >( graph ) );
     addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
     addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
     addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
-    addWidget( Wt::cpp14::make_unique< Wt::WText >( "Load" ) );
+    addWidget( Wt::cpp14::make_unique< Wt::WText >( "<b>Load</b>" ) );
     addWidget( Wt::cpp14::make_unique< LoadWidget >( graph, graph_widget ) );
   }
 
