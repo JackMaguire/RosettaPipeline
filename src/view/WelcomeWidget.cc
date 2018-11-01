@@ -22,13 +22,25 @@ namespace {
 
 void
 potentially_add_temporary_message( Wt::WBorderLayout * layout ){
-  std::ifstream in( "/tmp/message" );
+  std::ifstream in( "/tmp/red_alert" );
   if( in.is_open() ) {
     std::ostringstream contents;
     contents << in.rdbuf();
     in.close();
     std::string const message = contents.str();
-    layout->addWidget( Wt::cpp14::make_unique< Wt::WText >( message ), Wt::LayoutPosition::North );
+
+    Wt::WText * const text =
+      layout->addWidget( Wt::cpp14::make_unique< Wt::WText >( message ), Wt::LayoutPosition::North );
+
+    text->setStyleClass("alert alert-info");
+
+    /*Options appear to be:
+    alert-danger (red)
+    alert-success (green)
+    alert-info
+    alert-block
+    alert-error
+    */
   }
 }
 
