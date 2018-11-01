@@ -7,6 +7,7 @@
 #include <view/OptionsWidget.hh>
 #include <view/CompileWidget.hh>
 #include <view/WelcomeWidget.hh>
+#include <view/ExamplesWidget.hh>
 
 #include <global_data/options.hh>
 
@@ -63,6 +64,7 @@ RightViewWidget::RightViewWidget(
   graph_->registerNewChangeListener( this );
 
   addTab( Wt::cpp14::make_unique< WelcomeWidget >(), "Welcome", Wt::ContentLoading::Eager );
+  addTab( Wt::cpp14::make_unique< ExamplesWidget >( graph_ ), "Examples", Wt::ContentLoading::Eager );
 
   graph::NodeSP selected_node = graph_->selectedNode();
   NodeWidget * node_ptr = 0;

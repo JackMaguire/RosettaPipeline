@@ -16,7 +16,6 @@
 #include <fstream>
 #include <iostream>
 #include <memory>
-#include <string>
 #include <vector>
 
 namespace view {
@@ -36,7 +35,7 @@ std::vector< std::string > get_file_lines( std::string const & filename ){
 
 std::string load_file(
   std::vector< std::string > const & file_lines,
-  graph::GraphSP const & graph
+  graph::Graph & graph
 ){
   //First, options
   int current_line = 0;
@@ -49,12 +48,20 @@ std::string load_file(
   if( file_lines[ current_line ] != "START_GRAPH" ) {
     return "Error, expected first line to say \"START_OPTIONS\"";
   }
-  current_line = graph->loadSelfNodesAndEdges( file_lines, current_line ) + 1;
+  current_line = graph.loadSelfNodesAndEdges( file_lines, current_line ) + 1;
 
   return "load successful";
 }
 
 }
+
+std::string load_file(
+  std::string const & filename,
+  graph::Graph & graph
+){
+  load_file( get_file_lines( filename ), graph );
+}
+
 
 LoadWidget::LoadWidget(
   graph::GraphSP const & graph,
@@ -95,7 +102,7 @@ LoadWidget::LoadWidget(
 	std::vector< std::string > lines = get_file_lines( filename );
 	if( lines.size() > 1 ){
 	  //TODO clear maps in graph view
-	  out->setText( load_file( lines, graph ) );
+	  out->setText( load_file( lines, * graph ) );
 	  graph_widget->update();
 	}
       }

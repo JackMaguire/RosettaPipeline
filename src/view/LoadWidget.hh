@@ -5,7 +5,14 @@
 #include <graph/Graph.fwd.hh>
 #include <view/GraphWidget.fwd.hh>
 
+#include <string>
+
 namespace view {
+
+std::string load_file(
+  std::string const & filename,
+  graph::Graph & graph
+);
 
 class LoadWidget : public Wt::WContainerWidget
 {
