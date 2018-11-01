@@ -59,7 +59,7 @@ std::string load_file(
   std::string const & filename,
   graph::Graph & graph
 ){
-  load_file( get_file_lines( filename ), graph );
+  return load_file( get_file_lines( filename ), graph );
 }
 
 
