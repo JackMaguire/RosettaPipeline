@@ -32,16 +32,16 @@ potentially_add_temporary_message( Wt::WBorderLayout * layout ){
 }
 
 //TODO describe
-class CustomLayout : public Wt::WVBoxLayout {
+class CustomContainerWidget : public Wt::ContainerWidget {
 public:
-  CustomLayout *
+  CustomContainerWidget *
   addMessage( std::string const & message ){
     addWidget( Wt::cpp14::make_unique< Wt::WText >( message ) );
     addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
     return this;
   }
 
-  CustomLayout *
+  CustomContainerWidget *
   addExtraBreak(){
     addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
     return this;
@@ -58,12 +58,12 @@ WelcomeWidget::WelcomeWidget() :
 
   potentially_add_temporary_message( layout );
 
-  Wt::WContainerWidget * const main_container =
-    layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >(), Wt::LayoutPosition::Center );
-  CustomLayout * const main_layout =
-    main_container->setLayout( Wt::cpp14::make_unique< CustomLayout >() );
+  CustomContainerWidget * const main_container =
+    layout->addWidget( Wt::cpp14::make_unique< CustomContainerWidget >(), Wt::LayoutPosition::Center );
+  //CustomLayout * const main_layout =
+    //main_container->setLayout( Wt::cpp14::make_unique< CustomLayout >() );
 
-  main_layout->addMessage( "Welcome to RosettaPipeline" )
+  main_container->addMessage( "Welcome to RosettaPipeline" )
     ->addMessage( "Test" )
     ;
   
