@@ -23,7 +23,7 @@ public:
   ~Node();
 
   virtual std::string
-  uniqueToken(){
+  uniqueToken() const {
     return "RS_NODE";
   }
 
