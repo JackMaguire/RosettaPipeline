@@ -101,7 +101,7 @@ LeftViewWidget.o: src/view/LeftViewWidget.cc
 TopWidget.o: src/view/TopWidget.cc
 	${CXX} -c -o build/TopWidget.o src/view/TopWidget.cc ${GEN} ${WT_FLAGS}
 
-view: GraphWidget.o GraphToolbarWidget.o NodeWidget.o EdgeWidget.o TopWidget.o LeftViewWidget.o RightViewWidget.o CompileWidget.o LoadWidget.o SaveWidget.o OptionsWidget.o
+view: GraphWidget.o GraphToolbarWidget.o NodeWidget.o EdgeWidget.o TopWidget.o LeftViewWidget.o RightViewWidget.o CompileWidget.o LoadWidget.o SaveWidget.o OptionsWidget.o WelcomeWidget.o
 	ld -r build/GraphWidget.o build/GraphToolbarWidget.o build/TopWidget.o build/RightViewWidget.o build/LeftViewWidget.o \
 		build/NodeWidget.o build/EdgeWidget.o build/SaveWidget.o build/OptionsWidget.o build/WelcomeWidget.o\
 		build/LoadWidget.o build/CompileWidget.o -o build/view.o -arch ${ARCH}
