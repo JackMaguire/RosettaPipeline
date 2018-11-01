@@ -103,29 +103,29 @@ NodeWidget::construct_segment1(
       Wt::LayoutPosition::East );
 
   use_default_command_box->setChecked( node_->useDefaultCommand() );
-  command_edit->setText( node_->getEffectiveCommand() );
+  command_edit_->setText( node_->getEffectiveCommand() );
   if( node_->useDefaultCommand() ){
-    command_edit->setReadOnly( true );
+    command_edit_->setReadOnly( true );
   } else {
-    command_edit->setReadOnly( false );
+    command_edit_->setReadOnly( false );
   }
-  //command_edit->setHidden(node_->useDefaultCommand() );
+  //command_edit_->setHidden(node_->useDefaultCommand() );
 
   use_default_command_box->checked().connect (
     [=] {
       node_->setUseDefaultCommand( true );
-      command_edit->setText( node_->getEffectiveCommand() );
-      command_edit->setReadOnly( true );
-      //command_edit->setHidden( true );
+      command_edit_->setText( node_->getEffectiveCommand() );
+      command_edit_->setReadOnly( true );
+      //command_edit_->setHidden( true );
     }
   );
 
   use_default_command_box->unChecked().connect (
     [=] {
       node_->setUseDefaultCommand( false );
-      command_edit->setText( node_->getEffectiveCommand() );
-      command_edit->setReadOnly( false );
-      //command_edit->setHidden( false );
+      command_edit_->setText( node_->getEffectiveCommand() );
+      command_edit_->setReadOnly( false );
+      //command_edit_->setHidden( false );
     }
   );
 
