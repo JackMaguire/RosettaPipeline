@@ -173,7 +173,7 @@ void Node::save( std::vector< std::string > & output_lines ) const {
   }
   output_lines.emplace_back( "END_SCRIPT" );
 
-  output_lines.emplace_back( "END_" + uniqueToken() );
+  output_lines.emplace_back( "END_NODE" );
 }
 
 
