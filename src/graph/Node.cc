@@ -183,7 +183,7 @@ Node::Node( std::vector< std::string > const & lines, int line_to_start_at ) {
 
   uint current_line = line_to_start_at;
 
-  assert( lines[ current_line ] == "START_NODE" );
+  assert( lines[ current_line ] == "START_" + uniqueToken() );
 
   while( lines[ ++current_line ] != "END_NODE" ){
     std::string const line = lines[ current_line ];
