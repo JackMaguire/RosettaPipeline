@@ -82,6 +82,8 @@ WelcomeWidget::WelcomeWidget() :
   main_container->addMessage(
     "Welcome to RosettaPipeline!"
   )->addMessage(//What are we?
+    "<b>What is RosettaPipeline?<\b>", 1
+  )->addMessage(//What are we?
     "This is a service that allows Rosetta users to create and share their multistage design workflows. "
     "Workflows are represnted using the graph on the left. "
     "Each node in the graph represents a stage of your pipeline and "
@@ -89,6 +91,17 @@ WelcomeWidget::WelcomeWidget() :
     "Similar to multistage_rosetta_scripts, you can filter results between stages to save time. "
     "When you are finished, go to the \"Compile\" tab for instructions on how to download this workflow for use. "
     "If you want to save a workflow, go to the \"Save/Load\" tab to download a text file that can be loaded in to this site later."
+  )->addMessage(//How to?
+    "<b>How to make a workflow:<\b>", 1
+  )->addMessage(//How to?
+    "To create a workflow, start by editing the graph one the left using the Select, Add, and Delete buttons. "
+    "You can create nodes by pushing the plus button and clicking anywhere in the workspace. "
+    "Edges are created by clicking and dragging from one node to another. "
+    "Select nodes and edges by clicking on them (must click on the center arrow of edges) "
+    "and edit their parameters in the \"Edit\" tab. "
+    "When your graph is complete, visit the \"Options\" tab to set parameters for your run. "
+  )->addMessage(//Getting Started
+    "<b>Getting started:<\b>", 1
   )->addMessage(//Getting Started
     "If you are new, you can start by exploring sample pipelines in the \"Examples\" Tab."
   );
