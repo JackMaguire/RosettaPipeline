@@ -94,10 +94,7 @@ NodeWidget::construct_segment1(
   command_edit_->setFormObject( true );
   command_edit_->textInput().connect(
     [=] {
-      std::cout << "textInput " << command_edit->text() << std::endl;
-      std::cout << "textInput " << command_edit->text().narrow() << std::endl;
-      std::cout << "textInput " << command_edit->text().toUTF8() << std::endl;
-      node_->setCommand( command_edit->text().narrow() );
+      node_->setCommand( command_edit_->text().narrow() );
     }
   );
 
