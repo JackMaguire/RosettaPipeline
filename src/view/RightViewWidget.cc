@@ -68,7 +68,7 @@ RightViewWidget::RightViewWidget(
   NodeWidget * node_ptr = 0;
   if( selected_node ){
     auto uniq_ptr = Wt::cpp14::make_unique< NodeWidget >( selected_node, graph_widget );
-    node_ptr = uniq_ptr;
+    node_ptr = &(*uniq_ptr);
     addTab( std::move(uniq_ptr), "Edit", Wt::ContentLoading::Eager );
   } else {
     graph::EdgeSP selected_edge = graph_->selectedEdge();
