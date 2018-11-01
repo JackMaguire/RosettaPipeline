@@ -9,6 +9,7 @@
 #include <Wt/WLink.h>
 #include <Wt/WText.h>
 #include <Wt/WBreak.h>
+#include <Wt/WContainerWidget.h>
 
 #include <iostream>
 #include <fstream>
@@ -32,7 +33,7 @@ potentially_add_temporary_message( Wt::WBorderLayout * layout ){
 }
 
 //TODO describe
-class CustomContainerWidget : public Wt::ContainerWidget {
+class CustomContainerWidget : public Wt::WContainerWidget {
 public:
   CustomContainerWidget *
   addMessage( std::string const & message ){
