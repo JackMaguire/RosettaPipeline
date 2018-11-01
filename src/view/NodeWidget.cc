@@ -67,12 +67,12 @@ NodeWidget::construct_segment1(
     container->addWidget( Wt::cpp14::make_unique< Wt::WLineEdit >( node_->title() ) );
   title_edit->setInline( true );
   title_edit->setFormObject( true );
-  title_edit->textInput().connect(
+  /*title_edit->textInput().connect(
     [=] ( Wt::WKeyEvent const & e ) {
       node_->setTitle( title_edit->text().narrow() );
       graph_widget->update();
     }
-  );
+  );*/
 
   container->addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
 
@@ -92,14 +92,14 @@ NodeWidget::construct_segment1(
       Wt::LayoutPosition::Center );
   command_edit->setInline( true );
   command_edit->setFormObject( true );
-  /*command_edit->textInput().connect(
+  command_edit->textInput().connect(
     [=] {
       std::cout << "textInput " << command_edit->text() << std::endl;
       std::cout << "textInput " << command_edit->text().narrow() << std::endl;
       std::cout << "textInput " << command_edit->text().toUTF8() << std::endl;
       node_->setCommand( command_edit->text().narrow() );
     }
-  );*/
+  );
 
   Wt::WCheckBox * const use_default_command_box =
     cmd_layout->addWidget( Wt::cpp14::make_unique< Wt::WCheckBox >( "Use Default Command" ),
