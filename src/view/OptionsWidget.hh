@@ -23,7 +23,8 @@ protected:
 };
 
 inline
-void setNodeWidget( NodeWidget * node ) {
+void
+OptionsWidget::setNodeWidget( NodeWidget * node ) {
   current_node_widget_ = node;
 }
 
