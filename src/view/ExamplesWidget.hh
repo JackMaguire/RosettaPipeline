@@ -2,6 +2,7 @@
 
 #include <Wt/WContainerWidget.h>
 #include <graph/Graph.fwd.hh>
+#include <view/GraphWidget.fwd.hh>
 
 namespace view {
 
