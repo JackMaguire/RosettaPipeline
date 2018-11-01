@@ -47,7 +47,8 @@ WelcomeWidget::WelcomeWidget() :
 
   potentially_add_temporary_message( layout );
 
-  layout->addWidget( Wt::cpp14::make_unique< Wt::WText >( message ), Wt::LayoutPosition::Center );
+  layout->addWidget( Wt::cpp14::make_unique< Wt::WText >( welcome_message() ),
+    Wt::LayoutPosition::Center );
 }
 
 WelcomeWidget::~WelcomeWidget(){}
