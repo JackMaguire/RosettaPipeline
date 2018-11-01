@@ -102,6 +102,10 @@ WelcomeWidget::WelcomeWidget() :
     "<b>Getting started:</b>", 1
   )->addMessage(//Getting Started
     "If you are new, you can start by exploring sample pipelines in the \"Examples\" tab. "
+  )->addMessage(//Rules
+    "<b>Rules:</b>", 1
+  )->addMessage(//Rules
+    "TODO"
   );
   
 }
