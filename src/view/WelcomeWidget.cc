@@ -76,8 +76,6 @@ WelcomeWidget::WelcomeWidget() :
 
   CustomContainerWidget * const main_container =
     layout->addWidget( Wt::cpp14::make_unique< CustomContainerWidget >(), Wt::LayoutPosition::Center );
-  //CustomLayout * const main_layout =
-    //main_container->setLayout( Wt::cpp14::make_unique< CustomLayout >() );
 
   main_container->addMessage(
     "Welcome to RosettaPipeline!"
