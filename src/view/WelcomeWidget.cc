@@ -88,9 +88,9 @@ WelcomeWidget::WelcomeWidget() :
     "each directed edge represents the transfer of poses from one stage to the next. "
     "Similar to multistage_rosetta_scripts, you can filter results between stages to save time. "
     "When you are finished, go to the \"Compile\" tab for instructions on how to download this workflow for use. "
-    "If you want to save a workflow, go to the \"Save/Load\" tab to download a text file that can be loaded in to this site later.";
+    "If you want to save a workflow, go to the \"Save/Load\" tab to download a text file that can be loaded in to this site later."
   )->addMessage(//Getting Started
-    "If you are new, you can start by exploring sample pipelines in the \"Examples\" Tab.";
+    "If you are new, you can start by exploring sample pipelines in the \"Examples\" Tab."
   );
   
 }
