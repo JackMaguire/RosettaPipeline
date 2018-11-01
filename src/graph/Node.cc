@@ -1,6 +1,8 @@
 #include <graph/Node.hh>
 #include <graph/Edge.hh>
 
+#include <global_data/options.hh>
+
 #include <iostream>
 
 #include <sstream>
@@ -48,7 +50,7 @@ void Node::init(){
   stage_ = 0;
   stage_is_valid_ = false;
 
-  command_ = "TODO";
+  command_ = global_data::Options::default_run_command;
   notes_ = "";
 
   user_rosetta_flags_ = "# Keep in mind that all commands will be run one directory deeper.\n"
