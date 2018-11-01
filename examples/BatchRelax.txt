@@ -1,0 +1,266 @@
+START_OPTIONS
+show_node_titles 1
+put_node_titles_to_side 1
+grid_size 10
+serialize_intermediate_poses 0
+num_processors 200
+default_run_command mpirun -n $nproc rosetta_scripts.mpiserialization.linuxgccrelease @ flags
+delete_unused_intermediate_poses 1
+END_OPTIONS
+START_GRAPH
+next_node_id 5
+num_nodes 5
+START_RS_NODE
+id 0
+x 20
+y 8
+r 0
+g 0
+b 0
+command mpirun -n $nproc rosetta_scripts.mpiserialization.linuxgccrelease @ flags
+title Relax1
+script script.xml
+use_script_file 0
+use_default_command 1
+still_using_default_title 0
+START_FLAGS
+-nstruct 10
+-l input_pose.pdblist
+END_FLAGS
+START_NOTES
+
+
+END_NOTES
+START_SCRIPT
+<ROSETTASCRIPTS>
+    <SCOREFXNS>
+    </SCOREFXNS>
+    <RESIDUE_SELECTORS>
+    </RESIDUE_SELECTORS>
+    <TASKOPERATIONS>
+    </TASKOPERATIONS>
+    <FILTERS>
+    </FILTERS>
+    <MOVERS>
+    </MOVERS>
+    <PROTOCOLS>
+    </PROTOCOLS>
+    <OUTPUT />
+</ROSETTASCRIPTS>
+
+END_SCRIPT
+END_NODE
+START_RS_NODE
+id 1
+x 20
+y 18
+r 0
+g 0
+b 0
+command mpirun -n $nproc rosetta_scripts.mpiserialization.linuxgccrelease @ flags
+title Relax2
+script script.xml
+use_script_file 0
+use_default_command 1
+still_using_default_title 0
+START_FLAGS
+-nstruct 1
+
+END_FLAGS
+START_NOTES
+
+
+END_NOTES
+START_SCRIPT
+<ROSETTASCRIPTS>
+    <SCOREFXNS>
+    </SCOREFXNS>
+    <RESIDUE_SELECTORS>
+    </RESIDUE_SELECTORS>
+    <TASKOPERATIONS>
+    </TASKOPERATIONS>
+    <FILTERS>
+    </FILTERS>
+    <MOVERS>
+    </MOVERS>
+    <PROTOCOLS>
+    </PROTOCOLS>
+    <OUTPUT />
+</ROSETTASCRIPTS>
+
+END_SCRIPT
+END_NODE
+START_RS_NODE
+id 2
+x 20
+y 28
+r 0
+g 0
+b 0
+command mpirun -n $nproc rosetta_scripts.mpiserialization.linuxgccrelease @ flags
+title Relax3
+script script.xml
+use_script_file 0
+use_default_command 1
+still_using_default_title 0
+START_FLAGS
+-nstruct 1
+
+END_FLAGS
+START_NOTES
+
+
+END_NOTES
+START_SCRIPT
+<ROSETTASCRIPTS>
+    <SCOREFXNS>
+    </SCOREFXNS>
+    <RESIDUE_SELECTORS>
+    </RESIDUE_SELECTORS>
+    <TASKOPERATIONS>
+    </TASKOPERATIONS>
+    <FILTERS>
+    </FILTERS>
+    <MOVERS>
+    </MOVERS>
+    <PROTOCOLS>
+    </PROTOCOLS>
+    <OUTPUT />
+</ROSETTASCRIPTS>
+
+END_SCRIPT
+END_NODE
+START_RS_NODE
+id 3
+x 20
+y 37
+r 2003593784
+g 992553255
+b 656942090
+command mpirun -n $nproc rosetta_scripts.mpiserialization.linuxgccrelease @ flags
+title Relax4
+script script.xml
+use_script_file 0
+use_default_command 1
+still_using_default_title 0
+START_FLAGS
+-nstruct 1
+
+END_FLAGS
+START_NOTES
+
+
+END_NOTES
+START_SCRIPT
+<ROSETTASCRIPTS>
+    <SCOREFXNS>
+    </SCOREFXNS>
+    <RESIDUE_SELECTORS>
+    </RESIDUE_SELECTORS>
+    <TASKOPERATIONS>
+    </TASKOPERATIONS>
+    <FILTERS>
+    </FILTERS>
+    <MOVERS>
+    </MOVERS>
+    <PROTOCOLS>
+    </PROTOCOLS>
+    <OUTPUT />
+</ROSETTASCRIPTS>
+
+END_SCRIPT
+END_NODE
+START_RS_NODE
+id 4
+x 20
+y 45
+r 1679849842
+g 1852404341
+b 1634738279
+command mpirun -n $nproc rosetta_scripts.mpiserialization.linuxgccrelease @ flags
+title Relax5
+script script.xml
+use_script_file 0
+use_default_command 1
+still_using_default_title 0
+START_FLAGS
+-nstruct 1
+
+END_FLAGS
+START_NOTES
+
+
+END_NOTES
+START_SCRIPT
+<ROSETTASCRIPTS>
+    <SCOREFXNS>
+    </SCOREFXNS>
+    <RESIDUE_SELECTORS>
+    </RESIDUE_SELECTORS>
+    <TASKOPERATIONS>
+    </TASKOPERATIONS>
+    <FILTERS>
+    </FILTERS>
+    <MOVERS>
+    </MOVERS>
+    <PROTOCOLS>
+    </PROTOCOLS>
+    <OUTPUT />
+</ROSETTASCRIPTS>
+
+END_SCRIPT
+END_NODE
+num_edges 4
+START_EDGE
+source 0
+destination 1
+column total_score
+pos_is_better 0
+num 0
+frac 0.250000
+use_frac 1
+START_NOTES
+
+
+END_NOTES
+END_EDGE
+START_EDGE
+source 1
+destination 2
+column total_score
+pos_is_better 0
+num 0
+frac 0.250000
+use_frac 1
+START_NOTES
+
+
+END_NOTES
+END_EDGE
+START_EDGE
+source 2
+destination 3
+column total_score
+pos_is_better 0
+num 0
+frac 0.250000
+use_frac 1
+START_NOTES
+
+
+END_NOTES
+END_EDGE
+START_EDGE
+source 3
+destination 4
+column total_score
+pos_is_better 0
+num 0
+frac 0.250000
+use_frac 1
+START_NOTES
+
+
+END_NOTES
+END_EDGE
+END_GRAPH
