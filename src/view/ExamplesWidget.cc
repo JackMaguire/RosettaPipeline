@@ -21,7 +21,10 @@
 
 namespace view {
 
-ExamplesWidget::ExamplesWidget( graph::GraphSP graph ) :
+ExamplesWidget::ExamplesWidget(
+  graph::GraphSP graph,
+  GraphWidget * graph_widget
+) :
   WContainerWidget()
 {
   addWidget( Wt::cpp14::make_unique< Wt::WText >( "<b>Batch Relax</b>" ) );
@@ -41,7 +44,7 @@ ExamplesWidget::ExamplesWidget( graph::GraphSP graph ) :
       std::string const load_result = load_file( filename, * graph );
       std::cout << load_result << std::endl;
       if( load_result != "load successful" ) {
-	//TODO
+	graph_widget->update();
       }
     }
   );
