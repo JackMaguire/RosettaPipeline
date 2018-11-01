@@ -36,7 +36,7 @@ ExamplesWidget::ExamplesWidget( graph::GraphSP graph ) :
 
   batch_relax_upload_button->clicked().connect(
     [=] {
-      std::string const filename = util::getPathToTopDirectory() + "examples/BatchRelax.txt";
+      std::string const filename = util::getPathToTopDirectory() + "/examples/BatchRelax.txt";
       std::cout << filename << std::endl;
       std::string const load_result = load_file( filename, * graph );
       if( load_result != "load successful" ) {
