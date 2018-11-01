@@ -7,6 +7,7 @@
 #include <Wt/WVBoxLayout.h>
 #include <Wt/WBorderLayout.h>
 #include <Wt/WLink.h>
+#include <Wt/WText.h>
 
 #include <iostream>
 #include <fstream>
