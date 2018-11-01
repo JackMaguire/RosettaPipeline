@@ -92,7 +92,7 @@ compile( graph::Graph const & g ){
   std::string tar_file_contents;
   {
     std::ifstream in( tar_file, std::ios::in | std::ios::binary );
-    assert( in );
+    assert( in.is_open() );
     std::ostringstream contents;
     contents << in.rdbuf();
     in.close();
