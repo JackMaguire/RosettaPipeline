@@ -20,7 +20,7 @@ namespace {
 
 void
 potentially_add_temporary_message( Wt::WBorderLayout * layout ){
-  ifstream in( "/tmp/message" );
+  std::ifstream in( "/tmp/message" );
   if( in.is_open() ) {
     std::ostringstream contents;
     contents << in.rdbuf();
