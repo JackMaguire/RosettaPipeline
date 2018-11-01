@@ -39,6 +39,7 @@ ExamplesWidget::ExamplesWidget( graph::GraphSP graph ) :
       std::string const filename = util::getPathToTopDirectory() + "/examples/BatchRelax.txt";
       std::cout << filename << std::endl;
       std::string const load_result = load_file( filename, * graph );
+      std::cout << load_result << std::endl;
       if( load_result != "load successful" ) {
 	//TODO
       }
