@@ -182,6 +182,9 @@ OptionsWidget::setup_run_options(){
   command_edit->textInput().connect(
     [=] {
       Options::default_run_command = command_edit->text().toUTF8();
+      if( this->current_node_widget_ != 0 ){
+	this->current_node_widget_->updateDefaultCommand( Options::default_run_command );
+      }
     }
   );
 

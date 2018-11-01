@@ -87,12 +87,12 @@ NodeWidget::construct_segment1(
   cmd_layout->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Command: " ),
     Wt::LayoutPosition::West );
 
-  Wt::WLineEdit * const command_edit =
+  command_edit_ =
     cmd_layout->addWidget( Wt::cpp14::make_unique< Wt::WLineEdit >( node_->command() ),
       Wt::LayoutPosition::Center );
-  command_edit->setInline( true );
-  command_edit->setFormObject( true );
-  command_edit->textInput().connect(
+  command_edit_->setInline( true );
+  command_edit_->setFormObject( true );
+  command_edit_->textInput().connect(
     [=] {
       std::cout << "textInput " << command_edit->text() << std::endl;
       std::cout << "textInput " << command_edit->text().narrow() << std::endl;
@@ -247,6 +247,13 @@ NodeWidget::construct_segment4 (
       node_->setNotes( right_text_area->text().toUTF8() );
     }
   );
+}
+
+void
+NodeWidget::updateDefaultCommand( std::string const & new_command ) {
+  if( node_->useDefaultCommand() ){
+    command_edit_->setText( new_command );
+  }
 }
 
 

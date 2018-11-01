@@ -15,6 +15,8 @@ public:
 
   virtual ~NodeWidget();
 
+  void updateDefaultCommand( std::string const & );
+
 protected:
   void construct_segment1( GraphWidget *, Wt::WVBoxLayout & layout );
 
@@ -26,6 +28,7 @@ protected:
 
 private:
   graph::NodeSP node_;
+  Wt::WLineEdit * command_edit_;
 };
 
 

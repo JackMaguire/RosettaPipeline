@@ -65,17 +65,20 @@ RightViewWidget::RightViewWidget(
   addTab( Wt::cpp14::make_unique< WelcomeWidget >(), "Welcome", Wt::ContentLoading::Eager );
 
   graph::NodeSP selected_node = graph_->selectedNode();
+  NodeWidget * node_ptr = 0;
   if( selected_node ){
-    addTab( Wt::cpp14::make_unique< NodeWidget >( selected_node, graph_widget ), "Edit", Wt::ContentLoading::Eager );
+    node_ptr =
+      addTab( Wt::cpp14::make_unique< NodeWidget >( selected_node, graph_widget ), "Edit", Wt::ContentLoading::Eager );
   } else {
     graph::EdgeSP selected_edge = graph_->selectedEdge();
     assert( selected_edge );
     addTab( Wt::cpp14::make_unique< EdgeWidget >( selected_edge ), "Edit", Wt::ContentLoading::Eager );
   }
 
-  addTab( Wt::cpp14::make_unique< OptionsWidget >( graph_widget ), "Options", Wt::ContentLoading::Eager );
-  //addTab( Wt::cpp14::make_unique< SaveWidget >( graph_ ), "Save", Wt::ContentLoading::Eager );
-  //addTab( Wt::cpp14::make_unique< LoadWidget >( graph_, graph_widget ), "Load", Wt::ContentLoading::Eager );
+  options_widget_ = 
+    addTab( Wt::cpp14::make_unique< OptionsWidget >( graph_widget ), "Options", Wt::ContentLoading::Eager );
+  options_widget_->setNodeWidget( node_ptr );
+
   addTab( Wt::cpp14::make_unique< SaveAndLoadWidget >( graph_, graph_widget ), "Save/Load", Wt::ContentLoading::Eager );
   addTab( Wt::cpp14::make_unique< CompileWidget >( graph_ ), "Compile", Wt::ContentLoading::Eager );
 
@@ -93,11 +96,14 @@ RightViewWidget::noteChangeInSelection(){
 
   graph::NodeSP selected_node = graph_->selectedNode();
   if( selected_node ){
-    insertTab( 1, Wt::cpp14::make_unique< NodeWidget >( selected_node, graph_widget_ ), "Edit", Wt::ContentLoading::Eager );
+    NodeWidget * node_ptr =
+      insertTab( 1, Wt::cpp14::make_unique< NodeWidget >( selected_node, graph_widget_ ), "Edit", Wt::ContentLoading::Eager );
+    options_widget_->setNodeWidget( node_ptr );
   } else {
     graph::EdgeSP selected_edge = graph_->selectedEdge();
     assert( selected_edge );
     insertTab( 1, Wt::cpp14::make_unique< EdgeWidget >( selected_edge ), "Edit", Wt::ContentLoading::Eager );
+    options_widget_->setNodeWidget( 0 );
   }
 
   setCurrentIndex( starting_index );
