@@ -58,7 +58,7 @@ SaveWidget::SaveWidget(
   Wt::WPushButton * const downloadButton =
     addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Download" ) );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
-  addWidget( Wt::cpp14::make_unique< Wt::WText >( "Tip: Right-click the button and choose \"Save Link As...\" to pick a filename and save location." ) );
+  addWidget( Wt::cpp14::make_unique< Wt::WText >( "<b>Tip:</b> Right-click the button and choose \"Save Link As...\" to pick a filename and save location." ) );
 
   auto string_generating_func = [=] {
     std::vector< std::string > save_lines;
