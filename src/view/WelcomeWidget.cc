@@ -103,7 +103,7 @@ WelcomeWidget::WelcomeWidget() :
   )->addMessage(//Getting Started
     "<b>Getting started:</b>", 1
   )->addMessage(//Getting Started
-    "If you are new, you can start by exploring sample pipelines in the \"Examples\" Tab."
+    "If you are new, you can start by exploring sample pipelines in the \"Examples\" tab. "
   );
   
 }
