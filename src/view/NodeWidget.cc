@@ -67,8 +67,7 @@ NodeWidget::construct_segment1(
     container->addWidget( Wt::cpp14::make_unique< Wt::WLineEdit >( node_->title() ) );
   title_edit->setInline( true );
   title_edit->setFormObject( true );
-
-  title_edit->keyPressed().connect(
+  title_edit->textInput().connect(
     [=] ( Wt::WKeyEvent const & e ) {
       node_->setTitle( title_edit->text().narrow() );
       graph_widget->update();
@@ -93,21 +92,6 @@ NodeWidget::construct_segment1(
       Wt::LayoutPosition::Center );
   command_edit->setInline( true );
   command_edit->setFormObject( true );
-
-  /*command_edit->changed().connect(
-    [=] {
-      std::cout << "Changed " << command_edit->text() << std::endl;
-      node_->setCommand( command_edit->text().narrow() );
-    }
-  );
-
-  command_edit->validated().connect(
-    [=] {
-      std::cout << "Validated " << command_edit->text() << std::endl;
-      node_->setCommand( command_edit->text().narrow() );
-    }
-  );*/
-
   command_edit->textInput().connect(
     [=] {
       std::cout << "textInput " << command_edit->text() << std::endl;
