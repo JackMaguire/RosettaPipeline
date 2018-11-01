@@ -6,6 +6,8 @@
 
 namespace view {
 
+class OptionsWidget;
+
 class RightViewWidget : public Wt::WTabWidget, graph::SelectionChangeListener
 {
 public:
