@@ -38,8 +38,10 @@ potentially_add_temporary_message( Wt::WBorderLayout * layout ){
     alert-danger (red)
     alert-success (green)
     alert-info (blue)
-    alert-block
+    alert-block (yellow)
     alert-error
+
+    info and block seem to be the best ones
     */
   }
 }
@@ -48,9 +50,10 @@ potentially_add_temporary_message( Wt::WBorderLayout * layout ){
 class CustomContainerWidget : public Wt::WContainerWidget {
 public:
   CustomContainerWidget *
-  addMessage( std::string const & message ){
+  addMessage( std::string const & message, int num_breaks=2 ){
     addWidget( Wt::cpp14::make_unique< Wt::WText >( message ) );
-    addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
+    for( int i=0; i<num_breaks; ++i )
+      addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
     return this;
   }
 
@@ -76,10 +79,19 @@ WelcomeWidget::WelcomeWidget() :
   //CustomLayout * const main_layout =
     //main_container->setLayout( Wt::cpp14::make_unique< CustomLayout >() );
 
-  main_container->addMessage( "Welcome to RosettaPipeline!" )
-    ->addExtraBreak()
-    ->addMessage( "Test" )
-    ;
+  main_container->addMessage(
+    "Welcome to RosettaPipeline!"
+  )->addMessage(//What are we?
+    "This is a service that allows Rosetta users to create and share their multistage design workflows. "
+    "Workflows are represnted using the graph on the left. "
+    "Each node in the graph represents a stage of your pipeline and "
+    "each directed edge represents the transfer of poses from one stage to the next. "
+    "Similar to multistage_rosetta_scripts, you can filter results between stages to save time. "
+    "When you are finished, go to the \"Compile\" tab for instructions on how to download this workflow for use. "
+    "If you want to save a workflow, go to the \"Save/Load\" tab to download a text file that can be loaded in to this site later.";
+  )->addMessage(//Getting Started
+    "If you are new, you can start by exploring sample pipelines in the \"Examples\" Tab."
+  );
   
 }
 
