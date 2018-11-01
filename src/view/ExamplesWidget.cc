@@ -46,8 +46,9 @@ ExamplesWidget::ExamplesWidget(
       std::string const load_result = load_file( filename, * graph );
       std::cout << load_result << std::endl;
       if( load_result != "load successful" ) {
-	graph_widget->update();
+	//TODO
       }
+      graph_widget->update();
     }
   );
 
