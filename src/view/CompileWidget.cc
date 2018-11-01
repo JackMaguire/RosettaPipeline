@@ -82,8 +82,12 @@ struct CompileElements {
   CompileElements( Wt::WContainerWidget * root ){
     std::string const description1 =
       "The \"Compile\" button will download a compressed tar file containing everything you need to run this pipeline. "
-      ;
+      "This includes a working directory for every stage and a run.sh script. "
+      "In theory, you can just run the run.sh script and the workflow will run as designed. "
+      "If any stage crashes, you can fix the problem and simple execute run.sh again; "
+      "Rosetta will pick up where it left off (assuming you omit the -overwrite flag). ";
     root->addWidget( Wt::cpp14::make_unique< Wt::WText >( description1 ) );
+    root->addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
     root->addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
 
     std::string const description2 =
