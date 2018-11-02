@@ -40,6 +40,7 @@ void Node::init(){
   assert( hasEnding( uniqueToken(), "_NODE" ) );
 
   use_default_command_ = true;
+  id_ = 0;
 
   use_script_file_ = false;
   xml_script_filename_ = "script.xml";
