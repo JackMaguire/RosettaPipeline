@@ -192,18 +192,18 @@ Node::Node( std::vector< std::string > const & lines, int line_to_start_at ) {
     if( line == "START_FLAGS" ) {
       std::stringstream ss;
       while( lines[ ++current_line ] != "END_FLAGS" ){
-	//std::move this?
-	ss << lines[ current_line ] << "\n";
+	ss << std::move( lines[ current_line ] ) << "\n";
       }
       user_rosetta_flags_ = ss.str();
       continue;
     }
 
     if( line == "START_NOTES" ) {
+      std::stringstream ss;
       while( lines[ ++current_line ] != "END_NOTES" ){
-	//std::move this?
-	notes_ += lines[ current_line ] + "\n";
+	ss << std::move( lines[ current_line ] ) << "\n";
       }
+      notes_ = ss.str();
       continue;
     }
 

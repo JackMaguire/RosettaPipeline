@@ -83,12 +83,13 @@ Edge::load(
     std::string const line = lines[ current_line ];
 
     if( line == "START_NOTES" ) {
+      std::stringstream ss;
       while( lines[ ++current_line ] != "END_NOTES" ){
-	//std::move this?
-	notes_ += lines[ current_line ] + "\n";
+	ss << std::move( lines[ current_line ] ) << "\n";
       }
+      notes_ = ss.str();
       continue;
-    }//Notes
+    }
 
     std::vector< std::string > tokens;
     {//stolen from https://stackoverflow.com/questions/13172158/c-split-string-by-line
