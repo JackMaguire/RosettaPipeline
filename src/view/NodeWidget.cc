@@ -47,6 +47,9 @@ NodeWidget::NodeWidget(
       Wt::LayoutPosition::Center );
   script_editor->setMinimumSize( 500, 200 );
   script_editor->setExtraPlugins( "advcode" );
+  script_editor->setInline( true );
+  script_editor->setFormObject( true );
+
   //script_editor->setExtraPlugins( "bbcode" );
 }
 
