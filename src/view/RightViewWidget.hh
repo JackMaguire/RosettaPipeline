@@ -68,7 +68,9 @@ T *
 RightViewWidget::addTab_tmpl( std::string tab_title, Args&&... args ){
   auto uniq_ptr = Wt::cpp14::make_unique< T >( std::forward< Args >( args )... );
   addTab( std::move(uniq_ptr), tab_title, Wt::ContentLoading::Eager );  
-  return &(*uniq_ptr);
+  T * ptr = &(*uniq_ptr);
+  assert( ptr );
+  return ptr;
 }
 
 }//namespace view
