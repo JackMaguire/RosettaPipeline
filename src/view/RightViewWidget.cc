@@ -19,6 +19,7 @@
 #include <Wt/WGlobal.h>
 #include <Wt/WBreak.h>
 #include <Wt/WText.h>
+#include <Wt/WGroupBox.h>
 
 #include <iostream>
 #include <memory>
@@ -33,6 +34,8 @@ public:
     graph::GraphSP graph,
     GraphWidget * graph_widget
   ) {
+    //TODO WGroupBox
+
     addWidget( Wt::cpp14::make_unique< Wt::WText >( "<b>Save</b>" ) );
     save_widget_ =
       addWidget( Wt::cpp14::make_unique< SaveWidget >( graph ) );
