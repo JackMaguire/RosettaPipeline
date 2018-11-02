@@ -3,15 +3,23 @@
 #include <Wt/WContainerWidget.h>
 #include <graph/Graph.fwd.hh>
 #include <view/GraphWidget.fwd.hh>
+#include <view/RightViewWidget.hh>
 
 namespace view {
 
 class ExamplesWidget : public Wt::WContainerWidget
 {
 public:
-  ExamplesWidget( graph::GraphSP graph, GraphWidget * graph_widget );
+  ExamplesWidget(
+    RightViewWidget * parent,
+    graph::GraphSP graph,
+    GraphWidget * graph_widget
+  );
 
   virtual ~ExamplesWidget();
+
+private:
+  RightViewWidget * parent_;
 };
 
 

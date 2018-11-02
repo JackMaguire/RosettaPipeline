@@ -24,10 +24,12 @@
 namespace view {
 
 ExamplesWidget::ExamplesWidget(
+  RightViewWidget * parent,
   graph::GraphSP graph,
   GraphWidget * graph_widget
 ) :
-  WContainerWidget()
+  WContainerWidget(),
+  parent_( parent )
 {
   addWidget( Wt::cpp14::make_unique< Wt::WText >( "<b>Batch Relax</b>" ) );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
@@ -49,6 +51,7 @@ ExamplesWidget::ExamplesWidget(
 	//TODO
       }
       graph_widget->update();
+      parent_->options_widget()->update();
     }
   );
 
