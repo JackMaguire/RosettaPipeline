@@ -31,7 +31,7 @@ class SaveAndLoadWidget : public Wt::WContainerWidget {
 public:
 
   SaveAndLoadWidget(
-    graph::GraphSP const & graph,
+    graph::GraphSP graph,
     GraphWidget * graph_widget
   ) {
     addWidget( Wt::cpp14::make_unique< Wt::WText >( "<b>Save</b>" ) );
