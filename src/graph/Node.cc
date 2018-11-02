@@ -208,10 +208,11 @@ Node::Node( std::vector< std::string > const & lines, int line_to_start_at ) {
     }
 
     if( line == "START_SCRIPT" ) {
+      std::stringstream ss;
       while( lines[ ++current_line ] != "END_SCRIPT" ){
-	//std::move this?
-	xml_script_ += lines[ current_line ] + "\n";
+	ss << std::move( lines[ current_line ] ) << "\n";
       }
+      xml_script_ = ss.str();
       continue;
     }
 
