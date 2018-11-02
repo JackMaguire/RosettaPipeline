@@ -149,7 +149,7 @@ void Node::save( std::vector< std::string > & output_lines ) const {
   output_lines.emplace_back( "b " + std::to_string( blue_ ) );
   output_lines.emplace_back( "command " + command_ );
   output_lines.emplace_back( "title " + title_ );
-  output_lines.emplace_back( "script " + xml_script_filename_ );
+  output_lines.emplace_back( std::string( "script " ) + xml_script_filename_ );
   output_lines.emplace_back( std::string( "use_script_file " ) + ( use_script_file_ ? "1" : "0" ) );
   output_lines.emplace_back( std::string( "use_default_command " ) + ( use_default_command_ ? "1" : "0" ) );
   output_lines.emplace_back( std::string( "still_using_default_title " ) + ( still_using_default_title_ ? "1" : "0" ) );
