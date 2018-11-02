@@ -13,8 +13,9 @@ endif
 
 #include makefile_mac
 
-GEN=-flto -O3 -Isrc -std=${std} ${WARN} ${EXTRA} -lstdc++fs -DROSETTA_PIPELINE_PWD=$(shell pwd)
-#WT_FLAGS=-lwthttp -lwt -lboost_signals -DBOOST_SIGNALS_NO_DEPRECATION_WARNING
+#GEN=-flto -O3 -Isrc -std=${std} ${WARN} ${EXTRA} -lstdc++fs -DROSETTA_PIPELINE_PWD=$(shell pwd)
+GEN=-g -Isrc -std=${std} ${WARN} ${EXTRA} -lstdc++fs -DROSETTA_PIPELINE_PWD=$(shell pwd)
+
 WT_FLAGS=-lwthttp2 -lwt2 -lboost_signals -DBOOST_SIGNALS_NO_DEPRECATION_WARNING -Iwt_src -L. -Wl,-rpath,.
 
 ########
