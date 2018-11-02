@@ -30,8 +30,8 @@ LeftViewWidget::LeftViewWidget(
   //LOGO
   Wt::WImage * const image =
     vbox->addWidget( Wt::cpp14::make_unique< Wt::WImage >( Wt::WLink( "media/RosettaPipeline.png" ) ) );
-  image->setMinimumSize( 605, 167 );//605 × 167
-  image->setMaximumSize( 605, 167 );//605 × 167
+  image->setMinimumSize( 290, 80 );//290 × 80
+  image->setMaximumSize( 290, 80 );//290 × 80
 
   //Edit Area
   Wt::WContainerWidget * const outer_edit_container =
