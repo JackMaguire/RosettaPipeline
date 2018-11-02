@@ -66,7 +66,7 @@ RightViewWidget::layoutSizeChanged( int w, int h ) {
 template< typename T, typename... Args >
 T *
 RightViewWidget::addTab( std::string tab_title, Args&&... args ){
-  auto uniq_ptr = Wt::cpp14::make_unique< T >( std::forward< Args >( args ) );
+  auto uniq_ptr = Wt::cpp14::make_unique< T >( std::forward< Args >( args )... );
   addTab( std::move(uniq_ptr), tab_title, Wt::ContentLoading::Eager );  
   return &(*uniq_ptr);
 }
