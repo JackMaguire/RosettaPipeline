@@ -26,21 +26,9 @@ public:
 
   virtual ~LoadWidget();
 
-  void layoutSizeChanged( int w, int h ) override;
-
 private:
-  int width_;
-  int height_;
 
   RightViewWidget * parent_;
 };
-
-inline
-void
-LoadWidget::layoutSizeChanged( int w, int h ) {
-  width_ = w;
-  height_ = h;
-}
-
 
 }//namespace view

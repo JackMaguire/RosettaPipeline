@@ -70,13 +70,8 @@ LoadWidget::LoadWidget(
   GraphWidget * graph_widget
 ) :
   WContainerWidget(),
-  parent_( parent ),
-  width_( 500 ),
-  height_( 800 )
+  parent_( parent )
 {
-  setLayoutSizeAware( true );
-  //resize( width_, height_ ); // Provide a default size.
-
   //largely copied from https://github.com/emweb/wt/blob/29ae91638e197013f67e7c826317529615d10749/examples/widgetgallery/examples/FileUpload.cpp
 
   //todo look into WFileDropWidget
