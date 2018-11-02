@@ -89,7 +89,9 @@ RightViewWidget::RightViewWidget(
   addTab( std::move(uniq_options_ptr), "Options", Wt::ContentLoading::Eager );
   options_widget_->setNodeWidget( node_ptr );
 
-  addTab( Wt::cpp14::make_unique< SaveAndLoadWidget >( graph_, graph_widget_ ), "Save/Load", Wt::ContentLoading::Eager );
+  SaveAndLoadWidget test( graph_, graph_widget_ );
+
+  //addTab( Wt::cpp14::make_unique< SaveAndLoadWidget >( graph_, graph_widget_ ), "Save/Load", Wt::ContentLoading::Eager );
   addTab( Wt::cpp14::make_unique< CompileWidget >( graph_ ), "Compile", Wt::ContentLoading::Eager );
 
   setStyleClass("tabwidget");
