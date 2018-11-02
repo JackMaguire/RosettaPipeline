@@ -79,8 +79,7 @@ RightViewWidget::RightViewWidget(
     edge_edit_widget_ = addTab_tmpl< EdgeWidget >( "Edit", selected_edge );
   }
 
-  options_widget_ = addTab_tmpl< OptionsWidget >( "Options", graph_widget_ );
-  options_widget_->setNodeWidget( node_edit_widget_ );
+  options_widget_ = addTab_tmpl< OptionsWidget >( "Options", this, graph_widget_ );
 
   save_and_load_widget_ = addTab_tmpl< SaveAndLoadWidget >( "Save/Load", graph_, graph_widget_ );
   compile_widget_ = addTab_tmpl< CompileWidget >( "Compile", graph_ );
@@ -100,14 +99,19 @@ RightViewWidget::noteChangeInSelection(){
   graph::NodeSP selected_node = graph_->selectedNode();
   if( selected_node ){
     auto uniq_node_ptr = Wt::cpp14::make_unique< NodeWidget >( selected_node, graph_widget_ );
-    NodeWidget * const node_ptr = &(*uniq_node_ptr);
+    node_edit_widget_ = &(*uniq_node_ptr);
     insertTab( 2, std::move(uniq_node_ptr), "Edit", Wt::ContentLoading::Eager );
-    options_widget_->setNodeWidget( node_ptr );
+
+    edge_edit_widget_ = 0;
   } else {
     graph::EdgeSP selected_edge = graph_->selectedEdge();
     assert( selected_edge );
-    insertTab( 2, Wt::cpp14::make_unique< EdgeWidget >( selected_edge ), "Edit", Wt::ContentLoading::Eager );
-    options_widget_->setNodeWidget( 0 );
+
+    auto uniq_edge_ptr = Wt::cpp14::make_unique< EdgeWidget >( selected_edge );
+    edge_edit_widget_ = &(*uniq_edge_ptr);
+    insertTab( 2, std::move(uniq_edge_ptr), "Edit", Wt::ContentLoading::Eager );
+
+    node_edit_widget_ = 0;
   }
 
   setCurrentIndex( starting_index );

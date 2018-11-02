@@ -2,14 +2,14 @@
 
 #include <Wt/WContainerWidget.h>
 #include <view/GraphWidget.fwd.hh>
-#include <view/NodeWidget.hh>
+#include <view/RightViewWidget.hh>
 
 namespace view {
 
 class OptionsWidget : public Wt::WContainerWidget
 {
 public:
-  OptionsWidget( GraphWidget * );
+  OptionsWidget( RightViewWidget *, GraphWidget * );
 
   virtual ~OptionsWidget();
 
@@ -19,13 +19,7 @@ protected:
   void setup_view_options( GraphWidget * );
   void setup_run_options();
 
-  NodeWidget * current_node_widget_;//Sad that wt does not support shared_ptr
+  RightViewWidget * parent_;
 };
-
-inline
-void
-OptionsWidget::setNodeWidget( NodeWidget * node ) {
-  current_node_widget_ = node;
-}
 
 }//namespace view

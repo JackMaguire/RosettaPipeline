@@ -19,8 +19,12 @@ using namespace global_data;
 
 namespace view {
 
-OptionsWidget::OptionsWidget( GraphWidget * graph_widget ) :
-  WContainerWidget()
+OptionsWidget::OptionsWidget(
+  RightViewWidget * parent,
+  GraphWidget * graph_widget
+) :
+  WContainerWidget(),
+  parent_( parent )
 {
   setup_view_options( graph_widget );
   setup_run_options();
@@ -182,8 +186,8 @@ OptionsWidget::setup_run_options(){
   command_edit->textInput().connect(
     [=] {
       Options::default_run_command = command_edit->text().toUTF8();
-      if( this->current_node_widget_ != 0 ){
-	this->current_node_widget_->updateDefaultCommand( Options::default_run_command );
+      if( parent_->node_edit_widget() != 0 ){
+	parent_->node_edit_widget()->updateDefaultCommand( Options::default_run_command );
       }
     }
   );

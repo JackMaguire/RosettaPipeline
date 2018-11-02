@@ -32,6 +32,15 @@ public:
 
   void noteChangeInSelection() override;
 
+public:
+  WelcomeWidget * welcome_widget(){ return welcome_widget_; }
+  ExamplesWidget * examples_widget(){ return examples_widget_; }
+  NodeWidget * node_edit_widget(){ return node_edit_widget_; }
+  EdgeWidget * edge_edit_widget(){ return edge_edit_widget_; }
+  OptionsWidget * options_widget(){ return options_widget_; }
+  SaveAndLoadWidget * save_and_load_widget(){ return save_and_load_widget_; }
+  CompileWidget * compile_widget(){ return compile_widget_; }
+
 protected:
   template< typename T, typename... Args >
   T * addTab_tmpl( std::string tab_title, Args&&... args );
