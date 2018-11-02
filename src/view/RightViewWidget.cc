@@ -35,15 +35,21 @@ public:
     GraphWidget * graph_widget
   ) {
     addWidget( Wt::cpp14::make_unique< Wt::WText >( "<b>Save</b>" ) );
-    addWidget( Wt::cpp14::make_unique< SaveWidget >( graph ) );
+    save_widget_ =
+      addWidget( Wt::cpp14::make_unique< SaveWidget >( graph ) );
     addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
     addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
     addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
     addWidget( Wt::cpp14::make_unique< Wt::WText >( "<b>Load</b>" ) );
-    addWidget( Wt::cpp14::make_unique< LoadWidget >( graph, graph_widget ) );
+    load_widget_ =
+      addWidget( Wt::cpp14::make_unique< LoadWidget >( graph, graph_widget ) );
   }
 
   ~SaveAndLoadWidget() = default;
+
+private:
+  SaveWidget * save_widget_;
+  LoadWidget * load_widget_;
 
 };
 
