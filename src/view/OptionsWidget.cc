@@ -195,7 +195,7 @@ OptionsWidget::update(){
   orient_node_titles_box_->setChecked( Options::put_node_titles_to_side );
 
   //Run
-  command_edit_->setText( Options::default_run_command ) );
+  command_edit_->setText( Options::default_run_command );
   serialize_intermediate_poses_box_->setChecked( Options::serialize_intermediate_poses );
   delete_unused_intermediate_poses_box_->setChecked( Options::delete_unused_intermediate_poses );  
   num_proc_spin_box_->setValue( Options::num_processors );
