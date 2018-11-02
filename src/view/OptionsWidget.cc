@@ -2,6 +2,7 @@
 
 #include <global_data/options.hh>
 #include <view/GraphWidget.hh>
+#include <view/NodeWidget.hh>
 
 #include <Wt/WGlobal.h>
 #include <Wt/WPushButton.h>
