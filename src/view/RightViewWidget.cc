@@ -66,7 +66,7 @@ RightViewWidget::RightViewWidget(
   graph_->registerNewChangeListener( this );
 
   //addTab( Wt::cpp14::make_unique< WelcomeWidget >(), "Welcome", Wt::ContentLoading::Eager );
-  welcome_widget_ = addTab_tmpl( "Welcome", graph_, graph_widget_ );
+  welcome_widget_ = addTab_tmpl< WelcomeWidget >( "Welcome", graph_, graph_widget_ );
   addTab( Wt::cpp14::make_unique< ExamplesWidget >( graph_, graph_widget_ ), "Examples", Wt::ContentLoading::Eager );
 
   graph::NodeSP selected_node = graph_->selectedNode();
