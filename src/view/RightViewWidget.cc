@@ -25,8 +25,6 @@
 
 namespace view {
 
-namespace {
-
 class SaveAndLoadWidget : public Wt::WContainerWidget {
 public:
 
@@ -52,8 +50,6 @@ private:
   LoadWidget * load_widget_;
 
 };
-
-}
 
 RightViewWidget::RightViewWidget(
   graph::GraphSP graph,
@@ -89,9 +85,7 @@ RightViewWidget::RightViewWidget(
   addTab( std::move(uniq_options_ptr), "Options", Wt::ContentLoading::Eager );
   options_widget_->setNodeWidget( node_ptr );
 
-  SaveAndLoadWidget test( graph_, graph_widget_ );
-
-  //addTab( Wt::cpp14::make_unique< SaveAndLoadWidget >( graph_, graph_widget_ ), "Save/Load", Wt::ContentLoading::Eager );
+  addTab( Wt::cpp14::make_unique< SaveAndLoadWidget >( graph_, graph_widget_ ), "Save/Load", Wt::ContentLoading::Eager );
   addTab( Wt::cpp14::make_unique< CompileWidget >( graph_ ), "Compile", Wt::ContentLoading::Eager );
 
   setStyleClass("tabwidget");
