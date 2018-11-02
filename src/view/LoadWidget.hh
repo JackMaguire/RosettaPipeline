@@ -4,6 +4,7 @@
 #include <Wt/WContainerWidget.h>
 #include <graph/Graph.fwd.hh>
 #include <view/GraphWidget.fwd.hh>
+#include <view/RightViewWidget.hh>
 
 #include <string>
 
@@ -18,6 +19,7 @@ class LoadWidget : public Wt::WContainerWidget
 {
 public:
   LoadWidget(
+    RightViewWidget * parent,
     graph::GraphSP const &,
     GraphWidget * graph_widget
   );
@@ -29,6 +31,8 @@ public:
 private:
   int width_;
   int height_;
+
+  RightViewWidget * parent_;
 };
 
 inline

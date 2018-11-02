@@ -64,10 +64,12 @@ std::string load_file(
 
 
 LoadWidget::LoadWidget(
+  RightViewWidget * parent,
   graph::GraphSP const & graph,
   GraphWidget * graph_widget
 ) :
   WContainerWidget(),
+  parent_( parent ),
   width_( 500 ),
   height_( 800 )
 {
@@ -104,6 +106,7 @@ LoadWidget::LoadWidget(
 	  //TODO clear maps in graph view
 	  out->setText( load_file( lines, * graph ) );
 	  graph_widget->update();
+	  parent_->options_widget()->update();
 	}
       }
     }
