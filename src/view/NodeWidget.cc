@@ -57,6 +57,12 @@ NodeWidget::NodeWidget(
   script_editor->setInline( true );
   script_editor->setFormObject( true );
 
+  script_editor->textInput().connect(
+    [=] {
+      node_->setXMLScript( script_editor->text().narrow() );
+    }
+  );
+
   //script_editor->setExtraPlugins( "bbcode" );
 }
 
