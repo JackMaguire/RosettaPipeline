@@ -42,11 +42,18 @@ NodeWidget::NodeWidget(
   Wt::WBorderLayout * const bottom_layout =
     bottom_container->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
 
-  Wt::WTextEdit * const script_editor =
+  /*Wt::WTextEdit * const script_editor =
     bottom_layout->addWidget( Wt::cpp14::make_unique< Wt::WTextEdit >( node_->xmlScript() ),
       Wt::LayoutPosition::Center );
   script_editor->setMinimumSize( 500, 200 );
-  //script_editor->setExtraPlugins( "advcode" );
+  script_editor->setExtraPlugins( "advcode" );
+  script_editor->setInline( true );
+  script_editor->setFormObject( true );*/
+
+  Wt::WTextArea * const script_editor =
+    bottom_layout->addWidget( Wt::cpp14::make_unique< Wt::WTextArea >( node_->xmlScript() ),
+      Wt::LayoutPosition::Center );
+  script_editor->setMinimumSize( 500, 200 );
   script_editor->setInline( true );
   script_editor->setFormObject( true );
 
