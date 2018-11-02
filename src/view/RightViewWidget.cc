@@ -80,7 +80,7 @@ RightViewWidget::RightViewWidget(
   }
 
   options_widget_ = addTab_tmpl< OptionsWidget >( "Options", graph_widget_ );
-  options_widget_->setNodeWidget( node_ptr );
+  options_widget_->setNodeWidget( node_edit_widget_ );
 
   save_and_load_widget_ = addTab_tmpl< SaveAndLoadWidget >( "Save/Load", graph_, graph_widget_ );
   compile_widget_ = addTab_tmpl< CompileWidget >( "Compile", graph_ );
