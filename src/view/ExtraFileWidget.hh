@@ -3,7 +3,6 @@
 #include <Wt/WContainerWidget.h>
 #include <Wt/WTextArea.h>
 #include <Wt/WLineEdit.h>
-//#include <graph/Graph.fwd.hh>
 
 #include <string>
 

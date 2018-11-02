@@ -1,14 +1,7 @@
 #include <view/ExtraFileWidget.hh>
 
-//#include <global_data/options.hh>
-
-//#include <Wt/WLength.h>
-//#include <Wt/WImage.h>
 #include <Wt/WGlobal.h>
-//#include <Wt/WHBoxLayout.h>
-//#include <Wt/WVBoxLayout.h>
 #include <Wt/WBorderLayout.h>
-//#include <Wt/WLink.h>
 #include <Wt/WText.h>
 
 namespace view {
