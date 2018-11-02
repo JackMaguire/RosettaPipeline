@@ -1,5 +1,6 @@
 #include <view/ExamplesWidget.hh>
 #include <view/LoadWidget.hh>
+#include <view/OptionsWidget.hh>
 
 #include <view/GraphWidget.hh>
 

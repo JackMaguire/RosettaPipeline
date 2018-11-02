@@ -3,6 +3,7 @@
 #include <global_data/options.hh>
 #include <graph/Graph.hh>
 #include <view/GraphWidget.hh>
+#include <view/OptionsWidget.hh>
 
 
 //#include <Wt/WLength.h>
