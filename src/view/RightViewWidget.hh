@@ -34,7 +34,7 @@ public:
 
 protected:
   template< typename T, typename... Args >
-  T * addTab( std::string tab_title, Args&&... args );
+  T * addTab_tmpl( std::string tab_title, Args&&... args );
 
 private:
   graph::GraphSP graph_;
@@ -65,7 +65,7 @@ RightViewWidget::layoutSizeChanged( int w, int h ) {
 //inline
 template< typename T, typename... Args >
 T *
-RightViewWidget::addTab( std::string tab_title, Args&&... args ){
+RightViewWidget::addTab_tmpl( std::string tab_title, Args&&... args ){
   auto uniq_ptr = Wt::cpp14::make_unique< T >( std::forward< Args >( args )... );
   addTab( std::move(uniq_ptr), tab_title, Wt::ContentLoading::Eager );  
   return &(*uniq_ptr);
