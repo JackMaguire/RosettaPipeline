@@ -6,7 +6,9 @@
 
 namespace graph {
 
-Graph::Graph(){}
+Graph::Graph() :
+  next_node_id_( 0 )
+{}
 
 Graph::~Graph(){}
 
