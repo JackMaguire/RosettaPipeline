@@ -62,7 +62,7 @@ RightViewWidget::layoutSizeChanged( int w, int h ) {
 //Wt is not friendly about ownership of child widgets
 //I would love to just use shared_ptrs, but Wt's only option is to give the container
 //a unique_ptr and keep a raw ptr for ourselves
-inline
+//inline
 template< typename T, typename... Args >
 T *
 RightViewWidget::addTab( std::string tab_title, Args&&... args ){
