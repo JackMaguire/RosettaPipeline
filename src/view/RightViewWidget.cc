@@ -29,6 +29,7 @@ class SaveAndLoadWidget : public Wt::WContainerWidget {
 public:
 
   SaveAndLoadWidget(
+    RightViewWidget * parent,
     graph::GraphSP graph,
     GraphWidget * graph_widget
   ) {
@@ -40,7 +41,7 @@ public:
     addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
     addWidget( Wt::cpp14::make_unique< Wt::WText >( "<b>Load</b>" ) );
     load_widget_ =
-      addWidget( Wt::cpp14::make_unique< LoadWidget >( graph, graph_widget ) );
+      addWidget( Wt::cpp14::make_unique< LoadWidget >( parent, graph, graph_widget ) );
   }
 
   ~SaveAndLoadWidget() = default;
@@ -66,7 +67,7 @@ RightViewWidget::RightViewWidget(
   graph_->registerNewChangeListener( this );
 
   welcome_widget_ = addTab_tmpl< WelcomeWidget >( "Welcome" );
-  examples_widget_ = addTab_tmpl< ExamplesWidget >( "Examples", graph_, graph_widget_ );
+  examples_widget_ = addTab_tmpl< ExamplesWidget >( "Examples", this, graph_, graph_widget_ );
 
   graph::NodeSP selected_node = graph_->selectedNode();
   if( selected_node != 0 ){
@@ -81,7 +82,7 @@ RightViewWidget::RightViewWidget(
 
   options_widget_ = addTab_tmpl< OptionsWidget >( "Options", this, graph_widget_ );
 
-  save_and_load_widget_ = addTab_tmpl< SaveAndLoadWidget >( "Save/Load", graph_, graph_widget_ );
+  save_and_load_widget_ = addTab_tmpl< SaveAndLoadWidget >( "Save/Load", this, graph_, graph_widget_ );
   compile_widget_ = addTab_tmpl< CompileWidget >( "Compile", graph_ );
 
   setStyleClass("tabwidget");
