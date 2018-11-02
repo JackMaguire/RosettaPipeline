@@ -2,6 +2,7 @@
 #include <graph/Node.hh>
 
 #include <iostream>
+#include <sstream>
 
 namespace graph {
 
