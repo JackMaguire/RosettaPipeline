@@ -1,7 +1,6 @@
 #pragma once
 
 #include <Wt/WContainerWidget.h>
-//#include <graph/Graph.fwd.hh>
 
 namespace view {
 
