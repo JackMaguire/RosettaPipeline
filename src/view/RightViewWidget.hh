@@ -10,15 +10,36 @@
 #include <view/NodeWidget.hh>
 #include <view/EdgeWidget.hh>
 #include <view/OptionsWidget.hh>
-#include <view/SaveAndLoadWidget.hh>
 #include <view/CompileWidget.hh>
-
+#include <view/SaveWidget.hh>
+#include <view/LoadWidget.hh>
 
 #include <string>
 
 #include <Options.hh>
 
 namespace view {
+
+class SaveAndLoadWidget : public Wt::WContainerWidget {
+public:
+  SaveAndLoadWidget(
+    RightViewWidget * parent,
+    graph::GraphSP graph,
+    GraphWidget * graph_widget
+  );
+
+  ~SaveAndLoadWidget();
+
+  void setOptions( OptionsSP options ){
+    save_widget_->setOptions( options );
+    load_widget_->setOptions( options );
+  }
+
+private:
+  SaveWidget * save_widget_;
+  LoadWidget * load_widget_;
+};
+
 
 class RightViewWidget : public Wt::WTabWidget, graph::SelectionChangeListener, OptionsHolder
 {

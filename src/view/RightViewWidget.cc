@@ -24,39 +24,24 @@
 
 namespace view {
 
-class SaveAndLoadWidget : public Wt::WContainerWidget {
-public:
+SaveAndLoadWidget::SaveAndLoadWidget(
+  RightViewWidget * parent,
+  graph::GraphSP graph,
+  GraphWidget * graph_widget
+) {
+  //TODO WGroupBox
+  addWidget( Wt::cpp14::make_unique< Wt::WText >( "<b>Save</b>" ) );
+  save_widget_ =
+    addWidget( Wt::cpp14::make_unique< SaveWidget >( graph ) );
+  addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
+  addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
+  addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
+  addWidget( Wt::cpp14::make_unique< Wt::WText >( "<b>Load</b>" ) );
+  load_widget_ =
+    addWidget( Wt::cpp14::make_unique< LoadWidget >( parent, graph, graph_widget ) );
+}
 
-  SaveAndLoadWidget(
-    RightViewWidget * parent,
-    graph::GraphSP graph,
-    GraphWidget * graph_widget
-  ) {
-    //TODO WGroupBox
-
-    addWidget( Wt::cpp14::make_unique< Wt::WText >( "<b>Save</b>" ) );
-    save_widget_ =
-      addWidget( Wt::cpp14::make_unique< SaveWidget >( graph ) );
-    addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
-    addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
-    addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
-    addWidget( Wt::cpp14::make_unique< Wt::WText >( "<b>Load</b>" ) );
-    load_widget_ =
-      addWidget( Wt::cpp14::make_unique< LoadWidget >( parent, graph, graph_widget ) );
-  }
-
-  ~SaveAndLoadWidget() = default;
-
-  void setOptions( OptionsSP options ){
-    save_widget_->setOptions( options );
-    load_widget_->setOptions( options );
-  }
-
-private:
-  SaveWidget * save_widget_;
-  LoadWidget * load_widget_;
-
-};
+SaveAndLoadWidget::~SaveAndLoadWidget() = default;
 
 RightViewWidget::RightViewWidget(
   graph::GraphSP graph,
