@@ -4,7 +4,6 @@
 #include <graph/Node.hh>
 #include <graph/Edge.hh>
 
-#include <global_data/options.hh>
 #include <global_data/version.hh>
 
 #include <set>
@@ -43,13 +42,13 @@ generate_random_string( int size ){
 }
 
 CompilationResult
-compile( graph::Graph const & g ){
+compile( graph::Graph const & g, Options const & options ){
 
   if( cycleExists( g ) ){
     return CompilationResult( false, "Error: could not compile, cycle exists in graph" );
   }
 
-  auto const nproc = global_data::Options::num_processors;
+  auto const nproc = options.num_processors;
 
   if( nproc == 0 ){
     return CompilationResult( false, "Error: could not compile, num_processors value is not set."
@@ -68,14 +67,14 @@ compile( graph::Graph const & g ){
     nodes_in_order[ stage - 1 ]->setStageValidity( true );
   }
 
-  std::string const directory_name = setup_working_directory( nodes_in_order );
+  std::string const directory_name = setup_working_directory( nodes_in_order, options );
   std::string const subdirectory_name = directory_name + "/rosetta_pipeline";
 
   {//run script
     std::string const run_script_filename = subdirectory_name + "/run.sh";
     std::ofstream run_script;
     run_script.open( run_script_filename );
-    compile_run_script( nodes_in_order, run_script );
+    compile_run_script( nodes_in_order, options, run_script );
     run_script.close();
   }
 
@@ -105,12 +104,12 @@ compile( graph::Graph const & g ){
 }
 
 std::string
-just_compile_run_script( graph::Graph const & g ) {
+just_compile_run_script( graph::Graph const & g, Options const & options ) {
   if( cycleExists( g ) ){
     return "Error: could not compile, cycle exists in graph";
   }
 
-  auto const nproc = global_data::Options::num_processors;
+  auto const nproc = options.num_processors;
 
   if( nproc == 0 ){
     return "Error: could not compile, num_processors value is not set."
@@ -131,7 +130,7 @@ just_compile_run_script( graph::Graph const & g ) {
   }
 
   std::stringstream run_script;
-  compile_run_script( nodes_in_order, run_script );
+  compile_run_script( nodes_in_order, options, run_script );
 
   for( graph::NodeCSP const & node : nodes_in_order ) {
     node->setStageValidity( false );
@@ -143,7 +142,8 @@ just_compile_run_script( graph::Graph const & g ) {
 
 std::string
 setup_working_directory(
-  std::vector< graph::NodeCSP > const & nodes_in_order
+  std::vector< graph::NodeCSP > const & nodes_in_order,
+  Options const & options
 ){
   std::string const directory_name = "/tmp/" + generate_random_string( 16 );
   std::filesystem::create_directory( directory_name );
@@ -173,7 +173,7 @@ setup_working_directory(
       flags_file.open( flags_filename );
       flags_file << all_flags << "\n";
 
-      if( global_data::Options::serialize_intermediate_poses ) {
+      if( options.serialize_intermediate_poses ) {
 	if( node->numUpstreamEdges() > 0 ) {
 	  flags_file << "-in:file:srlz_override 1\n";
 	}
@@ -202,6 +202,7 @@ setup_working_directory(
 void
 compile_run_script(
   std::vector< graph::NodeCSP > const & nodes_in_order,
+  Options const & options,
   std::ostream & run_script
 ){
 
@@ -267,14 +268,14 @@ compile_run_script(
 	" fi\n"
 	"done\n";
 
-      if( global_data::Options::delete_unused_intermediate_poses && node->numDownstreamEdges() > 0 ) {
+      if( options.delete_unused_intermediate_poses && node->numDownstreamEdges() > 0 ) {
 	// Save good files so that they do not get deleted later
 	run_script << "\n#Save good files so that they do not get deleted later\n";
 	run_script << "cat temp3 | while read line; do echo $line.* ; done > results_to_keep.txt\n";
       }
     }
 
-    if( global_data::Options::delete_unused_intermediate_poses && node->numDownstreamEdges() > 0 ) {
+    if( options.delete_unused_intermediate_poses && node->numDownstreamEdges() > 0 ) {
       run_script << "\n# Delete poses not needed for future stages\n" <<
 	"awk '{print $2}' temp | while read line; do\n"
 	"    if [[ `grep $line temp3 | wc -l` -eq 0 ]]; then\n"
@@ -354,8 +355,8 @@ void addStageIntroToScript( int stage, std::ostream & run_script ) {
   run_script << "###########\n\n";
 }
 
-void addGlobalVariablesToRunScript( std::ostream & run_script ) {
-  run_script << "nproc=" << global_data::Options::num_processors << "\n";
+void addGlobalVariablesToRunScript( std::ostream & run_script, Options const & options ) {
+  run_script << "nproc=" << options.num_processors << "\n";
 }
 
 
