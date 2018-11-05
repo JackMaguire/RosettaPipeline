@@ -62,7 +62,7 @@ void Node::init( Options const & options ){
   stage_ = 0;
   stage_is_valid_ = false;
 
-  command_ = options->default_run_command;
+  command_ = options.default_run_command;
   notes_ = "";
 
   user_rosetta_flags_ = "# Keep in mind that all commands will be run one directory deeper.\n"
