@@ -22,7 +22,7 @@ NodeWidget::NodeWidget(
   OptionsSP options
 ) :
   WContainerWidget(),
-  OptionsHolder( std::move( options ),
+  OptionsHolder( std::move( options ) ),
   node_( std::move( node ) )
 {
   Wt::WVBoxLayout * const layout =
