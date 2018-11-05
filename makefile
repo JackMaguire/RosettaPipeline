@@ -19,9 +19,9 @@ WT_FLAGS=-lwthttp2 -lwt2 -lboost_signals -DBOOST_SIGNALS_NO_DEPRECATION_WARNING 
 ########
 # META #
 ########
-all: options graph compile view apps bin
+all: Options.o graph compile view apps bin
 
-all_no_wt: options graph compile
+all_no_wt: Options.o graph compile
 
 graph: Node.o Edge.o Graph.o
 
@@ -31,7 +31,6 @@ bin: graph_view_app
 # OPTIONS #
 ###########
 
-options:
 Options.o: src/Options.hh
 	${CXX} -c -o build/Options.o src/Options.cc ${GEN} 
 
@@ -123,5 +122,5 @@ apps: GraphApplication
 # BIN #
 #######
 
-graph_view_app: GraphApplication view 
+graph_view_app: GraphApplication view Options.o
 	${CXX} -o bin/graph_view_app build/graph_view_app.o build/graph.o build/view.o build/Options.o build/compile.o ${GEN} ${WT_FLAGS}
