@@ -101,7 +101,7 @@ RightViewWidget::noteChangeInSelection(){
 
   graph::NodeSP selected_node = graph_->selectedNode();
   if( selected_node ){
-    auto uniq_node_ptr = Wt::cpp14::make_unique< NodeWidget >( selected_node, graph_widget_ );
+    auto uniq_node_ptr = Wt::cpp14::make_unique< NodeWidget >( selected_node, graph_widget_, options_ );
     node_edit_widget_ = &(*uniq_node_ptr);
     insertTab( 2, std::move(uniq_node_ptr), "Edit", Wt::ContentLoading::Eager );
 
