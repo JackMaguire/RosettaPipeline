@@ -4,12 +4,12 @@
 #include <graph/Edge.fwd.hh>
 #include <graph/Graph.fwd.hh>
 
-#include <global_data/options.hh>
-
 #include <vector>
 #include <algorithm>
 #include <string>
 #include <cassert>
+
+#include <Options.hh>
 
 namespace graph {
 
@@ -18,8 +18,8 @@ class Node : public std::enable_shared_from_this< Node > {
 friend class Graph;
 
 public:
-  Node( int x, int y );
-  Node( std::string title, int x, int y );//pass-by-value on purpose
+  Node( Options const &, int x, int y );
+  Node( Options const &, std::string title, int x, int y );//pass-by-value on purpose
   ~Node();
 
   virtual std::string
@@ -118,7 +118,7 @@ public://container access
   }
 
 protected:
-  void init();
+  void init( Options const & );
 
   void save( std::vector< std::string > & output_lines ) const;
 

@@ -1,8 +1,6 @@
 #include <graph/Node.hh>
 #include <graph/Edge.hh>
 
-#include <global_data/options.hh>
-
 #include <iostream>
 
 #include <sstream>
@@ -20,23 +18,23 @@ bool hasEnding ( std::string const & fullString, std::string const & ending ) {
 }
 }
 
-Node::Node( int x, int y ) {
+Node::Node( Options const & options, int x, int y ) {
   title_ = "Node_0";
   x_ = x;
   y_ = y;
   init();
 }
 
-Node::Node( std::string title, int x, int y ) {//pass-by-value on purpose
+Node::Node( Options const & options, std::string title, int x, int y ) {//pass-by-value on purpose
   title_ = std::move( title );
   x_ = x;
   y_ = y;
-  init();
+  init( options );
 }
 
 Node::~Node(){}
 
-void Node::init(){
+void Node::init( Options const & options ){
   assert( hasEnding( uniqueToken(), "_NODE" ) );
 
   use_default_command_ = true;
@@ -64,7 +62,7 @@ void Node::init(){
   stage_ = 0;
   stage_is_valid_ = false;
 
-  command_ = global_data::Options::default_run_command;
+  command_ = options->default_run_command;
   notes_ = "";
 
   user_rosetta_flags_ = "# Keep in mind that all commands will be run one directory deeper.\n"
