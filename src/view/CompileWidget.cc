@@ -40,7 +40,7 @@ public:
   ) override {
 
     if( ! request.continuation() ){
-      compile::CompilationResult const compilation_result = compile::compile( * graph_ );
+      compile::CompilationResult const compilation_result = compile::compile( * graph_, options_ );
       if( compilation_result.success ){
 	iss_for_most_recent_request_ = std::make_unique< std::istringstream >( compilation_result.result );
       } else {
@@ -169,7 +169,7 @@ CompileWidget::CompileWidget( graph::GraphSP graph ) :
 
   preview_elements.preview_button->clicked().connect(
     [=](){
-      preview_elements.run_script_area->setText( compile::just_compile_run_script( * graph ) );
+      preview_elements.run_script_area->setText( compile::just_compile_run_script( * graph, options_ ) );
     }
   );
 }
