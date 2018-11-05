@@ -49,7 +49,7 @@ std::string load_file(
   if( file_lines[ current_line ] != "START_GRAPH" ) {
     return "Error, expected first line to say \"START_OPTIONS\"";
   }
-  current_line = graph.loadSelfNodesAndEdges( file_lines, current_line ) + 1;
+  current_line = graph.loadSelfNodesAndEdges( file_lines, current_line, options ) + 1;
 
   return "load successful";
 }
@@ -61,7 +61,7 @@ std::string load_file(
   graph::Graph & graph,
   Options & options
 ){
-  return load_file( get_file_lines( filename ), graph, * options_ );
+  return load_file( get_file_lines( filename ), graph, options );
 }
 
 
@@ -103,7 +103,7 @@ LoadWidget::LoadWidget(
 	std::vector< std::string > lines = get_file_lines( filename );
 	if( lines.size() > 1 ){
 	  //TODO clear maps in graph view
-	  out->setText( load_file( lines, * graph ) );
+	  out->setText( load_file( lines, * graph, * options_ ) );
 	  graph_widget->update();
 	  parent_->options_widget()->update();
 	}
