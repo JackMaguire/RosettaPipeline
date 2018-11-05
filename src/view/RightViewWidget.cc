@@ -80,7 +80,7 @@ RightViewWidget::RightViewWidget(
     edge_edit_widget_ = addTab_tmpl< EdgeWidget >( "Edit", selected_edge );
   }
 
-  options_widget_ = addTab_tmpl< OptionsWidget >( "Options", this, graph_widget_ );
+  options_widget_ = addTab_tmpl< OptionsWidget >( "Options", this, graph_widget_, options_ );
 
   save_and_load_widget_ = addTab_tmpl< SaveAndLoadWidget >( "Save/Load", this, graph_, graph_widget_ );
   compile_widget_ = addTab_tmpl< CompileWidget >( "Compile", graph_ );
