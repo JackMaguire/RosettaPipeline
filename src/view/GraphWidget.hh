@@ -14,6 +14,8 @@
 #include <view/color_themes.hh>
 #include <view/GraphToolbarWidget.hh>
 
+#include <Options.hh>
+
 #include <unordered_map>
 
 namespace view {
@@ -39,7 +41,7 @@ struct hitbox {
   }
 };
 
-class GraphWidget : public Wt::WPaintedWidget
+class GraphWidget : public Wt::WPaintedWidget, OptionsHolder
 {
 public:
   GraphWidget(

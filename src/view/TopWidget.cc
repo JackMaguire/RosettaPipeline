@@ -20,7 +20,7 @@
 
 namespace view {
 
-TopWidget::TopWidget( graph::GraphSP const & graph ) :
+TopWidget::TopWidget( graph::GraphSP graph, OptionsSP ) :
   WContainerWidget(),
   width_( 1000 ),
   height_( 800 )
@@ -40,7 +40,6 @@ TopWidget::TopWidget( graph::GraphSP const & graph ) :
   Wt::WBorderLayout * const right_layout =
     right_container->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
   right_layout->setSpacing( 0 );
-  //right_layout->
 
   right_layout->addWidget( Wt::cpp14::make_unique< RightViewWidget >( graph, left_item->graphWidget() ),
     Wt::LayoutPosition::Center );

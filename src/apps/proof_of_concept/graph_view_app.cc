@@ -7,6 +7,8 @@
 
 #include <memory>
 
+#include <Options.hh>
+
 using namespace Wt;
 
 std::unique_ptr< Wt::WApplication > createApplication( Wt::WEnvironment const & env ) {
@@ -21,13 +23,14 @@ std::unique_ptr< Wt::WApplication > createApplication( Wt::WEnvironment const & 
     previous = node;
   }
 
+  OptionsSP options = std::make_shared< Options >();
+
   std::unique_ptr< Wt::WApplication > app = Wt::cpp14::make_unique< Wt::WApplication >( env );
   app->setTitle( "Rosetta Pipeline" );
   app->root()->setStyleClass( "root" );
-  app->root()->addWidget( Wt::cpp14::make_unique< view::TopWidget >( graph ) );
+  app->root()->addWidget( Wt::cpp14::make_unique< view::TopWidget >( std::move( graph ), std::move( options ) ) );
   app->setCssTheme("polished");
   app->setTheme( std::make_shared< Wt::WBootstrapTheme >() ) ;
-  //app->useStyleSheet("dragdrop.css");
   return app;
 }
 

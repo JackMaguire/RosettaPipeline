@@ -2,13 +2,17 @@
 
 #include <Wt/WContainerWidget.h>
 #include <graph/Graph.fwd.hh>
+#include <Options.hh>
 
 namespace view {
 
 class TopWidget : public Wt::WContainerWidget
 {
 public:
-  TopWidget( graph::GraphSP const & );
+  TopWidget(
+    graph::GraphSP,
+    OptionsSP
+  );
 
   virtual ~TopWidget();
 

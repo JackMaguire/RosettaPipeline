@@ -2,6 +2,7 @@
 
 #include <string>
 #include <vector>
+#include <memory>
 
 struct Options {
 
@@ -37,4 +38,21 @@ struct Options {
   void save( std::vector< std::string > & output_lines );
   int load( std::vector< std::string > const & lines, int line_to_start_at );
 
+};
+
+using OptionsSP = std::shared_ptr< Options >;
+using OptionsCSP = std::shared_ptr< const Options >;
+using OptionsWP = std::weak_ptr< Options >;
+using OptionsCWP = std::weak_ptr< const Options >;
+
+class OptionsHolder {
+public:
+  virtual ~OptionsHolder(){}
+
+  void setOptions( OptionsSP options ){
+    options_ = std::move( options );
+  }
+
+protected:
+  OptionsSP options_;
 };

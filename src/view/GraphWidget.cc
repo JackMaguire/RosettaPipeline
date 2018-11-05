@@ -1,5 +1,4 @@
 #include <view/GraphWidget.hh>
-#include <global_data/options.hh>
 
 #include <graph/Graph.hh>
 #include <graph/Edge.hh>
@@ -288,7 +287,7 @@ void
 GraphWidget::paintEvent( Wt::WPaintDevice * paintDevice ) {
   Wt::WPainter painter( paintDevice );
   painter.setPen( default_pen_ );
-  int const grid_size = global_data::Options::grid_size;
+  int const grid_size = options_->grid_size;
 
   //Outline
   painter.setBrush( Wt::WBrush( theme_->grid_line() ) );
@@ -381,9 +380,9 @@ GraphWidget::drawNode(
   painter.drawEllipse( x, y, diameter, diameter );
   hitbox_for_node_[ node ] = hitbox( x, y, diameter, diameter );
 
-  if( global_data::Options::show_node_titles ) {
+  if( options_->show_node_titles ) {
     //g2D.setColor( Color.black );
-    if( global_data::Options::put_node_titles_to_side ) {
+    if( options_->put_node_titles_to_side ) {
       painter.drawText(
 	x + diameter + selection_width,
 	y,
@@ -487,7 +486,7 @@ GraphWidget::drawGhostEdge(
 //TODO this needs a better name
 int
 GraphWidget::getClosestPointForPoint( int point ) const {
-  int const grid_size = global_data::Options::grid_size;
+  int const grid_size = options_->grid_size;
   int const offset = ( node_width_ - ( node_width_ / 2 ) ) * grid_size;
   double const new_point = ( point - offset ) / double( grid_size );
   return int( round( new_point ) );

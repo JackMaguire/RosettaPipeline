@@ -3,6 +3,7 @@
 #include <Wt/WContainerWidget.h>
 #include <graph/Graph.fwd.hh>
 #include <view/GraphWidget.fwd.hh>
+#include <Options.hh>
 
 namespace view {
 
@@ -10,10 +11,11 @@ class LeftViewWidget : public Wt::WContainerWidget
 {
 public:
   LeftViewWidget(
-    graph::GraphSP
+    graph::GraphSP,
+    OptionsSP
   );
 
-  virtual ~LeftViewWidget();
+  ~LeftViewWidget() override;
 
   GraphWidget * graphWidget(){ return graph_widget_; }
 

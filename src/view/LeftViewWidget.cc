@@ -3,7 +3,6 @@
 #include <view/GraphWidget.hh>
 #include <view/GraphToolbarWidget.hh>
 
-#include <global_data/options.hh>
 #include <graph/Graph.hh>
 
 #include <Wt/WLength.h>
@@ -20,7 +19,8 @@
 namespace view {
 
 LeftViewWidget::LeftViewWidget(
-  graph::GraphSP graph
+  graph::GraphSP graph,
+  OptionsSP options
 ) :
   WContainerWidget()
 {
@@ -46,6 +46,7 @@ LeftViewWidget::LeftViewWidget(
     edit_layout->addWidget( Wt::cpp14::make_unique< GraphToolbarWidget >() );
   graph_widget_ =
     edit_layout->addWidget( Wt::cpp14::make_unique< GraphWidget >( graph, toolbar ) );
+  graph_widget_->setOptions( std::move( options ) );
 
   //Wt::WContainerWidget * const dummy_container =
   outer_edit_layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >(), Wt::LayoutPosition::Center );
