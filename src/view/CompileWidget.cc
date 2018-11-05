@@ -175,7 +175,7 @@ CompileWidget::CompileWidget(
 
   preview_elements.preview_button->clicked().connect(
     [=](){
-      preview_elements.run_script_area->setText( compile::just_compile_run_script( * graph, options_ ) );
+      preview_elements.run_script_area->setText( compile::just_compile_run_script( * graph, * options_ ) );
     }
   );
 }
