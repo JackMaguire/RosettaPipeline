@@ -94,6 +94,8 @@ RightViewWidget::RightViewWidget(
 
   setStyleClass("tabwidget");
   setCurrentIndex( 0 );
+
+  setOptionsDownward( std::move( options ) );
 }
 
 RightViewWidget::~RightViewWidget(){}
