@@ -97,7 +97,11 @@ Graph::saveSelfNodesAndEdges( std::vector< std::string > & output_lines ) const 
 }
 
 int
-Graph::loadSelfNodesAndEdges( std::vector< std::string > const & lines, int line_to_start_at ) {
+Graph::loadSelfNodesAndEdges(
+  std::vector< std::string > const & lines,
+  int line_to_start_at,
+  Options const & options
+) {
   // First, Delete everything!
   selected_node_ = 0;
   selected_edge_ = 0;
@@ -138,7 +142,7 @@ Graph::loadSelfNodesAndEdges( std::vector< std::string > const & lines, int line
     if( tokens[ 0 ] == "num_nodes" ) {
       uint const num_nodes = std::stoi( tokens[ 1 ] );
       for( uint i = 0; i < num_nodes; ++i ) {
-	NodeSP new_node = std::make_shared< Node >( lines, ++current_line );
+	NodeSP new_node = std::make_shared< Node >( lines, ++current_line, options );
 	nodes_.emplace_back( std::move( new_node ) );
 	while( lines[ ++current_line ] != "END_NODE" ){}
       }
