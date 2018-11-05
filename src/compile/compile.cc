@@ -207,6 +207,7 @@ compile_run_script(
 ){
 
   addGlobalIntroToScript( run_script );
+  addGlobalVariablesToRunScript( run_script, options );
   
   for( graph::NodeCSP const & node : nodes_in_order ){
     addStageIntroToScript( node->stage(), run_script );
