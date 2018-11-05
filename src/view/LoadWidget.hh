@@ -1,6 +1,6 @@
 #pragma once
 
-//#include <Wt/WTabWidget.h>
+#include <Options.hh>
 #include <Wt/WContainerWidget.h>
 #include <graph/Graph.fwd.hh>
 #include <view/GraphWidget.fwd.hh>
@@ -15,7 +15,7 @@ std::string load_file(
   graph::Graph & graph
 );
 
-class LoadWidget : public Wt::WContainerWidget
+class LoadWidget : public Wt::WContainerWidget, OptionsHolder
 {
 public:
   LoadWidget(
@@ -24,10 +24,9 @@ public:
     GraphWidget * graph_widget
   );
 
-  virtual ~LoadWidget();
+  ~LoadWidget() override;
 
 private:
-
   RightViewWidget * parent_;
 };
 

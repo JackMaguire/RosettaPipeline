@@ -2,17 +2,17 @@
 
 #include <Wt/WContainerWidget.h>
 #include <graph/Graph.fwd.hh>
-#include <string>
-//#include <cstdio> //std::tmpfile
+
+#include <Options.hh>
 
 namespace view {
 
-class SaveWidget : public Wt::WContainerWidget
+class SaveWidget : public Wt::WContainerWidget, OptionsHolder
 {
 public:
   SaveWidget( graph::GraphSP );
 
-  virtual ~SaveWidget();
+  ~SaveWidget() override;
 };
 
 

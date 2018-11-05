@@ -8,6 +8,8 @@
 
 #include <string>
 
+#include <Options.hh>
+
 namespace view {
 
 class WelcomeWidget;
@@ -18,7 +20,7 @@ class OptionsWidget;
 class SaveAndLoadWidget;
 class CompileWidget;
 
-class RightViewWidget : public Wt::WTabWidget, graph::SelectionChangeListener
+class RightViewWidget : public Wt::WTabWidget, graph::SelectionChangeListener, OptionsHolder
 {
 public:
   RightViewWidget(
@@ -26,11 +28,14 @@ public:
     GraphWidget * graph_widget
   );
 
-  virtual ~RightViewWidget();
+  ~RightViewWidget() override;
 
   void layoutSizeChanged( int w, int h ) override;
 
   void noteChangeInSelection() override;
+
+  //Don't just set the options for this class, but for all the nested data too
+  void setOptionsDownward( OptionsSP );
 
 public:
   WelcomeWidget * welcome_widget(){ return welcome_widget_; }
@@ -67,6 +72,24 @@ RightViewWidget::layoutSizeChanged( int w, int h ) {
   width_ = w;
   height_ = h;
 }
+
+inline
+void RightViewWidget::setOptionsDownward( OptionsSP options ){
+  assert( examples_widget_ );
+  examples_widget_->setOptions( options );
+
+  assert( options_widget_ );
+  options_widget_->setOptions( options );
+
+  assert( save_and_load_widget_ );
+  save_and_load_widget_->setOptions( options );
+
+  assert( compile_widget_ );
+  compile_widget_->setOptions( options );
+
+  setOptions( std::move( options ) );
+}
+
 
 //Wt is not friendly about ownership of child widgets
 //I would love to just use shared_ptrs, but Wt's only option is to give the container

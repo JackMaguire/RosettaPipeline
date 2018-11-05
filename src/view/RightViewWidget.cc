@@ -49,6 +49,11 @@ public:
 
   ~SaveAndLoadWidget() = default;
 
+  void setOptions( OptionsSP options ){
+    save_widget_->setOptions( options );
+    load_widget_->setOptions( options );
+  }
+
 private:
   SaveWidget * save_widget_;
   LoadWidget * load_widget_;

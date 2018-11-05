@@ -62,7 +62,7 @@ SaveWidget::SaveWidget(
 
   auto string_generating_func = [=] {
     std::vector< std::string > save_lines;
-    global_data::Options::save( save_lines );
+    options_->save( save_lines );
     graph->saveSelfNodesAndEdges( save_lines );
     
     std::stringstream ss;

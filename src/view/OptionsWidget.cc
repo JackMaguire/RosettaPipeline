@@ -1,6 +1,5 @@
 #include <view/OptionsWidget.hh>
 
-#include <global_data/options.hh>
 #include <view/GraphWidget.hh>
 #include <view/NodeWidget.hh>
 
@@ -10,21 +9,19 @@
 #include <Wt/WCheckBox.h>
 #include <Wt/WSpinBox.h>
 
-//#include <misc/type_deduction.hh>
-
 #include <iostream>
 #include <memory>
 #include <limits>
-
-using namespace global_data;
 
 namespace view {
 
 OptionsWidget::OptionsWidget(
   RightViewWidget * parent,
-  GraphWidget * graph_widget
+  GraphWidget * graph_widget,
+  OptionsSP options
 ) :
   WContainerWidget(),
+  OptionsHolder( std::move( options ) ),
   parent_( parent )
 {
   setup_view_options( graph_widget );
@@ -54,8 +51,8 @@ OptionsWidget::setup_view_options( GraphWidget * graph_widget ){
 
   zoom_out_button_->clicked().connect(
     [=](){
-      if( Options::grid_size > 1 ) {
-	--Options::grid_size;
+      if( options_->grid_size > 1 ) {
+	--options_->grid_size;
 	graph_widget->update();
       }
     }
@@ -63,7 +60,7 @@ OptionsWidget::setup_view_options( GraphWidget * graph_widget ){
 
   zoom_in_button_->clicked().connect(
     [=](){
-      ++Options::grid_size;
+      ++options_->grid_size;
       graph_widget->update();
     }
   );
@@ -71,28 +68,28 @@ OptionsWidget::setup_view_options( GraphWidget * graph_widget ){
 
   show_node_titles_box_->checked().connect (
     [=] {
-      Options::show_node_titles = true;
+      options_->show_node_titles = true;
       graph_widget->update();
     }
   );
 
   show_node_titles_box_->unChecked().connect (
     [=] {
-      Options::show_node_titles = false;
+      options_->show_node_titles = false;
       graph_widget->update();
     }
   );
 
   orient_node_titles_box_->checked().connect (
     [=] {
-      Options::put_node_titles_to_side = true;
+      options_->put_node_titles_to_side = true;
       graph_widget->update();
     }
   );
 
   orient_node_titles_box_->unChecked().connect (
     [=] {
-      Options::put_node_titles_to_side = false;
+      options_->put_node_titles_to_side = false;
       graph_widget->update();
     }
   );
@@ -127,7 +124,7 @@ OptionsWidget::setup_run_options(){
   addWidget( Wt::cpp14::make_unique< Wt::WText >( "   <b>Default Run Command.</b> This is the command that is executed for each node unless otherwise specified." ) )->setTextFormat( Wt::TextFormat::XHTML );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
   command_edit_ =
-    addWidget( Wt::cpp14::make_unique< Wt::WLineEdit >( Options::default_run_command ) );
+    addWidget( Wt::cpp14::make_unique< Wt::WLineEdit >( options_->default_run_command ) );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
   command_edit_->setMinimumSize( 500, command_edit_->height() );
   command_edit_->setInline( true );
@@ -138,12 +135,12 @@ OptionsWidget::setup_run_options(){
   delete_unused_intermediate_poses_box_->setTextFormat( Wt::TextFormat::XHTML );
   delete_unused_intermediate_poses_box_->checked().connect (
     [=] {
-      Options::delete_unused_intermediate_poses = true;
+      options_->delete_unused_intermediate_poses = true;
     }
   );
   delete_unused_intermediate_poses_box_->unChecked().connect (
     [=] {
-      Options::delete_unused_intermediate_poses = false;
+      options_->delete_unused_intermediate_poses = false;
     }
   );
 
@@ -152,12 +149,12 @@ OptionsWidget::setup_run_options(){
   serialize_intermediate_poses_box_->setTextFormat( Wt::TextFormat::XHTML );
   serialize_intermediate_poses_box_->checked().connect (
     [=] {
-      Options::serialize_intermediate_poses = true;
+      options_->serialize_intermediate_poses = true;
     }
   );
   serialize_intermediate_poses_box_->unChecked().connect (
     [=] {
-      Options::serialize_intermediate_poses = false;
+      options_->serialize_intermediate_poses = false;
     }
   );
 
@@ -170,7 +167,7 @@ OptionsWidget::setup_run_options(){
   num_proc_spin_box_->changed().connect(
     [=] {
       if( num_proc_spin_box_->validate() == Wt::ValidationState::Valid ){
-	Options::num_processors = num_proc_spin_box_->value();
+	options_->num_processors = num_proc_spin_box_->value();
       }
     }
   );
@@ -179,9 +176,9 @@ OptionsWidget::setup_run_options(){
   //command_edit_
   command_edit_->textInput().connect(
     [=] {
-      Options::default_run_command = command_edit_->text().toUTF8();
+      options_->default_run_command = command_edit_->text().toUTF8();
       if( parent_->node_edit_widget() != 0 ){
-	parent_->node_edit_widget()->updateDefaultCommand( Options::default_run_command );
+	parent_->node_edit_widget()->updateDefaultCommand( options_->default_run_command );
       }
     }
   );
@@ -191,14 +188,14 @@ OptionsWidget::setup_run_options(){
 void
 OptionsWidget::update(){
   //View
-  show_node_titles_box_->setChecked( Options::show_node_titles );
-  orient_node_titles_box_->setChecked( Options::put_node_titles_to_side );
+  show_node_titles_box_->setChecked( options_->show_node_titles );
+  orient_node_titles_box_->setChecked( options_->put_node_titles_to_side );
 
   //Run
-  command_edit_->setText( Options::default_run_command );
-  serialize_intermediate_poses_box_->setChecked( Options::serialize_intermediate_poses );
-  delete_unused_intermediate_poses_box_->setChecked( Options::delete_unused_intermediate_poses );  
-  num_proc_spin_box_->setValue( Options::num_processors );
+  command_edit_->setText( options_->default_run_command );
+  serialize_intermediate_poses_box_->setChecked( options_->serialize_intermediate_poses );
+  delete_unused_intermediate_poses_box_->setChecked( options_->delete_unused_intermediate_poses );  
+  num_proc_spin_box_->setValue( options_->num_processors );
 }
 
 }//namespace view

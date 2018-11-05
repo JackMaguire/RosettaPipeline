@@ -4,14 +4,20 @@
 #include <view/GraphWidget.fwd.hh>
 #include <view/RightViewWidget.hh>
 
+#include <Options.hh>
+
 namespace view {
 
-class OptionsWidget : public Wt::WContainerWidget
+class OptionsWidget : public Wt::WContainerWidget, OptionsHolder
 {
 public:
-  OptionsWidget( RightViewWidget *, GraphWidget * );
+  OptionsWidget(
+    RightViewWidget *,
+    GraphWidget *,
+    OptionsSP
+  );
 
-  virtual ~OptionsWidget();
+  ~OptionsWidget() override;
 
   void update();
 

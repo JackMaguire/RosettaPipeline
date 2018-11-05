@@ -1,6 +1,5 @@
 #include <view/LoadWidget.hh>
 
-#include <global_data/options.hh>
 #include <graph/Graph.hh>
 #include <view/GraphWidget.hh>
 #include <view/OptionsWidget.hh>
@@ -43,7 +42,7 @@ std::string load_file(
   if( file_lines[ current_line ] != "START_OPTIONS" ) {
     return "Error, expected first line to say \"START_OPTIONS\"";
   }
-  current_line = global_data::Options::load( file_lines, current_line ) + 1;
+  current_line = options_->load( file_lines, current_line ) + 1;
 
   //Graph
   if( file_lines[ current_line ] != "START_GRAPH" ) {

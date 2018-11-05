@@ -47,6 +47,12 @@ using OptionsCWP = std::weak_ptr< const Options >;
 
 class OptionsHolder {
 public:
+  OptionsHolder(){}
+
+  OptionsHolder( OptionsSP options ){
+    options_ = std::move( options );
+  }
+
   virtual ~OptionsHolder(){}
 
   void setOptions( OptionsSP options ){
