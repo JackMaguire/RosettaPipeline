@@ -22,7 +22,7 @@ Node::Node( Options const & options, int x, int y ) {
   title_ = "Node_0";
   x_ = x;
   y_ = y;
-  init();
+  init( options );
 }
 
 Node::Node( Options const & options, std::string title, int x, int y ) {//pass-by-value on purpose
