@@ -72,7 +72,7 @@ public://getters and setters:
   void setNotes( std::string setting ){ notes_ = std::move( setting ); }
 
 public://general compilation access
-  std::string const & getEffectiveCommand() const;
+  std::string const & getEffectiveCommand( Options const & options ) const;
 
   int inDegreeIgnoringTheseNodes( std::vector< NodeCSP > const & nodes_to_ignore ) const;
 
