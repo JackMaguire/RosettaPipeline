@@ -40,7 +40,7 @@ SaveAndLoadWidget::SaveAndLoadWidget(
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
   addWidget( Wt::cpp14::make_unique< Wt::WText >( "<b>Load</b>" ) );
   load_widget_ =
-    addWidget( Wt::cpp14::make_unique< LoadWidget >( parent, graph, graph_widget ) );
+    addWidget( Wt::cpp14::make_unique< LoadWidget >( parent, graph, graph_widget, std::move( options ) ) );
 }
 
 SaveAndLoadWidget::~SaveAndLoadWidget() = default;
