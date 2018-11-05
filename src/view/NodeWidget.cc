@@ -1,6 +1,5 @@
 #include <view/NodeWidget.hh>
 
-#include <global_data/options.hh>
 #include <graph/Node.hh>
 #include <view/GraphWidget.hh>
 

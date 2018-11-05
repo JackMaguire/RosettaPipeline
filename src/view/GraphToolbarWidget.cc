@@ -3,8 +3,6 @@
 #include <view/LeftViewWidget.hh>
 #include <view/GraphWidget.hh>
 
-//#include <global_data/options.hh>
-
 #include <Wt/WLength.h>
 #include <Wt/WImage.h>
 #include <Wt/WGlobal.h>

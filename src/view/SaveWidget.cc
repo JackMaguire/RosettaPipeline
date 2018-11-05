@@ -1,6 +1,5 @@
 #include <view/SaveWidget.hh>
 
-#include <global_data/options.hh>
 #include <graph/Graph.hh>
 
 #include <Wt/WGlobal.h>

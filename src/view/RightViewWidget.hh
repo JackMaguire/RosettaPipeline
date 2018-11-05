@@ -25,7 +25,8 @@ class RightViewWidget : public Wt::WTabWidget, graph::SelectionChangeListener, O
 public:
   RightViewWidget(
     graph::GraphSP,
-    GraphWidget * graph_widget
+    GraphWidget * graph_widget,
+    OptionsSP
   );
 
   ~RightViewWidget() override;

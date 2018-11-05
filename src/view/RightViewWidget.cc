@@ -9,8 +9,6 @@
 #include <view/WelcomeWidget.hh>
 #include <view/ExamplesWidget.hh>
 
-#include <global_data/options.hh>
-
 #include <graph/Graph.hh>
 #include <graph/Node.fwd.hh>
 #include <graph/Edge.fwd.hh>
@@ -62,7 +60,8 @@ private:
 
 RightViewWidget::RightViewWidget(
   graph::GraphSP graph,
-  GraphWidget * graph_widget
+  GraphWidget * graph_widget,
+  OptionsSP options
 ) :
   WTabWidget(),
   graph_( std::move( graph ) ),

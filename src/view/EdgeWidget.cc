@@ -1,6 +1,5 @@
 #include <view/EdgeWidget.hh>
 
-#include <global_data/options.hh>
 #include <graph/Edge.hh>
 
 #include <Wt/WBorderLayout.h>

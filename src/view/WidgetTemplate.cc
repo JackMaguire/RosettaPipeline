@@ -4,8 +4,6 @@
 #include <view/GraphWidget.hh>
 #include <view/GraphToolbarWidget.hh>
 
-//#include <global_data/options.hh>
-
 //#include <Wt/WLength.h>
 //#include <Wt/WImage.h>
 #include <Wt/WGlobal.h>

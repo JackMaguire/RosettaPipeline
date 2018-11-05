@@ -4,8 +4,6 @@
 #include <view/GraphWidget.hh>
 #include <view/GraphToolbarWidget.hh>
 
-//#include <global_data/options.hh>
-
 #include <Wt/WLength.h>
 #include <Wt/WImage.h>
 #include <Wt/WGlobal.h>
@@ -20,7 +18,7 @@
 
 namespace view {
 
-TopWidget::TopWidget( graph::GraphSP graph, OptionsSP ) :
+TopWidget::TopWidget( graph::GraphSP graph, OptionsSP options ) :
   WContainerWidget(),
   width_( 1000 ),
   height_( 800 )
@@ -31,7 +29,7 @@ TopWidget::TopWidget( graph::GraphSP graph, OptionsSP ) :
     setLayout( Wt::cpp14::make_unique< Wt::WHBoxLayout >() );
 
   LeftViewWidget * const left_item =
-    hbox->addWidget( Wt::cpp14::make_unique< LeftViewWidget >( graph ), 1 );
+    hbox->addWidget( Wt::cpp14::make_unique< LeftViewWidget >( graph, options ), 1 );
 
   Wt::WContainerWidget * const right_container =
     hbox->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >(), 2 );
@@ -41,7 +39,7 @@ TopWidget::TopWidget( graph::GraphSP graph, OptionsSP ) :
     right_container->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
   right_layout->setSpacing( 0 );
 
-  right_layout->addWidget( Wt::cpp14::make_unique< RightViewWidget >( graph, left_item->graphWidget() ),
+  right_layout->addWidget( Wt::cpp14::make_unique< RightViewWidget >( graph, left_item->graphWidget(), std::move( options ) ),
     Wt::LayoutPosition::Center );
 
 }
