@@ -1,7 +1,5 @@
-#include <global_data/options.hh>
+#include <Options.hh>
 #include <cassert>
-
-namespace global_data {
 
 bool Options::show_node_titles = true;
 bool Options::put_node_titles_to_side = true;
@@ -99,5 +97,3 @@ int Options::load( std::vector< std::string > const & lines, int line_to_start_a
   return current_line;
 }
 
-
-};
