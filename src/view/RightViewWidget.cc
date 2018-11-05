@@ -119,4 +119,22 @@ RightViewWidget::noteChangeInSelection(){
   setCurrentIndex( starting_index );
 }
 
+void
+RightViewWidget::setOptionsDownward( OptionsSP options ){
+  assert( examples_widget_ );
+  examples_widget_->setOptions( options );
+
+  assert( options_widget_ );
+  options_widget_->setOptions( options );
+
+  assert( save_and_load_widget_ );
+  save_and_load_widget_->setOptions( options );
+
+  assert( compile_widget_ );
+  compile_widget_->setOptions( options );
+
+  setOptions( std::move( options ) );
+}
+
+
 }//namespace view

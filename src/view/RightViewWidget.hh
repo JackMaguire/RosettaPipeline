@@ -93,23 +93,6 @@ RightViewWidget::layoutSizeChanged( int w, int h ) {
   height_ = h;
 }
 
-inline
-void RightViewWidget::setOptionsDownward( OptionsSP options ){
-  assert( examples_widget_ );
-  examples_widget_->setOptions( options );
-
-  assert( options_widget_ );
-  options_widget_->setOptions( options );
-
-  assert( save_and_load_widget_ );
-  save_and_load_widget_->setOptions( options );
-
-  assert( compile_widget_ );
-  compile_widget_->setOptions( options );
-
-  setOptions( std::move( options ) );
-}
-
 
 //Wt is not friendly about ownership of child widgets
 //I would love to just use shared_ptrs, but Wt's only option is to give the container
