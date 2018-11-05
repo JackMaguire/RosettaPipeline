@@ -6,12 +6,14 @@
 #include <graph/Node.fwd.hh>
 #include <view/GraphWidget.fwd.hh>
 
+#include <Options.hh>
+
 namespace view {
 
-class NodeWidget : public Wt::WContainerWidget
+class NodeWidget : public Wt::WContainerWidget, OptionsHolder
 {
 public:
-  NodeWidget( graph::NodeSP, GraphWidget * );
+  NodeWidget( graph::NodeSP, GraphWidget *, OptionsSP );
 
   virtual ~NodeWidget();
 

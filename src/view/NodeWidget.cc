@@ -18,9 +18,11 @@ namespace view {
 
 NodeWidget::NodeWidget(
   graph::NodeSP node,
-  GraphWidget * const graph_widget
+  GraphWidget * const graph_widget,
+  OptionsSP options
 ) :
   WContainerWidget(),
+  OptionsHolder( std::move( options ),
   node_( std::move( node ) )
 {
   Wt::WVBoxLayout * const layout =
@@ -118,7 +120,7 @@ NodeWidget::construct_segment1(
       Wt::LayoutPosition::East );
 
   use_default_command_box->setChecked( node_->useDefaultCommand() );
-  command_edit_->setText( node_->getEffectiveCommand() );
+  command_edit_->setText( node_->getEffectiveCommand( * options_ ) );
   if( node_->useDefaultCommand() ){
     command_edit_->setReadOnly( true );
   } else {
@@ -129,7 +131,7 @@ NodeWidget::construct_segment1(
   use_default_command_box->checked().connect (
     [=] {
       node_->setUseDefaultCommand( true );
-      command_edit_->setText( node_->getEffectiveCommand() );
+      command_edit_->setText( node_->getEffectiveCommand( * options_ ) );
       command_edit_->setReadOnly( true );
       //command_edit_->setHidden( true );
     }
@@ -138,7 +140,7 @@ NodeWidget::construct_segment1(
   use_default_command_box->unChecked().connect (
     [=] {
       node_->setUseDefaultCommand( false );
-      command_edit_->setText( node_->getEffectiveCommand() );
+      command_edit_->setText( node_->getEffectiveCommand( * options_ ) );
       command_edit_->setReadOnly( false );
       //command_edit_->setHidden( false );
     }

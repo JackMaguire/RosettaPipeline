@@ -18,6 +18,7 @@
 
 namespace view {
 
+//TODO make .fwd.hh fails
 class SaveWidget;
 class LoadWidget;
 

@@ -56,6 +56,7 @@ RightViewWidget::RightViewWidget(
   OptionsSP options
 ) :
   WTabWidget(),
+  OptionsHolder( options ),
   graph_( std::move( graph ) ),
   graph_widget_( graph_widget ),
   width_( 500 ),
@@ -70,7 +71,7 @@ RightViewWidget::RightViewWidget(
 
   graph::NodeSP selected_node = graph_->selectedNode();
   if( selected_node != 0 ){
-    node_edit_widget_ = addTab_tmpl< NodeWidget >( "Edit", selected_node, graph_widget_ );
+    node_edit_widget_ = addTab_tmpl< NodeWidget >( "Edit", selected_node, graph_widget_, options );
     edge_edit_widget_ = 0;
   } else {
     graph::EdgeSP selected_edge = graph_->selectedEdge();
