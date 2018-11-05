@@ -5,20 +5,20 @@
 
 #include <graph/Graph.hh>
 #include <view/GraphWidget.fwd.hh>
+#include <view/WelcomeWidget.hh>
+#include <view/ExamplesWidget.hh>
+#include <view/NodeWidget.hh>
+#include <view/EdgeWidget.hh>
+#include <view/OptionsWidget.hh>
+#include <view/SaveAndLoadWidget.hh>
+#include <view/CompileWidget.hh>
+
 
 #include <string>
 
 #include <Options.hh>
 
 namespace view {
-
-class WelcomeWidget;
-class ExamplesWidget;
-class NodeWidget;
-class EdgeWidget;
-class OptionsWidget;
-class SaveAndLoadWidget;
-class CompileWidget;
 
 class RightViewWidget : public Wt::WTabWidget, graph::SelectionChangeListener, OptionsHolder
 {
