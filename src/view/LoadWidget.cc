@@ -35,14 +35,15 @@ std::vector< std::string > get_file_lines( std::string const & filename ){
 
 std::string load_file(
   std::vector< std::string > const & file_lines,
-  graph::Graph & graph
+  graph::Graph & graph,
+  Options & options
 ){
   //First, options
   int current_line = 0;
   if( file_lines[ current_line ] != "START_OPTIONS" ) {
     return "Error, expected first line to say \"START_OPTIONS\"";
   }
-  current_line = options_->load( file_lines, current_line ) + 1;
+  current_line = options->load( file_lines, current_line ) + 1;
 
   //Graph
   if( file_lines[ current_line ] != "START_GRAPH" ) {
@@ -57,9 +58,10 @@ std::string load_file(
 
 std::string load_file(
   std::string const & filename,
-  graph::Graph & graph
+  graph::Graph & graph,
+  Options & options
 ){
-  return load_file( get_file_lines( filename ), graph );
+  return load_file( get_file_lines( filename ), graph, * options_ );
 }
 
 

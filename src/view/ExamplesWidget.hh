@@ -5,9 +5,11 @@
 #include <view/GraphWidget.fwd.hh>
 #include <view/RightViewWidget.hh>
 
+#include <Options.hh>
+
 namespace view {
 
-class ExamplesWidget : public Wt::WContainerWidget
+class ExamplesWidget : public Wt::WContainerWidget, OptionsHolder
 {
 public:
   ExamplesWidget(
@@ -16,7 +18,7 @@ public:
     GraphWidget * graph_widget
   );
 
-  virtual ~ExamplesWidget();
+  ~ExamplesWidget() override;
 
 private:
   RightViewWidget * parent_;
