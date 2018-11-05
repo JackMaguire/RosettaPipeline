@@ -177,8 +177,12 @@ void Node::save( std::vector< std::string > & output_lines ) const {
 
 
 
-Node::Node( std::vector< std::string > const & lines, int line_to_start_at ) {
-  init();
+Node::Node(
+  std::vector< std::string > const & lines,
+  int line_to_start_at,
+  Options const & options
+) {
+  init( options );
 
   uint current_line = line_to_start_at;
 

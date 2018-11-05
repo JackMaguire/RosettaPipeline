@@ -124,7 +124,11 @@ protected:
 
 public://This technically has to be public in order to use make_shared
   //load ctor
-  Node( std::vector< std::string > const & lines, int line_to_start_at );
+  Node(
+    std::vector< std::string > const & lines,
+    int line_to_start_at,
+    Options const &
+  );
 
 private:
   int id_;
