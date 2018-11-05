@@ -21,6 +21,7 @@ namespace view {
 //TODO make .fwd.hh fails
 class SaveWidget;
 class LoadWidget;
+class OptionsWidget;
 
 class SaveAndLoadWidget : public Wt::WContainerWidget {
 public:
