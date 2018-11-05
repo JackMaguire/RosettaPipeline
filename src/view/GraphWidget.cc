@@ -227,7 +227,7 @@ GraphWidget::up( int x, int y, GraphInteraction interaction_type ) {
       // create new node
       auto const x2 = getClosestPointForPoint( x );
       auto const y2 = getClosestPointForPoint( y );
-      graph_->addNode( std::make_shared< graph::Node >( x2, y2 ) );
+      graph_->addNode( std::make_shared< graph::Node >( * options_, x2, y2 ) );
     }
     update();
     break;
