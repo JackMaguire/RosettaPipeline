@@ -11,14 +11,15 @@
 #include <view/EdgeWidget.hh>
 #include <view/OptionsWidget.hh>
 #include <view/CompileWidget.hh>
-#include <view/SaveWidget.hh>
-#include <view/LoadWidget.hh>
 
 #include <string>
 
 #include <Options.hh>
 
 namespace view {
+
+class SaveWidget;
+class LoadWidget;
 
 class SaveAndLoadWidget : public Wt::WContainerWidget {
 public:
@@ -30,10 +31,7 @@ public:
 
   ~SaveAndLoadWidget();
 
-  void setOptions( OptionsSP options ){
-    save_widget_->setOptions( options );
-    load_widget_->setOptions( options );
-  }
+  void setOptions( OptionsSP options );
 
 private:
   SaveWidget * save_widget_;

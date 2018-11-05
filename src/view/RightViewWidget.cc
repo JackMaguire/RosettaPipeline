@@ -43,6 +43,13 @@ SaveAndLoadWidget::SaveAndLoadWidget(
 
 SaveAndLoadWidget::~SaveAndLoadWidget() = default;
 
+void
+SaveAndLoadWidget::setOptions( OptionsSP options ){
+  save_widget_->setOptions( options );
+  load_widget_->setOptions( options );
+}
+
+
 RightViewWidget::RightViewWidget(
   graph::GraphSP graph,
   GraphWidget * graph_widget,
