@@ -216,7 +216,7 @@ compile_run_script(
 
     // THE COMMAND
 
-    run_script << "if " << node->getEffectiveCommand() << " ;then \n"
+    run_script << "if " << node->getEffectiveCommand( options ) << " ;then \n"
       "    echo \"Done running " << dirname << "\" >> ../JD3BASH_runlog.txt\n"
       "else\n"
       "    echo \"Failed to run " << dirname << "\" >> ../JD3BASH_runlog.txt\n"
