@@ -41,7 +41,7 @@ struct hitbox {
   }
 };
 
-class GraphWidget : public Wt::WPaintedWidget, OptionsHolder
+class GraphWidget : public Wt::WPaintedWidget, public OptionsHolder
 {
 public:
   GraphWidget(
