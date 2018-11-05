@@ -25,7 +25,7 @@ all_no_wt: options graph compile
 
 graph: Node.o Edge.o Graph.o
 
-bin: save_and_load_graph graph_view_app tab_testing_app
+bin: graph_view_app
 
 ###########
 # OPTIONS #
