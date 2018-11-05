@@ -43,7 +43,7 @@ std::string load_file(
   if( file_lines[ current_line ] != "START_OPTIONS" ) {
     return "Error, expected first line to say \"START_OPTIONS\"";
   }
-  current_line = options->load( file_lines, current_line ) + 1;
+  current_line = options.load( file_lines, current_line ) + 1;
 
   //Graph
   if( file_lines[ current_line ] != "START_GRAPH" ) {
