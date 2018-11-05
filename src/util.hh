@@ -1,9 +1,6 @@
 #pragma once
 
 //Don't look, macros!!!
-//#define STR(str) #str
-//#define STRING(str) STR(str)
-
 #define STRINGIZE(x) STRINGIZE2(x)
 #define STRINGIZE2(x) #x
 #define FILE_STRING STRINGIZE(__FILE__)
