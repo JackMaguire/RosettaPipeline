@@ -42,7 +42,7 @@ public:
   ) override {
 
     if( ! request.continuation() ){
-      compile::CompilationResult const compilation_result = compile::compile( * graph_, options_ );
+      compile::CompilationResult const compilation_result = compile::compile( * graph_, * options_ );
       if( compilation_result.success ){
 	iss_for_most_recent_request_ = std::make_unique< std::istringstream >( compilation_result.result );
       } else {
