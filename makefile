@@ -31,11 +31,9 @@ bin: save_and_load_graph graph_view_app tab_testing_app
 # OPTIONS #
 ###########
 
-options: src/global_data/options.hh
-	${CXX} -c -o build/options.o src/global_data/options.cc ${GEN} 
-
-global_data: options
-	cp build/options.o build/global_data.o
+options:
+Options.o: src/Options.hh
+	${CXX} -c -o build/Options.o src/Options.cc ${GEN} 
 
 #########
 # GRAPH #
@@ -116,26 +114,14 @@ view: GraphWidget.o GraphToolbarWidget.o NodeWidget.o EdgeWidget.o TopWidget.o L
 ########
 # APPS #
 ########
-save_and_load_graph.o: src/apps/proof_of_concept/save_and_load_graph.cc graph global_data
-	${CXX} -c -o build/save_and_load_graph.o src/apps/proof_of_concept/save_and_load_graph.cc ${GEN}
-
 GraphApplication: src/apps/proof_of_concept/graph_view_app.cc
 	${CXX} -c -o build/graph_view_app.o src/apps/proof_of_concept/graph_view_app.cc ${GEN} ${WT_FLAGS}
 
-tab_testing: src/apps/proof_of_concept/tab_testing.cc
-	${CXX} -c -o build/tab_testing.o src/apps/proof_of_concept/tab_testing.cc ${GEN} ${WT_FLAGS}
-
-apps: save_and_load_graph.o GraphApplication tab_testing
+apps: GraphApplication
 
 #######
 # BIN #
 #######
 
-save_and_load_graph: save_and_load_graph.o graph global_data
-	${CXX} -o bin/save_and_load_graph build/save_and_load_graph.o build/global_data.o build/graph.o ${GEN}
-
 graph_view_app: GraphApplication view 
-	${CXX} -o bin/graph_view_app build/graph_view_app.o build/graph.o build/view.o build/options.o build/compile.o ${GEN} ${WT_FLAGS}
-
-tab_testing_app: tab_testing
-	${CXX} -o bin/tab_testing_app build/tab_testing.o ${GEN} ${WT_FLAGS}
+	${CXX} -o bin/graph_view_app build/graph_view_app.o build/graph.o build/view.o build/Options.o build/compile.o ${GEN} ${WT_FLAGS}

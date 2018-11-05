@@ -5,6 +5,20 @@
 
 struct Options {
 
+  Options(){
+    show_node_titles = true;
+    put_node_titles_to_side = true;
+    grid_size = 10;
+
+    serialize_intermediate_poses = false;
+    num_processors = 0;
+    default_run_command =
+      std::string( "mpirun -n $nproc rosetta_scripts.mpiserialization.linuxgccrelease @ flags" );
+    delete_unused_intermediate_poses = true;
+  }
+
+  ~Options();
+
   //////////////
   // View Options
   bool show_node_titles;

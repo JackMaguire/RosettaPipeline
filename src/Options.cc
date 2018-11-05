@@ -1,15 +1,7 @@
 #include <Options.hh>
 #include <cassert>
 
-bool Options::show_node_titles = true;
-bool Options::put_node_titles_to_side = true;
-int Options::grid_size = 10;
-
-bool Options::serialize_intermediate_poses = false;
-int Options::num_processors = 0;
-std::string Options::default_run_command =
-  std::string( "mpirun -n $nproc rosetta_scripts.mpiserialization.linuxgccrelease @ flags" );
-bool Options::delete_unused_intermediate_poses = true;
+Options::~Options(){}
 
 ////////////
 // Save/Load
