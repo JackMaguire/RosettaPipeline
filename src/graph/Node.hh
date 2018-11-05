@@ -161,9 +161,9 @@ private:
 
 inline
 std::string const &
-Node::getEffectiveCommand() const {
+Node::getEffectiveCommand( Options const & options ) const {
   if( use_default_command_ ) {
-    return global_data::Options::default_run_command;
+    return options.default_run_command;
   } else {
     return command_;
   }

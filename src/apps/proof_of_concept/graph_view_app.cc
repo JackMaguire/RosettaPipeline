@@ -12,18 +12,18 @@
 using namespace Wt;
 
 std::unique_ptr< Wt::WApplication > createApplication( Wt::WEnvironment const & env ) {
+  OptionsSP options = std::make_shared< Options >();
+
   graph::GraphSP graph = std::make_shared< graph::Graph >();
   graph::NodeSP previous = 0;
   for( int i=0; i < 3; ++i ){
-    graph::NodeSP node = std::make_shared< graph::Node >( 20, i*15 );
+    graph::NodeSP node = std::make_shared< graph::Node >( * options, 20, i*15 );
     graph->addNode( node );
     if( i > 0 ){
       graph->addEdge( previous, node );
     }
     previous = node;
   }
-
-  OptionsSP options = std::make_shared< Options >();
 
   std::unique_ptr< Wt::WApplication > app = Wt::cpp14::make_unique< Wt::WApplication >( env );
   app->setTitle( "Rosetta Pipeline" );
