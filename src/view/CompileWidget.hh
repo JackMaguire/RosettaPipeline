@@ -9,7 +9,7 @@ namespace view {
 class CompileWidget : public Wt::WContainerWidget, public OptionsHolder
 {
 public:
-  CompileWidget( graph::GraphSP );
+  CompileWidget( graph::GraphSP, OptionsSP );
 
   ~CompileWidget() override;
 };

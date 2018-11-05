@@ -22,12 +22,14 @@ namespace view {
 
 namespace {
 
-class OnTheFlyFileResource : public Wt::WStreamResource {
+class OnTheFlyFileResource : public Wt::WStreamResource, public OptionsHolder {
 public:
   OnTheFlyFileResource(
     graph::GraphSP graph,
-    Wt::WContainerWidget * root
+    Wt::WContainerWidget * root,
+    OptionsSP options
   ) :
+    OptionsHolder( std::move( options ) ),
     graph_( std::move( graph ) ),
     root_( root )
   {}
@@ -142,8 +144,12 @@ struct PreviewElements {
 }
 
 
-CompileWidget::CompileWidget( graph::GraphSP graph ) :
-  WContainerWidget( )
+CompileWidget::CompileWidget(
+  graph::GraphSP graph,
+  OptionsSP options
+) :
+  WContainerWidget( ),
+  OptionsHolder( std::move( options ) )
 { 
   Wt::WVBoxLayout * const layout =
     setLayout( Wt::cpp14::make_unique< Wt::WVBoxLayout >() );
@@ -157,7 +163,7 @@ CompileWidget::CompileWidget( graph::GraphSP graph ) :
   CompileElements compile_elements( top_container );
 
   //using ResourceSP = std::shared_ptr< OnTheFlyFileResource >;
-  auto file = std::make_shared< OnTheFlyFileResource >( graph, this );
+  auto file = std::make_shared< OnTheFlyFileResource >( graph, this, options_ );
   file->setDispositionType( Wt::ContentDisposition::Attachment );
   file->suggestFileName( "rosetta_pipeline.tar.gz" );
   compile_elements.compile_button->setLink( Wt::WLink( file ) );

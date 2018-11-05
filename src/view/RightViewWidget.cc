@@ -27,8 +27,11 @@ namespace view {
 SaveAndLoadWidget::SaveAndLoadWidget(
   RightViewWidget * parent,
   graph::GraphSP graph,
-  GraphWidget * graph_widget
-) {
+  GraphWidget * graph_widget,
+  OptionsSP options
+) :
+  OptionsHolder( std::move( options ) )
+{
   //TODO WGroupBox
   addWidget( Wt::cpp14::make_unique< Wt::WText >( "<b>Save</b>" ) );
   save_widget_ =
@@ -67,7 +70,7 @@ RightViewWidget::RightViewWidget(
   graph_->registerNewChangeListener( this );
 
   welcome_widget_ = addTab_tmpl< WelcomeWidget >( "Welcome" );
-  examples_widget_ = addTab_tmpl< ExamplesWidget >( "Examples", this, graph_, graph_widget_ );
+  examples_widget_ = addTab_tmpl< ExamplesWidget >( "Examples", this, graph_, graph_widget_, options_ );
 
   graph::NodeSP selected_node = graph_->selectedNode();
   if( selected_node != 0 ){
@@ -82,8 +85,11 @@ RightViewWidget::RightViewWidget(
 
   options_widget_ = addTab_tmpl< OptionsWidget >( "Options", this, graph_widget_, options_ );
 
-  save_and_load_widget_ = addTab_tmpl< SaveAndLoadWidget >( "Save/Load", this, graph_, graph_widget_ );
-  compile_widget_ = addTab_tmpl< CompileWidget >( "Compile", graph_ );
+  save_and_load_widget_ = addTab_tmpl< SaveAndLoadWidget >(
+    "Save/Load",
+    this, graph_, graph_widget_, options_
+  );
+  compile_widget_ = addTab_tmpl< CompileWidget >( "Compile", graph_, options_ );
 
   setStyleClass("tabwidget");
   setCurrentIndex( 0 );

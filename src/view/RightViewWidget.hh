@@ -27,7 +27,8 @@ public:
   SaveAndLoadWidget(
     RightViewWidget * parent,
     graph::GraphSP graph,
-    GraphWidget * graph_widget
+    GraphWidget * graph_widget,
+    OptionsSP
   );
 
   ~SaveAndLoadWidget();
