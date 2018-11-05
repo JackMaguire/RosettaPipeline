@@ -11,7 +11,7 @@ namespace view {
 
 class RightViewWidget;
 
-class ExamplesWidget : public Wt::WContainerWidget, OptionsHolder
+class ExamplesWidget : public Wt::WContainerWidget, public OptionsHolder
 {
 public:
   ExamplesWidget(

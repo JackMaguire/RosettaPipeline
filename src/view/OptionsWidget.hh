@@ -8,7 +8,7 @@
 
 namespace view {
 
-class OptionsWidget : public Wt::WContainerWidget, OptionsHolder
+class OptionsWidget : public Wt::WContainerWidget, public OptionsHolder
 {
 public:
   OptionsWidget(

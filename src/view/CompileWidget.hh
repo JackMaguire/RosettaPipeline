@@ -6,7 +6,7 @@
 
 namespace view {
 
-class CompileWidget : public Wt::WContainerWidget, OptionsHolder
+class CompileWidget : public Wt::WContainerWidget, public OptionsHolder
 {
 public:
   CompileWidget( graph::GraphSP );

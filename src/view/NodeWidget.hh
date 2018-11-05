@@ -10,7 +10,7 @@
 
 namespace view {
 
-class NodeWidget : public Wt::WContainerWidget, OptionsHolder
+class NodeWidget : public Wt::WContainerWidget, public OptionsHolder
 {
 public:
   NodeWidget( graph::NodeSP, GraphWidget *, OptionsSP );

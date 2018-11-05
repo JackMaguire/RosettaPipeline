@@ -40,7 +40,7 @@ private:
 };
 
 
-class RightViewWidget : public Wt::WTabWidget, graph::SelectionChangeListener, OptionsHolder
+class RightViewWidget : public Wt::WTabWidget, graph::SelectionChangeListener, public OptionsHolder
 {
 public:
   RightViewWidget(

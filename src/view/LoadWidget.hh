@@ -16,7 +16,7 @@ std::string load_file(
   Options & options
 );
 
-class LoadWidget : public Wt::WContainerWidget, OptionsHolder
+class LoadWidget : public Wt::WContainerWidget, public OptionsHolder
 {
 public:
   LoadWidget(
