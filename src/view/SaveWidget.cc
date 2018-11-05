@@ -49,10 +49,11 @@ private:
 }
 
 SaveWidget::SaveWidget(
-  graph::GraphSP graph
+  graph::GraphSP graph,
+  OptionsSP options
 ) :
-  WContainerWidget()
-  //save_filename_ ( std::tmpnam(nullptr) )
+  WContainerWidget(),
+  OptionsHolder( std::move( options ) )
 {
   Wt::WPushButton * const downloadButton =
     addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Download" ) );

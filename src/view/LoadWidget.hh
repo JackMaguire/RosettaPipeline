@@ -22,7 +22,8 @@ public:
   LoadWidget(
     RightViewWidget * parent,
     graph::GraphSP const &,
-    GraphWidget * graph_widget
+    GraphWidget * graph_widget,
+    OptionsSP
   );
 
   ~LoadWidget() override;

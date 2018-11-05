@@ -29,13 +29,12 @@ SaveAndLoadWidget::SaveAndLoadWidget(
   graph::GraphSP graph,
   GraphWidget * graph_widget,
   OptionsSP options
-) :
-  OptionsHolder( std::move( options ) )
+)
 {
   //TODO WGroupBox
   addWidget( Wt::cpp14::make_unique< Wt::WText >( "<b>Save</b>" ) );
   save_widget_ =
-    addWidget( Wt::cpp14::make_unique< SaveWidget >( graph ) );
+    addWidget( Wt::cpp14::make_unique< SaveWidget >( graph, options ) );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );

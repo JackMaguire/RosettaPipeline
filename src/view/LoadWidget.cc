@@ -68,9 +68,11 @@ std::string load_file(
 LoadWidget::LoadWidget(
   RightViewWidget * parent,
   graph::GraphSP const & graph,
-  GraphWidget * graph_widget
+  GraphWidget * graph_widget,
+  OptionsSP options
 ) :
   WContainerWidget(),
+  OptionsHolder( std::move( options ) ),
   parent_( parent )
 {
   //largely copied from https://github.com/emweb/wt/blob/29ae91638e197013f67e7c826317529615d10749/examples/widgetgallery/examples/FileUpload.cpp

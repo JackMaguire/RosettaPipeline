@@ -10,7 +10,7 @@ namespace view {
 class SaveWidget : public Wt::WContainerWidget, public OptionsHolder
 {
 public:
-  SaveWidget( graph::GraphSP );
+  SaveWidget( graph::GraphSP, OptionsSP );
 
   ~SaveWidget() override;
 };
