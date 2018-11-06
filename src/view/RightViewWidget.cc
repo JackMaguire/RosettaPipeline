@@ -35,8 +35,8 @@ SaveAndLoadWidget::SaveAndLoadWidget(
   //TODO WGroupBox
   Wt::WPanel * const save_container =
     addWidget( Wt::cpp14::make_unique< Wt::WPanel >() );
-  save_continer->setTitle( "<b>Save</b>" );
-  save_continer->setCollapsible( true );
+  save_container->setTitle( "<b>Save</b>" );
+  save_container->setCollapsible( true );
   /*Wt::WGroupBox * const save_container =
     addWidget( Wt::cpp14::make_unique< Wt::WGroupBox >( "<b>Save</b>" ) );*/
 
