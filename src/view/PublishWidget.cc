@@ -103,7 +103,7 @@ PublishWidget::PublishWidget(
 
       std::string const key = util::generate_random_string( 12 );
 
-      std::string const directory_name = "/published_poses/" + key;
+      std::string const directory_name = "/published_pipelines/" + key;
       std::filesystem::create_directory( directory_name );
 
       std::vector< std::string > save_lines;
