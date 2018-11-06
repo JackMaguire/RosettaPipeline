@@ -46,6 +46,11 @@ PublishWidget::PublishWidget(
 
   publish_button->clicked().connect(
     [=] {
+      std::string const key = util::generate_random_string( 12 );
+
+      std::string const directory_name = "/published_poses/" + key;
+      std::filesystem::create_directory( directory_name );
+
       std::vector< std::string > save_lines;
       options_->save( save_lines );
       graph->saveSelfNodesAndEdges( save_lines );
@@ -54,13 +59,22 @@ PublishWidget::PublishWidget(
       for( std::string const & line : save_lines ){
 	ss << line << "\n";
       }
-      std::string const save_file = ss.str();
 
-      std::string const key = util::generate_random_string( 12 );
+      {//save file
+	std::ofstream save_file;
+	save_file.open( directory_name + "/save.txt" );
+	save_file << ss.str() << "\n";
+	save_file.close();
+      }
 
-      std::string const directory_name = "/tmp/" + util::generate_random_string( 16 );
-      std::filesystem::create_directory( directory_name );
-
+      {//info file
+	std::ofstream info_file;
+	info_file.open( directory_name + "/info.txt" );
+	info_file << "Title " << "TODO" << "\n";
+	info_file << "Author " << "TODO" << "\n";
+	info_file << "Tags " << "TODO" << "\n";
+	info_file.close();
+      }
     }
   );
 
