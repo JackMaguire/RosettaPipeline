@@ -72,7 +72,7 @@ PublishWidget::PublishWidget(
   //addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
   Wt::WPushButton * const publish_button =
     addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Publish" ) );
-
+  addWidget( Wt::cpp14::make_unique< Wt::WText >( "    " ) );
   Wt::WCheckBox * const private_check_box =
     addWidget( Wt::cpp14::make_unique< Wt::WCheckBox >( "Private" ) );
 
