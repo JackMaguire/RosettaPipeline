@@ -1,6 +1,7 @@
 #include <view/PublishWidget.hh>
 
 #include <graph/Graph.hh>
+#include <util.hh>
 
 #include <Wt/WGlobal.h>
 #include <Wt/WPushButton.h>
