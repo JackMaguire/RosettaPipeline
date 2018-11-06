@@ -8,6 +8,7 @@
 #include <view/CompileWidget.hh>
 #include <view/WelcomeWidget.hh>
 #include <view/ExamplesWidget.hh>
+#include <view/PublishWidget.hh>
 
 #include <graph/Graph.hh>
 #include <graph/Node.fwd.hh>
@@ -50,7 +51,7 @@ SaveAndLoadWidget::SaveAndLoadWidget(
   Wt::WGroupBox * const load_container =
     addWidget( Wt::cpp14::make_unique< Wt::WGroupBox >( "Load" ) );
   load_widget_ =
-    load_container->addWidget( Wt::cpp14::make_unique< LoadWidget >( parent, graph, graph_widget, std::move( options ) ) );
+    load_container->addWidget( Wt::cpp14::make_unique< LoadWidget >( parent, graph, graph_widget, options ) );
 
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
@@ -58,7 +59,8 @@ SaveAndLoadWidget::SaveAndLoadWidget(
 
   Wt::WGroupBox * const publish_container =
     addWidget( Wt::cpp14::make_unique< Wt::WGroupBox >( "Publish" ) );
-
+  publish_widget_ =
+    publish_container->addWidget( Wt::cpp14::make_unique< PublishWidget >( graph, std::move( options ) ) );
 }
 
 SaveAndLoadWidget::~SaveAndLoadWidget() = default;
