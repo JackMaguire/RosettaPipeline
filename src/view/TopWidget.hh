@@ -35,7 +35,7 @@ TopWidget::layoutSizeChanged( int w, int h ) {
   height_ = h;
 
   if( graph_widget_ ){
-    graph_widget_->accomodateNewSize( w / 3, h / 2 );
+    graph_widget_->accomodateNewSize( w / 4, h / 2 );
   }
 }
 
