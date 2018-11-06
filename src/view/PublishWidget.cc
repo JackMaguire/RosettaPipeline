@@ -46,7 +46,7 @@ PublishWidget::PublishWidget(
   Wt::WLineEdit * const title_edit =
     addWidget( Wt::cpp14::make_unique< wt_util::WidgetWithTitle< Wt::WLineEdit > >( "Title:" ) )->subwidget();
   title_edit->setText( "" );
-  title_edit->setMaximumSize( 25, 100 );
+  title_edit->setMaximumSize( 100, 50 );
   //addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
 
   Wt::WLineEdit * const author_edit =
