@@ -31,6 +31,7 @@ void
 TopWidget::layoutSizeChanged( int w, int h ) {
   width_ = w;
   height_ = h;
+  std::cout << "TopWidget(2) " << "Width " << w << " Height " << h << std::endl;
 }
 
 inline
