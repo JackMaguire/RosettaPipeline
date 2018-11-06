@@ -46,12 +46,12 @@ PublishWidget::PublishWidget(
   Wt::WLineEdit * const title_edit =
     addWidget( Wt::cpp14::make_unique< wt_util::WidgetWithTitle< Wt::WLineEdit > >( "Title:" ) )->subwidget();
   title_edit->setText( "" );
-  addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
+  //addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
 
   Wt::WLineEdit * const author_edit =
     addWidget( Wt::cpp14::make_unique< wt_util::WidgetWithTitle< Wt::WLineEdit > >( "Author:" ) )->subwidget();
   author_edit->setText( "" );
-  addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
+  //addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
 
   Wt::WLineEdit * const tags_edit =
     addWidget( Wt::cpp14::make_unique< wt_util::WidgetWithTitle< Wt::WLineEdit > >( "Tags:" ) )->subwidget();
