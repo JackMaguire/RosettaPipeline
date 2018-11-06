@@ -32,10 +32,11 @@ SaveAndLoadWidget::SaveAndLoadWidget(
 )
 {
   //TODO WGroupBox
-  
-  addWidget( Wt::cpp14::make_unique< Wt::WText >( "<b>Save</b>" ) );
+  Wt::WGroupBox * const save_box =
+    addWidget( Wt::cpp14::make_unique< Wt::WGroupBox >( "<b>Save</b>" ) );
+  //addWidget( Wt::cpp14::make_unique< Wt::WText >( "<b>Save</b>" ) );
   save_widget_ =
-    addWidget( Wt::cpp14::make_unique< SaveWidget >( graph, options ) );
+    save_box->addWidget( Wt::cpp14::make_unique< SaveWidget >( graph, options ) );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );

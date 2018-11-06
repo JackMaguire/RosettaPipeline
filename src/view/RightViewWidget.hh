@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Wt/WTabWidget.h>
+#include <Wt/WGroupBox.h>
 #include <Wt/WGlobal.h>
 
 #include <graph/Graph.hh>
