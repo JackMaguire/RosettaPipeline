@@ -68,6 +68,9 @@ PublishWidget::PublishWidget(
   Wt::WPushButton * const publish_button =
     addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Publish" ) );
 
+  Wt::WCheckBox * const private_check_box =
+    addWidget( Wt::cpp14::make_unique< Wt::WCheckBox >( "Private" ) );
+
   publish_button->clicked().connect(
     [=] {
       if( title_edit->text().toUTF8().size() == 0 ){
@@ -117,10 +120,11 @@ PublishWidget::PublishWidget(
 	info_file << "Title " << title_edit->text().toUTF8() << "\n";
 	info_file << "Author " << author_edit->text().toUTF8() << "\n";
 	info_file << "Tags " << tags_edit->text().toUTF8() << "\n";
+	info_file << "Private? " << ( private_check_box->isChecked() ? "1" : "0" ) << "\n";
 	info_file.close();
       }
 
-      wt_util::handleSuccess( this, "Publishing Was Successful!" );
+      wt_util::handleSuccess( this, "Publishing Was Successful! Your key is: " + key );
     }
   );
 
