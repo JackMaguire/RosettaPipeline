@@ -34,4 +34,4 @@ private:
 
 };
 
-}//namespace view
+}//namespace wt_util

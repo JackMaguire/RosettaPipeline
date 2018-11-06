@@ -6,8 +6,7 @@
 
 namespace wt_util {
 
-
-inline
+//inline
 template< typename T >
 void
 handleFailure( T * root, std::string const & message ){
@@ -27,7 +26,7 @@ handleFailure( T * root, std::string const & message ){
   messageBox->show();
 }
 
-inline
+//inline
 template< typename T >
 void
 handleSuccess( T * root, std::string const & message ){
