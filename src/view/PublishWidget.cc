@@ -43,8 +43,8 @@ PublishWidget::PublishWidget(
     ) );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
 
-  Wt::WContainer * const line_edit_container =
-    addWidget( Wt::cpp14::make_unique< Wt::WContainer >() );
+  Wt::WContainerWidget * const line_edit_container =
+    addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
   Wt::WHBoxLayout * const line_edit_layout =
     line_edit_container->setLayout( Wt::cpp14::make_unique< Wt::WLayout >() );
 
