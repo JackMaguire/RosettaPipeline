@@ -41,7 +41,7 @@ SaveAndLoadWidget::SaveAndLoadWidget(
     addWidget( Wt::cpp14::make_unique< Wt::WGroupBox >( "<b>Save</b>" ) );*/
 
   save_widget_ =
-    save_container->addWidget( Wt::cpp14::make_unique< SaveWidget >( graph, options ) );
+    save_container->setCentralWidget( Wt::cpp14::make_unique< SaveWidget >( graph, options ) );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
