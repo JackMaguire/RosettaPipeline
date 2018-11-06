@@ -11,9 +11,9 @@
 #include <Wt/WLink.h>
 #include <Wt/WFileResource.h>
 #include <Wt/WStreamResource.h>
-#include <Wt/WMessageBox.h>
 
 #include <wt_util/WidgetWithTitle.hh>
+#include <wt_util/Messages.hh>
 
 #include <fstream>
 #include <iostream>
@@ -27,29 +27,6 @@
 
 namespace view {
 
-namespace {
-
-template< typename T >
-void
-handleFailure( T * root, std::string const & message ){
-  Wt::WMessageBox * const messageBox = root->addChild(
-    Wt::cpp14::make_unique< Wt::WMessageBox >(
-      "Error",
-      message,
-      Wt::Icon::Critical, Wt::StandardButton::Ok
-    )
-  );
-  messageBox->setModal( false );
-  messageBox->buttonClicked().connect(
-    [=] {
-      root->removeChild( messageBox );
-    }
-  );
-  messageBox->show();
-}
-
-
-}
 
 PublishWidget::PublishWidget(
   graph::GraphSP graph,
@@ -87,17 +64,17 @@ PublishWidget::PublishWidget(
   publish_button->clicked().connect(
     [=] {
       if( title_edit->text().toUTF8().size() == 0 ){
-	handleFailure( this, "Please set a title" );
+	wt_util::handleFailure( this, "Please set a title" );
 	return;
       }
 
       if( author_edit->text().toUTF8().size() == 0 ){
-	handleFailure( this, "Please set an author" );
+	wt_util::handleFailure( this, "Please set an author" );
 	return;
       }
 
       if( tags_edit->text().toUTF8().size() == 0 ){
-	handleFailure( this, "Please provide at least one tag" );
+	wt_util::handleFailure( this, "Please provide at least one tag" );
 	return;
       }
 
@@ -130,6 +107,8 @@ PublishWidget::PublishWidget(
 	info_file << "Tags " << tags_edit->text().toUTF8() << "\n";
 	info_file.close();
       }
+
+      util::handleSuccess( this, "Publishing Was Successful!" );
     }
   );
 
