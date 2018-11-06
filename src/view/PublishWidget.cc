@@ -47,26 +47,22 @@ PublishWidget::PublishWidget(
     addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
   Wt::WHBoxLayout * const line_edit_layout =
     line_edit_container->setLayout( Wt::cpp14::make_unique< Wt::WHBoxLayout >() );
+  line_edit_container->setMaximumSize( 1000, 30 );
 
   wt_util::WidgetWithTitle< Wt::WLineEdit > * const title_container =
     line_edit_layout->addWidget( Wt::cpp14::make_unique< wt_util::WidgetWithTitle< Wt::WLineEdit > >( "Title:" ) );
   Wt::WLineEdit * const title_edit = title_container->subwidget();
   title_edit->setText( "" );
-  //title_container->setMaximumSize( 300, 50 );
-  //addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
 
   wt_util::WidgetWithTitle< Wt::WLineEdit > * const author_container =
     line_edit_layout->addWidget( Wt::cpp14::make_unique< wt_util::WidgetWithTitle< Wt::WLineEdit > >( "Author:" ) );
   Wt::WLineEdit * const author_edit = author_container->subwidget();
   author_edit->setText( "" );
-  //author_container->setMaximumSize( 300, 50 );
-  //addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
 
   wt_util::WidgetWithTitle< Wt::WLineEdit > * const tags_container =
     line_edit_layout->addWidget( Wt::cpp14::make_unique< wt_util::WidgetWithTitle< Wt::WLineEdit > >( "Tags:" ) );
   Wt::WLineEdit * const tags_edit = tags_container->subwidget();
   tags_edit->setText( "" );
-  //tags_container->setMaximumSize( 300, 50 );
 
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
   Wt::WPushButton * const publish_button =
