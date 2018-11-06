@@ -52,11 +52,13 @@ PublishWidget::PublishWidget(
   Wt::WLineEdit * const author_edit =
     addWidget( Wt::cpp14::make_unique< wt_util::WidgetWithTitle< Wt::WLineEdit > >( "Author:" ) )->subwidget();
   author_edit->setText( "" );
+  author_edit->setMaximumSize( 100, 50 );
   //addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
 
   Wt::WLineEdit * const tags_edit =
     addWidget( Wt::cpp14::make_unique< wt_util::WidgetWithTitle< Wt::WLineEdit > >( "Tags:" ) )->subwidget();
   tags_edit->setText( "" );
+  tags_edit->setMaximumSize( 100, 50 );
 
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
   Wt::WPushButton * const publish_button =
