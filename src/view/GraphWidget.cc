@@ -29,6 +29,7 @@ GraphWidget::GraphWidget(
   //node_label_font_.setFamily( Wt::FontFamily::Monospace, "'Courier New'" );
 
   setLayoutSizeAware( true );
+  setSelectable( false );
 
   resize( width_, height_ ); // Provide a default size.
   setMinimumSize( width_, height_ );
