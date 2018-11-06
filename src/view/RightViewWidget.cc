@@ -59,8 +59,8 @@ SaveAndLoadWidget::SaveAndLoadWidget(
 
   Wt::WGroupBox * const publish_container =
     addWidget( Wt::cpp14::make_unique< Wt::WGroupBox >( "Publish" ) );
-  publish_widget_ =
-    publish_container->addWidget( Wt::cpp14::make_unique< PublishWidget >( graph, std::move( options ) ) );
+  //publish_widget_ =
+  publish_container->addWidget( Wt::cpp14::make_unique< PublishWidget >( graph, std::move( options ) ) );
 }
 
 SaveAndLoadWidget::~SaveAndLoadWidget() = default;
