@@ -85,6 +85,11 @@ PublishWidget::PublishWidget(
 	return;
       }
 
+      if( ! std::filesystem::exists( "/published_pipelines" ) ){
+	wt_util::handleFailure( this, "This server is not currently set up to save published files, sorry." );
+	return;
+      }
+
       std::string const key = util::generate_random_string( 12 );
 
       std::string const directory_name = "/published_pipelines/" + key;
