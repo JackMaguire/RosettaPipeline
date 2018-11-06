@@ -126,7 +126,10 @@ setup_working_directory(
   std::vector< graph::NodeCSP > const & nodes_in_order,
   Options const & options
 ){
-  std::string const directory_name = "/tmp/" + util::generate_random_string( 16 );
+  std::string directory_name = "/tmp/" + util::generate_random_string( 16 );
+  while( std::filesystem::exists( directory_name ) ){
+    directory_name = "/tmp/" + util::generate_random_string( 16 );
+  }
   std::filesystem::create_directory( directory_name );
   std::cout << "creating " << directory_name << std::endl;
 
