@@ -108,7 +108,7 @@ PublishWidget::PublishWidget(
 	info_file.close();
       }
 
-      util::handleSuccess( this, "Publishing Was Successful!" );
+      wt_util::handleSuccess( this, "Publishing Was Successful!" );
     }
   );
 
