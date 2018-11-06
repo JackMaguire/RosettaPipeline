@@ -9,8 +9,7 @@
 #include <Wt/WBreak.h>
 #include <Wt/WLineEdit.h>
 #include <Wt/WHBoxLayout.h>
-#include <Wt/WFileResource.h>
-#include <Wt/WStreamResource.h>
+#include <Wt/WCheckBox.h>
 
 #include <wt_util/WidgetWithTitle.hh>
 #include <wt_util/Messages.hh>
