@@ -494,7 +494,7 @@ GraphWidget::getClosestPointForPoint( int point ) const {
 
 void
 GraphWidget::parentResized( Wt::WWidget * parent, Wt::WFlags< Wt::Orientation > orientation ) {
-  ContainerWidget::parentResized( parent, orientation );
+  WPaintedWidget::parentResized( parent, orientation );
   std::cout << "Width " << width().value() << " Height " << height().value() << std::endl;
 }
 
