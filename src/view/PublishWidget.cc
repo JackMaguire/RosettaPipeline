@@ -8,7 +8,7 @@
 #include <Wt/WText.h>
 #include <Wt/WBreak.h>
 #include <Wt/WLineEdit.h>
-#include <Wt/WLink.h>
+#include <Wt/WHBoxLayout.h>
 #include <Wt/WFileResource.h>
 #include <Wt/WStreamResource.h>
 
