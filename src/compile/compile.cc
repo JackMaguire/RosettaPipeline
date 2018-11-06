@@ -210,7 +210,7 @@ compile_run_script(
   addGlobalVariablesToRunScript( run_script, options );
   
   for( graph::NodeCSP const & node : nodes_in_order ){
-    addStageIntroToScript( node->stage(), run_script );
+    addStageIntroToScript( * node, run_script );
 
     std::string const dirname = node->dirname();
     run_script << "cd " << dirname << "\n";
@@ -350,10 +350,10 @@ void addGlobalIntroToScript( std::ostream & run_script ) {
   run_script << "# Visit github.com/JackMaguire/RosettaPipeline for details\n\n";
 }
 
-void addStageIntroToScript( int stage, std::ostream & run_script ) {
-  run_script << "\n###########\n";
-  run_script << "# STAGE " << stage << " #\n";
-  run_script << "###########\n\n";
+void addStageIntroToScript( Node const & node, std::ostream & run_script ) {
+  run_script << "\n##########################\n";
+  run_script << "# STAGE " << node.stage() << ": " << node.title()  << "\n";
+  run_script << "#\n#\n";
 }
 
 void addGlobalVariablesToRunScript( std::ostream & run_script, Options const & options ) {
