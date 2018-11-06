@@ -18,6 +18,7 @@
 #include <Wt/WBreak.h>
 #include <Wt/WText.h>
 #include <Wt/WGroupBox.h>
+#include <Wt/WPanel.h>
 
 #include <iostream>
 #include <memory>
@@ -32,11 +33,15 @@ SaveAndLoadWidget::SaveAndLoadWidget(
 )
 {
   //TODO WGroupBox
-  Wt::WGroupBox * const save_box =
-    addWidget( Wt::cpp14::make_unique< Wt::WGroupBox >( "<b>Save</b>" ) );
-  //addWidget( Wt::cpp14::make_unique< Wt::WText >( "<b>Save</b>" ) );
+  Wt::WPanel * const save_continer =
+    addWidget( Wt::cpp14::make_unique< Wt::WPanel >() );
+  save_continer->setTitle( "<b>Save</b>" );
+  save_continer->setCollapsible( true );
+  /*Wt::WGroupBox * const save_container =
+    addWidget( Wt::cpp14::make_unique< Wt::WGroupBox >( "<b>Save</b>" ) );*/
+
   save_widget_ =
-    save_box->addWidget( Wt::cpp14::make_unique< SaveWidget >( graph, options ) );
+    save_container->addWidget( Wt::cpp14::make_unique< SaveWidget >( graph, options ) );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
