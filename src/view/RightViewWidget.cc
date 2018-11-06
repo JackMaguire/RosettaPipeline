@@ -43,10 +43,22 @@ SaveAndLoadWidget::SaveAndLoadWidget(
   save_widget_ =
     save_container->addWidget( Wt::cpp14::make_unique< SaveWidget >( graph, options ) );
 
+  addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
+  addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
+  addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
+
   Wt::WGroupBox * const load_container =
     addWidget( Wt::cpp14::make_unique< Wt::WGroupBox >( "Load" ) );
   load_widget_ =
     load_container->addWidget( Wt::cpp14::make_unique< LoadWidget >( parent, graph, graph_widget, std::move( options ) ) );
+
+  addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
+  addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
+  addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
+
+  Wt::WGroupBox * const publish_container =
+    addWidget( Wt::cpp14::make_unique< Wt::WGroupBox >( "Publish" ) );
+
 }
 
 SaveAndLoadWidget::~SaveAndLoadWidget() = default;
