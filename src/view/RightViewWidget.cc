@@ -37,6 +37,7 @@ SaveAndLoadWidget::SaveAndLoadWidget(
     addWidget( Wt::cpp14::make_unique< Wt::WPanel >() );
   save_container->setTitle( "<b>Save</b>" );
   save_container->setCollapsible( true );
+  save_container->addStyleClass( "centered-example" );
   /*Wt::WGroupBox * const save_container =
     addWidget( Wt::cpp14::make_unique< Wt::WGroupBox >( "<b>Save</b>" ) );*/
 
