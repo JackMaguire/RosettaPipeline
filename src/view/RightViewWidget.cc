@@ -32,23 +32,21 @@ SaveAndLoadWidget::SaveAndLoadWidget(
   OptionsSP options
 )
 {
-  //TODO WGroupBox
-  Wt::WPanel * const save_container =
+  /*Wt::WPanel * const save_container =
     addWidget( Wt::cpp14::make_unique< Wt::WPanel >() );
   save_container->setTitle( "<b>Save</b>" );
   save_container->setCollapsible( true );
-  save_container->addStyleClass( "centered-example" );
-  /*Wt::WGroupBox * const save_container =
-    addWidget( Wt::cpp14::make_unique< Wt::WGroupBox >( "<b>Save</b>" ) );*/
-
+  save_container->addStyleClass( "centered-example" );*/
+ 
+  Wt::WGroupBox * const save_container =
+    addWidget( Wt::cpp14::make_unique< Wt::WGroupBox >( "Save" ) );
   save_widget_ =
-    save_container->setCentralWidget( Wt::cpp14::make_unique< SaveWidget >( graph, options ) );
-  addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
-  addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
-  addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
-  addWidget( Wt::cpp14::make_unique< Wt::WText >( "<b>Load</b>" ) );
+    save_container->addWidget( Wt::cpp14::make_unique< SaveWidget >( graph, options ) );
+
+  Wt::WGroupBox * const load_container =
+    addWidget( Wt::cpp14::make_unique< Wt::WGroupBox >( "Load" ) );
   load_widget_ =
-    addWidget( Wt::cpp14::make_unique< LoadWidget >( parent, graph, graph_widget, std::move( options ) ) );
+    load_container->addWidget( Wt::cpp14::make_unique< LoadWidget >( parent, graph, graph_widget, std::move( options ) ) );
 }
 
 SaveAndLoadWidget::~SaveAndLoadWidget() = default;
