@@ -23,6 +23,7 @@
 #include <cstdio> //std::tmpfile
 #include <stdio.h>//remove
 #include <sstream>
+#include <filesystem>//remove
 
 namespace view {
 
