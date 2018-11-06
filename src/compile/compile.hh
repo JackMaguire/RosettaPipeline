@@ -50,7 +50,7 @@ determineOrderOfNodes( graph::Graph const & g );
 
 void addGlobalIntroToScript( std::ostream & run_script );
 
-void addStageIntroToScript( Node const & node_for_stage, std::ostream & run_script );
+void addStageIntroToScript( graph::Node const & node_for_stage, std::ostream & run_script );
 
 void addGlobalVariablesToRunScript( std::ostream & run_script, Options const & );
 

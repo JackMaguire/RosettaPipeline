@@ -350,7 +350,7 @@ void addGlobalIntroToScript( std::ostream & run_script ) {
   run_script << "# Visit github.com/JackMaguire/RosettaPipeline for details\n\n";
 }
 
-void addStageIntroToScript( Node const & node, std::ostream & run_script ) {
+void addStageIntroToScript( graph::Node const & node, std::ostream & run_script ) {
   run_script << "\n##########################\n";
   run_script << "# STAGE " << node.stage() << ": " << node.title()  << "\n";
   run_script << "#\n#\n";
