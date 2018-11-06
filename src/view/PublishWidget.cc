@@ -44,21 +44,21 @@ PublishWidget::PublishWidget(
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
 
   wt_util::WidgetWithTitle< Wt::WLineEdit > * const title_container =
-    addWidget( Wt::cpp14::make_unique< wt_util::WidgetWithTitle< Wt::WLineEdit > >( "Title:" ) )
+    addWidget( Wt::cpp14::make_unique< wt_util::WidgetWithTitle< Wt::WLineEdit > >( "Title:" ) );
   Wt::WLineEdit * const title_edit = title_container->subwidget();
   title_edit->setText( "" );
   title_container->setMaximumSize( 150, 50 );
   //addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
 
   wt_util::WidgetWithTitle< Wt::WLineEdit > * const author_container =
-    addWidget( Wt::cpp14::make_unique< wt_util::WidgetWithTitle< Wt::WLineEdit > >( "Author:" ) )
+    addWidget( Wt::cpp14::make_unique< wt_util::WidgetWithTitle< Wt::WLineEdit > >( "Author:" ) );
   Wt::WLineEdit * const author_edit = author_container->subwidget();
   author_edit->setText( "" );
   author_container->setMaximumSize( 150, 50 );
   //addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
 
   wt_util::WidgetWithTitle< Wt::WLineEdit > * const tags_container =
-    addWidget( Wt::cpp14::make_unique< wt_util::WidgetWithTitle< Wt::WLineEdit > >( "Tags:" ) )
+    addWidget( Wt::cpp14::make_unique< wt_util::WidgetWithTitle< Wt::WLineEdit > >( "Tags:" ) );
   Wt::WLineEdit * const tags_edit = tags_container->subwidget();
   tags_edit->setText( "" );
   tags_container->setMaximumSize( 150, 50 );
