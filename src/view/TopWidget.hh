@@ -4,6 +4,8 @@
 #include <graph/Graph.fwd.hh>
 #include <Options.hh>
 #include <iostream>
+#include <view/GraphWidget.hh>
+
 
 namespace view {
 
@@ -19,11 +21,11 @@ public:
 
   void layoutSizeChanged( int w, int h ) override;
 
-  void parentResized( Wt::WWidget *parent, Wt::WFlags< Wt::Orientation > directions ) override;
-
 private:
   int width_;
   int height_;
+
+  GraphWidget * graph_widget_;
 };
 
 inline
@@ -31,14 +33,10 @@ void
 TopWidget::layoutSizeChanged( int w, int h ) {
   width_ = w;
   height_ = h;
-  std::cout << "TopWidget(2) " << "Width " << w << " Height " << h << std::endl;
-}
 
-inline
-void
-TopWidget::parentResized( Wt::WWidget * parent, Wt::WFlags< Wt::Orientation > orientation ) {
-  WContainerWidget::parentResized( parent, orientation );
-  std::cout << "TopWidget " << "Width " << width().value() << " Height " << height().value() << std::endl;
+  if( graph_widget_ ){
+    graph_widget_->accomodateNewSize( w / 3, h / 2 );
+  }
 }
 
 

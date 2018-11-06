@@ -30,6 +30,7 @@ TopWidget::TopWidget( graph::GraphSP graph, OptionsSP options ) :
 
   LeftViewWidget * const left_item =
     hbox->addWidget( Wt::cpp14::make_unique< LeftViewWidget >( graph, options ), 1 );
+  graph_widget_ = left_item->graphWidget();
 
   Wt::WContainerWidget * const right_container =
     hbox->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >(), 2 );
@@ -39,7 +40,7 @@ TopWidget::TopWidget( graph::GraphSP graph, OptionsSP options ) :
     right_container->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
   right_layout->setSpacing( 0 );
 
-  right_layout->addWidget( Wt::cpp14::make_unique< RightViewWidget >( graph, left_item->graphWidget(), std::move( options ) ),
+  right_layout->addWidget( Wt::cpp14::make_unique< RightViewWidget >( graph, graph_widget_, std::move( options ) ),
     Wt::LayoutPosition::Center );
 
 }

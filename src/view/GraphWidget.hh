@@ -55,7 +55,7 @@ public:
 
   void setGraph( graph::GraphSP const & );
 
-  void parentResized( Wt::WWidget *parent, Wt::WFlags< Wt::Orientation > directions ) override;
+  void accomodateNewSize( int w, int h );
 
 protected:
   void init_painting_tools();
