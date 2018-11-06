@@ -221,7 +221,7 @@ compile_run_script(
       "    echo \"Done running " << dirname << "\" >> ../JD3BASH_runlog.txt\n"
       "else\n"
       "    echo \"Failed to run " << dirname << "\" >> ../JD3BASH_runlog.txt\n"
-      "    exit 1\n"
+      "    exit " << node->stage() << "\n"
       "fi\n";
 
     run_script << "grep -v 'SEQUENCE:' score.sc > no_first_line.score.sc\n";
