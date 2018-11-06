@@ -71,6 +71,10 @@ PublishWidget::PublishWidget(
   Wt::WCheckBox * const private_check_box =
     addWidget( Wt::cpp14::make_unique< Wt::WCheckBox >( "Private" ) );
 
+  Wt::WText * const text =
+    addWidget( Wt::cpp14::make_unique< Wt::WText >( "" ) );
+
+
   publish_button->clicked().connect(
     [=] {
       if( title_edit->text().toUTF8().size() == 0 ){
@@ -124,7 +128,10 @@ PublishWidget::PublishWidget(
 	info_file.close();
       }
 
-      wt_util::handleSuccess( this, "Publishing Was Successful! Your key is: " + key );
+      wt_util::handleSuccess( this, "Publishing Was Successful! Your key is: " + key + 
+	( private_check_box->isChecked() ? ". This was published as private so you will need this key to access what you saved." :"")
+      );
+      text->setText( "Key: " + key );
     }
   );
 
