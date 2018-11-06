@@ -64,7 +64,7 @@ PublishWidget::PublishWidget(
   Wt::WLineEdit * const tags_edit = tags_container->subwidget();
   tags_edit->setText( "" );
 
-  addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
+  //addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
   Wt::WPushButton * const publish_button =
     addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Publish" ) );
 
