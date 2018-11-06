@@ -11,12 +11,14 @@
 
 namespace util {
 
+inline
 std::string
 getPathToTopDirectory(){
   std::string path_to_this_file( STRINGIZE( ROSETTA_PIPELINE_PWD ) );
   return path_to_this_file;
 }
 
+inline
 std::string
 generate_random_string( int size ){
   srand( time(NULL) );
