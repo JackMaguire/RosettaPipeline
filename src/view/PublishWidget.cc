@@ -79,22 +79,22 @@ PublishWidget::PublishWidget(
   tags_edit->setText( "" );
 
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
-  Wt::WPushButton * const publish_Button =
+  Wt::WPushButton * const publish_button =
     addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Publish" ) );
 
   publish_button->clicked().connect(
     [=] {
-      if( title_edit->getText().toUTF8().size() == 0 ){
+      if( title_edit->text().toUTF8().size() == 0 ){
 	handleFailure( this, "Please set a title" );
 	return;
       }
 
-      if( title_edit->getText().toUTF8().size() == 0 ){
+      if( author_edit->text().toUTF8().size() == 0 ){
 	handleFailure( this, "Please set an author" );
 	return;
       }
 
-      if( tags_edit->getText().toUTF8().size() == 0 ){
+      if( tags_edit->text().toUTF8().size() == 0 ){
 	handleFailure( this, "Please provide at least one tag" );
 	return;
       }
@@ -123,9 +123,9 @@ PublishWidget::PublishWidget(
       {//info file
 	std::ofstream info_file;
 	info_file.open( directory_name + "/info.txt" );
-	info_file << "Title " << "TODO" << "\n";
-	info_file << "Author " << "TODO" << "\n";
-	info_file << "Tags " << "TODO" << "\n";
+	info_file << "Title " << title_edit->text().toUTF8() << "\n";
+	info_file << "Author " << author_edit->text().toUTF8() << "\n";
+	info_file << "Tags " << tags_edit->text().toUTF8() << "\n";
 	info_file.close();
       }
     }
