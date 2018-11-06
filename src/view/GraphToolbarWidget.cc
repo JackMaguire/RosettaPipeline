@@ -39,10 +39,13 @@ GraphToolbarWidget::GraphToolbarWidget() :
     layout->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >() );
 
   select_button->setIcon( Wt::WLink( "media/mouse.png" ) );
+  select_button->setMinimumSize( 35, 35 );
   select_button->setMaximumSize( 45, 45 );
   add_button->setIcon( Wt::WLink( "media/plus.png" ) );
+  add_button->setMinimumSize( 35, 35 );
   add_button->setMaximumSize( 45, 45 );
   delete_button->setIcon( Wt::WLink( "media/trash.png" ) );
+  delete_button->setMinimumSize( 35, 35 );
   delete_button->setMaximumSize( 45, 45 );
 
   select_button->setCheckable( true );
