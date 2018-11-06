@@ -6,6 +6,8 @@
 
 #include <global_data/version.hh>
 
+#include <util.hh>
+
 #include <set>
 #include <sstream>
 //#include <stdlib.h>
@@ -13,33 +15,12 @@
 //#include <stdio.h>//remove
 #include <filesystem>//remove
 #include <cstdlib>//system
-#include <time.h>
 #include <fstream>
-#include <string>
+
 
 using namespace graph;
 
 namespace compile {
-
-namespace {
-
-std::string
-generate_random_string( int size ){
-  srand( time(NULL) );
-
-  std::string chars =
-        "0123456789"
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        "abcdefghijklmnopqrstuvwxyz";
-
-  std::string out = "";
-  for (int i = 0; i < size; ++i) {
-    out += chars[ rand() % chars.size() ];
-  }
-  return out;
-}
-
-}
 
 CompilationResult
 compile( graph::Graph const & g, Options const & options ){
@@ -145,7 +126,7 @@ setup_working_directory(
   std::vector< graph::NodeCSP > const & nodes_in_order,
   Options const & options
 ){
-  std::string const directory_name = "/tmp/" + generate_random_string( 16 );
+  std::string const directory_name = "/tmp/" + util::generate_random_string( 16 );
   std::filesystem::create_directory( directory_name );
   std::cout << "creating " << directory_name << std::endl;
 

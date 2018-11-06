@@ -13,10 +13,12 @@ RUN apt-get -y install git cmake g++-8 libboost-all-dev build-essential && \
     cd ../../
 
 # TineMCE
-RUN apt-get install tinymce && \
-    ln -s /wt/resources/ /resources && \
-    mkdir /resources/tiny_mce && \
-    cp -r /usr/share/tinymce/www/* /resources/tiny_mce/
+#RUN apt-get install tinymce && \
+#    ln -s /wt/resources/ /resources && \
+#    mkdir /resources/tiny_mce && \
+#    cp -r /usr/share/tinymce/www/* /resources/tiny_mce/
+
+RUN if [ ! -d /published_pipelines ]; then mkdir /published_pipelines; fi
 
 #Now RosettaPipeline gets rebuilt every time
 ARG CACHEBUST=1
