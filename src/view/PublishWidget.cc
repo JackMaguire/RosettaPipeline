@@ -11,6 +11,9 @@
 #include <Wt/WAnchor.h>
 #include <Wt/WFileResource.h>
 #include <Wt/WStreamResource.h>
+#include <Wt/WDialog.h>
+
+#include <wt_util/WidgetWithTitle.hh>
 
 #include <fstream>
 #include <iostream>
@@ -22,6 +25,30 @@
 #include <sstream>
 
 namespace view {
+
+namespace {
+
+template< typename T >
+void
+handleFailure( T * root, std::string const & message ){
+  Wt::WMessageBox * const messageBox = root->addChild(
+    Wt::cpp14::make_unique< Wt::WMessageBox >(
+      "Error",
+      message,
+      Wt::Icon::Critical, Wt::StandardButton::Ok
+    )
+  );
+  messageBox->setModal( false );
+  messageBox->buttonClicked().connect(
+    [=] {
+      root->removeChild( messageBox );
+    }
+  );
+  messageBox->show();
+}
+
+
+}
 
 PublishWidget::PublishWidget(
   graph::GraphSP graph,
@@ -37,15 +64,42 @@ PublishWidget::PublishWidget(
       "Otherwise, the user will need to submit the key to load it."
     ) );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
+
+  Wt::WLineEdit * const title_edit =
+    addWidget( Wt::cpp14::make_unique< wt_util::WidgetWithTitle< Wt::WLineEdit > >( "Title:" ) )->subwidget();
+  title_edit->setText( "" );
+  addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
+
+  Wt::WLineEdit * const author_edit =
+    addWidget( Wt::cpp14::make_unique< wt_util::WidgetWithTitle< Wt::WLineEdit > >( "Author:" ) )->subwidget();
+  author_edit->setText( "" );
+  addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
+
+  Wt::WLineEdit * const tags_edit =
+    addWidget( Wt::cpp14::make_unique< wt_util::WidgetWithTitle< Wt::WLineEdit > >( "Tags:" ) )->subwidget();
+  tags_edit->setText( "" );
+
+  addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
   Wt::WPushButton * const publish_Button =
     addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Publish" ) );
 
-  auto string_generating_func = [=] {
-    return ss.str();
-  };
-
   publish_button->clicked().connect(
     [=] {
+      if( title_edit->getText().toUTF8().size() == 0 ){
+	handleFailure( this, "Please set a title" );
+	return;
+      }
+
+      if( title_edit->getText().toUTF8().size() == 0 ){
+	handleFailure( this, "Please set an author" );
+	return;
+      }
+
+      if( tags_edit->getText().toUTF8().size() == 0 ){
+	handleFailure( this, "Please provide at least one tag" );
+	return;
+      }
+
       std::string const key = util::generate_random_string( 12 );
 
       std::string const directory_name = "/published_poses/" + key;
