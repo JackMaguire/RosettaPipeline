@@ -10,7 +10,7 @@
 #include <Wt/WLink.h>
 #include <Wt/WFileResource.h>
 #include <Wt/WStreamResource.h>
-#include <Wt/WMesageBox.h>
+#include <Wt/WMessageBox.h>
 
 #include <wt_util/WidgetWithTitle.hh>
 
