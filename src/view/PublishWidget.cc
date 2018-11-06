@@ -8,10 +8,9 @@
 #include <Wt/WBreak.h>
 #include <Wt/WLineEdit.h>
 #include <Wt/WLink.h>
-#include <Wt/WAnchor.h>
 #include <Wt/WFileResource.h>
 #include <Wt/WStreamResource.h>
-#include <Wt/WDialog.h>
+#include <Wt/WMesageBox.h>
 
 #include <wt_util/WidgetWithTitle.hh>
 
