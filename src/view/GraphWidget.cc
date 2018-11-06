@@ -495,7 +495,7 @@ GraphWidget::getClosestPointForPoint( int point ) const {
 
 void
 GraphWidget::accomodateNewSize( int w, int h ){
-  width_ = w;
+  width_ = ( w < 200 ? 200 : w );
   height_ = h;
 
   resize( width_, height_ ); // Provide a default size.
