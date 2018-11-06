@@ -46,7 +46,7 @@ PublishWidget::PublishWidget(
     addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
   Wt::WHBoxLayout * const line_edit_layout =
     line_edit_container->setLayout( Wt::cpp14::make_unique< Wt::WHBoxLayout >() );
-  //line_edit_container->setMaximumSize( 1000, 50 );
+  line_edit_container->setMaximumSize( 1000, 50 );
 
   wt_util::WidgetWithTitle< Wt::WLineEdit > * const title_container =
     line_edit_layout->addWidget( Wt::cpp14::make_unique< wt_util::WidgetWithTitle< Wt::WLineEdit > >( "Title:" ) );
