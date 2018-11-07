@@ -1,4 +1,5 @@
 #include <widgets/PublicationBrowserDialog.hh>
+#include <widgets/LoadWidget.hh>
 
 #include <publishing/load.hh>
 
