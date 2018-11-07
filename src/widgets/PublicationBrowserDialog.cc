@@ -167,7 +167,8 @@ void PublicationBrowserDialog::reset_table (
       table_->elementAt( count, 3 )->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Load" ) );    
 
     std::string filename_to_load = pub.filepath;
-    
+    assert( filename_to_load.size() > 0 );
+
     load_button->clicked().connect(
       [=]{
 	load_file( filename_to_load, *graph_, *options_ );
