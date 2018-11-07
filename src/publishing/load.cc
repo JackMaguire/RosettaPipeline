@@ -29,6 +29,8 @@ load( std::string const & directory ){
 	all_publications.emplace_back();
 	Publication & new_pub = all_publications.back();
 	new_pub.key = subdir_str.substr( subdir_str.rfind("/") + 1 );
+	new_pub.filepath = std::move( save_file );
+	new_pub.is_private = false;//This can be overriden later
 
 	for( std::string line; std::getline( reader, line ); ) {
 	  std::string const first_token = line.substr( 0, line.find(' ') );
