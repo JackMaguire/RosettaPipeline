@@ -153,7 +153,7 @@ LoadWidget::loadBrowseWidget(){
       this->removeChild( container );
     }
   );
-  messageBox->show();
+  container->show();
 }
 
 }//namespace widgets
