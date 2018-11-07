@@ -115,12 +115,11 @@ PublicationBrowserDialog::PublicationBrowserDialog( Wt::WContainerWidget * paren
   table_->addStyleClass( "table form-inline" );
   table_->setWidth( Wt::WLength( "100%" ) );
 
-  table_->setHeaderCount( 1 );
+  /*table_->setHeaderCount( 1 );
   table_->elementAt( 0, 0 )->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Title" ) );
   table_->elementAt( 0, 1 )->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Author" ) );
   table_->elementAt( 0, 2 )->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Tags" ) );
-  //table_->elementAt( 0, 3 )->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Key" ) );
-  table_->elementAt( 0, 3 )->addWidget( Wt::cpp14::make_unique< Wt::WText >( "" ) );
+  table_->elementAt( 0, 3 )->addWidget( Wt::cpp14::make_unique< Wt::WText >( "" ) );*/
 
   
   SearchBarWidget * const search_bar =
