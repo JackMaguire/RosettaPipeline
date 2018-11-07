@@ -16,6 +16,7 @@
 #include <Wt/WText.h>
 #include <Wt/WTable.h>
 
+#include <cassert>
 namespace widgets {
 
 namespace {
@@ -25,6 +26,7 @@ public:
   SearchBarWidget( PublicationBrowserDialog * parent ):
     parent_( parent )
   {
+    assert( parent_ );
     all_publications_ = publishing::load( "/published_pipelines" );
 
     Wt::WBorderLayout * const layout =
@@ -111,6 +113,7 @@ PublicationBrowserDialog::~PublicationBrowserDialog(){}
 void PublicationBrowserDialog::reset_table (
   std::list< publishing::Publication > const & new_elements
 ){
+  assert( table_ );
   table_->clear();
   table_->setHeaderCount( 1 );
   table_->elementAt( 0, 0 )->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Title" ) );
