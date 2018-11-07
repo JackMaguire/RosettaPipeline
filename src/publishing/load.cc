@@ -15,7 +15,7 @@ load( std::string const & directory ){
 
   for( auto & subdir : std::filesystem::directory_iterator( directory ) ){
     if( std::filesystem::is_directory( subdir ) ){
-      std::string const subdir_str( subdir );
+      std::string const subdir_str( subdir.string() );
 
       std::string const info_file = subdir_str + "/info.txt";
       if( ! std::filesystem::exists( info_file ) ) continue;
