@@ -148,7 +148,7 @@ LoadWidget::loadBrowseWidget(){
   Wt::WPushButton * close_button =
     container->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Close" ) );
   
-  close_button->buttonClicked().connect(
+  close_button->clicked().connect(
     [=] {
       this->removeChild( container );
     }
