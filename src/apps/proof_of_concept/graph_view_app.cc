@@ -6,6 +6,7 @@
 #include <widgets/TopWidget.hh>
 
 #include <memory>
+#include <iostream>
 
 #include <Options.hh>
 
@@ -31,6 +32,9 @@ std::unique_ptr< Wt::WApplication > createApplication( Wt::WEnvironment const & 
   app->root()->addWidget( Wt::cpp14::make_unique< widgets::TopWidget >( std::move( graph ), std::move( options ) ) );
   app->setCssTheme("polished");
   app->setTheme( std::make_shared< Wt::WBootstrapTheme >() ) ;
+
+  std::cout << app->internalSubPath() << std::endl;
+
   return app;
 }
 
