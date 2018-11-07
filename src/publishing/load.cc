@@ -26,7 +26,7 @@ load( std::string const & directory ){
       std::ifstream reader( info_file );
       if( reader.good() ){
 	all_publications.emplace_back();
-	Publication & new_pub = * all_publications.back();
+	Publication & new_pub = all_publications.back();
 	new_pub.key = subdir_str.substr( str.rfind("/") + 1 );
 
 	for( std::string line; std::getline( reader, line ); ) {
