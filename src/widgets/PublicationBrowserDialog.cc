@@ -90,7 +90,7 @@ PublicationBrowserDialog::PublicationBrowserDialog( ) :
   Wt::WBorderLayout * const layout =
     my_contents->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
 
-  Wt::WTable * const table_ =
+  table_ =
     layout->addWidget( Wt::cpp14::make_unique< Wt::WTable >(), Wt::LayoutPosition::Center );
 
   table_->addStyleClass( "table form-inline" );
