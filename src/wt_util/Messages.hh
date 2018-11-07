@@ -17,7 +17,7 @@ handleFailure( T * root, std::string const & message ){
       Wt::Icon::Critical, Wt::StandardButton::Ok
     )
   );
-  messageBox->setModal( false );
+  //messageBox->setModal( false );
   messageBox->buttonClicked().connect(
     [=] {
       root->removeChild( messageBox );
@@ -37,7 +37,7 @@ handleSuccess( T * root, std::string const & message ){
       Wt::Icon::Critical, Wt::StandardButton::Ok
     )
   );
-  messageBox->setModal( false );
+  //messageBox->setModal( false );
   messageBox->buttonClicked().connect(
     [=] {
       root->removeChild( messageBox );
