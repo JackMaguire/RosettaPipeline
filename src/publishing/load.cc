@@ -27,7 +27,7 @@ load( std::string const & directory ){
       if( reader.good() ){
 	all_publications.emplace_back();
 	Publication & new_pub = all_publications.back();
-	new_pub.key = subdir_str.substr( str.rfind("/") + 1 );
+	new_pub.key = subdir_str.substr( subdir_str.rfind("/") + 1 );
 
 	for( std::string line; std::getline( reader, line ); ) {
 	  std::string const first_token = line.substr( 0, line.find(' ') );
