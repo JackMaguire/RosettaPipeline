@@ -2,8 +2,8 @@
 #include <Wt/WBootstrapTheme.h>
 
 #include <graph/Graph.hh>
-//#include <view/GraphWidget.hh>
-#include <view/TopWidget.hh>
+//#include <widgets/GraphWidget.hh>
+#include <widgets/TopWidget.hh>
 
 #include <memory>
 
