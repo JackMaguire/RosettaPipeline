@@ -52,18 +52,18 @@ public:
 	  switch( combo_box->currentIndex() ){
 	    case 0://title
 	      if( pub.is_private ) break;
-	      if( pub.title == search_field.text().toUTF8() ) elements.push_back( pub );
+	      if( pub.title == search_field->text().toUTF8() ) elements.push_back( pub );
 	      break;
 	    case 1://author
 	      if( pub.is_private ) break;
-	      if( pub.author == search_field.text().toUTF8() ) elements.push_back( pub );
+	      if( pub.author == search_field->text().toUTF8() ) elements.push_back( pub );
 	      break;
 	    case 2://tag
 	      if( pub.is_private ) break;
-	      if( pub.tags == search_field.text().toUTF8() ) elements.push_back( pub );
+	      if( pub.tags == search_field->text().toUTF8() ) elements.push_back( pub );
 	      break;
 	    case 3://key
-	      if( pub.key == search_field.text().toUTF8() ) elements.push_back( pub );
+	      if( pub.key == search_field->text().toUTF8() ) elements.push_back( pub );
 	      break;
 	  }
 	}
