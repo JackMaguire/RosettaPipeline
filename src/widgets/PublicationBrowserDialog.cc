@@ -125,7 +125,7 @@ void PublicationBrowserDialog::reset_table (
     table_->elementAt( count, 1 )->addWidget( Wt::cpp14::make_unique< Wt::WText >( pub.author ) );
     table_->elementAt( count, 2 )->addWidget( Wt::cpp14::make_unique< Wt::WText >( pub.tags ) );
 
-    WPushButton * const load_button =
+    Wt::WPushButton * const load_button =
       table_->elementAt( count, 3 )->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Load" ) );    
 
     ++count;
