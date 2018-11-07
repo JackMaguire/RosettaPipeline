@@ -102,7 +102,7 @@ private:
 
 }
 
-PublicationBrowserDialog::PublicationBrowserDialog( ) :
+PublicationBrowserDialog::PublicationBrowserDialog( Wt::WContainerWidget * parent ) :
   WDialog( "Published Workflows" )
 {
   Wt::WContainerWidget * const my_contents = contents();
@@ -119,12 +119,21 @@ PublicationBrowserDialog::PublicationBrowserDialog( ) :
   table_->elementAt( 0, 0 )->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Title" ) );
   table_->elementAt( 0, 1 )->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Author" ) );
   table_->elementAt( 0, 2 )->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Tags" ) );
-  table_->elementAt( 0, 3 )->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Key" ) );
-  table_->elementAt( 0, 4 )->addWidget( Wt::cpp14::make_unique< Wt::WText >( "" ) );
+  //table_->elementAt( 0, 3 )->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Key" ) );
+  table_->elementAt( 0, 3 )->addWidget( Wt::cpp14::make_unique< Wt::WText >( "" ) );
 
   
   SearchBarWidget * const search_bar =
     layout->addWidget( Wt::cpp14::make_unique< SearchBarWidget >( this ), Wt::LayoutPosition::North );
+
+  Wt::WPushButton * const close_button =
+    layout->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Cancel" ), Wt::LayoutPosition::South );
+  search_button->clicked().connect(
+    [=]{
+      parent->removeChild( this );
+    }
+  );
+
 }
 
 PublicationBrowserDialog::~PublicationBrowserDialog(){}

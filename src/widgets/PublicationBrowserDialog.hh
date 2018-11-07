@@ -2,6 +2,7 @@
 
 #include <Wt/WDialog.h>
 #include <Wt/WTable.h>
+#include <Wt/WContainerWidget.h>
 
 #include <publishing/load.hh>
 
@@ -12,7 +13,7 @@ namespace widgets {
 class PublicationBrowserDialog : public Wt::WDialog
 {
 public:
-  PublicationBrowserDialog();
+  PublicationBrowserDialog( Wt::WContainerWidget * parent );
 
   virtual ~PublicationBrowserDialog();
 

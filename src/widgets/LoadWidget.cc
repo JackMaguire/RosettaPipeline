@@ -141,16 +141,7 @@ LoadWidget::~LoadWidget(){}
 void
 LoadWidget::loadBrowseWidget(){
   PublicationBrowserDialog * const container = addChild(
-    Wt::cpp14::make_unique< PublicationBrowserDialog >()
-  );
-
-  Wt::WPushButton * close_button =
-    container->contents()->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Close" ) );
-  
-  close_button->clicked().connect(
-    [=] {
-      this->removeChild( container );
-    }
+    Wt::cpp14::make_unique< PublicationBrowserDialog >( this )
   );
   container->show();
 }
