@@ -19,9 +19,9 @@ WT_FLAGS=-lwthttp2 -lwt2 -lboost_signals -DBOOST_SIGNALS_NO_DEPRECATION_WARNING 
 ########
 # META #
 ########
-all: Options.o graph compile widgets apps bin
+all: Options.o graph compile publishing widgets apps bin
 
-all_no_wt: Options.o graph compile
+all_no_wt: Options.o graph compile publishing
 
 graph: Node.o Edge.o Graph.o
 
@@ -57,9 +57,19 @@ graph: Graph.o Edge.o Node.o
 compile: graph
 	${CXX} -c -o build/compile.o src/compile/compile.cc ${GEN} 
 
-########
+##############
+# PUBLISHING #
+##############
+
+pubload.o: src/publishing/load.cc
+	${CXX} -c -o build/pubload.o src/publishing/load.cc ${GEN}
+
+publishing: pubload.o
+	ld -r build/pubload.o -o build/publishing.o -arch ${ARCH}
+
+###########
 # WIDGETS #
-########
+###########
 
 GraphWidget.o: src/widgets/GraphWidget.hh graph
 	${CXX} -c -o build/GraphWidget.o src/widgets/GraphWidget.cc ${GEN} ${WT_FLAGS}
