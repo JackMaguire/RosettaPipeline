@@ -1,11 +1,11 @@
 #pragma once
 
-#include <Wt/WContainerWidget.h>
+#include <Wt/WDialog.h>
 //#include <graph/Graph.fwd.hh>
 
 namespace widgets {
 
-class PublicationBrowserDialog : public Wt::WContainerWidget
+class PublicationBrowserDialog : public Wt::WDialog
 {
 public:
   PublicationBrowserDialog();

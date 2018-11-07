@@ -3,14 +3,13 @@
 #include <graph/Graph.hh>
 #include <widgets/GraphWidget.hh>
 #include <widgets/OptionsWidget.hh>
-
+#include <widgets/PublicationBrowserDialog.hh>
 
 //#include <Wt/WLength.h>
 #include <Wt/WGlobal.h>
 #include <Wt/WPushButton.h>
 #include <Wt/WText.h>
 #include <Wt/WFileUpload.h>
-#include <Wt/WDialog.h>
 #include <Wt/WBreak.h>
 
 #include <fstream>
@@ -141,8 +140,8 @@ LoadWidget::~LoadWidget(){}
 
 void
 LoadWidget::loadBrowseWidget(){
-  Wt::WDialog * const container = addChild(
-    Wt::cpp14::make_unique< Wt::WDialog >( "Published Workflows" )
+  PublicationBrowserDialog * const container = addChild(
+    Wt::cpp14::make_unique< PublicationBrowserDialog >( "Published Workflows" )
   );
 
   Wt::WPushButton * close_button =
