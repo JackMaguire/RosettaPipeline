@@ -169,7 +169,7 @@ void PublicationBrowserDialog::reset_table (
     std::string filename_to_load = pub.filepath;
     
     load_button->clicked().connect(
-      [filename_to_load,options_,graph_]{
+      [=]{
 	load_file( filename_to_load, *graph_, *options_ );
 	parent_->removeChild( this );
 	graph_widget_->update();
