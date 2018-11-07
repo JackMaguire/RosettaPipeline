@@ -2,7 +2,7 @@
 //#include <cassert>
 //#include <memory>
 #include <filesystem>
-#include <iostream>
+#include <fstream>
 
 namespace publishing {
 
