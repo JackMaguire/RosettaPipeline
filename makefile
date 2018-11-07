@@ -139,4 +139,4 @@ apps: GraphApplication
 #######
 
 graph_view_app: GraphApplication widgets Options.o
-	${CXX} -o bin/graph_view_app build/graph_view_app.o build/graph.o build/widgets.o build/Options.o build/compile.o ${GEN} ${WT_FLAGS}
+	${CXX} -o bin/graph_view_app build/graph_view_app.o build/graph.o build/widgets.o build/Options.o build/compile.o build/publishing.o ${GEN} ${WT_FLAGS}
