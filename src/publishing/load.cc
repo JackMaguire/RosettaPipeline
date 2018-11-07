@@ -15,17 +15,19 @@ load( std::string const & directory ){
 
   for( auto & subdir : std::filesystem::directory_iterator( directory ) ){
     if( std::filesystem::is_directory( subdir ) ){
-      std::string const info_file = subdir + "/info.txt";
+      std::string const subdir_str( subdir );
+
+      std::string const info_file = subdir_str + "/info.txt";
       if( ! std::filesystem::exists( info_file ) ) continue;
 
-      std::string save_file = subdir + "/save.txt";
+      std::string save_file = subdir_str + "/save.txt";
       if( ! std::filesystem::exists( save_file ) ) continue;
 
       std::ifstream reader( info_file );
       if( reader.good() ){
 	all_publications.emplace_back();
 	Publication & new_pub = * all_publications.back();
-	new_pub.key = subdir.substr( str.rfind("/") + 1 );
+	new_pub.key = subdir_str.substr( str.rfind("/") + 1 );
 
 	for( std::string line; std::getline( reader, line ); ) {
 	  std::string const first_token = line.substr( 0, s.find(' ') );
