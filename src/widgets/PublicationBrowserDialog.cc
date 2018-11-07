@@ -11,12 +11,24 @@
 //#include <Wt/WVBoxLayout.h>
 //#include <Wt/WBorderLayout.h>
 //#include <Wt/WLink.h>
+#include <Wt/WTable.h>
 
 namespace widgets {
 
 PublicationBrowserDialog::PublicationBrowserDialog( ) :
   WDialog( "Published Workflows" )
 {
+  auto contents = contents();
+  Wt::WTable * const table =
+    contents->addWidget( Wt::cpp14::make_unique< Wt::WTable >() );
+  table->setHeaderCount( 1 );
+  table->elementAt( 0, 0 )->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Title" ) );
+  table->elementAt( 0, 1 )->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Author" ) );
+  table->elementAt( 0, 2 )->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Tags" ) );
+  table->elementAt( 0, 3 )->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Key" ) );
+
+
+
 }
 
 PublicationBrowserDialog::~PublicationBrowserDialog(){}
