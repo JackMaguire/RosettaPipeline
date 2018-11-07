@@ -15,7 +15,7 @@
 namespace widgets {
 
 PublicationBrowserDialog::PublicationBrowserDialog( ) :
-  WDialog()
+  WDialog( "Published Workflows" )
 {
 }
 
