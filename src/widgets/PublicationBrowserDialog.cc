@@ -10,7 +10,7 @@
 //#include <Wt/WHBoxLayout.h>
 //#include <Wt/WVBoxLayout.h>
 //#include <Wt/WBorderLayout.h>
-//#include <Wt/WLink.h>
+#include <Wt/WText.h>
 #include <Wt/WTable.h>
 
 namespace widgets {
