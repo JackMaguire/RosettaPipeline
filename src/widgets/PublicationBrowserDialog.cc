@@ -107,6 +107,7 @@ PublicationBrowserDialog::PublicationBrowserDialog(
   OptionsSP options
 ) :
   WDialog( "Published Workflows" ),
+  parent_( parent ),
   graph_( std::move( graph ) ),
   options_( std::move( options ) ),
   graph_widget_( graph_widget ),

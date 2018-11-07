@@ -30,6 +30,7 @@ public:
   void reset_table( std::list< publishing::Publication > const & new_elements );
 
 private:
+  Wt::WContainerWidget * parent_;
   graph::GraphSP graph_;
   OptionsSP options_;
   Wt::WTable * table_;
