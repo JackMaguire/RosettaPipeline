@@ -29,6 +29,7 @@ PublicationBrowserDialog::PublicationBrowserDialog( ) :
   table->elementAt( 0, 1 )->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Author" ) );
   table->elementAt( 0, 2 )->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Tags" ) );
   table->elementAt( 0, 3 )->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Key" ) );
+  table->elementAt( 0, 4 )->addWidget( Wt::cpp14::make_unique< Wt::WText >( "" ) );
 
 
 
