@@ -28,6 +28,8 @@ public:
 
   ~LoadWidget() override;
 
+protected:
+  void loadBrowseWidget();
 private:
   RightViewWidget * parent_;
 };
