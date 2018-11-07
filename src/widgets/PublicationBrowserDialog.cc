@@ -128,7 +128,7 @@ PublicationBrowserDialog::PublicationBrowserDialog( Wt::WContainerWidget * paren
 
   Wt::WPushButton * const close_button =
     layout->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Cancel" ), Wt::LayoutPosition::South );
-  search_button->clicked().connect(
+  close_button->clicked().connect(
     [=]{
       parent->removeChild( this );
     }
