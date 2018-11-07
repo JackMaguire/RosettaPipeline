@@ -32,6 +32,7 @@ protected:
   void loadBrowseWidget();
 private:
   RightViewWidget * parent_;
+  GraphWidget * graph_widget_;
 };
 
 }//namespace widgets

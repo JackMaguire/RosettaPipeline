@@ -55,6 +55,8 @@ public:
 
   void setGraph( graph::GraphSP const & );
 
+  graph::GraphSP graph(){ return graph_; }
+
   void accomodateNewSize( int w, int h );
 
 protected:

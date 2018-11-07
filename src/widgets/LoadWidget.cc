@@ -72,7 +72,8 @@ LoadWidget::LoadWidget(
 ) :
   WContainerWidget(),
   OptionsHolder( std::move( options ) ),
-  parent_( parent )
+  parent_( parent ),
+  graph_widget_( graph_widget )
 {
   //largely copied from https://github.com/emweb/wt/blob/29ae91638e197013f67e7c826317529615d10749/examples/widgetgallery/examples/FileUpload.cpp
 
@@ -141,7 +142,13 @@ LoadWidget::~LoadWidget(){}
 void
 LoadWidget::loadBrowseWidget(){
   PublicationBrowserDialog * const container = addChild(
-    Wt::cpp14::make_unique< PublicationBrowserDialog >( this )
+    Wt::cpp14::make_unique< PublicationBrowserDialog >(
+      this,
+      graph_widget_,
+      parent_->options_widget(),
+      graph_widget_->graph(),
+      options_
+    )
   );
   container->show();
 }

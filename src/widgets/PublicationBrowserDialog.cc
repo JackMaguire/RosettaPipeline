@@ -1,8 +1,4 @@
 #include <widgets/PublicationBrowserDialog.hh>
-#include <widgets/RightViewWidget.hh>
-#include <widgets/LeftViewWidget.hh>
-#include <widgets/GraphWidget.hh>
-#include <widgets/GraphToolbarWidget.hh>
 
 #include <publishing/load.hh>
 
@@ -102,8 +98,18 @@ private:
 
 }
 
-PublicationBrowserDialog::PublicationBrowserDialog( Wt::WContainerWidget * parent ) :
-  WDialog( "Published Workflows" )
+PublicationBrowserDialog::PublicationBrowserDialog(
+  Wt::WContainerWidget * parent,
+  GraphWidget * graph_widget,
+  OptionsWidget * options_widget,
+  graph::GraphSP graph,
+  OptionsSP options
+) :
+  WDialog( "Published Workflows" ),
+  graph_( std::move( graph ) ),
+  options_( std::move( options ) ),
+  graph_widget_( graph_widget ),
+  options_widget_( options_widget )
 {
   Wt::WContainerWidget * const my_contents = contents();
   Wt::WBorderLayout * const layout =
@@ -129,7 +135,7 @@ PublicationBrowserDialog::PublicationBrowserDialog( Wt::WContainerWidget * paren
     layout->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Cancel" ), Wt::LayoutPosition::South );
   close_button->clicked().connect(
     [=]{
-      parent->removeChild( this );
+      parent_->removeChild( this );
     }
   );
 
@@ -157,6 +163,17 @@ void PublicationBrowserDialog::reset_table (
 
     Wt::WPushButton * const load_button =
       table_->elementAt( count, 3 )->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Load" ) );    
+
+    std::string filename_to_load = pub.filepath;
+    
+    load_button->clicked().connect(
+      [=filename_to_load,=options_,=graph_]{
+	load_file( filename_to_load, *graph_, *options_ );
+	parent_->removeChild( this );
+	graph_widget_->update();
+	options_widget_->update();
+      }
+    );
 
     ++count;
   }
