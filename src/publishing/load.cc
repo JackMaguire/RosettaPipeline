@@ -30,8 +30,8 @@ load( std::string const & directory ){
 	new_pub.key = subdir_str.substr( str.rfind("/") + 1 );
 
 	for( std::string line; std::getline( reader, line ); ) {
-	  std::string const first_token = line.substr( 0, s.find(' ') );
-	  std::string arg = line.substr( s.find(' ') + 1 );
+	  std::string const first_token = line.substr( 0, line.find(' ') );
+	  std::string arg = line.substr( line.find(' ') + 1 );
 
 	  if( first_token == "Title" ){
 	    new_pub.title = std::move( arg );
