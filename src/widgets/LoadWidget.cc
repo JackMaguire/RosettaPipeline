@@ -142,7 +142,7 @@ LoadWidget::~LoadWidget(){}
 void
 LoadWidget::loadBrowseWidget(){
   Wt::WDialog * const container = addChild(
-    Wt::cpp14::make_unique< Wt::WDialog >()
+    Wt::cpp14::make_unique< Wt::WDialog >( "Published Workflows" )
   );
 
   Wt::WPushButton * close_button =
