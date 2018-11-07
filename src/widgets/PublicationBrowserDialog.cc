@@ -17,9 +17,22 @@
 #include <Wt/WTable.h>
 
 #include <cassert>
+
+#include <boost/algorithm/string.hpp> 
+
 namespace widgets {
 
 namespace {
+
+bool a_contains_b_case_insensitive(
+  std::string const & a,
+  std::string const & b
+){
+  std::string A = a;
+  std::string B = b;
+
+  return A.find( B ) != std::string::npos;
+}
 
 class SearchBarWidget : public Wt::WContainerWidget{
 public:  
