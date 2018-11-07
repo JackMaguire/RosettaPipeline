@@ -35,13 +35,14 @@ public:
     combo_box->addItem( "Author" );
     combo_box->addItem( "Tag" );
     combo_box->addItem( "Key" );
+    combo_box->setMaximumSize( 100, 99999 );
 
     Wt::WLineEdit * const search_field =
       layout->addWidget( Wt::cpp14::make_unique< Wt::WLineEdit >(), Wt::LayoutPosition::Center );
     search_field->setPlaceholderText( "Search" );
 
     Wt::WPushButton * const search_button =
-      layout->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >(), Wt::LayoutPosition::East );
+      layout->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Search" ), Wt::LayoutPosition::East );
   }
 
   ~SearchBarWidget() = default;
