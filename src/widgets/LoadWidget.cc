@@ -141,7 +141,7 @@ LoadWidget::~LoadWidget(){}
 
 void
 LoadWidget::loadBrowseWidget(){
-  Wt::WMessageBox * const container = addChild(
+  Wt::WContainerWidget * const container = addChild(
     Wt::cpp14::make_unique< Wt::WContainerWidget >()
   );
 
