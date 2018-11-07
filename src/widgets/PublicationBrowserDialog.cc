@@ -18,7 +18,9 @@
 
 namespace widgets {
 
-class SearchBarWidget : public Wt::WContainerWidget(){
+namespace {
+
+class SearchBarWidget : public Wt::WContainerWidget{
 public:  
   SearchBarWidget(){
 
@@ -47,6 +49,8 @@ public:
 private:
   std::vector< publishing::Publication > all_publications_;
 };
+
+}
 
 PublicationBrowserDialog::PublicationBrowserDialog( ) :
   WDialog( "Published Workflows" )
