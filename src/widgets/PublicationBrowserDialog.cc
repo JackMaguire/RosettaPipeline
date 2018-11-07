@@ -18,9 +18,9 @@ namespace widgets {
 PublicationBrowserDialog::PublicationBrowserDialog( ) :
   WDialog( "Published Workflows" )
 {
-  auto contents = contents();
+  auto my_contents = contents();
   Wt::WTable * const table =
-    contents->addWidget( Wt::cpp14::make_unique< Wt::WTable >() );
+    my_contents->addWidget( Wt::cpp14::make_unique< Wt::WTable >() );
   table->setHeaderCount( 1 );
   table->elementAt( 0, 0 )->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Title" ) );
   table->elementAt( 0, 1 )->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Author" ) );
