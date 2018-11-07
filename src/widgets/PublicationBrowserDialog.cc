@@ -28,9 +28,8 @@ bool a_contains_b_case_insensitive(
   std::string const & a,
   std::string const & b
 ){
-  std::string A = a;
-  std::string B = b;
-
+  std::string const A = boost::algorithm::to_lower_copy( a );
+  std::string const B = boost::algorithm::to_lower_copy( b );
   return A.find( B ) != std::string::npos;
 }
 
@@ -64,21 +63,28 @@ public:
       [=]{
 	std::list< publishing::Publication > elements;
 	for( publishing::Publication const & pub : all_publications_ ){
+	  std::string const query = search_field->text().toUTF8();
 	  switch( combo_box->currentIndex() ){
 	    case 0://title
 	      if( pub.is_private ) break;
-	      if( pub.title == search_field->text().toUTF8() ) elements.push_back( pub );
+	      if( a_contains_b_case_insensitive( pub.title, query ) ){ 
+		elements.push_back( pub );
+	      }
 	      break;
 	    case 1://author
 	      if( pub.is_private ) break;
-	      if( pub.author == search_field->text().toUTF8() ) elements.push_back( pub );
+	      if( a_contains_b_case_insensitive( pub.author, query ) ){ 
+		elements.push_back( pub );
+	      }
 	      break;
 	    case 2://tag
 	      if( pub.is_private ) break;
-	      if( pub.tags == search_field->text().toUTF8() ) elements.push_back( pub );
+	      if( a_contains_b_case_insensitive( pub.tags, query ) ){ 
+		elements.push_back( pub );
+	      }
 	      break;
 	    case 3://key
-	      if( pub.key == search_field->text().toUTF8() ) elements.push_back( pub );
+	      if( pub.key == query ) elements.push_back( pub );
 	      break;
 	  }
 	}
