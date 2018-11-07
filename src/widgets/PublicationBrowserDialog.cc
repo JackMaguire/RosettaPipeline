@@ -4,7 +4,7 @@
 #include <widgets/GraphWidget.hh>
 #include <widgets/GraphToolbarWidget.hh>
 
-//#include <Wt/WLength.h>
+#include <Wt/WLength.h>
 //#include <Wt/WImage.h>
 #include <Wt/WGlobal.h>
 //#include <Wt/WHBoxLayout.h>
@@ -21,6 +21,9 @@ PublicationBrowserDialog::PublicationBrowserDialog( ) :
   auto my_contents = contents();
   Wt::WTable * const table =
     my_contents->addWidget( Wt::cpp14::make_unique< Wt::WTable >() );
+  table->addStyleClass( "table form-inline" );
+  table->setWidth( Wt::WLength( "100%" ) );
+
   table->setHeaderCount( 1 );
   table->elementAt( 0, 0 )->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Title" ) );
   table->elementAt( 0, 1 )->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Author" ) );
