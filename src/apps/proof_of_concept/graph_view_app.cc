@@ -33,6 +33,7 @@ std::unique_ptr< Wt::WApplication > createApplication( Wt::WEnvironment const & 
   app->setCssTheme("polished");
   app->setTheme( std::make_shared< Wt::WBootstrapTheme >() ) ;
 
+  std::cout << app->url() << std::endl;
   std::cout << app->internalSubPath( "" ) << std::endl;
 
   return app;
