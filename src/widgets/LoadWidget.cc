@@ -10,7 +10,7 @@
 #include <Wt/WPushButton.h>
 #include <Wt/WText.h>
 #include <Wt/WFileUpload.h>
-#include <Wt/WProgressBar.h>
+#include <Wt/WDialog.h>
 #include <Wt/WBreak.h>
 
 #include <fstream>
@@ -141,12 +141,12 @@ LoadWidget::~LoadWidget(){}
 
 void
 LoadWidget::loadBrowseWidget(){
-  Wt::WContainerWidget * const container = addChild(
-    Wt::cpp14::make_unique< Wt::WContainerWidget >()
+  Wt::WDialog * const container = addChild(
+    Wt::cpp14::make_unique< Wt::WDialog >()
   );
 
   Wt::WPushButton * close_button =
-    container->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Close" ) );
+    container->contents()->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Close" ) );
   
   close_button->clicked().connect(
     [=] {
