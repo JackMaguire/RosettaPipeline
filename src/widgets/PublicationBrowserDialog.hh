@@ -1,7 +1,11 @@
 #pragma once
 
 #include <Wt/WDialog.h>
-//#include <graph/Graph.fwd.hh>
+#include <Wt/WTable.h>
+
+#include <publishing/load.hh>
+
+#include <list>
 
 namespace widgets {
 
@@ -12,6 +16,10 @@ public:
 
   virtual ~PublicationBrowserDialog();
 
+  void reset_table( std::list< publishing::Publication > const & new_elements );
+
+private:
+  Wt::WTable * table_;
 };
 
 }//namespace widgets
