@@ -14,9 +14,39 @@
 
 namespace serialization {
 
+struct ArchiveElementImpl : public ArchiveElement {
+  template < class Archive >
+  void save( Archive & ar ) const {
+    ar( token );
+    ar( value );
+  }
+      
+  template < class Archive >
+  void load( Archive & ar ) {
+    ar( token );
+    ar( value );
+  }
+};
+
+
 ////////
 //SAVE//
 ////////
+
+namespace {
+
+/*class ArchiverImpl : public Archiver {
+public:
+  ArchiverImpl(){
+
+  }
+
+  ~ArchiverImpl() = default;
+
+  void add_element( ArchiveElement const & ) override;
+};*/
+
+}
 
 std::string save(
   Options const & options,
@@ -48,6 +78,13 @@ std::string save(
 ////////
 
 namespace {
+
+/*class UnarchiverImpl : public Unarchiver {
+public:
+  ArchiveElement const & get_next_element() override {
+
+  }
+};*/
 
 std::vector< std::string > get_file_lines( std::string const & filename ){
   std::vector< std::string > myLines;

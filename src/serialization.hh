@@ -6,6 +6,23 @@
 
 namespace serialization {
 
+//Structs and classes
+struct ArchiveElement {
+  std::string token;
+  std::string value;
+};
+
+class Archiver {
+public:
+  virtual void add_element( ArchiveElement const & );
+};
+
+class Unarchiver {
+public:
+  virtual ArchiveElement const & get_next_element();
+};
+
+
 std::string save(
   Options const &,
   graph::Graph const &
