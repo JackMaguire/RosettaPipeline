@@ -12,6 +12,13 @@ std::string save(
 );
 
 
+//returns a message, hopefully "load successful"
+//possibly replace this with an enum?
+std::string load_file(
+  std::string const & filename,
+  graph::Graph & graph,
+  Options & options
+);
 
 
 }

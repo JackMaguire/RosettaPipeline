@@ -286,6 +286,9 @@ GraphWidget::drag( int x, int y ) {
 
 void
 GraphWidget::paintEvent( Wt::WPaintDevice * paintDevice ) {
+  hitbox_for_node_.clear();
+  hitbox_for_edge_.clear();
+
   Wt::WPainter painter( paintDevice );
   painter.setPen( default_pen_ );
   int const grid_size = options_->grid_size;

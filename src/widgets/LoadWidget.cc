@@ -19,51 +19,6 @@
 
 namespace widgets {
 
-namespace {
-
-std::vector< std::string > get_file_lines( std::string const & filename ){
-  std::vector< std::string > myLines;
-  std::ifstream myFile( filename );
-  if( myFile.good() ){
-    for( std::string line; std::getline( myFile, line ); ) {
-      myLines.push_back(line);
-    }
-  }
-  return myLines;
-}
-
-std::string load_file(
-  std::vector< std::string > const & file_lines,
-  graph::Graph & graph,
-  Options & options
-){
-  //First, options
-  int current_line = 0;
-  if( file_lines[ current_line ] != "START_OPTIONS" ) {
-    return "Error, expected first line to say \"START_OPTIONS\"";
-  }
-  current_line = options.load( file_lines, current_line ) + 1;
-
-  //Graph
-  if( file_lines[ current_line ] != "START_GRAPH" ) {
-    return "Error, expected first line to say \"START_OPTIONS\"";
-  }
-  current_line = graph.loadSelfNodesAndEdges( file_lines, current_line, options ) + 1;
-
-  return "load successful";
-}
-
-}
-
-std::string load_file(
-  std::string const & filename,
-  graph::Graph & graph,
-  Options & options
-){
-  return load_file( get_file_lines( filename ), graph, options );
-}
-
-
 LoadWidget::LoadWidget(
   RightViewWidget * parent,
   graph::GraphSP const & graph,
@@ -101,7 +56,7 @@ LoadWidget::LoadWidget(
     [=] {
       fu->upload();
       upload_button->disable();
-      upload_out->setText("File upload has begun.");
+      upload_out->setText( "File upload has begun." );
     }
   );
 
@@ -111,13 +66,10 @@ LoadWidget::LoadWidget(
 
       auto const filename = fu->spoolFileName();
       if( filename.size() > 1 ){
-	std::vector< std::string > lines = get_file_lines( filename );
-	if( lines.size() > 1 ){
-	  //TODO clear maps in graph view
-	  upload_out->setText( load_file( lines, * graph, * options_ ) );
-	  graph_widget->update();
-	  parent_->options_widget()->update();
-	}
+	//TODO clear maps in graph view
+	upload_out->setText( serialization::load_file( filename, * graph, * options_ ) );
+	graph_widget->update();
+	parent_->options_widget()->update();
       }
     }
   );

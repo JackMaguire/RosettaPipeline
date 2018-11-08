@@ -10,12 +10,6 @@
 
 namespace widgets {
 
-std::string load_file(
-  std::string const & filename,
-  graph::Graph & graph,
-  Options & options
-);
-
 class LoadWidget : public Wt::WContainerWidget, public OptionsHolder
 {
 public:

@@ -1,6 +1,6 @@
 #include <widgets/PublicationBrowserDialog.hh>
-#include <widgets/LoadWidget.hh>
 
+#include <serialization.hh>
 #include <publishing.hh>
 
 #include <Wt/WLength.h>
@@ -171,7 +171,7 @@ void PublicationBrowserDialog::reset_table (
 
     load_button->clicked().connect(
       [=]{
-	load_file( filename_to_load, *graph_, *options_ );
+	serialization::load_file( filename_to_load, *graph_, *options_ );
 	parent_->removeChild( this );
 	graph_widget_->update();
 	options_widget_->update();
