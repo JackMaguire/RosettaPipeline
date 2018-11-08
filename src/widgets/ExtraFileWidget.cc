@@ -15,8 +15,6 @@
 
 namespace widgets {
 
-namespace {
-
 struct UpperExtraFileWidget : public Wt::WContainerWidget {
   UpperExtraFileWidget(){
     addWidget( Wt::cpp14::make_unique< Wt::WText >( "TODO: Describe How This Works!" ) );
@@ -36,7 +34,7 @@ struct UpperExtraFileWidget : public Wt::WContainerWidget {
   }
 
   void setup_connections(){
-    /*upload_button->clicked().connect(
+    upload_button->clicked().connect(
       [=] {
 	file_upload->upload();
 	upload_message_area->setText( "File upload has begun." );
@@ -47,7 +45,7 @@ struct UpperExtraFileWidget : public Wt::WContainerWidget {
       [=] {
 	upload_message_area->setText( "File is too large. Current limit is 1 MB." );
       }
-    );*/
+    );
   }
 
   Wt::WLineEdit * line_edit;
@@ -55,8 +53,6 @@ struct UpperExtraFileWidget : public Wt::WContainerWidget {
   Wt::WText * upload_message_area;
   Wt::WPushButton * upload_button;
 };
-
-}//anonymous namespace
 
 ExtraFileWidget::ExtraFileWidget( graph::GraphSP graph ) :
   WContainerWidget(),
@@ -72,7 +68,7 @@ ExtraFileWidget::ExtraFileWidget( graph::GraphSP graph ) :
   table_->addStyleClass( "table form-inline" );
   table_->setWidth( Wt::WLength( "100%" ) );
 
-  /*upper_widget->file_upload->uploaded().connect(
+  upper_widget->file_upload->uploaded().connect(
     [=] {
       auto const filename = upper_widget->file_upload->spoolFileName();
       if( filename.size() > 1 ){
@@ -92,7 +88,7 @@ ExtraFileWidget::ExtraFileWidget( graph::GraphSP graph ) :
 	this->update_table();
       }
     }
-  );*/
+  );
 
 }
 
