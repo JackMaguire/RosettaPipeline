@@ -4,6 +4,8 @@
 #include <graph/Edge.fwd.hh>
 #include <graph/Graph.fwd.hh>
 
+#include <serialization.hh>
+
 #include <vector>
 #include <algorithm>
 #include <string>
@@ -36,15 +38,6 @@ public://getters and setters:
 
   int Y() const { return y_; }
   void setY( int y ){ y_ = y; }
-
-  int Red() const { return red_; }
-  void setRed( int r ){ red_ = r; }
-
-  int Green() const { return green_; }
-  void setGreen( int g ){ green_ = g; }
-
-  int Blue() const { return blue_; }
-  void setBlue( int b ){ blue_ = b; }
   
   bool useDefaultCommand() const { return use_default_command_; }
   void setUseDefaultCommand( bool setting ){ use_default_command_ = setting; }
@@ -120,7 +113,7 @@ public://container access
 protected:
   void init( Options const & );
 
-  void save( std::vector< std::string > & output_lines ) const;
+  void save( serialization::Archiver & archiver ) const;
 
 public://This technically has to be public in order to use make_shared
   //load ctor
@@ -134,11 +127,6 @@ private:
   int id_;
   int x_;
   int y_;
-
-  //Colors:
-  int red_;
-  int green_;
-  int blue_;
 
   std::vector< EdgeSP > upstream_edges_;
   std::vector< EdgeSP > downstream_edges_;

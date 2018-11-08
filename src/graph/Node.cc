@@ -137,42 +137,24 @@ Node::getAllRosettaFlags() const {
   return determineAutoFlags() + "\n" + user_rosetta_flags_;
 }
 
-void Node::save( std::vector< std::string > & output_lines ) const {
-  output_lines.emplace_back( "START_" + uniqueToken() );
-  output_lines.emplace_back( "id " + std::to_string( id_ ) );
-  output_lines.emplace_back( "x " + std::to_string( x_ ) );
-  output_lines.emplace_back( "y " + std::to_string( y_ ) );
-  output_lines.emplace_back( "r " + std::to_string( red_ ) );
-  output_lines.emplace_back( "g " + std::to_string( green_ ) );
-  output_lines.emplace_back( "b " + std::to_string( blue_ ) );
-  output_lines.emplace_back( "command " + command_ );
-  output_lines.emplace_back( "title " + title_ );
-  output_lines.emplace_back( std::string( "script " ) + xml_script_filename_ );
-  output_lines.emplace_back( std::string( "use_script_file " ) + ( use_script_file_ ? "1" : "0" ) );
-  output_lines.emplace_back( std::string( "use_default_command " ) + ( use_default_command_ ? "1" : "0" ) );
-  output_lines.emplace_back( std::string( "still_using_default_title " ) + ( still_using_default_title_ ? "1" : "0" ) );
+void Node::save( serialization::Archiver & archiver ) const {
+  archiver.add_element( "START", uniqueToken() );
 
-  output_lines.emplace_back( "START_FLAGS" );
-  output_lines.emplace_back( user_rosetta_flags_ );
-  output_lines.emplace_back( "END_FLAGS" );
+  archiver.add_element( "id",  std::to_string( id_ ) );
+  archiver.add_element( "x",  std::to_string( x_ ) );
+  archiver.add_element( "y",  std::to_string( y_ ) );
+  archiver.add_element( "command",  command_ );
+  archiver.add_element( "title",  title_ );
+  archiver.add_element( "script", xml_script_filename_ );
+  archiver.add_element( "use_script_file", ( use_script_file_ ? "1" : "0" ) );
+  archiver.add_element( "use_default_command", ( use_default_command_ ? "1" : "0" ) );
+  archiver.add_element( "still_using_default_title", ( still_using_default_title_ ? "1" : "0" ) );
 
-  output_lines.emplace_back( "START_NOTES" );
-  if( hasEnding( notes_, "\n") ){
-    output_lines.emplace_back( notes_ );
-  } else {
-    output_lines.emplace_back( notes_ + "\n" );
-  }
-  output_lines.emplace_back( "END_NOTES" );
+  archiver.add_element( "flags", user_rosetta_flags_ );
+  archiver.add_element( "notes", notes_ );
+  archiver.add_element( "script", xml_script_ );
 
-  output_lines.emplace_back( "START_SCRIPT" );
-  if( hasEnding( xml_script_, "\n") ){
-    output_lines.emplace_back( xml_script_ );
-  } else {
-    output_lines.emplace_back( xml_script_ + "\n" );
-  }
-  output_lines.emplace_back( "END_SCRIPT" );
-
-  output_lines.emplace_back( "END_NODE" );
+  archiver.add_element( "END", "NODE" );
 }
 
 
@@ -247,21 +229,6 @@ Node::Node(
 
     if( tokens[ 0 ] == "y" ) {
       y_ = std::stoi( tokens[ 1 ] );
-      continue;
-    }
-
-    if( tokens[ 0 ] == "r" ) {
-      red_ = std::stoi( tokens[ 1 ] );
-      continue;
-    }
-
-    if( tokens[ 0 ] == "g" ) {
-      green_ = std::stoi( tokens[ 1 ] );
-      continue;
-    }
-
-    if( tokens[ 0 ] == "b" ) {
-      blue_ = std::stoi( tokens[ 1 ] );
       continue;
     }
 
