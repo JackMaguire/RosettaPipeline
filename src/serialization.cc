@@ -6,11 +6,14 @@
 #include <vector>
 #include <sstream>
 #include <fstream>
+#include <memory>
 
 //CEREAL
 #include <cereal/types/unordered_map.hpp>
 #include <cereal/types/memory.hpp>
 #include <cereal/archives/binary.hpp>
+
+using BinaryOutputArchiveUP = std::unique_ptr< cereal::BinaryOutputArchive >;
 
 namespace serialization {
 
@@ -35,16 +38,27 @@ struct ArchiveElementImpl : public ArchiveElement {
 
 namespace {
 
-/*class ArchiverImpl : public Archiver {
+class ArchiverImpl : public Archiver {
 public:
   ArchiverImpl(){
-
+    archive_ = std::make_unique< cereal::BinaryOutputArchive >( ss_ );
   }
 
   ~ArchiverImpl() = default;
 
-  void add_element( ArchiveElement const & ) override;
-};*/
+  void add_element( ArchiveElement const & element ) override {
+    ( *archive_ )( element );
+  }
+
+  std::string
+  get_final_string(){
+    return ss_.str();
+  }
+
+private:
+  std::stringstream ss_;
+  BinaryOutputArchiveUP archive_;
+};
 
 }
 
@@ -65,9 +79,6 @@ std::string save(
     return ss.str();
   */
   //std::ofstream os("out.cereal", std::ios::binary);
-  std::stringstream ss;
-  cereal::BinaryOutputArchive archive( ss );
-  return ss.str();
 }
 
 
