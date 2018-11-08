@@ -33,7 +33,11 @@ std::string
 just_compile_run_script( graph::Graph const &, Options const & );
 
 std::string
-setup_working_directory( std::vector< graph::NodeCSP > const & nodes_in_order, Options const & );
+setup_working_directory(
+  std::vector< graph::NodeCSP > const & nodes_in_order,
+  Options const &,
+  graph::Graph const &
+);
 
 void
 compile_run_script(

@@ -48,7 +48,7 @@ compile( graph::Graph const & g, Options const & options ){
     nodes_in_order[ stage - 1 ]->setStageValidity( true );
   }
 
-  std::string const directory_name = setup_working_directory( nodes_in_order, options );
+  std::string const directory_name = setup_working_directory( nodes_in_order, options, g );
   std::string const subdirectory_name = directory_name + "/rosetta_pipeline";
 
   {//run script
@@ -124,7 +124,8 @@ just_compile_run_script( graph::Graph const & g, Options const & options ) {
 std::string
 setup_working_directory(
   std::vector< graph::NodeCSP > const & nodes_in_order,
-  Options const & options
+  Options const & options,
+  graph::Graph const & graph
 ){
   std::string directory_name = "/tmp/" + util::generate_random_string( 16 );
   while( std::filesystem::exists( directory_name ) ){
@@ -178,6 +179,16 @@ setup_working_directory(
       input_file << "";
       input_file.close();
     }    
+  }
+
+  for( graph::ExtraFile const & extra_file : graph.extraFiles() ){
+    std::string const full_filename = subdirectory_name + "/" + extra_file.name;
+    if( ! std::filesystem::exists( full_filename ) ){
+      std::ofstream file;
+      file.open( flags_filename );
+      file << full_filename.contents;
+      file.close();
+    }
   }
 
   return directory_name;
