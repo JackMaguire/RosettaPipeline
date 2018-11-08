@@ -93,6 +93,11 @@ Graph::saveSelfNodesAndEdges( serialization::Archiver & archiver ) const {
     e->save( archiver );
   }
 
+  for( ExtraFile const & file : extra_files_ ){
+    archiver.add_element( "extra_file_name", file.name );
+    archiver.add_element( "extra_file_contents", file.contents );
+  }
+
   archiver.add_element( "END", "GRAPH" );
 }
 
@@ -122,6 +127,15 @@ Graph::loadSelfNodesAndEdges(
       next_node_id_ = std::stoi( element.value );
       continue;
     }
+
+    if( element.token == "extra_file_name" ){
+      std::string name = element.value;
+      element = unarchiver.get_next_element();
+      assert( element.token == "extra_file_contents" );
+      extra_files_.emplace_back( std::move( name ), element.value );
+      continue;
+    }
+
 
     if( element.token == "num_nodes" ){
       uint const num_nodes = std::stoi( element.value );

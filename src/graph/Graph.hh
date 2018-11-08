@@ -11,6 +11,21 @@
 
 namespace graph {
 
+struct ExtraFile {
+  ExtraFile(){}
+
+  ExtraFile(
+    std::string const & n,
+    std::string const & c
+  ) :
+    name( n ),
+    contents( c )
+  {}
+
+  std::string name;
+  std::string contents;
+};
+
 struct PreliminaryEdge {
   NodeSP source_node;
   int cursor_x;
@@ -87,6 +102,8 @@ private:
   PreliminaryEdgeSP ghost_edge_;
 
   std::vector< SelectionChangeListener * > change_listeners_;
+
+  std::vector< ExtraFile > extra_files_;
 };
 
 
