@@ -14,8 +14,8 @@ std::string save(
   graph::Graph const & graph
 ) {
   std::vector< std::string > save_lines;
-  options->save( save_lines );
-  graph->saveSelfNodesAndEdges( save_lines );
+  options.save( save_lines );
+  graph.saveSelfNodesAndEdges( save_lines );
     
   std::stringstream ss;
   for( std::string const & line : save_lines ){
