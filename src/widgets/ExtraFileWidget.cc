@@ -67,9 +67,8 @@ ExtraFileWidget::ExtraFileWidget( graph::GraphSP graph ) :
 
   Wt::WContainerWidget * const table_container =
     layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >(), Wt::LayoutPosition::Center );
-    
 
-  table_ = table_container->addWidget( Wt::cpp14::make_unique< Wt::WTable >(), Wt::LayoutPosition::Center );
+  table_ = table_container->addWidget( Wt::cpp14::make_unique< Wt::WTable >() );
   table_->addStyleClass( "table form-inline" );
   table_->setWidth( Wt::WLength( "100%" ) );
   update_table();
