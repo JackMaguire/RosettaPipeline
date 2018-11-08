@@ -112,12 +112,12 @@ LeftViewWidget.o: src/widgets/LeftViewWidget.cc
 TopWidget.o: src/widgets/TopWidget.cc
 	${CXX} -c -o build/TopWidget.o src/widgets/TopWidget.cc ${GEN} ${WT_FLAGS}
 
-widgets: GraphWidget.o GraphToolbarWidget.o NodeWidget.o EdgeWidget.o TopWidget.o LeftViewWidget.o RightViewWidget.o CompileWidget.o ExtraFileWidget.o\
+widgets: GraphWidget.o GraphToolbarWidget.o NodeWidget.o EdgeWidget.o TopWidget.o LeftViewWidget.o RightViewWidget.o CompileWidget.o\
 	 LoadWidget.o SaveWidget.o OptionsWidget.o WelcomeWidget.o ExamplesWidget.o ExtraFileWidget.o PublishWidget.o PublicationBrowserDialog.o
 	ld -r build/GraphWidget.o build/GraphToolbarWidget.o build/TopWidget.o build/RightViewWidget.o build/LeftViewWidget.o\
 		build/ExtraFileWidget.o build/PublicationBrowserDialog.o\
 		build/NodeWidget.o build/EdgeWidget.o build/SaveWidget.o build/OptionsWidget.o build/WelcomeWidget.o build/PublishWidget.o\
-		build/LoadWidget.o build/CompileWidget.o build/ExamplesWidget.o build/ExtraFileWidget.o -o build/widgets.o -arch ${ARCH}
+		build/LoadWidget.o build/CompileWidget.o build/ExamplesWidget.o -o build/widgets.o -arch ${ARCH}
 
 
 ########
