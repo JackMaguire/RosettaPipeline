@@ -90,7 +90,7 @@ std::string save(
   //std::ofstream os("out.cereal", std::ios::binary);
   ArchiverImpl archiver;
   options.save( archiver );
-  graph.save( archiver );
+  graph.saveSelfNodesAndEdges( archiver );
   return archiver.get_final_string();
 }
 
