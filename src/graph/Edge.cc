@@ -33,17 +33,6 @@ void Edge::init(){
   notes_ = "";
 }
 
-namespace {
-//Stolen from https://stackoverflow.com/questions/874134/find-if-string-ends-with-another-string-in-c
-bool hasEnding ( std::string const & fullString, std::string const & ending ) {
-  if( fullString.length() < ending.length() ) {
-    return false;
-  }
-
-  return fullString.compare ( fullString.length() - ending.length(), ending.length(), ending ) == 0;
-}
-}
-
 void Edge::save( serialization::Archiver & archiver ) const {
   archiver.add_element( "START", "EDGE" );
 
