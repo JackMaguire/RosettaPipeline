@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 struct Options;
 
 using OptionsSP = std::shared_ptr< Options >;
