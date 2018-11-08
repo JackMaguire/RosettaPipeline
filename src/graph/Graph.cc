@@ -124,7 +124,7 @@ Graph::loadSelfNodesAndEdges(
     }
 
     if( element.token == "num_nodes" ){
-      int const num_nodes = std::stoi( element.value );
+      uint const num_nodes = std::stoi( element.value );
       for( uint i = 0; i < num_nodes; ++i ) {
 	serialization::ArchiveElement node_element = unarchiver.get_next_element();
 	assert( node_element.token == "START" );
@@ -135,7 +135,7 @@ Graph::loadSelfNodesAndEdges(
     }
 
     if( element.token == "num_edges" ){
-      int const num_edges = std::stoi( element.value );
+      uint const num_edges = std::stoi( element.value );
       for( uint i = 0; i < num_edges; ++i ) {
 	serialization::ArchiveElement edge_element = unarchiver.get_next_element();
 	assert( edge_element.token == "START" );
