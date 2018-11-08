@@ -145,14 +145,14 @@ void Node::save( serialization::Archiver & archiver ) const {
   archiver.add_element( "y",  std::to_string( y_ ) );
   archiver.add_element( "command",  command_ );
   archiver.add_element( "title",  title_ );
-  archiver.add_element( "script", xml_script_filename_ );
+  archiver.add_element( "xml_script_filename", xml_script_filename_ );
   archiver.add_element( "use_script_file", ( use_script_file_ ? "1" : "0" ) );
   archiver.add_element( "use_default_command", ( use_default_command_ ? "1" : "0" ) );
   archiver.add_element( "still_using_default_title", ( still_using_default_title_ ? "1" : "0" ) );
 
   archiver.add_element( "flags", user_rosetta_flags_ );
   archiver.add_element( "notes", notes_ );
-  archiver.add_element( "script", xml_script_ );
+  archiver.add_element( "xml_script", xml_script_ );
 
   archiver.add_element( "END", "NODE" );
 }
@@ -160,116 +160,79 @@ void Node::save( serialization::Archiver & archiver ) const {
 
 
 Node::Node(
-  std::vector< std::string > const & lines,
-  int line_to_start_at,
+  serialization::Unarchiver & unarchiver,
   Options const & options
 ) {
   init( options );
 
-  uint current_line = line_to_start_at;
+  //START line has already been checked by Graph
 
-  assert( lines[ current_line ] == "START_" + uniqueToken() );
+  for( serialization::ArchiveElement element = unarchiver.get_next_element();
+       element.token != "END" || element.value != "NODE";
+       element = unarchiver.get_next_element() ){
 
-  while( lines[ ++current_line ] != "END_NODE" ){
-    std::string const line = lines[ current_line ];
-
-    if( line == "START_FLAGS" ) {
-      std::stringstream ss;
-      while( lines[ ++current_line ] != "END_FLAGS" ){
-	ss << std::move( lines[ current_line ] ) << "\n";
-      }
-      user_rosetta_flags_ = ss.str();
+    if( element.token == "id" ){
+      id_ = std::stoi( element.value );
       continue;
     }
 
-    if( line == "START_NOTES" ) {
-      std::stringstream ss;
-      while( lines[ ++current_line ] != "END_NOTES" ){
-	ss << std::move( lines[ current_line ] ) << "\n";
-      }
-      notes_ = ss.str();
+    if( element.token == "x" ){
+      x_ = std::stoi( element.value );
       continue;
     }
 
-    if( line == "START_SCRIPT" ) {
-      std::stringstream ss;
-      while( lines[ ++current_line ] != "END_SCRIPT" ){
-	ss << std::move( lines[ current_line ] ) << "\n";
-      }
-      xml_script_ = ss.str();
+    if( element.token == "y" ){
+      y_ = std::stoi( element.value );
       continue;
     }
 
-    std::vector< std::string > tokens;
-    {//stolen from https://stackoverflow.com/questions/13172158/c-split-string-by-line
-      std::string const delimiter = " ";
-      std::string::size_type prev = 0;
-      std::string::size_type pos = line.find( delimiter, prev );
-      while ( pos != std::string::npos ) {
-	tokens.push_back( line.substr( prev, pos - prev ) );
-	prev = pos + 1;
-	pos = line.find( delimiter, prev );
-      }
-
-      // To get the last substring (or only, if delimiter is not found)
-      tokens.push_back( line.substr( prev ) );
-    }
-
-    if( tokens.size() < 2 ) continue;
-
-    if( tokens[ 0 ] == "id" ) {
-      id_ = std::stoi( tokens[ 1 ] );
+    if( element.token == "command" ){
+      command_ = element.value;
       continue;
     }
 
-    if( tokens[ 0 ] == "x" ) {
-      x_ = std::stoi( tokens[ 1 ] );
+    if( element.token == "title" ){
+      title_ = element.value;
       continue;
     }
 
-    if( tokens[ 0 ] == "y" ) {
-      y_ = std::stoi( tokens[ 1 ] );
+    if( element.token == "xml_script_filename" ){
+      xml_script_filename_ = element.value;
       continue;
     }
 
-    if( tokens[ 0 ] == "command" ) {
-      command_ = "";
-      for( unsigned int i = 1; i < tokens.size(); ++i ) {
-	command_ += tokens[ i ];
-	if( i != tokens.size() - 1 ) {
-	  command_ += " ";
-	}
-      }
+    if( element.token == "use_script_file" ){
+      use_script_file_ = element.value == "1";
       continue;
     }
 
-    if( tokens[ 0 ] == "title" ) {
-      title_ = tokens[ 1 ];
-      for( unsigned int i = 2; i < tokens.size(); ++i ) {
-	title_ += " " + tokens[ i ];
-      }
+    if( element.token == "use_default_command" ){
+      use_default_command_ = element.value == "1";
       continue;
     }
 
-    if( tokens[ 0 ] == "script" ) {
-      xml_script_filename_ = ( tokens[ 1 ] == "1" );
+    if( element.token == "still_using_default_title" ){
+      still_using_default_title_ = element.value == "1";
       continue;
     }
 
-    if( tokens[ 0 ] == "use_script_file" ) {
-      use_script_file_ = ( tokens[ 1 ] == "1" );
+    if( element.token == "flags" ){
+      user_rosetta_flags_ = element.value;
       continue;
     }
 
-    if( tokens[ 0 ] == "still_using_default_title" ) {
-      still_using_default_title_ = ( tokens[ 1 ] == "1" );
+    if( element.token == "notes" ){
+      notes_ = element.value;
       continue;
     }
 
-    if( tokens[ 0 ] == "use_default_command" ) {
+    if( element.token == "xml_script" ){
+      xml_script_ = element.value;
       continue;
     }
-  } // for string line
+
+  }
+
 
 }//load ctor
 

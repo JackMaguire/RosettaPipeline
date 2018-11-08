@@ -118,8 +118,7 @@ protected:
 public://This technically has to be public in order to use make_shared
   //load ctor
   Node(
-    std::vector< std::string > const & lines,
-    int line_to_start_at,
+    serialization::Unarchiver &,
     Options const &
   );
 

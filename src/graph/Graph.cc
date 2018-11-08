@@ -115,7 +115,7 @@ Graph::loadSelfNodesAndEdges(
   edges_.clear();
 
   for( serialization::ArchiveElement element = unarchiver.get_next_element();
-       element.token != "END" || element.value != "OPTIONS";
+       element.token != "END" || element.value != "GRAPH";
        element = unarchiver.get_next_element() ){
 
     if( element.token == "next_node_id" ){
