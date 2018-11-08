@@ -36,7 +36,7 @@ struct UpperExtraFileWidget : public Wt::WContainerWidget {
   }
 
   void setup_connections(){
-    upload_button->clicked().connect(
+    /*upload_button->clicked().connect(
       [=] {
 	file_upload->upload();
 	upload_message_area->setText( "File upload has begun." );
@@ -47,7 +47,7 @@ struct UpperExtraFileWidget : public Wt::WContainerWidget {
       [=] {
 	upload_message_area->setText( "File is too large. Current limit is 1 MB." );
       }
-    );
+    );*/
   }
 
   Wt::WLineEdit * line_edit;
@@ -56,7 +56,7 @@ struct UpperExtraFileWidget : public Wt::WContainerWidget {
   Wt::WPushButton * upload_button;
 };
 
-}
+}//anonymous namespace
 
 ExtraFileWidget::ExtraFileWidget( graph::GraphSP graph ) :
   WContainerWidget(),
