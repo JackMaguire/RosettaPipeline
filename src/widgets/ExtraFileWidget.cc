@@ -100,6 +100,7 @@ ExtraFileWidget::ExtraFileWidget( graph::GraphSP graph ) :
 ExtraFileWidget::~ExtraFileWidget(){}
 
 void ExtraFileWidget::update_table(){
+  table_->clear();
   table_->elementAt( 0, 0 )->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Filename" ) );
 
   int counter = 1;
