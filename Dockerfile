@@ -20,6 +20,9 @@ RUN apt-get -y install git cmake g++-8 libboost-all-dev build-essential && \
 
 RUN if [ ! -d /published_pipelines ]; then mkdir /published_pipelines; fi
 
+#CEREAL
+RUN cd / && git clone https://github.com/USCiLab/cereal.git
+
 #Now RosettaPipeline gets rebuilt every time
 ARG CACHEBUST=1
 
