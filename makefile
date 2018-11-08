@@ -103,6 +103,9 @@ ExamplesWidget.o: src/widgets/ExamplesWidget.cc
 ExtraFileWidget.o: src/widgets/ExtraFileWidget.cc
 	${CXX} -c -o build/ExtraFileWidget.o src/widgets/ExtraFileWidget.cc ${GEN} ${WT_FLAGS}
 
+ExtraFileWidget.o: src/widgets/ExtraFileWidget.cc
+	${CXX} -c -o build/ExtraFileWidget.o src/widgets/ExtraFileWidget.cc ${GEN} ${WT_FLAGS}
+
 RightViewWidget.o: src/widgets/RightViewWidget.cc
 	${CXX} -c -o build/RightViewWidget.o src/widgets/RightViewWidget.cc ${GEN} ${WT_FLAGS}
 
@@ -112,9 +115,10 @@ LeftViewWidget.o: src/widgets/LeftViewWidget.cc
 TopWidget.o: src/widgets/TopWidget.cc
 	${CXX} -c -o build/TopWidget.o src/widgets/TopWidget.cc ${GEN} ${WT_FLAGS}
 
-widgets: GraphWidget.o GraphToolbarWidget.o NodeWidget.o EdgeWidget.o TopWidget.o LeftViewWidget.o RightViewWidget.o CompileWidget.o \
+widgets: GraphWidget.o GraphToolbarWidget.o NodeWidget.o EdgeWidget.o TopWidget.o LeftViewWidget.o RightViewWidget.o CompileWidget.o ExtraFileWidget.o\
 	 LoadWidget.o SaveWidget.o OptionsWidget.o WelcomeWidget.o ExamplesWidget.o ExtraFileWidget.o PublishWidget.o PublicationBrowserDialog.o
-	ld -r build/GraphWidget.o build/GraphToolbarWidget.o build/TopWidget.o build/RightViewWidget.o build/LeftViewWidget.o build/PublicationBrowserDialog.o\
+	ld -r build/GraphWidget.o build/GraphToolbarWidget.o build/TopWidget.o build/RightViewWidget.o build/LeftViewWidget.o\
+		build/ExtraFileWidget.o build/PublicationBrowserDialog.o\
 		build/NodeWidget.o build/EdgeWidget.o build/SaveWidget.o build/OptionsWidget.o build/WelcomeWidget.o build/PublishWidget.o\
 		build/LoadWidget.o build/CompileWidget.o build/ExamplesWidget.o build/ExtraFileWidget.o -o build/widgets.o -arch ${ARCH}
 
