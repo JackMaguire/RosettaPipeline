@@ -1,7 +1,7 @@
 #include <widgets/PublicationBrowserDialog.hh>
 #include <widgets/LoadWidget.hh>
 
-#include <publishing/load.hh>
+#include <publishing.hh>
 
 #include <Wt/WLength.h>
 #include <Wt/WPushButton.h>
