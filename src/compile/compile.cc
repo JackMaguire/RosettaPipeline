@@ -185,8 +185,8 @@ setup_working_directory(
     std::string const full_filename = subdirectory_name + "/" + extra_file.name;
     if( ! std::filesystem::exists( full_filename ) ){
       std::ofstream file;
-      file.open( flags_filename );
-      file << full_filename.contents;
+      file.open( full_filename );
+      file << extra_file.contents;
       file.close();
     }
   }
