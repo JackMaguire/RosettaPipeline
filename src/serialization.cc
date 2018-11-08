@@ -87,7 +87,10 @@ std::string save(
     return ss.str();
   */
   //std::ofstream os("out.cereal", std::ios::binary);
-  return "";
+  ArchiverImpl archiver;
+  options.save( archiver );
+  //graph.save( archiver );
+  return archiver.get_final_string();
 }
 
 

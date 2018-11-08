@@ -3,20 +3,25 @@
 
 Options::~Options(){}
 
+std::string
+bool_2_string( bool b ){
+  return ( b ? "1" : "0" );
+}
+
 ////////////
 // Save/Load
-void Options::save( std::vector< std::string > & output_lines ) const {
-  output_lines.emplace_back( "START_OPTIONS" );
+void Options::save( serialization::Archiver & archiver ) const {
+  archiver.add_element( "START", "OPTIONS" );
 
-  output_lines.emplace_back( "show_node_titles " + std::to_string( show_node_titles ) );
-  output_lines.emplace_back( "put_node_titles_to_side " + std::to_string( put_node_titles_to_side ) );
-  output_lines.emplace_back( "grid_size " + std::to_string( grid_size ) );
+  archiver.add_element( "show_node_titles" , bool_2_string( show_node_titles ) );
+  archiver.add_element( "put_node_titles_to_side" , bool_2_string( put_node_titles_to_side ) );
+  archiver.add_element( "grid_size" , std::to_string( grid_size ) );
 
-  output_lines.emplace_back( "serialize_intermediate_poses " + std::to_string( serialize_intermediate_poses ) );
-  output_lines.emplace_back( "num_processors " + std::to_string( num_processors ) );
-  output_lines.emplace_back( "default_run_command " + default_run_command );
-  output_lines.emplace_back( "delete_unused_intermediate_poses " + std::to_string( delete_unused_intermediate_poses ) );
-  output_lines.emplace_back( "END_OPTIONS" );
+  archiver.add_element( "serialize_intermediate_poses" , bool_2_string( serialize_intermediate_poses ) );
+  archiver.add_element( "num_processors" , std::to_string( num_processors ) );
+  archiver.add_element( "default_run_command" , default_run_command );
+  archiver.add_element( "delete_unused_intermediate_poses" , bool_2_string( delete_unused_intermediate_poses ) );
+  archiver.add_element( "END", "OPTIONS" );
 }
 
 int Options::load( std::vector< std::string > const & lines, int line_to_start_at ) {

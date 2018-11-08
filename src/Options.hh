@@ -1,5 +1,7 @@
 #pragma once
 
+#include <serialization.hh>
+
 #include <string>
 #include <vector>
 #include <memory>
@@ -35,7 +37,7 @@ struct Options {
 
   ///////////
   //SAVE/LOAD
-  void save( std::vector< std::string > & output_lines ) const;
+  void save( serialization::Archiver & ) const;
   int load( std::vector< std::string > const & lines, int line_to_start_at );
 
 };
