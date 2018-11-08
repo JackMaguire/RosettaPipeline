@@ -8,6 +8,7 @@
 #include <widgets/CompileWidget.hh>
 #include <widgets/WelcomeWidget.hh>
 #include <widgets/ExamplesWidget.hh>
+#include <widgets/ExtraFileWidget.hh>
 #include <widgets/PublishWidget.hh>
 
 #include <graph/Graph.hh>
@@ -108,6 +109,8 @@ RightViewWidget::RightViewWidget(
     "Save/Load",
     this, graph_, graph_widget_, options_
   );
+
+  addTab_tmpl< ExtraFileWidget >( "Extra Files", graph_ );
   compile_widget_ = addTab_tmpl< CompileWidget >( "Compile", graph_, options_ );
 
   setStyleClass("tabwidget");
