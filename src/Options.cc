@@ -78,7 +78,6 @@ Options::load( serialization::Unarchiver & unarchiver ) {
     }
 
     assert( false );//TODO remove this for future-proofing?
-  }
 
   }//while not "END" "OPTIONS"
 
