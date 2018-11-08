@@ -2,6 +2,7 @@
 
 #include <graph/Graph.hh>
 #include <util.hh>
+#include <serialization.hh>
 
 #include <Wt/WGlobal.h>
 #include <Wt/WPushButton.h>
@@ -107,19 +108,12 @@ PublishWidget::PublishWidget(
       std::string const directory_name = "/published_pipelines/" + key;
       std::filesystem::create_directory( directory_name );
 
-      std::vector< std::string > save_lines;
-      options_->save( save_lines );
-      graph->saveSelfNodesAndEdges( save_lines );
-    
-      std::stringstream ss;
-      for( std::string const & line : save_lines ){
-	ss << line << "\n";
-      }
+      std::string save_file_contents = serialization::save( * options_, * graph_ );
 
       {//save file
 	std::ofstream save_file;
 	save_file.open( directory_name + "/save.txt" );
-	save_file << ss.str() << "\n";
+	save_file << save_file_contents;
 	save_file.close();
       }
 
