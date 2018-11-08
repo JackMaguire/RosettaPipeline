@@ -1,6 +1,4 @@
-#include <publishing/load.hh>
-//#include <cassert>
-//#include <memory>
+#include <publishing.hh>
 #include <filesystem>
 #include <fstream>
 
