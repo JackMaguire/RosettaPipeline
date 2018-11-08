@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include <Options.hh>
+#include <Options.fwd.hh>
 #include <graph/Graph.fwd.hh>
 
 namespace serialization {

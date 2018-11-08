@@ -1,6 +1,7 @@
 #include <serialization.hh>
 
 #include <graph/Graph.hh>
+#include <Options.hh>
 
 #include <iostream>
 #include <vector>
