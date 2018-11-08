@@ -87,6 +87,7 @@ std::string save(
     return ss.str();
   */
   //std::ofstream os("out.cereal", std::ios::binary);
+  return "";
 }
 
 
