@@ -67,7 +67,6 @@ LoadWidget::LoadWidget(
 
       auto const filename = fu->spoolFileName();
       if( filename.size() > 1 ){
-	//TODO clear maps in graph view
 	upload_out->setText( serialization::load_file( filename, * graph, * options_ ) );
 	graph_widget->update();
 	parent_->options_widget()->update();
@@ -78,7 +77,7 @@ LoadWidget::LoadWidget(
   fu->fileTooLarge().connect(
     [=] {
       upload_button->enable();
-      upload_out->setText("File is too large.");
+      upload_out->setText( "File is too large. Current limit is 1 MB." );
     }
   );
 

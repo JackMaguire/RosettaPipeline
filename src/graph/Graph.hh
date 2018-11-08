@@ -87,7 +87,7 @@ public://selection access
   void setGhostEdge( PreliminaryEdgeSP const & );
 
 public://auxiliary
-  std::vector< ExtraFile > const & extraFiles() const {
+  std::vector< ExtraFileSP > const & extraFiles() const {
     return extra_files_;
   }
 
@@ -95,7 +95,7 @@ public://auxiliary
     std::string const & name,
     std::string const & contents
   ){
-    extra_files_.emplace_back( name, contents );
+    extra_files_.emplace_back( std::make_shared< ExtraFile >( name, contents ) );
   }
 
 protected:
@@ -115,7 +115,7 @@ private:
 
   std::vector< SelectionChangeListener * > change_listeners_;
 
-  std::vector< ExtraFile > extra_files_;
+  std::vector< ExtraFileSP > extra_files_;
 };
 
 

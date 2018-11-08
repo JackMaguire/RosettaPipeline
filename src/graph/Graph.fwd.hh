@@ -16,4 +16,10 @@ using PreliminaryEdgeCSP = std::shared_ptr< const PreliminaryEdge >;
 using PreliminaryEdgeWP = std::weak_ptr< PreliminaryEdge >;
 using PreliminaryEdgeCWP = std::weak_ptr< const PreliminaryEdge >;
 
+struct ExtraFile;
+using ExtraFileSP = std::shared_ptr< ExtraFile >;
+using ExtraFileCSP = std::shared_ptr< const ExtraFile >;
+using ExtraFileWP = std::weak_ptr< ExtraFile >;
+using ExtraFileCWP = std::weak_ptr< const ExtraFile >;
+
 }//namespace graph
