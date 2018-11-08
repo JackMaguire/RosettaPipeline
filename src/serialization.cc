@@ -106,7 +106,7 @@ public:
   }
 
   ArchiveElement get_next_element() override {
-    ArchiveElementImpl element;
+    ArchiveElementImpl element( "", "" );
     (*archive_)( element );
 
     assert( element.token != "END" || element.value != "SERIALIZATION" );
