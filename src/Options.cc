@@ -32,11 +32,13 @@ void Options::save( serialization::Archiver & archiver ) const {
 void
 Options::load( serialization::Unarchiver & unarchiver ) {
 
-  ArchiveElement first_element = unarchiver.get_next_element();
-  assert( first_element.token == "START" );
-  assert( first_element.value == "OPTIONS" );
+  {
+    serialization::ArchiveElement first_element = unarchiver.get_next_element();
+    assert( first_element.token == "START" );
+    assert( first_element.value == "OPTIONS" );
+  }
 
-  for( ArchiveElement element = unarchiver.get_next_element();
+  for( serialization::ArchiveElement element = unarchiver.get_next_element();
        element.token != "END" || element.value != "OPTIONS";
        element = unarchiver.get_next_element() ){
 
