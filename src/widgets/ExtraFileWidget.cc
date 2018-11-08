@@ -65,7 +65,7 @@ ExtraFileWidget::ExtraFileWidget( graph::GraphSP graph ) :
   UpperExtraFileWidget * const upper_widget =
     layout->addWidget( Wt::cpp14::make_unique< UpperExtraFileWidget >(), Wt::LayoutPosition::North );
 
-  Wt::WContainerWidget table_container =
+  Wt::WContainerWidget * const table_container =
     layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >(), Wt::LayoutPosition::Center );
     
 
