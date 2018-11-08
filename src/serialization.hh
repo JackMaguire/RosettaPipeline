@@ -27,7 +27,7 @@ public:
 
 class Unarchiver {
 public:
-  virtual ArchiveElement const & get_next_element() = 0;
+  virtual ArchiveElement get_next_element() = 0;
 };
 
 

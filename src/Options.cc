@@ -8,6 +8,11 @@ bool_2_string( bool b ){
   return ( b ? "1" : "0" );
 }
 
+bool
+string_2_bool( std::string const & s ){
+  return s == "1";
+}
+
 ////////////
 // Save/Load
 void Options::save( serialization::Archiver & archiver ) const {
@@ -24,73 +29,56 @@ void Options::save( serialization::Archiver & archiver ) const {
   archiver.add_element( "END", "OPTIONS" );
 }
 
-int Options::load( std::vector< std::string > const & lines, int line_to_start_at ) {
+void
+Options::load( serialization::Unarchiver & unarchiver ) {
 
-  unsigned int current_line = line_to_start_at;
+  ArchiveElement first_element = unarchiver.get_next_element();
+  assert( first_element.token == "START" );
+  assert( first_element.value == "OPTIONS" );
 
-  assert( lines[ current_line ] == "START_OPTIONS" );
+  for( ArchiveElement element = unarchiver.get_next_element();
+       element.token != "END" || element.value != "OPTIONS";
+       element = unarchiver.get_next_element() ){
 
-  while( lines[ ++current_line ] != "END_OPTIONS" ){
-    std::string const line = lines[ current_line ];
-
-    std::vector< std::string > tokens;
-    {//stolen from https://stackoverflow.com/questions/13172158/c-split-string-by-line
-      std::string const delimiter = " ";
-      std::string::size_type prev = 0;
-      std::string::size_type pos = line.find( delimiter, prev );
-      while ( pos != std::string::npos ) {
-	tokens.push_back( line.substr( prev, pos - prev ) );
-	prev = pos + 1;
-	pos = line.find( delimiter, prev );
-      }
-
-      // To get the last substring (or only, if delimiter is not found)
-      tokens.push_back( line.substr( prev ) );
-    }
-
-    if( tokens.size() < 2 ) continue;
-
-    if( tokens[ 0 ] == "show_node_titles" ) {
-      show_node_titles = ( tokens[ 1 ] == "1" );
+    if( element.token == "show_node_titles" ){
+      show_node_titles = string_2_bool( element.value );
       continue;
     }
 
-    if( tokens[ 0 ] == "put_node_titles_to_side" ) {
-      put_node_titles_to_side = ( tokens[ 1 ] == "1" );
+    if( element.token == "put_node_titles_to_side" ){
+      put_node_titles_to_side = string_2_bool( element.value );
       continue;
     }
 
-    if( tokens[ 0 ] == "grid_size" ) {
-      num_processors = std::stoi( tokens[ 1 ] );
+    if( element.token == "grid_size" ){
+      grid_size = std::stoi( element.value );
       continue;
     }
 
-
-    if( tokens[ 0 ] == "serialize_intermediate_poses" ) {
-      serialize_intermediate_poses = ( tokens[ 1 ] == "1" );
+    if( element.token == "serialize_intermediate_poses" ){
+      serialize_intermediate_poses = string_2_bool( element.value );
       continue;
     }
 
-    if( tokens[ 0 ] == "num_processors" ) {
-      num_processors = std::stoi( tokens[ 1 ] );
+    if( element.token == "num_processors" ){
+      num_processors = std::stoi( element.value );
       continue;
     }
 
-    if( tokens[ 0 ] == "title" ) {
-      default_run_command = tokens[ 1 ];
-      for( unsigned int i = 2; i < tokens.size(); ++i ) {
-	default_run_command += " " + tokens[ i ];
-      }
+    if( element.token == "default_run_command" ){
+      default_run_command = element.value;
       continue;
     }
 
-    if( tokens[ 0 ] == "delete_unused_intermediate_poses" ) {
-      delete_unused_intermediate_poses = ( tokens[ 1 ] == "1" );
+    if( element.token == "delete_unused_intermediate_poses" ){
+      delete_unused_intermediate_poses = string_2_bool( element.value );
       continue;
     }
 
-  }//while not "END_OPTINS"
+    assert( false );//TODO remove this for future-proofing?
+  }
 
-  return current_line;
+  }//while not "END" "OPTIONS"
+
 }
 

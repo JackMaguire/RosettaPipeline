@@ -8,6 +8,7 @@
 #include <sstream>
 #include <fstream>
 #include <memory>
+#include <cassert>
 
 //CEREAL
 #include <cereal/types/unordered_map.hpp>
@@ -75,22 +76,11 @@ std::string save(
   Options const & options,
   graph::Graph const & graph
 ) {
-  /*
-    OLD METHOD:
-    std::vector< std::string > save_lines;
-    options.save( save_lines );
-    graph.saveSelfNodesAndEdges( save_lines );
-    
-    std::stringstream ss;
-    for( std::string const & line : save_lines ){
-    ss << line << "\n";
-    }
-    return ss.str();
-  */
-  //std::ofstream os("out.cereal", std::ios::binary);
   ArchiverImpl archiver;
+  archiver.add_element( "START", "SERIALIZATION" );
   options.save( archiver );
   graph.saveSelfNodesAndEdges( archiver );
+  archiver.add_element( "END", "SERIALIZATION" );
   return archiver.get_final_string();
 }
 
@@ -103,53 +93,53 @@ std::string save(
 
 namespace {
 
-/*class UnarchiverImpl : public Unarchiver {
+class UnarchiverImpl : public Unarchiver {
 public:
-  ArchiveElement const & get_next_element() override {
-
+  UnarchiverImpl( std::string const & filename ) :
+    in_stream_( filename )
+  {
+    archive_ = std::make_unique< cereal::BinaryOutputArchive >( in_stream_ );
   }
-};*/
 
-std::vector< std::string > get_file_lines( std::string const & filename ){
-  std::vector< std::string > myLines;
-  std::ifstream myFile( filename );
-  if( myFile.good() ){
-    for( std::string line; std::getline( myFile, line ); ) {
-      myLines.push_back(line);
-    }
+  ~UnarchiverImpl(){
+    in_stream_.close();
   }
-  return myLines;
-}
 
-std::string load_file(
-  std::vector< std::string > const & file_lines,
-  graph::Graph & graph,
-  Options & options
-){
-  //First, options
-  int current_line = 0;
-  if( file_lines[ current_line ] != "START_OPTIONS" ) {
-    return "Error, expected first line to say \"START_OPTIONS\"";
+  ArchiveElement get_next_element() override {
+    ArchiveElementImpl element;
+    (*archive_)( element );
+
+    assert( element.token != "END" || element.value != "SERIALIZATION" );
+
+    return element;
   }
-  current_line = options.load( file_lines, current_line ) + 1;
 
-  //Graph
-  if( file_lines[ current_line ] != "START_GRAPH" ) {
-    return "Error, expected first line to say \"START_OPTIONS\"";
-  }
-  current_line = graph.loadSelfNodesAndEdges( file_lines, current_line, options ) + 1;
+private:
+  std::ifstream in_stream_;
+  BinaryOutputArchiveUP archive_;
+};
 
-  return "load successful";
-}
-
-}
+}//anonymous namespace
 
 std::string load_file(
   std::string const & filename,
   graph::Graph & graph,
   Options & options
 ){
-  return load_file( get_file_lines( filename ), graph, options );
+  try {
+    UnarchiverImpl unarchiver( filename );
+    ArchiveElement first_element = unarchiver.get_next_element();
+    if( first_element.token != "START" || first_element.value != "SERIALIZATION" ){
+      return filename + " is either corrupted or out of date.";
+    }
+
+    options.load( unarchiver );
+    //graph.loadSelfNodesAndEdges( unarchiver, options );
+
+    return "load successful";
+  } catch (...) {
+    return "Unable to load from " + filename;
+  }
 }
 
 

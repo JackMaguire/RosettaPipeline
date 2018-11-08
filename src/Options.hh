@@ -39,7 +39,7 @@ struct Options {
   ///////////
   //SAVE/LOAD
   void save( serialization::Archiver & ) const;
-  int load( std::vector< std::string > const & lines, int line_to_start_at );
+  void load( serialization::Unarchiver & );
 
 };
 
