@@ -1,5 +1,6 @@
 #include <widgets/LoadWidget.hh>
 
+#include <serialization.hh>
 #include <graph/Graph.hh>
 #include <widgets/GraphWidget.hh>
 #include <widgets/OptionsWidget.hh>
