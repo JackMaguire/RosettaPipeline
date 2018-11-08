@@ -122,36 +122,6 @@ Edge::load(
     }
 
   }
- 
-  while( lines[ ++current_line ] != "END_EDGE" ){
-    std::string const line = lines[ current_line ];
-
-    if( tokens[ 0 ] == "column" ) {
-      column_name_to_sort_by_ = tokens[ 1 ];
-      continue;
-    }
-
-    if( tokens[ 0 ] == "pos_is_better" ) {
-      positive_scores_are_better_ = ( tokens[ 1 ] == "1" );
-      continue;
-    }
-
-    if( tokens[ 0 ] == "num" ) {
-      num_results_to_transfer_ = std::stoi( tokens[ 1 ] );
-      continue;
-    }
-
-    if( tokens[ 0 ] == "frac" ) {
-      fraction_of_results_to_transfer_ = std::stod( tokens[ 1 ] );
-      continue;
-    }
-
-    if( tokens[ 0 ] == "use_frac" ) {
-      use_fraction_instead_of_count_ = ( tokens[ 1 ] == "1" );
-      continue;
-    }
-
-  }//while not END_EDGE
 
 }
 
