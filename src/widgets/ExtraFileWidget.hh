@@ -16,7 +16,6 @@ public:
 
   virtual ~ExtraFileWidget();
 
-protected:
   void update_table();
 
 private:
