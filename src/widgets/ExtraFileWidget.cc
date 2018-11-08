@@ -67,6 +67,7 @@ ExtraFileWidget::ExtraFileWidget( graph::GraphSP graph ) :
   table_ = layout->addWidget( Wt::cpp14::make_unique< Wt::WTable >(), Wt::LayoutPosition::Center );
   table_->addStyleClass( "table form-inline" );
   table_->setWidth( Wt::WLength( "100%" ) );
+  update_table();
 
   upper_widget->file_upload->uploaded().connect(
     [=] {
