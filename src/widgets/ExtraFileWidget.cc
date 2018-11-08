@@ -26,6 +26,7 @@ struct UpperExtraFileWidget : public Wt::WContainerWidget {
 
     file_upload = addWidget( Wt::cpp14::make_unique< Wt::WFileUpload >() );
     file_upload->setFileTextSize( 1000 );//Set the maximum file size to 1000 kB.
+    upload_message_area = addWidget( Wt::cpp14::make_unique< Wt::WText >( "" ) );
     addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
 
     upload_button = addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Upload" ) );
