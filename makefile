@@ -103,9 +103,6 @@ ExamplesWidget.o: src/widgets/ExamplesWidget.cc
 ExtraFileWidget.o: src/widgets/ExtraFileWidget.cc
 	${CXX} -c -o build/ExtraFileWidget.o src/widgets/ExtraFileWidget.cc ${GEN} ${WT_FLAGS}
 
-ExtraFileWidget.o: src/widgets/ExtraFileWidget.cc
-	${CXX} -c -o build/ExtraFileWidget.o src/widgets/ExtraFileWidget.cc ${GEN} ${WT_FLAGS}
-
 RightViewWidget.o: src/widgets/RightViewWidget.cc
 	${CXX} -c -o build/RightViewWidget.o src/widgets/RightViewWidget.cc ${GEN} ${WT_FLAGS}
 
