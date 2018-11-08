@@ -72,7 +72,7 @@ ExtraFileWidget::ExtraFileWidget( graph::GraphSP graph ) :
   table_->addStyleClass( "table form-inline" );
   table_->setWidth( Wt::WLength( "100%" ) );
 
-  upper_widget->file_upload->uploaded().connect(
+  /*upper_widget->file_upload->uploaded().connect(
     [=] {
       auto const filename = upper_widget->file_upload->spoolFileName();
       if( filename.size() > 1 ){
@@ -92,7 +92,7 @@ ExtraFileWidget::ExtraFileWidget( graph::GraphSP graph ) :
 	this->update_table();
       }
     }
-  );
+  );*/
 
 }
 
