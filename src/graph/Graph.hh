@@ -41,9 +41,8 @@ public://deletion
 public://IO
   void saveSelfNodesAndEdges( serialization::Archiver & archiver ) const;
 
-  int loadSelfNodesAndEdges(
-    std::vector< std::string > const & output_lines,
-    int line_to_start_at,
+  void loadSelfNodesAndEdges(
+    serialization::Unarchiver &,
     Options const &
   );
 

@@ -96,12 +96,17 @@ Graph::saveSelfNodesAndEdges( serialization::Archiver & archiver ) const {
   archiver.add_element( "END", "GRAPH" );
 }
 
-int
+void
 Graph::loadSelfNodesAndEdges(
-  std::vector< std::string > const & lines,
-  int line_to_start_at,
+  serialization::Unarchiver & unarchiver,
   Options const & options
 ) {
+  {
+    serialization::ArchiveElement first_element = unarchiver.get_next_element();
+    assert( first_element.token == "START" );
+    assert( first_element.value == "GRAPH" );
+  }
+
   // First, Delete everything!
   selected_node_ = 0;
   selected_edge_ = 0;
@@ -109,62 +114,43 @@ Graph::loadSelfNodesAndEdges(
   nodes_.clear();
   edges_.clear();
 
-  if( lines[ line_to_start_at ] != "START_GRAPH" ) {
-    //TODO throw something
-  }
+  for( serialization::ArchiveElement element = unarchiver.get_next_element();
+       element.token != "END" || element.value != "OPTIONS";
+       element = unarchiver.get_next_element() ){
 
-  int current_line = line_to_start_at;
-
-  while( lines[ ++current_line ] != "END_GRAPH" ){
-
-    std::string const line = lines[ current_line ];
-    std::vector< std::string > tokens;
-    {//stolen from https://stackoverflow.com/questions/13172158/c-split-string-by-line
-      std::string const delimiter = " ";
-      std::string::size_type prev = 0;
-      std::string::size_type pos = line.find( delimiter, prev );
-      while ( pos != std::string::npos ) {
-	tokens.push_back( line.substr( prev, pos - prev ) );
-	prev = pos + 1;
-	pos = line.find( delimiter, prev );
-      }
-
-      // To get the last substring (or only, if delimiter is not found)
-      tokens.push_back( line.substr( prev ) );
-    }
-
-    if( tokens.size() < 2 ) continue;
-
-    if( tokens[ 0 ] == "next_node_id" ) {
-      next_node_id_ = std::stoi( tokens[ 1 ] );
+    if( element.token == "next_node_id" ){
+      next_node_id_ = std::stoi( element.value );
       continue;
     }
-    if( tokens[ 0 ] == "num_nodes" ) {
-      uint const num_nodes = std::stoi( tokens[ 1 ] );
+
+    if( element.token == "num_nodes" ){
+      int const num_nodes = std::stoi( element.value );
       for( uint i = 0; i < num_nodes; ++i ) {
-	NodeSP new_node = std::make_shared< Node >( lines, ++current_line, options );
+	serialization::ArchiveElement node_element = unarchiver.get_next_element();
+	assert( node_element.token == "START" );
+	NodeSP new_node = std::make_shared< Node >( unarchiver, options );
 	nodes_.emplace_back( std::move( new_node ) );
-	while( lines[ ++current_line ] != "END_NODE" ){}
       }
-      assert( nodes_.size() == num_nodes );
       continue;
     }
-    if( tokens[ 0 ] == "num_edges" ) {
-      int const num_edges = std::stoi( tokens[ 1 ] );
-      for( int i = 0; i < num_edges; ++i ) {
+
+    if( element.token == "num_edges" ){
+      int const num_edges = std::stoi( element.value );
+      for( uint i = 0; i < num_edges; ++i ) {
+	serialization::ArchiveElement edge_element = unarchiver.get_next_element();
+	assert( edge_element.token == "START" );
+	assert( edge_element.value == "EDGE" );
 	EdgeSP new_edge = std::make_shared< Edge >();
-	new_edge->load( nodes_, lines, ++current_line );
+	new_edge->load( nodes_, unarchiver );
 	edges_.emplace_back( std::move( new_edge ) );
-	while( lines[ ++current_line ] != "END_EDGE" ){}
       }
       continue;
     }
+
   }
 
   assert( nodes_.size() > 0 );
   selected_node_ = nodes_[ 0 ];
-
-  return current_line;
 }// load self
 
 

@@ -131,11 +131,11 @@ std::string load_file(
     UnarchiverImpl unarchiver( filename );
     ArchiveElement first_element = unarchiver.get_next_element();
     if( first_element.token != "START" || first_element.value != "SERIALIZATION" ){
-      return filename + " is either corrupted or out of date.";
+      return "file is either corrupted or out of date.";
     }
 
     options.load( unarchiver );
-    //graph.loadSelfNodesAndEdges( unarchiver, options );
+    graph.loadSelfNodesAndEdges( unarchiver, options );
 
     return "load successful";
   } catch (...) {
