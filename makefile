@@ -91,7 +91,7 @@ LoadWidget.o: src/widgets/LoadWidget.cc
 PublishWidget.o: src/widgets/PublishWidget.cc
 	${CXX} -c -o build/PublishWidget.o src/widgets/PublishWidget.cc ${GEN} ${WT_FLAGS}
 
-CompileWidget.o: src/widgets/CompileWidget.cc compile
+CompileWidget.o: src/widgets/CompileWidget.cc
 	${CXX} -c -o build/CompileWidget.o src/widgets/CompileWidget.cc ${GEN} ${WT_FLAGS}
 
 WelcomeWidget.o: src/widgets/WelcomeWidget.cc
