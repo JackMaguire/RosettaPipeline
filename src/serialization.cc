@@ -18,6 +18,13 @@ using BinaryOutputArchiveUP = std::unique_ptr< cereal::BinaryOutputArchive >;
 namespace serialization {
 
 struct ArchiveElementImpl : public ArchiveElement {
+  ArchiveElementImpl(
+    std::string const & t,
+    std::string const & v
+  ):
+    ArchiveElement( t, v )
+  {}
+
   template < class Archive >
   void save( Archive & ar ) const {
     ar( token );
@@ -46,7 +53,8 @@ public:
 
   ~ArchiverImpl() = default;
 
-  void add_element( ArchiveElement const & element ) override {
+  void add_element( std::string const & token, std::string const & value ) override {
+    ArchiveElementImpl element( token, value );
     ( *archive_ )( element );
   }
 
