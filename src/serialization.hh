@@ -22,12 +22,12 @@ struct ArchiveElement {
 
 class Archiver {
 public:
-  virtual void add_element( std::string const & token, std::string const & value );
+  virtual void add_element( std::string const & token, std::string const & value ) = 0;
 };
 
 class Unarchiver {
 public:
-  virtual ArchiveElement const & get_next_element();
+  virtual ArchiveElement const & get_next_element() = 0;
 };
 
 
