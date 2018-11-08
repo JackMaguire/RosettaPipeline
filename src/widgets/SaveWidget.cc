@@ -72,7 +72,7 @@ SaveWidget::SaveWidget(
 
   Resource_TSP local_file = std::make_shared< Resource_T >( string_generating_func );
   local_file->setDispositionType( Wt::ContentDisposition::Attachment );
-  local_file->suggestFileName( "MyRosettaPipeline.txt" );
+  local_file->suggestFileName( "MyRosettaPipeline.rpf" );
   downloadButton->setLink( Wt::WLink( local_file ) );
 }
 
