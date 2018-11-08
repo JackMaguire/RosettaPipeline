@@ -16,6 +16,7 @@
 #include <cereal/archives/binary.hpp>
 
 using BinaryOutputArchiveUP = std::unique_ptr< cereal::BinaryOutputArchive >;
+using BinaryInputArchiveUP = std::unique_ptr< cereal::BinaryInputArchive >;
 
 namespace serialization {
 
@@ -98,7 +99,7 @@ public:
   UnarchiverImpl( std::string const & filename ) :
     in_stream_( filename )
   {
-    archive_ = std::make_unique< cereal::BinaryOutputArchive >( in_stream_ );
+    archive_ = std::make_unique< cereal::BinaryInputArchive >( in_stream_ );
   }
 
   ~UnarchiverImpl(){
@@ -116,7 +117,7 @@ public:
 
 private:
   std::ifstream in_stream_;
-  BinaryOutputArchiveUP archive_;
+  BinaryInputArchiveUP archive_;
 };
 
 }//anonymous namespace
