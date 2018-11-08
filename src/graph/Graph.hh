@@ -86,6 +86,18 @@ public://selection access
   PreliminaryEdgeCSP ghostEdge() const;
   void setGhostEdge( PreliminaryEdgeSP const & );
 
+public://auxiliary
+  std::vector< ExtraFile > const & extraFiles() const {
+    return extra_files_;
+  }
+
+  void addExtraFile(
+    std::string const & name,
+    std::string const & contents
+  ){
+    extra_files_.emplace_back( name, contents );
+  }
+
 protected:
   int getNextNodeID() { return next_node_id_++; }
 
