@@ -65,7 +65,11 @@ ExtraFileWidget::ExtraFileWidget( graph::GraphSP graph ) :
   UpperExtraFileWidget * const upper_widget =
     layout->addWidget( Wt::cpp14::make_unique< UpperExtraFileWidget >(), Wt::LayoutPosition::North );
 
-  table_ = layout->addWidget( Wt::cpp14::make_unique< Wt::WTable >(), Wt::LayoutPosition::Center );
+  Wt::WContainerWidget table_container =
+    layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >(), Wt::LayoutPosition::Center );
+    
+
+  table_ = table_container->addWidget( Wt::cpp14::make_unique< Wt::WTable >(), Wt::LayoutPosition::Center );
   table_->addStyleClass( "table form-inline" );
   table_->setWidth( Wt::WLength( "100%" ) );
   update_table();
@@ -83,7 +87,7 @@ ExtraFileWidget::ExtraFileWidget( graph::GraphSP graph ) :
 	std::string file_contents = contents.str();
 
 	std::string file_name = upper_widget->line_edit->text().toUTF8();
-	graph_->addExtraFile( file_contents, file_name );
+	graph_->addExtraFile( file_name, file_contents);
 
 	upper_widget->upload_message_area->setText( "Upload Complete" );
 	
