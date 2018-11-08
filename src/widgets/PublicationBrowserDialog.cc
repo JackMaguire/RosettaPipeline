@@ -130,8 +130,8 @@ PublicationBrowserDialog::PublicationBrowserDialog(
   table_->elementAt( 0, 3 )->addWidget( Wt::cpp14::make_unique< Wt::WText >( "" ) );*/
 
   
-  SearchBarWidget * const search_bar =
-    layout->addWidget( Wt::cpp14::make_unique< SearchBarWidget >( this ), Wt::LayoutPosition::North );
+  //SearchBarWidget * const search_bar =
+  layout->addWidget( Wt::cpp14::make_unique< SearchBarWidget >( this ), Wt::LayoutPosition::North );
 
   Wt::WPushButton * const close_button =
     layout->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Cancel" ), Wt::LayoutPosition::South );
