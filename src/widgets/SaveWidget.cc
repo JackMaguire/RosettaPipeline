@@ -1,6 +1,7 @@
 #include <widgets/SaveWidget.hh>
 
 #include <graph/Graph.hh>
+#include <serialization.hh>
 
 #include <Wt/WGlobal.h>
 #include <Wt/WPushButton.h>
@@ -62,16 +63,8 @@ SaveWidget::SaveWidget(
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
   addWidget( Wt::cpp14::make_unique< Wt::WText >( "<b>Tip:</b> Right-click the button and choose \"Save Link As...\" to pick a filename and save location." ) );
 
-  auto string_generating_func = [=] {
-    std::vector< std::string > save_lines;
-    options_->save( save_lines );
-    graph->saveSelfNodesAndEdges( save_lines );
-    
-    std::stringstream ss;
-    for( std::string const & line : save_lines ){
-      ss << line << "\n";
-    }
-    return ss.str();
+  auto string_generating_func = [ graph, this ] {
+    return serialization( *this->options_, * graph );
   };
 
   using Resource_T = OnTheFlyFileResource< decltype(string_generating_func) >;

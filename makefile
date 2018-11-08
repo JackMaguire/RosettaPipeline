@@ -19,20 +19,30 @@ WT_FLAGS=-lwthttp2 -lwt2 -lboost_signals -DBOOST_SIGNALS_NO_DEPRECATION_WARNING 
 ########
 # META #
 ########
-all: Options.o graph compile publishing widgets apps bin
-
-all_no_wt: Options.o graph compile publishing
+all: misc graph widgets apps bin
 
 graph: Node.o Edge.o Graph.o
 
 bin: graph_view_app
 
-###########
-# OPTIONS #
-###########
+########
+# MISC #
+########
 
 Options.o: src/Options.hh
 	${CXX} -c -o build/Options.o src/Options.cc ${GEN} 
+
+compile.o: graph
+	${CXX} -c -o build/compile.o src/compile/compile.cc ${GEN} 
+
+publishing.o: src/publishing.cc
+	${CXX} -c -o build/publishing.o src/publishing.cc ${GEN}
+
+serialization.o: src/serialization.cc
+	${CXX} -c -o build/serialization.o src/serialization.cc ${GEN}
+
+misc: Options.o compile.o publishing.o serialization.o
+	ld -r build/Options.o build/compile.o build/publishing.o build/serialization.o -o build/misc.o -arch ${ARCH}
 
 #########
 # GRAPH #
@@ -49,23 +59,6 @@ Graph.o: src/graph/Graph.cc src/graph/Node.hh src/graph/Edge.hh
 
 graph: Graph.o Edge.o Node.o
 	ld -r build/Graph.o build/Edge.o build/Node.o -o build/graph.o -arch ${ARCH}
-
-###########
-# COMPILE #
-###########
-
-compile: graph
-	${CXX} -c -o build/compile.o src/compile/compile.cc ${GEN} 
-
-##############
-# PUBLISHING #
-##############
-
-pubload.o: src/publishing/load.cc
-	${CXX} -c -o build/pubload.o src/publishing/load.cc ${GEN}
-
-publishing: pubload.o
-	ld -r build/pubload.o -o build/publishing.o -arch ${ARCH}
 
 ###########
 # WIDGETS #
@@ -138,5 +131,5 @@ apps: GraphApplication
 # BIN #
 #######
 
-graph_view_app: GraphApplication widgets Options.o
-	${CXX} -o bin/graph_view_app build/graph_view_app.o build/graph.o build/widgets.o build/Options.o build/compile.o build/publishing.o ${GEN} ${WT_FLAGS}
+graph_view_app: GraphApplication widgets misc
+	${CXX} -o bin/graph_view_app build/graph_view_app.o build/graph.o build/widgets.o build/misc.o ${GEN} ${WT_FLAGS}
