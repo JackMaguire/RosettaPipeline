@@ -64,7 +64,7 @@ SaveWidget::SaveWidget(
   addWidget( Wt::cpp14::make_unique< Wt::WText >( "<b>Tip:</b> Right-click the button and choose \"Save Link As...\" to pick a filename and save location." ) );
 
   auto string_generating_func = [ graph, this ] {
-    return serialization( *this->options_, * graph );
+    return serialization::save( *this->options_, * graph );
   };
 
   using Resource_T = OnTheFlyFileResource< decltype(string_generating_func) >;
