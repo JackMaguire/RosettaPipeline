@@ -39,7 +39,7 @@ publishing.o: src/publishing.cc
 	${CXX} -c -o build/publishing.o src/publishing.cc ${GEN}
 
 serialization.o: src/serialization.cc
-	${CXX} -c -o build/serialization.o src/serialization.cc ${GEN}
+	${CXX} -c -o build/serialization.o src/serialization.cc ${GEN} -L/cereal/include
 
 misc: Options.o compile.o publishing.o serialization.o
 	ld -r build/Options.o build/compile.o build/publishing.o build/serialization.o -o build/misc.o -arch ${ARCH}
