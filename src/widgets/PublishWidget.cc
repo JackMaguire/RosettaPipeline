@@ -108,7 +108,7 @@ PublishWidget::PublishWidget(
       std::string const directory_name = "/published_pipelines/" + key;
       std::filesystem::create_directory( directory_name );
 
-      std::string save_file_contents = serialization::save( * options_, * graph_ );
+      std::string save_file_contents = serialization::save( * options_, * graph );
 
       {//save file
 	std::ofstream save_file;
