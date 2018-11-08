@@ -202,17 +202,17 @@ Node::Node(
     }
 
     if( element.token == "use_script_file" ){
-      use_script_file_ = element.value == "1";
+      use_script_file_ = (element.value == "1");
       continue;
     }
 
     if( element.token == "use_default_command" ){
-      use_default_command_ = element.value == "1";
+      use_default_command_ = (element.value == "1");
       continue;
     }
 
     if( element.token == "still_using_default_title" ){
-      still_using_default_title_ = element.value == "1";
+      still_using_default_title_ = (element.value == "1");
       continue;
     }
 

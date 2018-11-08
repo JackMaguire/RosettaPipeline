@@ -53,44 +53,46 @@ void Edge::save( serialization::Archiver & archiver ) const {
 void
 Edge::load(
   std::vector< NodeSP > const & nodes,
-  std::vector< std::string > const & lines,
-  int line_to_start_at
+  serialization::Unarchiver & unarchiver
 ) {
-  unsigned int current_line = line_to_start_at;
+  //START line has already been checked by Graph
 
-  assert( lines[ current_line ] == "START_EDGE" );
- 
-  while( lines[ ++current_line ] != "END_EDGE" ){
-    std::string const line = lines[ current_line ];
+  for( serialization::ArchiveElement element = unarchiver.get_next_element();
+       element.token != "END" || element.value != "EDGE";
+       element = unarchiver.get_next_element() ){
 
-    if( line == "START_NOTES" ) {
-      std::stringstream ss;
-      while( lines[ ++current_line ] != "END_NOTES" ){
-	ss << std::move( lines[ current_line ] ) << "\n";
-      }
-      notes_ = ss.str();
+    if( element.token == "column" ){
+      column_name_to_sort_by_ = element.value;
       continue;
     }
 
-    std::vector< std::string > tokens;
-    {//stolen from https://stackoverflow.com/questions/13172158/c-split-string-by-line
-      std::string const delimiter = " ";
-      std::string::size_type prev = 0;
-      std::string::size_type pos = line.find( delimiter, prev );
-      while ( pos != std::string::npos ) {
-	tokens.push_back( line.substr( prev, pos - prev ) );
-	prev = pos + 1;
-	pos = line.find( delimiter, prev );
-      }
-
-      // To get the last substring (or only, if delimiter is not found)
-      tokens.push_back( line.substr( prev ) );
+    if( element.token == "pos_is_better" ){
+      positive_scores_are_better_ = ( element.value == "1" );
+      continue;
     }
 
-    if( tokens.size() < 2 ) continue;
-    
-    if( tokens[ 0 ] == "source" ) {
-      int const node_id = std::stoi( tokens[ 1 ] );
+    if( element.token == "num" ){
+      num_results_to_transfer_ = std::stoi( element.value );
+      continue;
+    }
+
+    if( element.token == "frac" ){
+      fraction_of_results_to_transfer_ = std::stod( element.value );
+      continue;
+    }
+
+    if( element.token == "use_frac" ){
+      use_fraction_instead_of_count_ = ( element.value == "1" );
+      continue;
+    }
+
+    if( element.token == "notes" ){
+      notes_ = element.value;
+      continue;
+    }
+
+    if( element.token == "source" ){
+      int const node_id = std::stoi( element.value );
       bool found_a_match = false;
       for( NodeSP const & n : nodes ) {
 	if( n->ID() == node_id ) {
@@ -102,10 +104,10 @@ Edge::load(
       }
       assert( found_a_match );
       continue;
-    }//if source
+    }
 
-    if( tokens[ 0 ] == "destination" ) {
-      int const node_id = std::stoi( tokens[ 1 ] );
+    if( element.token == "destination" ){
+      int const node_id = std::stoi( element.value );
       bool found_a_match = false;
       for( NodeSP const & n : nodes ) {
 	if( n->ID() == node_id ) {
@@ -117,7 +119,12 @@ Edge::load(
       }
       assert( found_a_match );
       continue;
-    }//if destination
+    }
+
+  }
+ 
+  while( lines[ ++current_line ] != "END_EDGE" ){
+    std::string const line = lines[ current_line ];
 
     if( tokens[ 0 ] == "column" ) {
       column_name_to_sort_by_ = tokens[ 1 ];
@@ -142,11 +149,6 @@ Edge::load(
     if( tokens[ 0 ] == "use_frac" ) {
       use_fraction_instead_of_count_ = ( tokens[ 1 ] == "1" );
       continue;
-    }
-
-    if( current_line == lines.size() - 1 ){
-      //TODO
-      //throw something
     }
 
   }//while not END_EDGE

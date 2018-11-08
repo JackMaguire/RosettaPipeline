@@ -72,8 +72,7 @@ protected:
   //load 
   void load(
     std::vector< NodeSP > const & nodes,
-    std::vector< std::string > const & lines,
-    int line_to_start_at
+    serialization::Unarchiver &
   );
 
 private:
