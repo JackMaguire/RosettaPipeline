@@ -35,7 +35,7 @@ struct Options {
 
   ///////////
   //SAVE/LOAD
-  void save( std::vector< std::string > & output_lines );
+  void save( std::vector< std::string > & output_lines ) const;
   int load( std::vector< std::string > const & lines, int line_to_start_at );
 
 };

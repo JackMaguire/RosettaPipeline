@@ -5,7 +5,7 @@ Options::~Options(){}
 
 ////////////
 // Save/Load
-void Options::save( std::vector< std::string > & output_lines ) {
+void Options::save( std::vector< std::string > & output_lines ) const {
   output_lines.emplace_back( "START_OPTIONS" );
 
   output_lines.emplace_back( "show_node_titles " + std::to_string( show_node_titles ) );
