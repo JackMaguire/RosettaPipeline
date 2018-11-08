@@ -6,7 +6,7 @@
 
 #include <Options.hh>
 #include <graph/Graph.fwd.hh>
-#include <publishing/load.hh>
+#include <publishing.hh>
 #include <widgets/GraphWidget.hh>
 #include <widgets/OptionsWidget.hh>
 
