@@ -11,6 +11,8 @@
 
 #include <graph/Graph.hh>
 
+#include <fstream>
+
 namespace widgets {
 
 namespace {
