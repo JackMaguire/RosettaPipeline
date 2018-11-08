@@ -4,6 +4,8 @@
 #include <graph/Node.hh>
 #include <graph/Edge.hh>
 
+#include <serializaiton.hh>
+
 #include <memory>
 #include <vector>
 
@@ -37,7 +39,7 @@ public://deletion
   void removeEdgeAndNotifyItsNodes( EdgeSP & );
 
 public://IO
-  void saveSelfNodesAndEdges( std::vector< std::string > & output_lines ) const;
+  void saveSelfNodesAndEdges( serialization::Archiver & archiver ) const;
 
   int loadSelfNodesAndEdges(
     std::vector< std::string > const & output_lines,

@@ -79,21 +79,21 @@ Graph::removeEdgeAndNotifyItsNodes( EdgeSP & e ) {
 
 // Save/Load
 void
-Graph::saveSelfNodesAndEdges( std::vector< std::string > & output_lines ) const {
-  output_lines.emplace_back( "START_GRAPH" );
-  output_lines.emplace_back( "next_node_id " + std::to_string( next_node_id_ ) );
-  output_lines.emplace_back( "num_nodes " + std::to_string( nodes_.size() ) );
+Graph::saveSelfNodesAndEdges( serialization::Archiver & archiver ) const {
+  archiver.add_element( "START", "GRAPH" );
+  archiver.add_element( "next_node_id", std::to_string( next_node_id_ ) );
+  archiver.add_element( "num_nodes", std::to_string( nodes_.size() ) );
 
   for( NodeSP const & n : nodes_ ) {
-    n->save( output_lines );
+    n->save( archiver );
   }
 
-  output_lines.emplace_back( "num_edges " + std::to_string( edges_.size() ) );
+  archiver.add_element( "num_edges", std::to_string( edges_.size() ) );
   for( EdgeSP const & e : edges_ ) {
-    e->save( output_lines );
+    e->save( archiver );
   }
 
-  output_lines.emplace_back( "END_GRAPH" );
+  archiver.add_element( "END", "GRAPH" );
 }
 
 int
