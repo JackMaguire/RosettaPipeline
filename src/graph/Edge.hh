@@ -4,6 +4,8 @@
 #include <graph/Node.fwd.hh>
 #include <graph/Graph.fwd.hh>
 
+#include <serialization.hh>
+
 #include <string>
 #include <vector>
 #include <cassert>
@@ -65,7 +67,7 @@ public://Getters and setters for "other"
 protected:
   void init();
 
-  void save( std::vector< std::string > & output_lines ) const;
+  void save( serialization::Archiver & archiver ) const;
 
   //load 
   void load(

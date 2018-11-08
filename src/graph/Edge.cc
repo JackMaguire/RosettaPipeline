@@ -44,30 +44,21 @@ bool hasEnding ( std::string const & fullString, std::string const & ending ) {
 }
 }
 
-void Edge::save( std::vector< std::string > & output_lines ) const {
+void Edge::save( serialization::Archiver & archiver ) const {
+  archiver.add_element( "START", "EDGE" );
 
-  output_lines.emplace_back( "START_EDGE" );
+  archiver.add_element( "source", std::to_string( source_node_.lock()->ID() ) );
+  archiver.add_element( "destination", std::to_string( destination_node_.lock()->ID() ) );
+  archiver.add_element( "column", column_name_to_sort_by_ );
+  archiver.add_element( "pos_is_better", ( positive_scores_are_better_ ? "1" : "0" ) );
 
-  output_lines.emplace_back( "source " + std::to_string( source_node_.lock()->ID() ) );
-  output_lines.emplace_back( "destination " + std::to_string( destination_node_.lock()->ID() ) );
-  output_lines.emplace_back( "column " + column_name_to_sort_by_ );
-  output_lines.emplace_back( std::string( "pos_is_better " ) +
-    ( positive_scores_are_better_ ? "1" : "0" ) );
+  archiver.add_element( "num", std::to_string( num_results_to_transfer_ ) );
+  archiver.add_element( "frac", std::to_string( fraction_of_results_to_transfer_ ) );
+  archiver.add_element( "use_frac", ( use_fraction_instead_of_count_ ? "1" : "0" ) );
 
-  output_lines.emplace_back( "num " + std::to_string( num_results_to_transfer_ ) );
-  output_lines.emplace_back( "frac " + std::to_string( fraction_of_results_to_transfer_ ) );
-  output_lines.emplace_back( std::string( "use_frac " ) +
-    ( use_fraction_instead_of_count_ ? "1" : "0" ) );
+  archiver.add_element( "notes", notes_ );
 
-  output_lines.emplace_back( "START_NOTES" );
-  if( hasEnding( notes_, "\n") ){
-    output_lines.emplace_back( notes_ );
-  } else {
-    output_lines.emplace_back( notes_ + "\n" );
-  }
-  output_lines.emplace_back( "END_NOTES" );
-
-  output_lines.emplace_back( "END_EDGE" );
+  archiver.add_element( "END", "EDGE" );
 }
 
 void
