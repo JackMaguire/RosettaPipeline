@@ -1,28 +1,19 @@
 #pragma once
 
-#include <graph/Graph.hh>
-
-#include <iostream>
 #include <string>
-#include <vector>
-#include <sstream>
-
+#include <Options.hh>
+#include <graph/Graph.fwd.hh>
 
 namespace serialization {
 
 std::string save(
-  Options const & options,
-  graph::Graph const & graph
-) {
-  std::vector< std::string > save_lines;
-  options->save( save_lines );
-  graph->saveSelfNodesAndEdges( save_lines );
-    
-  std::stringstream ss;
-  for( std::string const & line : save_lines ){
-    ss << line << "\n";
-  }
-  return ss.str();
+  Options const &,
+  graph::Graph const &
+);
+
+
+
+
 }
 
-}//namespace
+
