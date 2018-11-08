@@ -6,6 +6,7 @@
 #include <Wt/WLineEdit.h>
 #include <Wt/WFileUpload.h>
 #include <Wt/WText.h>
+#include <Wt/WBreak.h>
 #include <Wt/WPushButton.h>
 
 #include <graph/Graph.hh>
