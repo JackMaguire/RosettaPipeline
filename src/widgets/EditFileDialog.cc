@@ -24,7 +24,7 @@ EditFileDialog::EditFileDialog(
   ExtraFileWidget * parent,
   graph::ExtraFileSP extra_file
 ) :
-  WDialog( "TODO" ),
+  WDialog( "Editing " + extra_file->name ),
   parent_( parent ),
   extra_file_( std::move( extra_file ) )
 {
@@ -32,7 +32,7 @@ EditFileDialog::EditFileDialog(
   Wt::WBorderLayout * const layout =
     my_contents->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
 
-  layout->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Editing " + extra_file_->name ), Wt::LayoutPosition::North );
+  //layout->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Editing " + extra_file_->name ), Wt::LayoutPosition::North );
 
   Wt::WPushButton * const close_button =
     layout->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( ), Wt::LayoutPosition::South );
