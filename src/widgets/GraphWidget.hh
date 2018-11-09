@@ -15,6 +15,7 @@
 #include <widgets/GraphToolbarWidget.hh>
 
 #include <Options.hh>
+#include <global_data/refresh.hh>
 
 #include <unordered_map>
 
@@ -41,7 +42,7 @@ struct hitbox {
   }
 };
 
-class GraphWidget : public Wt::WPaintedWidget, public OptionsHolder
+class GraphWidget : public Wt::WPaintedWidget, public OptionsHolder, public global_data::Refreshable
 {
 public:
   GraphWidget(
@@ -58,6 +59,10 @@ public:
   graph::GraphSP graph(){ return graph_; }
 
   void accomodateNewSize( int w, int h );
+
+  void refresh() override {
+    update();
+  }
 
 protected:
   void init_painting_tools();
