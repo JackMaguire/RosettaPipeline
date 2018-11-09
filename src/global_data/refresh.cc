@@ -19,6 +19,7 @@ void refresh_all_objects() {
 void register_refreshable_object( Refreshable * obj ){
   std::cout << "Adding element " << obj << std::endl;
   if( obj != 0 ){
+    std::cout << "Size = " << objects.size() << std::endl;
     objects.push_back( obj );
   }
 }
