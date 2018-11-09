@@ -10,6 +10,7 @@
 #include <Wt/WText.h>
 #include <Wt/WBreak.h>
 #include <Wt/WPushButton.h>
+#include <Wt/WMessageBox.h>
 
 #include <graph/Graph.hh>
 
