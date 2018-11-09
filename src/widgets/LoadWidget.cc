@@ -96,8 +96,6 @@ LoadWidget::loadBrowseWidget(){
   PublicationBrowserDialog * const container = addChild(
     Wt::cpp14::make_unique< PublicationBrowserDialog >(
       this,
-      graph_widget_,
-      parent_->options_widget(),
       graph_widget_->graph(),
       options_
     )

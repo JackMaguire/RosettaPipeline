@@ -2,6 +2,7 @@
 
 #include <serialization.hh>
 #include <publishing.hh>
+#include <global_data/refresh.hh>
 
 #include <Wt/WLength.h>
 #include <Wt/WPushButton.h>
@@ -101,8 +102,6 @@ private:
 
 PublicationBrowserDialog::PublicationBrowserDialog(
   Wt::WContainerWidget * parent,
-  GraphWidget * graph_widget,
-  OptionsWidget * options_widget,
   graph::GraphSP graph,
   OptionsSP options
 ) :
@@ -110,8 +109,6 @@ PublicationBrowserDialog::PublicationBrowserDialog(
   parent_( parent ),
   graph_( std::move( graph ) ),
   options_( std::move( options ) ),
-  graph_widget_( graph_widget ),
-  options_widget_( options_widget )
 {
   Wt::WContainerWidget * const my_contents = contents();
   Wt::WBorderLayout * const layout =
@@ -122,12 +119,6 @@ PublicationBrowserDialog::PublicationBrowserDialog(
 
   table_->addStyleClass( "table form-inline" );
   table_->setWidth( Wt::WLength( "100%" ) );
-
-  /*table_->setHeaderCount( 1 );
-  table_->elementAt( 0, 0 )->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Title" ) );
-  table_->elementAt( 0, 1 )->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Author" ) );
-  table_->elementAt( 0, 2 )->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Tags" ) );
-  table_->elementAt( 0, 3 )->addWidget( Wt::cpp14::make_unique< Wt::WText >( "" ) );*/
 
   
   //SearchBarWidget * const search_bar =
@@ -173,8 +164,7 @@ void PublicationBrowserDialog::reset_table (
       [=]{
 	serialization::load_file( filename_to_load, *graph_, *options_ );
 	parent_->removeChild( this );
-	graph_widget_->update();
-	options_widget_->update();
+	global_data::refresh();
       }
     );
 

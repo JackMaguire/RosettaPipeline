@@ -19,8 +19,6 @@ class PublicationBrowserDialog : public Wt::WDialog
 public:
   PublicationBrowserDialog(
     Wt::WContainerWidget * parent,
-    GraphWidget * graph_widget,
-    OptionsWidget * options_widget,
     graph::GraphSP graph,
     OptionsSP options
   );
@@ -34,8 +32,6 @@ private:
   graph::GraphSP graph_;
   OptionsSP options_;
   Wt::WTable * table_;
-  GraphWidget * graph_widget_;
-  OptionsWidget * options_widget_;
 };
 
 }//namespace widgets
