@@ -37,7 +37,7 @@ EditFileDialog::EditFileDialog(
   //layout->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Editing " + extra_file_->name ), Wt::LayoutPosition::North );
 
   Wt::WPushButton * const close_button =
-    layout->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( ), Wt::LayoutPosition::South );
+    layout->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Done" ), Wt::LayoutPosition::South );
 
   close_button->setMinimumSize( 10, 50 );
 
