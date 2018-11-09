@@ -44,7 +44,7 @@ serialization.o: src/serialization.cc
 refresh.o: src/global_data/refresh.cc
 	${CXX} -c -o build/refresh.o global_data/refresh.cc ${GEN}
 
-misc: Options.o compile.o publishing.o serialization.o
+misc: Options.o compile.o publishing.o serialization.o refresh.o
 	ld -r build/Options.o build/compile.o build/publishing.o build/refresh.o build/serialization.o -o build/misc.o -arch ${ARCH}
 
 #########
