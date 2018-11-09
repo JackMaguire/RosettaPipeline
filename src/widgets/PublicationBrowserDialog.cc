@@ -108,7 +108,7 @@ PublicationBrowserDialog::PublicationBrowserDialog(
   WDialog( "Published Workflows" ),
   parent_( parent ),
   graph_( std::move( graph ) ),
-  options_( std::move( options ) ),
+  options_( std::move( options ) )
 {
   Wt::WContainerWidget * const my_contents = contents();
   Wt::WBorderLayout * const layout =
