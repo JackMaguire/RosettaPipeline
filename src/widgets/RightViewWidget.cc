@@ -30,20 +30,12 @@ namespace widgets {
 SaveAndLoadWidget::SaveAndLoadWidget(
   RightViewWidget * parent,
   graph::GraphSP graph,
-  GraphWidget * graph_widget,
   OptionsSP options
 )
 {
-  /*Wt::WPanel * const save_container =
-    addWidget( Wt::cpp14::make_unique< Wt::WPanel >() );
-  save_container->setTitle( "<b>Save</b>" );
-  save_container->setCollapsible( true );
-  save_container->addStyleClass( "centered-example" );*/
-
   Wt::WGroupBox * const publish_container =
     addWidget( Wt::cpp14::make_unique< Wt::WGroupBox >( "Publish" ) );
-  //publish_widget_ =
-  publish_container->addWidget( Wt::cpp14::make_unique< PublishWidget >( graph, std::move( options ) ) );
+  publish_container->addWidget( Wt::cpp14::make_unique< PublishWidget >( graph, options ) );
 
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
@@ -61,7 +53,7 @@ SaveAndLoadWidget::SaveAndLoadWidget(
   Wt::WGroupBox * const load_container =
     addWidget( Wt::cpp14::make_unique< Wt::WGroupBox >( "Load" ) );
   load_widget_ =
-    load_container->addWidget( Wt::cpp14::make_unique< LoadWidget >( parent, graph, graph_widget, options ) );
+    load_container->addWidget( Wt::cpp14::make_unique< LoadWidget >( parent, graph ) );
 }
 
 SaveAndLoadWidget::~SaveAndLoadWidget() = default;
