@@ -3,7 +3,6 @@
 #include <Options.hh>
 #include <Wt/WContainerWidget.h>
 #include <graph/Graph.fwd.hh>
-#include <widgets/GraphWidget.fwd.hh>
 #include <widgets/RightViewWidget.hh>
 
 #include <string>
@@ -16,7 +15,6 @@ public:
   LoadWidget(
     RightViewWidget * parent,
     graph::GraphSP const &,
-    GraphWidget * graph_widget,
     OptionsSP
   );
 
@@ -26,7 +24,7 @@ protected:
   void loadBrowseWidget();
 private:
   RightViewWidget * parent_;
-  GraphWidget * graph_widget_;
+  graph::GraphSP graph_;
 };
 
 }//namespace widgets

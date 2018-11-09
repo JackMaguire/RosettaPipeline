@@ -23,13 +23,12 @@ namespace widgets {
 LoadWidget::LoadWidget(
   RightViewWidget * parent,
   graph::GraphSP const & graph,
-  GraphWidget * graph_widget,
   OptionsSP options
 ) :
   WContainerWidget(),
   OptionsHolder( std::move( options ) ),
   parent_( parent ),
-  graph_widget_( graph_widget )
+  graph_( std::move( graph ) )
 {
   //largely copied from https://github.com/emweb/wt/blob/29ae91638e197013f67e7c826317529615d10749/examples/widgetgallery/examples/FileUpload.cpp
 
@@ -68,8 +67,7 @@ LoadWidget::LoadWidget(
       auto const filename = fu->spoolFileName();
       if( filename.size() > 1 ){
 	upload_out->setText( serialization::load_file( filename, * graph, * options_ ) );
-	graph_widget->update();
-	parent_->options_widget()->update();
+	global_data::refresh_all_objects();
       }
     }
   );
@@ -96,7 +94,7 @@ LoadWidget::loadBrowseWidget(){
   PublicationBrowserDialog * const container = addChild(
     Wt::cpp14::make_unique< PublicationBrowserDialog >(
       this,
-      graph_widget_->graph(),
+      graph_,
       options_
     )
   );
