@@ -61,6 +61,8 @@ ExtraFileWidget::ExtraFileWidget( graph::GraphSP graph ) :
   WContainerWidget(),
   graph_( std::move( graph ) )
 {
+  global_data::register_refreshable_object( this );
+
   Wt::WBorderLayout * const layout =
     setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
 
@@ -99,7 +101,9 @@ ExtraFileWidget::ExtraFileWidget( graph::GraphSP graph ) :
 
 }
 
-ExtraFileWidget::~ExtraFileWidget(){}
+ExtraFileWidget::~ExtraFileWidget(){
+  global_data::deregister_refreshable_object( this );
+}
 
 void ExtraFileWidget::update_table(){
   table_->clear();

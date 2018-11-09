@@ -25,6 +25,8 @@ GraphWidget::GraphWidget(
   width_( 500 ),
   height_( 600 )
 {
+
+  global_data::register_refreshable_object( this );
   //TODO
   //node_label_font_.setFamily( Wt::FontFamily::Monospace, "'Courier New'" );
 
@@ -39,7 +41,9 @@ GraphWidget::GraphWidget(
   init_painting_tools();
 }
 
-GraphWidget::~GraphWidget(){}
+GraphWidget::~GraphWidget(){
+  global_data::deregister_refreshable_object( this );
+}
 
 void
 GraphWidget::init_listeners(){

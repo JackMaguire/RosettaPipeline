@@ -5,10 +5,11 @@
 #include <widgets/RightViewWidget.hh>
 
 #include <Options.hh>
+#include <global_data/refresh.hh>
 
 namespace widgets {
 
-class OptionsWidget : public Wt::WContainerWidget, public OptionsHolder
+class OptionsWidget : public Wt::WContainerWidget, public OptionsHolder, public global_data::Refreshable
 {
 public:
   OptionsWidget(
@@ -20,6 +21,10 @@ public:
   ~OptionsWidget() override;
 
   void update();
+
+  void refresh() override {
+    update();
+  }
 
 protected:
   void setup_view_options( GraphWidget * );
