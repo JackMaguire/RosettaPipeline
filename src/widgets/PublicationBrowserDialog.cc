@@ -164,7 +164,7 @@ void PublicationBrowserDialog::reset_table (
       [=]{
 	serialization::load_file( filename_to_load, *graph_, *options_ );
 	parent_->removeChild( this );
-	global_data::refresh();
+	global_data::refresh_all_objects();
       }
     );
 
