@@ -24,6 +24,7 @@ struct UpperExtraFileWidget : public Wt::WContainerWidget {
   UpperExtraFileWidget(){
     addWidget( Wt::cpp14::make_unique< Wt::WText >( "TODO: Describe How This Works!" ) );
     addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
+    addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
 
     addWidget( Wt::cpp14::make_unique< Wt::WText >( "Name:" ) );
     line_edit = addWidget( Wt::cpp14::make_unique< Wt::WLineEdit >() );
@@ -35,6 +36,8 @@ struct UpperExtraFileWidget : public Wt::WContainerWidget {
     addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
 
     upload_button = addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Upload" ) );
+    addWidget( Wt::cpp14::make_unique< Wt::WText >( "" ) );
+    blank_file_button = addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Create Blank Text File" ) );
 
     setup_connections();
   }
@@ -58,6 +61,7 @@ struct UpperExtraFileWidget : public Wt::WContainerWidget {
   Wt::WFileUpload * file_upload;
   Wt::WText * upload_message_area;
   Wt::WPushButton * upload_button;
+  Wt::WPushButton * blank_file_button;
 };
 
 ExtraFileWidget::ExtraFileWidget( graph::GraphSP graph ) :
@@ -101,6 +105,15 @@ ExtraFileWidget::ExtraFileWidget( graph::GraphSP graph ) :
       }
     }
   );
+
+  upper_widget->blank_file_button->clicked().connect(
+    [=] {
+      std::string file_name = upper_widget->line_edit->text().toUTF8();
+      graph_->addExtraFile( std::move( file_name ), "" );
+      this->update_table();      
+    }
+  );
+
 
 }
 
