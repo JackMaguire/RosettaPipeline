@@ -1,5 +1,8 @@
 #include <widgets/EditFileDialog.hh>
 
+#include <widgets/ExtraFileWidget.hh>
+#include <graph/Graph.hh>
+
 #include <Wt/WLength.h>
 #include <Wt/WPushButton.h>
 #include <Wt/WLineEdit.h>
