@@ -37,7 +37,7 @@ EditFileDialog::EditFileDialog(
   Wt::WPushButton * const close_button =
     layout->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( ), Wt::LayoutPosition::South );
 
-  close_button->clicked()->connect(
+  close_button->clicked().connect(
     [=]{
       assert( parent_ );
       parent_->removeChild( this );
