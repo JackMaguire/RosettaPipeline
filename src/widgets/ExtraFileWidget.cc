@@ -107,7 +107,7 @@ ExtraFileWidget::ExtraFileWidget( graph::GraphSP graph ) :
   );
 
   upper_widget->blank_file_button->clicked().connect(
-    [=] {
+    [=] {//TODO ask for filename if empty
       std::string file_name = upper_widget->line_edit->text().toUTF8();
       graph_->addExtraFile( std::move( file_name ), "" );
       this->update_table();      
@@ -123,6 +123,9 @@ ExtraFileWidget::~ExtraFileWidget(){
 
 void ExtraFileWidget::update_table(){
   table_->clear();
+
+  if( graph_->extraFiles().empty() ) return;
+
   table_->elementAt( 0, 0 )->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Filename" ) );
 
   int counter = 1;

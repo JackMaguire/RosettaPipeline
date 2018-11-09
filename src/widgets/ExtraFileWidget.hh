@@ -4,9 +4,10 @@
 #include <Wt/WTable.h>
 
 #include <graph/Graph.fwd.hh>
+#include <global_data/refresh.hh>
 
 #include <string>
-#include <global_data/refresh.hh>
+#include <iostream>
 
 namespace widgets {
 
@@ -20,6 +21,7 @@ public:
   void update_table();
 
   void refresh() override {
+    std::cout << "refreshing" << std::endl;
     update_table();
   }
 
