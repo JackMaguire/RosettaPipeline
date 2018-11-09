@@ -82,7 +82,7 @@ RightViewWidget::RightViewWidget(
   graph_->registerNewChangeListener( this );
 
   welcome_widget_ = addTab_tmpl< WelcomeWidget >( "Welcome" );
-  examples_widget_ = addTab_tmpl< ExamplesWidget >( "Examples", this, graph_, graph_widget_, options_ );
+  examples_widget_ = addTab_tmpl< ExamplesWidget >( "Examples", graph_, options_ );
 
   graph::NodeSP selected_node = graph_->selectedNode();
   if( selected_node != 0 ){
