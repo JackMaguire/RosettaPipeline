@@ -1,6 +1,7 @@
 #include <global_data/refresh.hh>
 
 #include <vector>
+#include <algorithm>
 
 namespace global_data {
 
