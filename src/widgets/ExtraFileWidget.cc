@@ -111,7 +111,7 @@ void ExtraFileWidget::update_table(){
     Wt::WPushButton * const delete_button =
       table_->elementAt( counter, 2 )->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Delete" ) );
 
-    edit_button->clicked()->connect(
+    edit_button->clicked().connect(
       [=]{
 	EditFileDialog * const editor = addChild(
 	  Wt::cpp14::make_unique< EditFileDialog >( this, file )
