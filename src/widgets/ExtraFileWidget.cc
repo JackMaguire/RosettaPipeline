@@ -1,5 +1,7 @@
 #include <widgets/ExtraFileWidget.hh>
 
+#include <widgets/EditFileDialog.hh>
+
 #include <Wt/WGlobal.h>
 #include <Wt/WBorderLayout.h>
 #include <Wt/WText.h>
