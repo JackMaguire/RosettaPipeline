@@ -87,6 +87,10 @@ public://selection access
   void setGhostEdge( PreliminaryEdgeSP const & );
 
 public://auxiliary
+  std::vector< ExtraFileSP > & extraFiles() {
+    return extra_files_;
+  }
+
   std::vector< ExtraFileSP > const & extraFiles() const {
     return extra_files_;
   }

@@ -14,6 +14,8 @@
 #include <graph/Graph.hh>
 
 #include <fstream>
+#include <cassert>
+#include <algorithm>
 
 namespace widgets {
 
@@ -126,6 +128,31 @@ void ExtraFileWidget::update_table(){
       }
     );
 
+    delete_button->clicked().connect(
+      [=]{
+	  Wt::WMessageBox * const messageBox = addChild(
+	    Wt::cpp14::make_unique< Wt::WMessageBox >(
+	      "Delete File",
+	      "<p>Permanently delete file with name " + file->name + "?</p>",
+	      Wt::Icon::Warning, Wt::StandardButton::Yes | Wt::StandardButton::No
+	    )
+	  );
+	  // messageBox->setModal( false );
+	  messageBox->buttonClicked().connect(
+	    [=] {
+	      if( messageBox->buttonResult() == Wt::StandardButton::Yes ) {
+		auto & vec = this->graph_->extraFiles();
+		auto iter = std::find( vec.begin(), vec.end(), file );
+		assert( iter != vec.end() );
+		vec.erase( iter );
+		update_table();
+	      }
+	      this->removeChild( messageBox );
+	    }
+	  );
+	  messageBox->show();
+      }
+    );
 
     counter++;
   }
