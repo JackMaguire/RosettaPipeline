@@ -99,7 +99,7 @@ RightViewWidget::RightViewWidget(
 
   save_and_load_widget_ = addTab_tmpl< SaveAndLoadWidget >(
     "Save/Load",
-    this, graph_, graph_widget_, options_
+    this, graph_, options_
   );
 
   addTab_tmpl< ExtraFileWidget >( "Extra Files", graph_ );
