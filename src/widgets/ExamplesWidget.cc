@@ -25,14 +25,11 @@
 namespace widgets {
 
 ExamplesWidget::ExamplesWidget(
-  RightViewWidget * parent,
   graph::GraphSP graph,
-  GraphWidget * graph_widget,
   OptionsSP options
 ) :
   WContainerWidget(),
-  OptionsHolder( std::move( options ) ),
-  parent_( parent )
+  OptionsHolder( std::move( options ) )
 {
   addWidget( Wt::cpp14::make_unique< Wt::WText >( "<b>Batch Relax</b>" ) );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
@@ -51,10 +48,9 @@ ExamplesWidget::ExamplesWidget(
       std::string const load_result = serialization::load_file( filename, * graph, * options_ );
       std::cout << load_result << std::endl;
       if( load_result != "load successful" ) {
-	//TODO
+	//TODO?
       }
-      graph_widget->update();
-      parent_->options_widget()->update();
+      global_data::refresh_all_objects();
     }
   );
 
