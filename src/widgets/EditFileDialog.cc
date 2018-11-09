@@ -29,6 +29,8 @@ EditFileDialog::EditFileDialog(
   extra_file_( std::move( extra_file ) )
 {
   Wt::WContainerWidget * const my_contents = contents();
+  my_contents->setMinimumSize( 300, 400 );
+
   Wt::WBorderLayout * const layout =
     my_contents->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
 
