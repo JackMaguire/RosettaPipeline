@@ -20,7 +20,8 @@ public:
   PublicationBrowserDialog(
     Wt::WContainerWidget * parent,
     graph::GraphSP graph,
-    OptionsSP options
+    OptionsSP options,
+    RefreshableElementVecSP
   );
 
   virtual ~PublicationBrowserDialog();
@@ -31,6 +32,7 @@ private:
   Wt::WContainerWidget * parent_;
   graph::GraphSP graph_;
   OptionsSP options_;
+  RefreshableElementVecSP refreshers_;
   Wt::WTable * table_;
 };
 

@@ -103,12 +103,14 @@ private:
 PublicationBrowserDialog::PublicationBrowserDialog(
   Wt::WContainerWidget * parent,
   graph::GraphSP graph,
-  OptionsSP options
+  OptionsSP options,
+  RefreshableElementVecSP refreshers
 ) :
   WDialog( "Published Workflows" ),
   parent_( parent ),
   graph_( std::move( graph ) ),
-  options_( std::move( options ) )
+  options_( std::move( options ) ),
+  refreshers_( std::move( refreshers ) )
 {
   Wt::WContainerWidget * const my_contents = contents();
   Wt::WBorderLayout * const layout =
@@ -164,7 +166,7 @@ void PublicationBrowserDialog::reset_table (
       [=]{
 	serialization::load_file( filename_to_load, *graph_, *options_ );
 	parent_->removeChild( this );
-	global_data::refresh_all_objects();
+	refreshers_->refresh_all_objects();
       }
     );
 

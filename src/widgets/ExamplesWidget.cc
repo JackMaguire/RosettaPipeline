@@ -2,7 +2,9 @@
 
 #include <widgets/OptionsWidget.hh>
 #include <widgets/GraphWidget.hh>
+
 #include <serialization.hh>
+#include <refresh.hh>
 
 #include <util.hh>
 
@@ -26,7 +28,8 @@ namespace widgets {
 
 ExamplesWidget::ExamplesWidget(
   graph::GraphSP graph,
-  OptionsSP options
+  OptionsSP options,
+  RefreshableElementVecSP refreshers
 ) :
   WContainerWidget(),
   OptionsHolder( std::move( options ) )
@@ -50,7 +53,7 @@ ExamplesWidget::ExamplesWidget(
       if( load_result != "load successful" ) {
 	//TODO?
       }
-      global_data::refresh_all_objects();
+      refreshers->refresh_all_objects();
     }
   );
 

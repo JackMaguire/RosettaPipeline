@@ -4,6 +4,8 @@
 #include <widgets/GraphWidget.hh>
 #include <widgets/GraphToolbarWidget.hh>
 
+#include <refresh.hh>
+
 #include <Wt/WLength.h>
 #include <Wt/WImage.h>
 #include <Wt/WGlobal.h>
@@ -25,11 +27,13 @@ TopWidget::TopWidget( graph::GraphSP graph, OptionsSP options ) :
 {
   setLayoutSizeAware( true );
 
+  RefreshableElementVecSP refreshable_objects = std::make_shared< RefreshableElementVec >();
+
   Wt::WHBoxLayout * const hbox =
     setLayout( Wt::cpp14::make_unique< Wt::WHBoxLayout >() );
 
   LeftViewWidget * const left_item =
-    hbox->addWidget( Wt::cpp14::make_unique< LeftViewWidget >( graph, options ), 1 );
+    hbox->addWidget( Wt::cpp14::make_unique< LeftViewWidget >( graph, options, refreshable_objects ), 1 );
   graph_widget_ = left_item->graphWidget();
 
   Wt::WContainerWidget * const right_container =
@@ -40,7 +44,7 @@ TopWidget::TopWidget( graph::GraphSP graph, OptionsSP options ) :
     right_container->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
   right_layout->setSpacing( 0 );
 
-  right_layout->addWidget( Wt::cpp14::make_unique< RightViewWidget >( graph, graph_widget_, std::move( options ) ),
+  right_layout->addWidget( Wt::cpp14::make_unique< RightViewWidget >( graph, graph_widget_, std::move( options ), refreshable_objects ),
     Wt::LayoutPosition::Center );
 
 }

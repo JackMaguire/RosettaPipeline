@@ -1,6 +1,8 @@
 #pragma once
 
 #include <Options.hh>
+#include <refresh.hh>
+
 #include <Wt/WContainerWidget.h>
 #include <graph/Graph.fwd.hh>
 #include <widgets/RightViewWidget.hh>
@@ -14,8 +16,9 @@ class LoadWidget : public Wt::WContainerWidget, public OptionsHolder
 public:
   LoadWidget(
     RightViewWidget * parent,
-    graph::GraphSP const &,
-    OptionsSP
+    graph::GraphSP,
+    OptionsSP,
+    RefreshableElementVecSP
   );
 
   ~LoadWidget() override;
@@ -25,6 +28,7 @@ protected:
 private:
   RightViewWidget * parent_;
   graph::GraphSP graph_;
+  RefreshableElementVecSP refreshers_;
 };
 
 }//namespace widgets

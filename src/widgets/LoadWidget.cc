@@ -1,6 +1,7 @@
 #include <widgets/LoadWidget.hh>
 
 #include <serialization.hh>
+
 #include <graph/Graph.hh>
 #include <widgets/GraphWidget.hh>
 #include <widgets/OptionsWidget.hh>
@@ -22,13 +23,15 @@ namespace widgets {
 
 LoadWidget::LoadWidget(
   RightViewWidget * parent,
-  graph::GraphSP const & graph,
-  OptionsSP options
+  graph::GraphSP graph,
+  OptionsSP options,
+  RefreshableElementVecSP refreshers
 ) :
   WContainerWidget(),
   OptionsHolder( std::move( options ) ),
   parent_( parent ),
-  graph_( std::move( graph ) )
+  graph_( std::move( graph ) ),
+  refreshers_( std::move( refreshers ) )
 {
   //largely copied from https://github.com/emweb/wt/blob/29ae91638e197013f67e7c826317529615d10749/examples/widgetgallery/examples/FileUpload.cpp
 
@@ -67,7 +70,7 @@ LoadWidget::LoadWidget(
       auto const filename = fu->spoolFileName();
       if( filename.size() > 1 ){
 	upload_out->setText( serialization::load_file( filename, * graph, * options_ ) );
-	global_data::refresh_all_objects();
+	refreshers_->refresh_all_objects();
       }
     }
   );
@@ -95,7 +98,8 @@ LoadWidget::loadBrowseWidget(){
     Wt::cpp14::make_unique< PublicationBrowserDialog >(
       this,
       graph_,
-      options_
+      options_,
+      refreshers_
     )
   );
   container->show();

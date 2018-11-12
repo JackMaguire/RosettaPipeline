@@ -1,16 +1,24 @@
 #pragma once
 
-namespace global_data {
+#include <vector>
+#include <memory>
 
 class Refreshable {
 public:
   virtual void refresh() = 0;
 };
 
-void refresh_all_objects();
+struct RefreshableElementVec {
+  
+  void refresh_all_objects(){
+    for( Refreshable * obj : objects ){
+      obj->refresh();
+    }
+  }
 
-void register_refreshable_object( Refreshable * );
+  std::vector< Refreshable * > elements;
 
-void deregister_refreshable_object( Refreshable * );
+};
 
-}
+using RefreshableElementVecSP = std::shared_ptr< RefreshableElementVec >;
+
