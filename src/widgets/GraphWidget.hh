@@ -42,7 +42,7 @@ struct hitbox {
   }
 };
 
-class GraphWidget : public Wt::WPaintedWidget, public OptionsHolder, public global_data::Refreshable
+class GraphWidget : public Wt::WPaintedWidget, public OptionsHolder, public Refreshable
 {
 public:
   GraphWidget(
