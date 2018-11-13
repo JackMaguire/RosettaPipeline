@@ -5,13 +5,7 @@
 #include <Wt/WGlobal.h>
 
 #include <graph/Graph.hh>
-#include <widgets/GraphWidget.fwd.hh>
-#include <widgets/WelcomeWidget.hh>
-//#include <widgets/ExamplesWidget.hh>
-#include <widgets/NodeWidget.hh>
-#include <widgets/EdgeWidget.hh>
-#include <widgets/OptionsWidget.hh>
-#include <widgets/CompileWidget.hh>
+#include <widgets/all_widgets.fwd.hh>
 
 #include <string>
 
