@@ -8,6 +8,8 @@
 #include <Options.hh>
 #include <refresh.hh>
 
+#include <functional>
+
 namespace widgets {
 
 class RightViewWidget;
@@ -22,6 +24,14 @@ public:
   );
 
   ~ExamplesWidget() override;
+
+  template< typename T >
+  void set_action_to_call_upon_load( T action ){
+    action_to_call_upon_load_ = action;
+  }
+
+private:
+  std::function< void() > action_to_call_upon_load_;
 };
 
 

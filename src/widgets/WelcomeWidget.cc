@@ -1,4 +1,5 @@
 #include <widgets/WelcomeWidget.hh>
+#include <widgets/ExamplesWidget.hh>
 
 #include <Wt/WLength.h>
 #include <Wt/WDialog.h>
@@ -76,9 +77,9 @@ public:
 }
 
 WelcomeWidget::WelcomeWidget(
-  //graph::GraphSP graph,
-  //OptionsSP,
-  //RefreshableElementVecSP refreshers
+  graph::GraphSP graph,
+  OptionsSP options,
+  RefreshableElementVecSP refreshers
 ) :
   WContainerWidget()
 {
@@ -105,6 +106,15 @@ WelcomeWidget::WelcomeWidget(
       Wt::WPushButton * const close =
 	dialog_layout->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Close" ), Wt::LayoutPosition::South );
       close->clicked().connect(
+	[=]{
+	  this->removeChild( dialog );
+	}
+      );
+
+      auto examples_widget_uniq_ptr = Wt::cpp14::make_unique< ExamplesWidget >( graph, options, refreshers );
+      ExamplesWidget * const examples_widget =
+	dialog_layout->addWidget( std::move( examples_widget_uniq_ptr ), Wt::LayoutPosition::Center );
+      examples_widget->set_action_to_call_upon_load(
 	[=]{
 	  this->removeChild( dialog );
 	}

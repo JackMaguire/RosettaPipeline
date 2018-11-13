@@ -54,6 +54,9 @@ ExamplesWidget::ExamplesWidget(
 	//TODO?
       }
       refreshers->refresh_all_objects();
+      if( action_to_call_upon_load_ ){
+	action_to_call_upon_load_();
+      }
     }
   );
 

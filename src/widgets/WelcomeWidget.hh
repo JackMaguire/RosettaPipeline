@@ -11,9 +11,9 @@ class WelcomeWidget : public Wt::WContainerWidget
 {
 public:
   WelcomeWidget(
-    //graph::GraphSP graph,
-    //OptionsSP,
-    //RefreshableElementVecSP refreshers
+    graph::GraphSP graph,
+    OptionsSP,
+    RefreshableElementVecSP refreshers
   );
 
   virtual ~WelcomeWidget();
