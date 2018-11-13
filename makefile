@@ -41,8 +41,8 @@ publishing.o: src/publishing.cc
 serialization.o: src/serialization.cc
 	${CXX} -c -o build/serialization.o src/serialization.cc ${GEN} -I/cereal/include
 
-refresh.o: src/global_data/refresh.cc
-	${CXX} -c -o build/refresh.o src/global_data/refresh.cc ${GEN}
+refresh.o: src/refresh.cc
+	${CXX} -c -o build/refresh.o src/refresh.cc ${GEN}
 
 misc: Options.o compile.o publishing.o serialization.o refresh.o
 	ld -r build/Options.o build/compile.o build/publishing.o build/refresh.o build/serialization.o -o build/misc.o -arch ${ARCH}
