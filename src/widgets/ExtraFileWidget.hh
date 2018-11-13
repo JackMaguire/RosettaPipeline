@@ -4,14 +4,14 @@
 #include <Wt/WTable.h>
 
 #include <graph/Graph.fwd.hh>
-#include <global_data/refresh.hh>
+#include <refresh.hh>
 
 #include <string>
-#include <iostream>
+//#include <iostream>
 
 namespace widgets {
 
-class ExtraFileWidget : public Wt::WContainerWidget, public global_data::Refreshable
+class ExtraFileWidget : public Wt::WContainerWidget, public Refreshable
 {
 public:
   ExtraFileWidget( graph::GraphSP graph );
@@ -21,7 +21,7 @@ public:
   void update_table();
 
   void refresh() override {
-    std::cout << "refreshing" << std::endl;
+    //std::cout << "refreshing" << std::endl;
     update_table();
   }
 

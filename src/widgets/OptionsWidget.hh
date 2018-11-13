@@ -5,11 +5,11 @@
 #include <widgets/RightViewWidget.hh>
 
 #include <Options.hh>
-#include <global_data/refresh.hh>
+#include <refresh.hh>
 
 namespace widgets {
 
-class OptionsWidget : public Wt::WContainerWidget, public OptionsHolder, public global_data::Refreshable
+class OptionsWidget : public Wt::WContainerWidget, public OptionsHolder, public Refreshable
 {
 public:
   OptionsWidget(

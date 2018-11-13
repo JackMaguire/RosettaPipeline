@@ -16,6 +16,10 @@ struct RefreshableElementVec {
     }
   }
 
+  void push_back( Refreshable * element ){
+    elements.push_back( element );
+  }
+
   std::vector< Refreshable * > elements;
 
 };

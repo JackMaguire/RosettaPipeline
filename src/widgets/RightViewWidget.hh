@@ -16,10 +16,11 @@
 #include <string>
 
 #include <Options.hh>
+#include <refresh.hh>
 
 namespace widgets {
 
-//TODO make .fwd.hh fails
+//TODO make .fwd.hh files
 class SaveWidget;
 class LoadWidget;
 class OptionsWidget;
@@ -48,7 +49,8 @@ public:
   RightViewWidget(
     graph::GraphSP,
     GraphWidget * graph_widget,
-    OptionsSP
+    OptionsSP,
+    RefreshableElementVecSP
   );
 
   ~RightViewWidget() override;

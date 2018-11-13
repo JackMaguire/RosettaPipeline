@@ -30,9 +30,9 @@ namespace widgets {
 SaveAndLoadWidget::SaveAndLoadWidget(
   RightViewWidget * parent,
   graph::GraphSP graph,
-  OptionsSP options
-)
-{
+  OptionsSP options,
+  RefreshableElementVecSP refresh_vec
+) {
   Wt::WGroupBox * const publish_container =
     addWidget( Wt::cpp14::make_unique< Wt::WGroupBox >( "Publish" ) );
   publish_container->addWidget( Wt::cpp14::make_unique< PublishWidget >( graph, options ) );
@@ -68,7 +68,8 @@ SaveAndLoadWidget::setOptions( OptionsSP options ){
 RightViewWidget::RightViewWidget(
   graph::GraphSP graph,
   GraphWidget * graph_widget,
-  OptionsSP options
+  OptionsSP options,
+  RefreshableElementVecSP refresh_vec
 ) :
   WTabWidget(),
   OptionsHolder( options ),
@@ -82,7 +83,7 @@ RightViewWidget::RightViewWidget(
   graph_->registerNewChangeListener( this );
 
   welcome_widget_ = addTab_tmpl< WelcomeWidget >( "Welcome" );
-  examples_widget_ = addTab_tmpl< ExamplesWidget >( "Examples", graph_, options_ );
+  examples_widget_ = addTab_tmpl< ExamplesWidget >( "Examples", graph_, options_, refresh_vec );
 
   graph::NodeSP selected_node = graph_->selectedNode();
   if( selected_node != 0 ){
@@ -96,16 +97,20 @@ RightViewWidget::RightViewWidget(
   }
 
   options_widget_ = addTab_tmpl< OptionsWidget >( "Options", this, graph_widget_, options_ );
+  refresh_vec->push_back( options_widget_ );
 
   save_and_load_widget_ = addTab_tmpl< SaveAndLoadWidget >(
     "Save/Load",
-    this, graph_, options_
+    this, graph_, options_, refresh_vec
   );
 
-  addTab_tmpl< ExtraFileWidget >( "Extra Files", graph_ );
+  ExtraFileWidget * const extra_files =
+    addTab_tmpl< ExtraFileWidget >( "Extra Files", graph_ );
+  refresh_vec->push_back( extra_files );
+
   compile_widget_ = addTab_tmpl< CompileWidget >( "Compile", graph_, options_ );
 
-  setStyleClass("tabwidget");
+  setStyleClass( "tabwidget" );
   setCurrentIndex( 0 );
 
   setOptionsDownward( std::move( options ) );

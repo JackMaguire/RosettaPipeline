@@ -33,8 +33,10 @@ TopWidget::TopWidget( graph::GraphSP graph, OptionsSP options ) :
     setLayout( Wt::cpp14::make_unique< Wt::WHBoxLayout >() );
 
   LeftViewWidget * const left_item =
-    hbox->addWidget( Wt::cpp14::make_unique< LeftViewWidget >( graph, options, refreshable_objects ), 1 );
+    hbox->addWidget( Wt::cpp14::make_unique< LeftViewWidget >( graph, options ), 1 );
   graph_widget_ = left_item->graphWidget();
+  assert( graph_widget_ );
+  refreshable_objects->push_back( graph_widget_ );
 
   Wt::WContainerWidget * const right_container =
     hbox->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >(), 2 );
@@ -44,7 +46,8 @@ TopWidget::TopWidget( graph::GraphSP graph, OptionsSP options ) :
     right_container->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
   right_layout->setSpacing( 0 );
 
-  right_layout->addWidget( Wt::cpp14::make_unique< RightViewWidget >( graph, graph_widget_, std::move( options ), refreshable_objects ),
+  right_layout->addWidget(
+    Wt::cpp14::make_unique< RightViewWidget >( graph, graph_widget_, options, refreshable_objects ),
     Wt::LayoutPosition::Center );
 
 }
