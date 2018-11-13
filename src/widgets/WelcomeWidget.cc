@@ -65,7 +65,7 @@ public:
 
   template< typename T >
   CustomContainerWidget *
-  addWidget( T widget, int num_breaks ){
+  addWidgetDerived( T widget, int num_breaks ){
     addWidget( std::move( widget ) );
     for( int i=0; i<num_breaks; ++i )
       addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
@@ -137,7 +137,7 @@ WelcomeWidget::WelcomeWidget(
     "<b>Getting started:</b>", 1
   )->addMessage(//Getting Started
     "If you are new, you can start by exploring sample pipelines in the \"Examples\" tab. ", 0
-  )->addWidget(
+  )->addWidgetDerived(
     std::move( examples_button ), 2
   )->addMessage(//Rules
     "<b>Rules:</b>", 1
