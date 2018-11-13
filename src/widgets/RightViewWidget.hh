@@ -30,7 +30,8 @@ public:
   SaveAndLoadWidget(
     RightViewWidget * parent,
     graph::GraphSP graph,
-    OptionsSP
+    OptionsSP,
+    RefreshableElementVecSP
   );
 
   ~SaveAndLoadWidget();
