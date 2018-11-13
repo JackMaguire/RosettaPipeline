@@ -2,7 +2,7 @@
 
 #include <Wt/WContainerWidget.h>
 #include <graph/Graph.fwd.hh>
-#include <widgets/GraphWidget.fwd.hh>
+#include <widgets/all_widgets.fwd.hh>
 #include <Options.hh>
 
 namespace widgets {

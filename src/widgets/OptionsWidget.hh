@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Wt/WContainerWidget.h>
-#include <widgets/GraphWidget.fwd.hh>
+#include <widgets/all_widgets.fwd.hh>
 //#include <widgets/RightViewWidget.hh>
 
 #include <Options.hh>
