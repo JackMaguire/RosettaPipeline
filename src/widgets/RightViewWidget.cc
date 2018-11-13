@@ -53,7 +53,7 @@ SaveAndLoadWidget::SaveAndLoadWidget(
   Wt::WGroupBox * const load_container =
     addWidget( Wt::cpp14::make_unique< Wt::WGroupBox >( "Load" ) );
   load_widget_ =
-    load_container->addWidget( Wt::cpp14::make_unique< LoadWidget >( parent, graph, options ) );
+    load_container->addWidget( Wt::cpp14::make_unique< LoadWidget >( parent, graph, options, refresh_vec ) );
 }
 
 SaveAndLoadWidget::~SaveAndLoadWidget() = default;
