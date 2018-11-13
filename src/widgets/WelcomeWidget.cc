@@ -1,12 +1,12 @@
 #include <widgets/WelcomeWidget.hh>
 
 #include <Wt/WLength.h>
-#include <Wt/WImage.h>
+#include <Wt/WDialog.h>
 #include <Wt/WGlobal.h>
 #include <Wt/WHBoxLayout.h>
 #include <Wt/WVBoxLayout.h>
 #include <Wt/WBorderLayout.h>
-#include <Wt/WLink.h>
+#include <Wt/WPushButton.h>
 #include <Wt/WText.h>
 #include <Wt/WBreak.h>
 #include <Wt/WContainerWidget.h>
@@ -62,11 +62,24 @@ public:
     addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
     return this;
   }
+
+  template T
+  CustomContainerWidget *
+  addWidget( T widget, int num_breaks ){
+    addWidget( std::move( widget ) );
+    for( int i=0; i<num_breaks; ++i )
+      addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
+    return this;
+  }
 };
 
 }
 
-WelcomeWidget::WelcomeWidget() :
+WelcomeWidget::WelcomeWidget(
+  //graph::GraphSP graph,
+  //OptionsSP,
+  //RefreshableElementVecSP refreshers
+) :
   WContainerWidget()
 {
   Wt::WBorderLayout * const layout =
@@ -76,6 +89,28 @@ WelcomeWidget::WelcomeWidget() :
 
   CustomContainerWidget * const main_container =
     layout->addWidget( Wt::cpp14::make_unique< CustomContainerWidget >(), Wt::LayoutPosition::Center );
+
+  auto examples_button = Wt::cpp14::make_unique< Wt::WPushButton >( "Examples" );
+  examples_button->clicked().connect(
+    [=]{
+      Wt::WDialog * const dialog =
+	addChild( Wt::cpp14::make_unique< Wt::WDialog >( "Examples" ) );
+      dialog->show();
+
+      Wt::WContainerWidget * const container = dialog->contents();
+
+      Wt::WBorderLayout * const dialog_layout =
+	container->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
+
+      Wt::WPushButton * const close =
+	dialog_layout->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Close" ) );
+      close->clicked().connect(
+	[=]{
+	  this->removeChild( dialog );
+	}
+      );
+    }
+  );
 
   main_container->addMessage(
     "Welcome to RosettaPipeline!"
@@ -101,7 +136,9 @@ WelcomeWidget::WelcomeWidget() :
   )->addMessage(//Getting Started
     "<b>Getting started:</b>", 1
   )->addMessage(//Getting Started
-    "If you are new, you can start by exploring sample pipelines in the \"Examples\" tab. "
+    "If you are new, you can start by exploring sample pipelines in the \"Examples\" tab. ", 0
+  )->addWidget(
+    std::move( examples_button ), 2
   )->addMessage(//Rules
     "<b>Rules:</b>", 1
   )->addMessage(//Rules
