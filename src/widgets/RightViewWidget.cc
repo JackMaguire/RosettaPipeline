@@ -82,12 +82,12 @@ RightViewWidget::RightViewWidget(
 
   graph_->registerNewChangeListener( this );
 
-  welcome_widget_ = addTab_tmpl< WelcomeWidget >( "Welcome" );
-  examples_widget_ = addTab_tmpl< ExamplesWidget >( "Examples", graph_, options_, refresh_vec );
+  welcome_widget_ = addTab_tmpl< WelcomeWidget >( "Welcome", graph_, options_, refresh_vec );
+  //examples_widget_ = addTab_tmpl< ExamplesWidget >( "Examples", graph_, options_, refresh_vec );
 
   graph::NodeSP selected_node = graph_->selectedNode();
   if( selected_node != 0 ){
-    node_edit_widget_ = addTab_tmpl< NodeWidget >( "Edit", selected_node, graph_widget_, options );
+    node_edit_widget_ = addTab_tmpl< NodeWidget >( "Edit", selected_node, graph_widget_, options_ );
     edge_edit_widget_ = 0;
   } else {
     graph::EdgeSP selected_edge = graph_->selectedEdge();
