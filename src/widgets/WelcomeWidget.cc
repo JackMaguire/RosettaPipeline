@@ -103,7 +103,7 @@ WelcomeWidget::WelcomeWidget(
 	container->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
 
       Wt::WPushButton * const close =
-	dialog_layout->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Close" ) );
+	dialog_layout->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Close" ), Wt::LayoutPosition::South );
       close->clicked().connect(
 	[=]{
 	  this->removeChild( dialog );
