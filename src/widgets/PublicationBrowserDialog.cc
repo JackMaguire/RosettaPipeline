@@ -2,7 +2,7 @@
 
 #include <serialization.hh>
 #include <publishing.hh>
-#include <global_data/refresh.hh>
+#include <refresh.hh>
 
 #include <Wt/WLength.h>
 #include <Wt/WPushButton.h>
