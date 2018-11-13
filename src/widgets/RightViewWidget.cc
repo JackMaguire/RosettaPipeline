@@ -7,7 +7,7 @@
 #include <widgets/OptionsWidget.hh>
 #include <widgets/CompileWidget.hh>
 #include <widgets/WelcomeWidget.hh>
-#include <widgets/ExamplesWidget.hh>
+//#include <widgets/ExamplesWidget.hh>
 #include <widgets/ExtraFileWidget.hh>
 #include <widgets/PublishWidget.hh>
 
