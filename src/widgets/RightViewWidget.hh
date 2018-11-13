@@ -14,11 +14,6 @@
 
 namespace widgets {
 
-//TODO make .fwd.hh files
-class SaveWidget;
-class LoadWidget;
-class OptionsWidget;
-
 class SaveAndLoadWidget : public Wt::WContainerWidget {
 public:
   SaveAndLoadWidget(

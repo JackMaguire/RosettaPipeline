@@ -4,7 +4,7 @@
 #include <Wt/WVBoxLayout.h>
 
 #include <graph/Node.fwd.hh>
-#include <widgets/GraphWidget.fwd.hh>
+#include <widgets/all_widgets.fwd.hh>
 
 #include <Options.hh>
 
