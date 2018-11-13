@@ -6,6 +6,7 @@
 //#include <widgets/RightViewWidget.hh>
 
 #include <Options.hh>
+#include <refresh.hh>
 
 namespace widgets {
 
@@ -16,7 +17,8 @@ class ExamplesWidget : public Wt::WContainerWidget, public OptionsHolder
 public:
   ExamplesWidget(
     graph::GraphSP graph,
-    OptionsSP
+    OptionsSP,
+    RefreshableElementVecSP refreshers
   );
 
   ~ExamplesWidget() override;
