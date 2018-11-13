@@ -11,7 +11,7 @@ public:
 struct RefreshableElementVec {
   
   void refresh_all_objects(){
-    for( Refreshable * obj : objects ){
+    for( Refreshable * obj : elements ){
       obj->refresh();
     }
   }
