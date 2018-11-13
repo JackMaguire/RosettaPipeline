@@ -24,15 +24,12 @@ OptionsWidget::OptionsWidget(
   OptionsHolder( std::move( options ) ),
   parent_( parent )
 {
-  global_data::register_refreshable_object( this );
   setup_view_options( graph_widget );
   setup_run_options();
   update();
 }
 
-OptionsWidget::~OptionsWidget(){
-  global_data::deregister_refreshable_object( this );
-}
+OptionsWidget::~OptionsWidget(){}
 
 void
 OptionsWidget::setup_view_options( GraphWidget * graph_widget ){
