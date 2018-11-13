@@ -63,7 +63,7 @@ public:
     return this;
   }
 
-  template T
+  template< typename T >
   CustomContainerWidget *
   addWidget( T widget, int num_breaks ){
     addWidget( std::move( widget ) );
