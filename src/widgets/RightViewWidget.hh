@@ -7,7 +7,7 @@
 #include <graph/Graph.hh>
 #include <widgets/GraphWidget.fwd.hh>
 #include <widgets/WelcomeWidget.hh>
-#include <widgets/ExamplesWidget.hh>
+//#include <widgets/ExamplesWidget.hh>
 #include <widgets/NodeWidget.hh>
 #include <widgets/EdgeWidget.hh>
 #include <widgets/OptionsWidget.hh>
@@ -81,7 +81,7 @@ private:
   GraphWidget * graph_widget_;
 
   WelcomeWidget * welcome_widget_;
-  ExamplesWidget * examples_widget_;
+  //ExamplesWidget * examples_widget_;
   NodeWidget * node_edit_widget_;
   EdgeWidget * edge_edit_widget_;
   OptionsWidget * options_widget_;

@@ -147,8 +147,8 @@ RightViewWidget::noteChangeInSelection(){
 
 void
 RightViewWidget::setOptionsDownward( OptionsSP options ){
-  assert( examples_widget_ );
-  examples_widget_->setOptions( options );
+  //assert( examples_widget_ );
+  //examples_widget_->setOptions( options );
 
   assert( options_widget_ );
   options_widget_->setOptions( options );
