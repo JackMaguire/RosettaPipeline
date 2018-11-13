@@ -2,12 +2,14 @@
 
 #include <Wt/WContainerWidget.h>
 #include <widgets/GraphWidget.fwd.hh>
-#include <widgets/RightViewWidget.hh>
+//#include <widgets/RightViewWidget.hh>
 
 #include <Options.hh>
 #include <refresh.hh>
 
 namespace widgets {
+
+class RightViewWidget;
 
 class OptionsWidget : public Wt::WContainerWidget, public OptionsHolder, public Refreshable
 {
