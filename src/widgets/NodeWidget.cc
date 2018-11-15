@@ -190,7 +190,7 @@ NodeWidget::construct_segment2(
     }
   );
 
-  flag_area->setMinimumSize( 100, 100 );
+  flag_area->setMinimumSize( 200, 100 );
 
 
   right_layout->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Notes:" ),
@@ -304,7 +304,7 @@ NodeWidget::construct_segment5 (
   Wt::WTextArea * const script_editor =
     outer_layout.addWidget( Wt::cpp14::make_unique< Wt::WTextArea >( node_->xmlScript() ),
       Wt::LayoutPosition::Center );
-  script_editor->setMinimumSize( 500, 500 );
+  script_editor->setMinimumSize( 500, 400 );
   script_editor->setInline( true );
   script_editor->setFormObject( true );
 
