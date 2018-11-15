@@ -295,7 +295,7 @@ NodeWidget::construct_segment4 (
 
 void
 NodeWidget::construct_segment5 (
-  Wt::WVBoxLayout & outer_layout
+  Wt::WBorderLayout & outer_layout
 ){
   Wt::WTextArea * const script_editor =
     outer_layout.addWidget( Wt::cpp14::make_unique< Wt::WTextArea >( node_->xmlScript() ),
