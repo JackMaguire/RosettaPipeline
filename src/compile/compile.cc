@@ -182,11 +182,11 @@ setup_working_directory(
   }
 
   for( graph::ExtraFileSP const & extra_file : graph.extraFiles() ){
-    std::string const full_filename = subdirectory_name + "/" + extra_file->name;
+    std::string const full_filename = subdirectory_name + "/" + extra_file->getName();
     if( ! std::filesystem::exists( full_filename ) ){
       std::ofstream file;
       file.open( full_filename );
-      file << extra_file->contents;
+      file << extra_file->getContents();
       file.close();
     }
   }
