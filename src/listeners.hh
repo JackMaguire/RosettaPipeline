@@ -37,7 +37,7 @@ public:
   }
 
 protected:
-  void change( Identifier< T > ){
+  void announce_change( Identifier< T > ){
     for( Listener< T > * l : listeners_ ){
       l->register_change();
     }
