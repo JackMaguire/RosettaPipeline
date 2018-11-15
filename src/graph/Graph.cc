@@ -94,8 +94,8 @@ Graph::saveSelfNodesAndEdges( serialization::Archiver & archiver ) const {
   }
 
   for( ExtraFileSP const & file : extra_files_ ){
-    archiver.add_element( "extra_file_name", file->name );
-    archiver.add_element( "extra_file_contents", file->contents );
+    archiver.add_element( "extra_file_name", file->getName() );
+    archiver.add_element( "extra_file_contents", file->getContents() );
   }
 
   archiver.add_element( "END", "GRAPH" );

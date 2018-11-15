@@ -49,11 +49,11 @@ EditFileDialog::EditFileDialog(
   );
 
   Wt::WTextArea * const edit_area =
-    layout->addWidget( Wt::cpp14::make_unique< Wt::WTextArea >( extra_file_->contents ), Wt::LayoutPosition::Center);
+    layout->addWidget( Wt::cpp14::make_unique< Wt::WTextArea >( extra_file_->getContents() ), Wt::LayoutPosition::Center);
 
   edit_area->changed().connect(
     [=] {
-      extra_file_->contents = edit_area->text().toUTF8();
+      extra_file_->setContents( edit_area->text().toUTF8() );
     }
   );
 

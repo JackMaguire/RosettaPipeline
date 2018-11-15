@@ -126,7 +126,7 @@ void ExtraFileWidget::update_table(){
 
   int counter = 1;
   for( graph::ExtraFileSP const & file : graph_->extraFiles() ){
-    table_->elementAt( counter, 0 )->addWidget( Wt::cpp14::make_unique< Wt::WText >( file->name ) );
+    table_->elementAt( counter, 0 )->addWidget( Wt::cpp14::make_unique< Wt::WText >( file->getName() ) );
     Wt::WPushButton * const edit_button =
       table_->elementAt( counter, 1 )->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Edit As Text" ) );
     Wt::WPushButton * const delete_button =
@@ -146,7 +146,7 @@ void ExtraFileWidget::update_table(){
 	  Wt::WMessageBox * const messageBox = addChild(
 	    Wt::cpp14::make_unique< Wt::WMessageBox >(
 	      "Delete File",
-	      "<p>Permanently delete file with name " + file->name + "?</p>",
+	      "<p>Permanently delete file with name " + file->getName() + "?</p>",
 	      Wt::Icon::Warning, Wt::StandardButton::Yes | Wt::StandardButton::No
 	    )
 	  );

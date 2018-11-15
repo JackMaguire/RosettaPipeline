@@ -3,8 +3,6 @@
 #include <vector>
 #include <algorithm>
 
-namespace listeners {
-
 enum ListenType {
   EXTRA_FILE_EDIT,
   EXTRA_FILE_LIST
@@ -13,6 +11,8 @@ enum ListenType {
 //Allows classes to derive from more than one Listener/Changable without impacting the vtable
 template< ListenType T >
 class Identifier{};
+
+namespace listeners {
 
 template< ListenType T >
 class Listener {

@@ -5,13 +5,14 @@
 #include <graph/Edge.hh>
 
 #include <serialization.hh>
+#include <listeners.hh>
 
 #include <memory>
 #include <vector>
 
 namespace graph {
 
-struct ExtraFile {
+class ExtraFile : public listeners::Changable< EXTRA_FILE_EDIT >{
   ExtraFile(){}
 
   ExtraFile(
@@ -22,6 +23,26 @@ struct ExtraFile {
     contents( c )
   {}
 
+public:
+  void setName( std::string n ){
+    name = std::move( n );
+    register_change( Identifier< EXTRA_FILE_EDIT > );
+  }
+
+  std::string const & getName() const {
+    return name;
+  }
+
+  void setContents( std::string c ){
+    contents = std::move( c );
+    register_change( Identifier< EXTRA_FILE_EDIT > );
+  }
+
+  std::string const & getContents() const {
+    return contents;
+  }
+
+private:
   std::string name;
   std::string contents;
 };
