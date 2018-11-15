@@ -18,7 +18,7 @@ namespace widgets {
 
 namespace {
 
-class ChooseExistingScriptWidget() : public Wt::WContainerWidget {
+class ChooseExistingScriptWidget : public Wt::WContainerWidget {
 public:
   ChooseExistingScriptWidget(
     graph::NodeSP node
