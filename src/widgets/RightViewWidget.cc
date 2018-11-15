@@ -122,13 +122,13 @@ void
 RightViewWidget::noteChangeInSelection(){
 
   auto const starting_index = currentIndex();
-  removeTab( widget( 2 ) );
+  removeTab( widget( 1 ) );
 
   graph::NodeSP selected_node = graph_->selectedNode();
   if( selected_node ){
     auto uniq_node_ptr = Wt::cpp14::make_unique< NodeWidget >( selected_node, graph_widget_, options_ );
     node_edit_widget_ = &(*uniq_node_ptr);
-    insertTab( 2, std::move(uniq_node_ptr), "Edit", Wt::ContentLoading::Eager );
+    insertTab( 1, std::move(uniq_node_ptr), "Edit", Wt::ContentLoading::Eager );
 
     edge_edit_widget_ = 0;
   } else {
@@ -137,7 +137,7 @@ RightViewWidget::noteChangeInSelection(){
 
     auto uniq_edge_ptr = Wt::cpp14::make_unique< EdgeWidget >( selected_edge );
     edge_edit_widget_ = &(*uniq_edge_ptr);
-    insertTab( 2, std::move(uniq_edge_ptr), "Edit", Wt::ContentLoading::Eager );
+    insertTab( 1, std::move(uniq_edge_ptr), "Edit", Wt::ContentLoading::Eager );
 
     node_edit_widget_ = 0;
   }
