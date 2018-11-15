@@ -171,8 +171,11 @@ void Node::save( serialization::Archiver & archiver ) const {
 
 Node::Node(
   serialization::Unarchiver & unarchiver,
-  Options const & options
-) {
+  Options const & options,
+  Graph * parent
+) :
+  parent_( parent )
+{
   init( options );
 
   //START line has already been checked by Graph

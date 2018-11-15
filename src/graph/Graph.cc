@@ -142,7 +142,7 @@ Graph::loadSelfNodesAndEdges(
       for( uint i = 0; i < num_nodes; ++i ) {
 	serialization::ArchiveElement node_element = unarchiver.get_next_element();
 	assert( node_element.token == "START" );
-	NodeSP new_node = std::make_shared< Node >( unarchiver, options );
+	NodeSP new_node = std::make_shared< Node >( unarchiver, options, this );
 	nodes_.emplace_back( std::move( new_node ) );
       }
       continue;

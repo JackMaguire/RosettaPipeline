@@ -18,7 +18,7 @@ std::unique_ptr< Wt::WApplication > createApplication( Wt::WEnvironment const & 
   graph::GraphSP graph = std::make_shared< graph::Graph >();
   graph::NodeSP previous = 0;
   for( int i=0; i < 3; ++i ){
-    graph::NodeSP node = std::make_shared< graph::Node >( * options, 20, i*15 );
+    graph::NodeSP node = std::make_shared< graph::Node >( * options, 20, i*15, graph );
     graph->addNode( node );
     if( i > 0 ){
       graph->addEdge( previous, node );
