@@ -26,7 +26,7 @@ class ExtraFile : public listeners::Changable< EXTRA_FILE_EDIT >{
 public:
   void setName( std::string n ){
     name = std::move( n );
-    announce_change( Identifier< EXTRA_FILE_EDIT > );
+    announce_change( Identifier< EXTRA_FILE_EDIT >() );
   }
 
   std::string const & getName() const {
@@ -35,7 +35,7 @@ public:
 
   void setContents( std::string c ){
     contents = std::move( c );
-    announce_change( Identifier< EXTRA_FILE_EDIT > );
+    announce_change( Identifier< EXTRA_FILE_EDIT >() );
   }
 
   std::string const & getContents() const {
