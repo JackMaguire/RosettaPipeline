@@ -298,7 +298,7 @@ NodeWidget::construct_segment5 (
   Wt::WVBoxLayout & outer_layout
 ){
   Wt::WTextArea * const script_editor =
-    outer_layout->addWidget( Wt::cpp14::make_unique< Wt::WTextArea >( node_->xmlScript() ),
+    outer_layout.addWidget( Wt::cpp14::make_unique< Wt::WTextArea >( node_->xmlScript() ),
       Wt::LayoutPosition::Center );
   script_editor->setMinimumSize( 500, 400 );
   script_editor->setInline( true );
