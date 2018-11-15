@@ -19,9 +19,9 @@ bool hasEnding ( std::string const & fullString, std::string const & ending ) {
 }
 
 Node::Node( Options const & options, int x, int y, Graph * parent ) :
-  title_( "Node_0" ),
   x_( x ),
   y_( y ),
+  title_( "Node_0" ),
   parent_( parent )
 {
   init( options );
@@ -31,16 +31,14 @@ Node::Node(
   Options const & options,
   std::string title, //pass-by-value string is on purpose
   int x,
-  int y
+  int y,
+  Graph * parent
 ) :
-  title_( std::move( title ) ),
   x_( x ),
   y_( y ),
+  title_( std::move( title ) ),
   parent_( parent )
 {
-  title_ = std::move( title );
-  x_ = x;
-  y_ = y;
   init( options );
 }
 
