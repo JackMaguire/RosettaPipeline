@@ -46,7 +46,7 @@ ExamplesWidget::ExamplesWidget(
 
   batch_relax_upload_button->clicked().connect(
     [=] {
-      std::string const filename = util::getPathToTopDirectory() + "/examples/BatchRelax.txt";
+      std::string const filename = util::getPathToTopDirectory() + "/examples/BatchRelax.rpf";
       std::cout << filename << std::endl;
       std::string const load_result = serialization::load_file( filename, * graph, * options_ );
       std::cout << load_result << std::endl;
