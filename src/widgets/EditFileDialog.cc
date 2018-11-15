@@ -24,7 +24,7 @@ EditFileDialog::EditFileDialog(
   ExtraFileWidget * parent,
   graph::ExtraFileSP extra_file
 ) :
-  WDialog( "Editing " + extra_file->name ),
+  WDialog( "Editing " + extra_file->getName() ),
   parent_( parent ),
   extra_file_( extra_file )
 {
