@@ -54,7 +54,7 @@ SaveWidget::SaveWidget(
   OptionsSP options
 ) :
   WContainerWidget(),
-  OptionsHolder( std::move( options ) )
+  OptionsHolder( options )
 {
   addWidget( Wt::cpp14::make_unique< Wt::WText >( "Download the current workflow to your computer. You will be able to load it back by using the \"Load\" button below." ) );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );

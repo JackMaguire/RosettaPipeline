@@ -22,7 +22,7 @@ namespace widgets {
 
 EdgeWidget::EdgeWidget( graph::EdgeSP edge ) :
   WContainerWidget(),
-  edge_( std::move( edge ) )
+  edge_( edge )
 {
   Wt::WVBoxLayout * const layout =
     setLayout( Wt::cpp14::make_unique< Wt::WVBoxLayout >() );

@@ -22,7 +22,7 @@ OptionsWidget::OptionsWidget(
   OptionsSP options
 ) :
   WContainerWidget(),
-  OptionsHolder( std::move( options ) ),
+  OptionsHolder( options ),
   parent_( parent )
 {
   setup_view_options( graph_widget );

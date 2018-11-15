@@ -32,7 +32,7 @@ ExamplesWidget::ExamplesWidget(
   RefreshableElementVecSP refreshers
 ) :
   WContainerWidget(),
-  OptionsHolder( std::move( options ) )
+  OptionsHolder( options )
 {
   addWidget( Wt::cpp14::make_unique< Wt::WText >( "<b>Batch Relax</b>" ) );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );

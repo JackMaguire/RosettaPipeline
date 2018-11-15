@@ -108,9 +108,9 @@ PublicationBrowserDialog::PublicationBrowserDialog(
 ) :
   WDialog( "Published Workflows" ),
   parent_( parent ),
-  graph_( std::move( graph ) ),
-  options_( std::move( options ) ),
-  refreshers_( std::move( refreshers ) )
+  graph_( graph ),
+  options_( options ),
+  refreshers_( refreshers )
 {
   Wt::WContainerWidget * const my_contents = contents();
   Wt::WBorderLayout * const layout =

@@ -33,7 +33,7 @@ PublishWidget::PublishWidget(
   OptionsSP options
 ) :
   WContainerWidget(),
-  OptionsHolder( std::move( options ) )
+  OptionsHolder( options )
 {
   addWidget( Wt::cpp14::make_unique< Wt::WText >(
       "Save the current workflow to our server. "

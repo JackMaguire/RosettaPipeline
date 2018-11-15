@@ -26,7 +26,7 @@ EditFileDialog::EditFileDialog(
 ) :
   WDialog( "Editing " + extra_file->name ),
   parent_( parent ),
-  extra_file_( std::move( extra_file ) )
+  extra_file_( extra_file )
 {
   Wt::WContainerWidget * const my_contents = contents();
   my_contents->setMinimumSize( 300, 400 );

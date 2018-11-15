@@ -73,7 +73,7 @@ RightViewWidget::RightViewWidget(
 ) :
   WTabWidget(),
   OptionsHolder( options ),
-  graph_( std::move( graph ) ),
+  graph_( graph ),
   graph_widget_( graph_widget ),
   width_( 500 ),
   height_( 800 )
@@ -113,7 +113,7 @@ RightViewWidget::RightViewWidget(
   setStyleClass( "tabwidget" );
   setCurrentIndex( 0 );
 
-  setOptionsDownward( std::move( options ) );
+  setOptionsDownward( options );
 }
 
 RightViewWidget::~RightViewWidget(){}
@@ -159,7 +159,7 @@ RightViewWidget::setOptionsDownward( OptionsSP options ){
   assert( compile_widget_ );
   compile_widget_->setOptions( options );
 
-  setOptions( std::move( options ) );
+  setOptions( options );
 }
 
 

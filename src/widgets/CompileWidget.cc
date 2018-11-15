@@ -29,8 +29,8 @@ public:
     Wt::WContainerWidget * root,
     OptionsSP options
   ) :
-    OptionsHolder( std::move( options ) ),
-    graph_( std::move( graph ) ),
+    OptionsHolder( options ),
+    graph_( graph ),
     root_( root )
   {}
 
