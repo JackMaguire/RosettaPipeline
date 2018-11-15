@@ -28,11 +28,12 @@ LoadWidget::LoadWidget(
   RefreshableElementVecSP refreshers
 ) :
   WContainerWidget(),
-  OptionsHolder( std::move( options ) ),
+  OptionsHolder( options ),
   parent_( parent ),
-  graph_( std::move( graph ) ),
-  refreshers_( std::move( refreshers ) )
+  graph_( graph ),
+  refreshers_( refreshers )
 {
+  assert( graph_ );
   //largely copied from https://github.com/emweb/wt/blob/29ae91638e197013f67e7c826317529615d10749/examples/widgetgallery/examples/FileUpload.cpp
 
   addWidget( Wt::cpp14::make_unique< Wt::WText >(
@@ -69,7 +70,7 @@ LoadWidget::LoadWidget(
 
       auto const filename = fu->spoolFileName();
       if( filename.size() > 1 ){
-	upload_out->setText( serialization::load_file( filename, * graph, * options_ ) );
+	upload_out->setText( serialization::load_file( filename, * graph_, * options_ ) );
 	refreshers_->refresh_all_objects();
       }
     }
