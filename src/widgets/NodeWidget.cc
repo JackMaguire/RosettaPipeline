@@ -16,6 +16,29 @@
 
 namespace widgets {
 
+namespace {
+
+class ChooseExistingScriptWidget() : public Wt::WContainerWidget {
+public:
+  ChooseExistingScriptWidget(
+    graph::NodeSP node
+  ) :
+    WContainerWidget(),
+    node_( node )
+    {
+      Wt::WHBoxLayout * const layout =
+	setLayout( Wt::cpp14::make_unique< Wt::WHBoxLayout >() );
+      
+
+    }
+
+
+private:
+  graph::NodeSP node_;
+};
+
+}
+
 NodeWidget::NodeWidget(
   graph::NodeSP node,
   GraphWidget * const graph_widget,
@@ -42,19 +65,8 @@ NodeWidget::NodeWidget(
 
   Wt::WBorderLayout * const bottom_layout =
     bottom_container->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
+  construct_segment5( * bottom_layout );
 
-  Wt::WTextArea * const script_editor =
-    bottom_layout->addWidget( Wt::cpp14::make_unique< Wt::WTextArea >( node_->xmlScript() ),
-      Wt::LayoutPosition::Center );
-  script_editor->setMinimumSize( 500, 200 );
-  script_editor->setInline( true );
-  script_editor->setFormObject( true );
-
-  script_editor->textInput().connect(
-    [=] {
-      node_->setXMLScript( script_editor->text().narrow() );
-    }
-  );
 
   //script_editor->setExtraPlugins( "bbcode" );
 }
@@ -279,6 +291,25 @@ NodeWidget::construct_segment4 (
       node_->setNotes( right_text_area->text().toUTF8() );
     }
   );
+}
+
+void
+NodeWidget::construct_segment5 (
+  Wt::WVBoxLayout & outer_layout
+){
+  Wt::WTextArea * const script_editor =
+    outer_layout->addWidget( Wt::cpp14::make_unique< Wt::WTextArea >( node_->xmlScript() ),
+      Wt::LayoutPosition::Center );
+  script_editor->setMinimumSize( 500, 400 );
+  script_editor->setInline( true );
+  script_editor->setFormObject( true );
+
+  script_editor->textInput().connect(
+    [=] {
+      node_->setXMLScript( script_editor->text().narrow() );
+    }
+  );
+
 }
 
 void

@@ -20,8 +20,8 @@ class Node : public std::enable_shared_from_this< Node > {
 friend class Graph;
 
 public:
-  Node( Options const &, int x, int y );
-  Node( Options const &, std::string title, int x, int y );//pass-by-value on purpose
+  Node( Options const &, int x, int y, Graph * parent );
+  Node( Options const &, std::string title, int x, int y, Graph * parent );//pass-by-value on purpose
   ~Node();
 
   virtual std::string
@@ -98,6 +98,8 @@ public://edge access and modification
 
   void removeDownstreamEdge( EdgeSP const & edge );
 
+  Graph * parent() const { return parent_; }
+
 public://container access
   std::vector< EdgeSP > & getUpstreamEdges() { return upstream_edges_; }
   std::vector< EdgeSP > const & getUpstreamEdges() const { return upstream_edges_; }
@@ -148,6 +150,8 @@ private:
 
   std::string user_rosetta_flags_;
   std::string notes_;
+
+  Graph * parent_;
 };
 
 inline
