@@ -2,6 +2,7 @@
 
 #include <graph/Node.hh>
 #include <widgets/GraphWidget.hh>
+#include <listeners.hh>
 
 #include <Wt/WBorderLayout.h>
 #include <Wt/WBreak.h>
@@ -26,10 +27,13 @@ public:
     WContainerWidget(),
     node_( node )
     {
-      Wt::WHBoxLayout * const layout =
+      /*Wt::WHBoxLayout * const layout =
 	setLayout( Wt::cpp14::make_unique< Wt::WHBoxLayout >() );
       
+      Wt::WCheckBox * const box =
+	layout->addWidget( Wt::cpp14::make_unique< Wt::WCheckBox >( "Use Existing File" ) );
 
+      Wt::WCheckBox * const */
     }
 
 
@@ -300,7 +304,7 @@ NodeWidget::construct_segment5 (
   Wt::WTextArea * const script_editor =
     outer_layout.addWidget( Wt::cpp14::make_unique< Wt::WTextArea >( node_->xmlScript() ),
       Wt::LayoutPosition::Center );
-  script_editor->setMinimumSize( 500, 400 );
+  script_editor->setMinimumSize( 500, 500 );
   script_editor->setInline( true );
   script_editor->setFormObject( true );
 
