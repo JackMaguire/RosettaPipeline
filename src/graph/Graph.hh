@@ -13,6 +13,7 @@
 namespace graph {
 
 class ExtraFile : public listeners::Changable< EXTRA_FILE_EDIT >{
+public:
   ExtraFile(){}
 
   ExtraFile(
