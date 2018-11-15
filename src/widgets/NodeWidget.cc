@@ -38,18 +38,10 @@ NodeWidget::NodeWidget(
   construct_segment1( graph_widget, * top_layout );
   construct_segment2( * top_layout );
   construct_segment3( * top_layout );
-  construct_segment4( * top_layout );
+  //construct_segment4( * top_layout );
 
   Wt::WBorderLayout * const bottom_layout =
     bottom_container->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
-
-  /*Wt::WTextEdit * const script_editor =
-    bottom_layout->addWidget( Wt::cpp14::make_unique< Wt::WTextEdit >( node_->xmlScript() ),
-      Wt::LayoutPosition::Center );
-  script_editor->setMinimumSize( 500, 200 );
-  script_editor->setExtraPlugins( "advcode" );
-  script_editor->setInline( true );
-  script_editor->setFormObject( true );*/
 
   Wt::WTextArea * const script_editor =
     bottom_layout->addWidget( Wt::cpp14::make_unique< Wt::WTextArea >( node_->xmlScript() ),
@@ -156,13 +148,24 @@ NodeWidget::construct_segment2(
 ){
   Wt::WContainerWidget * const container =
     outer_layout.addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
-  Wt::WBorderLayout * const layout =
-    container->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
+  Wt::WHBoxLayout * const layout =
+    container->setLayout( Wt::cpp14::make_unique< Wt::WHBoxLayout >() );
 
-  layout->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Your Rosetta Flags:" ),
+  Wt::WContainerWidget * const left_container =
+    layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
+  Wt::WContainerWidget * const right_container =
+    layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
+
+  Wt::WBorderLayout * const left_layout =
+    left_container->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
+  Wt::WBorderLayout * const right_layout =
+    right_container->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
+
+
+  left_layout->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Your Rosetta Flags:" ),
     Wt::LayoutPosition::North );
   Wt::WTextArea * const flag_area =
-    layout->addWidget( Wt::cpp14::make_unique< Wt::WTextArea >( node_->userRosettaFlags() ),
+    left_layout->addWidget( Wt::cpp14::make_unique< Wt::WTextArea >( node_->userRosettaFlags() ),
       Wt::LayoutPosition::Center);
 
   flag_area->changed().connect(
@@ -172,7 +175,22 @@ NodeWidget::construct_segment2(
   );
 
   flag_area->setMinimumSize( 100, 100 );
+
+
+  right_layout->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Notes:" ),
+    Wt::LayoutPosition::North );
+  Wt::WTextArea * const right_text_area =
+    right_layout->addWidget( Wt::cpp14::make_unique< Wt::WTextArea >( node_->notes() ),
+      Wt::LayoutPosition::Center );
+  right_text_area->setMinimumSize( 200, 100 );
+
+  right_text_area->changed().connect(
+    [=] {
+      node_->setNotes( right_text_area->text().toUTF8() );
+    }
+  );
 }
+
 
 void
 NodeWidget::construct_segment3(
