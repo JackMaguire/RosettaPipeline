@@ -14,6 +14,7 @@
 #include <Wt/WBreak.h>
 #include <Wt/WPushButton.h>
 #include <Wt/WMessageBox.h>
+#include <Wt/WDialog.h>
 
 #include <iostream>
 #include <memory>
@@ -60,7 +61,8 @@ public:
       Wt::cpp14::make_unique< Wt::WMessageBox >(
 	"Error",
 	"Compilation failed with message: " + message,
-	Wt::Icon::Critical, Wt::StandardButton::Ok
+	Wt::Icon::Critical,
+	Wt::StandardButton::Ok
       )
     );
     messageBox->setModal( false );
@@ -108,37 +110,13 @@ struct CompileElements {
 
     compile_button = root->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Compile" ) );
     compile_button->setStyleClass( "btn-primary" );
+
+    preview_button = root->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Preview" ) );
+    //preview_button->setStyleClass( "btn-primary" );
   }
 
-  Wt::WPushButton * compile_button;//A
-};
-
-struct PreviewElements {
-  PreviewElements( Wt::WContainerWidget * root ){
-    Wt::WBorderLayout * const border_layout =
-      root->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
-
-    //A
-    preview_button =
-      border_layout->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Preview" ), Wt::LayoutPosition::North );
-
-    Wt::WContainerWidget * const center_container =
-      border_layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >(), Wt::LayoutPosition::Center );
-
-    Wt::WBorderLayout * const center_layout =
-      center_container->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
-
-    //B
-    center_layout->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Run.sh" ), Wt::LayoutPosition::North );
-
-    //C
-    run_script_area =
-      center_layout->addWidget( Wt::cpp14::make_unique< Wt::WTextArea >(), Wt::LayoutPosition::Center );
-
-  }
-
-  Wt::WPushButton * preview_button;//A
-  Wt::WTextArea * run_script_area;//C
+  Wt::WPushButton * compile_button;
+  Wt::WPushButton * preview_button;
 };
 
 }
@@ -151,16 +129,7 @@ CompileWidget::CompileWidget(
   WContainerWidget( ),
   OptionsHolder( std::move( options ) )
 { 
-  Wt::WVBoxLayout * const layout =
-    setLayout( Wt::cpp14::make_unique< Wt::WVBoxLayout >() );
-  Wt::WContainerWidget * const top_container =
-    layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
-  Wt::WContainerWidget * const bottom_container =
-    layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >() );
-
-  /////
-  //top
-  CompileElements compile_elements( top_container );
+  CompileElements compile_elements( this );
 
   //using ResourceSP = std::shared_ptr< OnTheFlyFileResource >;
   auto file = std::make_shared< OnTheFlyFileResource >( graph, this, options_ );
@@ -168,16 +137,30 @@ CompileWidget::CompileWidget(
   file->suggestFileName( "rosetta_pipeline.tar.gz" );
   compile_elements.compile_button->setLink( Wt::WLink( file ) );
 
-  ////////
-  //bottom
 
-  PreviewElements preview_elements( bottom_container );
-
-  preview_elements.preview_button->clicked().connect(
+  compile_elements.preview_button->clicked().connect(
     [=](){
-      preview_elements.run_script_area->setText( compile::just_compile_run_script( * graph, * options_ ) );
+      Wt::WDialog * const dialog =
+	this->addChild( Wt::cpp14::make_unique< Wt::WDialog >() );
+
+      Wt::WBorderLayout * const dialog_layout =
+	dialog->contents().setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
+
+      Wt::WTextArea * const text_area =
+	dialog_layout->addWidget( Wt::cpp14::make_unique< Wt::WTextArea >( ), Wt::LayoutPosition::Center );
+      text_area->setText( compile::just_compile_run_script( * graph, * options_ ) );
+
+      Wt::WPushButton * const close =
+	dialog_layout->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Done" ), Wt::LayoutPosition::South );
+
+      close->clicked().connect(
+	[=]{
+	  this->removeChild( dialog );
+	}
+      );
     }
   );
+
 }
 
 CompileWidget::~CompileWidget(){}
