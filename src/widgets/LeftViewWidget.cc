@@ -24,6 +24,8 @@ LeftViewWidget::LeftViewWidget(
 ) :
   WContainerWidget()
 {
+  setMinimumSize( 400, 400 );
+  
   Wt::WVBoxLayout * const vbox =
     setLayout( Wt::cpp14::make_unique< Wt::WVBoxLayout >() );
 
