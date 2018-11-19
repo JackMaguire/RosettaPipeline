@@ -71,9 +71,8 @@ void ExamplesWidget::addExample(
 
   upload_button->clicked().connect(
     [=] {
-      std::string const filename = util::getPathToTopDirectory() + "/examples/" + filename;
-      std::cout << filename << std::endl;
-      std::string const load_result = serialization::load_file( filename, * graph, * options_ );
+      std::string const fname = util::getPathToTopDirectory() + "/examples/" + filename;
+      std::string const load_result = serialization::load_file( fname, * graph, * options_ );
       std::cout << load_result << std::endl;
       if( load_result != "load successful" ) {
 	//TODO?
