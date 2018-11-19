@@ -108,7 +108,7 @@ public://selection access
   PreliminaryEdgeCSP ghostEdge() const;
   void setGhostEdge( PreliminaryEdgeSP const & );
 
-public://auxiliary
+public://extra files
   std::vector< ExtraFileSP > & extraFiles() {
     return extra_files_;
   }

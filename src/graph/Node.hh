@@ -30,7 +30,7 @@ public:
   }
 
 public://getters and setters:
-  [[nodiscard]] int ID() const { return id_; }
+  int ID() const { return id_; }
   void setID( int id );
 
   int X() const { return x_; }
@@ -39,7 +39,7 @@ public://getters and setters:
   int Y() const { return y_; }
   void setY( int y ){ y_ = y; }
   
-  bool useDefaultCommand() const { return use_default_command_; }
+  [[nodiscard]] bool useDefaultCommand() const { return use_default_command_; }
   void setUseDefaultCommand( bool setting ){ use_default_command_ = setting; }
 
   std::string const & command() const { return command_; }
@@ -48,7 +48,7 @@ public://getters and setters:
   std::string const & title() const { return title_; }
   void setTitle( std::string title );
 
-  bool useScriptFile() const { return use_script_file_; }
+  [[nodiscard]] bool useScriptFile() const { return use_script_file_; }
   void setUseScriptFile( bool setting ){ use_script_file_ = setting; }
 
   std::string const & xmlScriptFilename() const { return xml_script_filename_; }
@@ -71,7 +71,7 @@ public://general compilation access
 
   std::string dirname() const;
 
-  std::string determineAutoFlags() const;
+  [[nodiscard]] std::string determineAutoFlags() const;
 
   static std::string commonFlags();
 

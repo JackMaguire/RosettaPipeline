@@ -42,7 +42,7 @@ public://Getters and setters for sorting options
   std::string const & getColumnNameToSortBy() const;
   void setColumnNameToSortBy( std::string setting );//passing by value on purpose
 
-  bool positiveScoresAreBetter() const;
+  [[nodiscard]] bool positiveScoresAreBetter() const;
   bool getPositiveScoresAreBetter() const;
   void setPositiveScoresAreBetter( bool setting );
 
@@ -55,7 +55,7 @@ public://Getters and setters for transfer options
   double getFractionOfResultsToTransfer() const;
   void setFractionOfResultsToTransfer( double setting );
 
-  bool useFractionInsteadOfCount() const;
+  [[nodiscard]] bool useFractionInsteadOfCount() const;
   bool getUseFractionInsteadOfCount() const;
   void setUseFractionInsteadOfCount( bool setting );
 
