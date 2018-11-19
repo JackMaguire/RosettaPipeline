@@ -9,6 +9,7 @@
 #include <refresh.hh>
 
 #include <functional>
+#include <string>
 
 namespace widgets {
 
@@ -29,6 +30,13 @@ public:
   void set_action_to_call_upon_load( T action ){
     action_to_call_upon_load_ = action;
   }
+
+protected:
+  void addExample(
+    std::string const & title,
+    std::string const & description,
+    std::string const & filename
+  );
 
 private:
   std::function< void() > action_to_call_upon_load_;
