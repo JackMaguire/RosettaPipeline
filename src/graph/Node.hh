@@ -30,7 +30,7 @@ public:
   }
 
 public://getters and setters:
-  int ID() const { return id_; }
+  [[nodiscard]] int ID() const { return id_; }
   void setID( int id );
 
   int X() const { return x_; }
