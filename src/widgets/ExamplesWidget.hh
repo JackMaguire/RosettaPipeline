@@ -35,7 +35,10 @@ protected:
   void addExample(
     std::string const & title,
     std::string const & description,
-    std::string const & filename
+    std::string const & filename,
+    graph::GraphSP graph,
+    OptionsSP options,
+    RefreshableElementVecSP refreshers
   );
 
 private:
