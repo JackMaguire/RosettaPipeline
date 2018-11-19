@@ -144,7 +144,7 @@ CompileWidget::CompileWidget(
 	this->addChild( Wt::cpp14::make_unique< Wt::WDialog >() );
 
       Wt::WBorderLayout * const dialog_layout =
-	dialog->contents().setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
+	dialog->contents()->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
 
       Wt::WTextArea * const text_area =
 	dialog_layout->addWidget( Wt::cpp14::make_unique< Wt::WTextArea >( ), Wt::LayoutPosition::Center );
