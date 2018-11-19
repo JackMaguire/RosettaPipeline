@@ -164,7 +164,7 @@ Graph::loadSelfNodesAndEdges(
   }
 
   assert( nodes_.size() > 0 );
-  selected_node_ = nodes_[ 0 ];
+  setSelectedNode( nodes_[ 0 ] );
 }// load self
 
 
