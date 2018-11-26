@@ -46,7 +46,7 @@ std::unique_ptr< Wt::WApplication > createApplication( Wt::WEnvironment const & 
     do {
       pos = internal_path.find( "/", prev );
       if ( pos == std::string::npos ) pos = internal_path.length();
-      std::string token = internal_path.substr(prev, pos-prev);
+      std::string token = internal_path.substr( prev, pos - prev );
       if( !token.empty() ) tokens.push_back( std::move( token ) );
       prev = pos + 1;
     }
