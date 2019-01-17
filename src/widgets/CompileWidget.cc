@@ -142,7 +142,7 @@ CompileWidget::CompileWidget(
     [=](){
       Wt::WDialog * const dialog =
 	this->addChild( Wt::cpp14::make_unique< Wt::WDialog >() );
-
+/*
       std::cout << "1 " << dialog << std::endl;
 
       Wt::WBorderLayout * const dialog_layout =
@@ -165,9 +165,10 @@ CompileWidget::CompileWidget(
 
       close->clicked().connect(
 	[=]{
-	  //this->removeChild( dialog );
+	  this->removeChild( dialog );
 	}
       );
+ */
     }
   );
 
