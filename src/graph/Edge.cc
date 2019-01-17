@@ -168,11 +168,8 @@ Edge::addToRunScript( std::stringstream & run_script ) const {
     " fi\n"
     "done\n";
 
-  if( options.delete_unused_intermediate_poses && destinationNode()->numDownstreamEdges() > 0 ) {
-    // Save good files so that they do not get deleted later
-    run_script << "\n#Save good files so that they do not get deleted later\n";
-    run_script << "cat _temp3 | while read line; do echo $line.* ; done > _results_to_keep.txt\n";
-  }
+  run_script << "\n# Save good files so that they do not get deleted later\n";
+  run_script << "cat _temp3 | while read line; do echo $line.* ; done >> _results_to_keep.txt\n";
 
 }
 
