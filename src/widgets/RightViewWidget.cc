@@ -33,13 +33,13 @@ SaveAndLoadWidget::SaveAndLoadWidget(
   OptionsSP options,
   RefreshableElementVecSP refresh_vec
 ) {
-  Wt::WGroupBox * const publish_container =
+  /*Wt::WGroupBox * const publish_container =
     addWidget( Wt::cpp14::make_unique< Wt::WGroupBox >( "Publish" ) );
   publish_container->addWidget( Wt::cpp14::make_unique< PublishWidget >( graph, options ) );
 
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
-  addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
+  addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );*/
  
   Wt::WGroupBox * const save_container =
     addWidget( Wt::cpp14::make_unique< Wt::WGroupBox >( "Save" ) );
