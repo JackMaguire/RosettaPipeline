@@ -150,13 +150,13 @@ setup_working_directory(
       run_script << "#!/bin/bash\n\n";
       node->addToRunScript( options, run_script );
       for( EdgeSP const & de : node->getDownstreamEdges() ) {
-	de->addToRunScript();
+	de->addToRunScript( run_script );
       }
 
       std::string const script_filename = subsubdirectory + "/run.sh";
       std::ofstream script_file;
       script_file.open( script_filename );
-      script_file << run_script << "\n";
+      script_file << run_script.str() << "\n";
       script_file.close();
     }
 
