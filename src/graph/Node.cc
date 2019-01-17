@@ -250,10 +250,11 @@ Node::Node(
 }//load ctor
 
 void
-Node::addToRunScript( Options const & options, std::stringstream & ss ) const {
-  ss << "#!/bin/bash\n";
-  ss << getEffectiveCommand( options ) << " || exit 1\n\n";
-  ss << "grep -v 'SEQUENCE:' score.sc > _data.txt\n";
+Node::addToRunScript( Options const & options, std::stringstream & run_script ) const {
+  run_script << "#!/bin/bash\n";
+  run_script << "nproc=" << options.num_processors << "\n";
+  run_script << getEffectiveCommand( options ) << " || exit 1\n\n";
+  run_script << "grep -v 'SEQUENCE:' score.sc > _data.txt\n";
 }
 
 
