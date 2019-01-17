@@ -125,4 +125,55 @@ Edge::load(
 
 }
 
+void
+Edge::addToRunScript( std::stringstream & run_script ) const {
+  std::string const name_of_next_stage_directory = destinationNode().dirname();
+  std::string const & sort_column = columnNameToSortBy();
+  run_script << "\n#####\n" <<
+    "# Extract the best results for stage \"" <<
+    destinationNode().title() << "\"\n" <<
+    "# This awk command prints the data for the column " <<
+    sort_column << " along with the title for each result and saves it to _temp\n" <<
+    "# The header line is excluded\n" <<
+    "awk -v c1=\"" << sort_column <<
+    "\" 'NR==1 {for (i=1; i<=NF; i++) {ix[$i] = i}}NR>1 {print $ix[c1] \" \" $NF}' _data.txt > _temp\n";
+
+  run_script << "\n# Sort results\n";
+  if( positiveScoresAreBetter() ) {
+    run_script << "# positive scores are better\n";
+    //TODO add support for scientific notation?
+    run_script << "sort -nrk1 _temp > _temp2\n";
+  } else {
+    run_script << "# negative scores are better\n";
+    run_script << "sort -nk1 _temp > _temp2\n";
+  }
+
+  if( useFractionInsteadOfCount() ) {
+    run_script << "num_results=`cat _temp2 | wc -l`\n";
+    run_script << "frac=\"" << fractionOfResultsToTransfer() << "\"\n";
+    run_script << "num_results_to_keep=`echo \"($num_results) * $frac\" | bc`\n";
+  } else {
+    run_script << "num_results_to_keep=\"" << numResultsToTransfer() << "\"\n";
+  }
+
+  run_script << "# Extract structures that will survive until the next stage\n";
+  run_script << "head -n $num_results_to_keep _temp2 | awk '{print $2}' > _temp3\n";
+
+  run_script << "# move successful runs to next stage if not there already\n";
+  run_script << "destination=../" << name_of_next_stage_directory << "/input_files\n";
+
+  run_script << "cat _temp3 | while read line; do\n"
+    " if [[ `grep $line $destination | wc -l` -eq 0 ]]; then\n"
+    "  echo `pwd`/$line.* >> $destination\n"
+    " fi\n"
+    "done\n";
+
+  if( options.delete_unused_intermediate_poses && destinationNode()->numDownstreamEdges() > 0 ) {
+    // Save good files so that they do not get deleted later
+    run_script << "\n#Save good files so that they do not get deleted later\n";
+    run_script << "cat _temp3 | while read line; do echo $line.* ; done > _results_to_keep.txt\n";
+  }
+
+}
+
 } //namespace graph

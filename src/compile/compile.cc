@@ -146,7 +146,13 @@ setup_working_directory(
     std::filesystem::create_directory( subsubdirectory );
 
     {//xml script
-      std::string const & run_script = node->generate_run_script( options );
+      std::stringstream run_script;
+      run_script << "#!/bin/bash\n\n";
+      node->addToRunScript( options, run_script );
+      for( EdgeSP const & de : node->getDownstreamEdges() ) {
+	de->addToRunScript();
+      }
+
       std::string const script_filename = subsubdirectory + "/run.sh";
       std::ofstream script_file;
       script_file.open( script_filename );
@@ -232,65 +238,8 @@ compile_run_script(
       "    exit " << node->stage() << "\n"
       "fi\n";
 
-    run_script << "grep -v 'SEQUENCE:' score.sc > _no_first_line.score.sc\n";
-    for( EdgeSP const & de : node->getDownstreamEdges() ) {
-      std::string const name_of_next_stage_directory = de->destinationNode().dirname();
-      std::string const & sort_column = de->columnNameToSortBy();
-      run_script << "\n#####\n" <<
-	"# Extract the best results for stage \"" <<
-	de->destinationNode().title() << "\"\n" <<
-	"# This awk command prints the data for the column with header " <<
-	sort_column << " along with the title for each result\n" <<
-	"awk -v c1=\"" << sort_column <<
-	"\" 'NR==1 {for (i=1; i<=NF; i++) {ix[$i] = i}}NR>1 {print $ix[c1] \" \" $NF}' _no_first_line.score.sc > _temp\n";
-
-      if( de->positiveScoresAreBetter() ) {
-	//TODO add support for scientific notation?
-	run_script << "sort -nrk1 _temp > _temp2\n";
-      } else {
-	run_script << "sort -nk1 _temp > _temp2\n";
-      }
-
-      run_script << "x=`cat _no_first_line.score.sc | wc -l`\n";
-      if( de->useFractionInsteadOfCount() ) {
-	run_script << "perc=\"" << de->fractionOfResultsToTransfer() << "\"\n";
-	run_script << "nresults=`echo \"($x - 1) * $perc / 1\" | bc`\n";
-      } else {
-	run_script << "nresults=\"" << de->numResultsToTransfer() << "\"\n";
-      }
-      run_script << "# Extract structures that will survive until the next stage\n";
-      run_script << "head -n $nresults _temp2 | awk '{print $2}' > _temp3\n";
-
-      run_script << "# move successful runs to next stage if not there already\n";
-      run_script << "destination=../" << name_of_next_stage_directory << "/input_files\n";
-
-      /*
-       * cat _temp3 | while read line; do
-       *   if [[ `grep $line $destination | wc -l` -eq 0 ]]; then
-       *     echo `pwd`/$line.* >> $destination
-       *   fi
-       * done
-       */
-      run_script << "cat _temp3 | while read line; do\n"
-	" if [[ `grep $line $destination | wc -l` -eq 0 ]]; then\n"
-	"  echo `pwd`/$line.* >> $destination\n"
-	" fi\n"
-	"done\n";
-
-      if( options.delete_unused_intermediate_poses && node->numDownstreamEdges() > 0 ) {
-	// Save good files so that they do not get deleted later
-	run_script << "\n#Save good files so that they do not get deleted later\n";
-	run_script << "cat _temp3 | while read line; do echo $line.* ; done > results_to_keep.txt\n";
-      }
-    }
-
     if( options.delete_unused_intermediate_poses && node->numDownstreamEdges() > 0 ) {
-      run_script << "\n# Delete poses not needed for future stages\n" <<
-	"awk '{print $2}' _temp | while read line; do\n"
-	"    if [[ `grep $line _temp3 | wc -l` -eq 0 ]]; then\n"
-	"        rm $line.*\n"
-	"    fi\n"
-	"done\n";
+      run_script << "\n# Delete poses not needed for future stages\n" << "TODO";
     }
 
     run_script << "\ncd ..\n";

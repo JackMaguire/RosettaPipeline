@@ -22,6 +22,9 @@ public:
 
   ~Edge();
 
+public:
+  void addToRunScript( std::stringstream & ss ) const;
+
 public://Node getters and setters
   Node const & sourceNode() const;
   Node const & getSourceNode() const;
