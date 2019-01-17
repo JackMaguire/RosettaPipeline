@@ -234,13 +234,13 @@ compile_run_script(
 
     run_script << "if [[ `grep SUCCESS _status | wc -l` -eq \"0\" ]]; then\n";
 
-    run_script << "echo STARTED >> _status\n\n";
+    run_script << "echo STARTED > _status\n\n";
 
     run_script << "if bash run.sh; then \n"
-      "    echo SUCCESS >> _status\n"
+      "    echo SUCCESS > _status\n"
       "    echo \"Done running " << dirname << "\" >> ../JD3BASH_runlog.txt\n"
       "else\n"
-      "    echo FAILURE >> _status\n"
+      "    echo FAILURE > _status\n"
       "    echo \"Failed to run " << dirname << "\" >> ../JD3BASH_runlog.txt\n"
       "    exit " << node->stage() << "\n"
       "fi\n";
