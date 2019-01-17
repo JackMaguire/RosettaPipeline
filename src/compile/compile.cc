@@ -108,7 +108,6 @@ just_compile_run_script( graph::Graph const & g, Options const & options ) {
       "is an invalid value for num_processors. Please set this to a positive number.";
   }
 
-
   std::vector< graph::NodeCSP > const nodes_in_order = determineOrderOfNodes( g );
 
   for( uint stage = 1; stage <= nodes_in_order.size(); ++stage ) {
@@ -240,12 +239,12 @@ compile_run_script(
       "    exit " << node->stage() << "\n"
       "fi\n";
 
-    if( options.delete_unused_intermediate_poses && node->numDownstreamEdges() > 0 ) {
+    /*if( options.delete_unused_intermediate_poses && node->numDownstreamEdges() > 0 ) {
       run_script << "\n# Delete poses not needed for future stages\n" << "TODO";
-    }
+    }*/
 
-    run_script << "\ncd ..\n";
-    run_script << "echo \"Done With " << dirname << "\" >> JD3BASH_runlog.txt\n";
+    run_script << "\ncd ../\n";
+    //run_script << "echo \"Done With " << dirname << "\" >> JD3BASH_runlog.txt\n";
   }
 }
 

@@ -252,7 +252,7 @@ Node::Node(
 void
 Node::addToRunScript( Options const & options, std::stringstream & ss ) const {
   ss << "#!/bin/bash\n";
-  ss << getEffectiveCommand( options ) << "|| exit 1\n\n";
+  ss << getEffectiveCommand( options ) << " || exit 1\n\n";
   ss << "grep -v 'SEQUENCE:' score.sc > _data.txt\n";
 }
 
