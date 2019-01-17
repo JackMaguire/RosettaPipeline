@@ -80,8 +80,10 @@ compile( graph::Graph const & g, Options const & options ){
   }
  
 #ifdef DEBUG_SERVER_COMPILATION
-  std::cout << "Check here for " << directory_name << std::endl;
+  std::cout << "Check here " << directory_name << std::endl;
   return CompilationResult( false, "compiled with DEBUG_SERVER_COMPILATION. Check " + directory_name );
+#else
+  std::cout << "Missing DEBUG_SERVER_COMPILATION" << std::endl;
 #endif
 
   std::filesystem::remove_all( directory_name );
