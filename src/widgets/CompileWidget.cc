@@ -165,7 +165,7 @@ CompileWidget::CompileWidget(
 
       close->clicked().connect(
 	[=]{
-	  this->removeChild( dialog );
+	  //this->removeChild( dialog );
 	}
       );
     }
