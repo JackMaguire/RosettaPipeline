@@ -143,15 +143,25 @@ CompileWidget::CompileWidget(
       Wt::WDialog * const dialog =
 	this->addChild( Wt::cpp14::make_unique< Wt::WDialog >() );
 
+      std::cout << "1 " << dialog << std::endl;
+
       Wt::WBorderLayout * const dialog_layout =
 	dialog->contents()->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
 
+      std::cout << "2 " << dialog_layout << std::endl;
+
       Wt::WTextArea * const text_area =
 	dialog_layout->addWidget( Wt::cpp14::make_unique< Wt::WTextArea >( ), Wt::LayoutPosition::Center );
-      text_area->setText( compile::just_compile_run_script( * graph, * options_ ) );
+
+      std::cout << "3 " << text_area << std::endl;
+
+      std::string run_script = compile::just_compile_run_script( * graph, * options_ );
+      text_area->setText( run_script );
 
       Wt::WPushButton * const close =
 	dialog_layout->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Done" ), Wt::LayoutPosition::South );
+
+      std::cout << "4 " << close << std::endl;
 
       close->clicked().connect(
 	[=]{
