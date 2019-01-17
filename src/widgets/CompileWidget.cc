@@ -127,12 +127,12 @@ CompileWidget::CompileWidget(
   OptionsSP options
 ) :
   WContainerWidget( ),
-  OptionsHolder( std::move( options ) )
+  OptionsHolder( options )
 { 
   CompileElements compile_elements( this );
 
-  //using ResourceSP = std::shared_ptr< OnTheFlyFileResource >;
-  auto file = std::make_shared< OnTheFlyFileResource >( graph, this, options_ );
+  using ResourceSP = std::shared_ptr< OnTheFlyFileResource >;
+  ResourceSP file = std::make_shared< OnTheFlyFileResource >( graph, this, options_ );
   file->setDispositionType( Wt::ContentDisposition::Attachment );
   file->suggestFileName( "rosetta_pipeline.tar.gz" );
   compile_elements.compile_button->setLink( Wt::WLink( file ) );
@@ -141,19 +141,19 @@ CompileWidget::CompileWidget(
   compile_elements.preview_button->clicked().connect(
     [=](){
       Wt::WDialog * const dialog =
-	this->addChild( Wt::cpp14::make_unique< Wt::WDialog >() );
-/*
-      std::cout << "1 " << dialog << std::endl;
+	addChild( Wt::cpp14::make_unique< Wt::WDialog >() );
+
+      //std::cout << "1 " << dialog << std::endl;
 
       Wt::WBorderLayout * const dialog_layout =
 	dialog->contents()->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
 
-      std::cout << "2 " << dialog_layout << std::endl;
+      //std::cout << "2 " << dialog_layout << std::endl;
 
       Wt::WTextArea * const text_area =
 	dialog_layout->addWidget( Wt::cpp14::make_unique< Wt::WTextArea >( ), Wt::LayoutPosition::Center );
 
-      std::cout << "3 " << text_area << std::endl;
+      //std::cout << "3 " << text_area << std::endl;
 
       std::string run_script = compile::just_compile_run_script( * graph, * options_ );
       text_area->setText( run_script );
@@ -161,14 +161,14 @@ CompileWidget::CompileWidget(
       Wt::WPushButton * const close =
 	dialog_layout->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Done" ), Wt::LayoutPosition::South );
 
-      std::cout << "4 " << close << std::endl;
+      //std::cout << "4 " << close << std::endl;
 
       close->clicked().connect(
 	[=]{
 	  this->removeChild( dialog );
 	}
       );
- */
+ 
     }
   );
 
