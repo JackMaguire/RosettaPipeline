@@ -77,6 +77,11 @@ public://general compilation access
 
   std::string getAllRosettaFlags() const;
 
+  virtual std::string generate_run_script( Options const & options ) const {
+    return "#!/bin/bash\n" + 
+      getEffectiveCommand( options ) + "|| exit 1\n";
+  }
+
 public://edge access and modification
   int numUpstreamEdges() const;
 

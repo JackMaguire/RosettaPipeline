@@ -79,6 +79,10 @@ compile( graph::Graph const & g, Options const & options ){
     tar_file_contents = contents.str();
   }
  
+#ifdef DEBUG_SERVER_COMPILATION
+  std::cout << "Check here for " << directory_name << std::endl;
+  return CompilationResult( false, "compiled with DEBUG_SERVER_COMPILATION. Check " + directory_name );
+#endif
 
   std::filesystem::remove_all( directory_name );
   return CompilationResult( true, tar_file_contents );
@@ -140,6 +144,15 @@ setup_working_directory(
   for( graph::NodeCSP const & node : nodes_in_order ){
     std::string const subsubdirectory = subdirectory_name + "/" + node->dirname();
     std::filesystem::create_directory( subsubdirectory );
+
+    {//xml script
+      std::string const & run_script = node->generate_run_script( options );
+      std::string const script_filename = subsubdirectory + "/run.sh";
+      std::ofstream script_file;
+      script_file.open( script_filename );
+      script_file << run_script << "\n";
+      script_file.close();
+    }
 
     {//xml script
       std::string const & xml_script = node->xmlScript();
@@ -212,7 +225,7 @@ compile_run_script(
 
     // THE COMMAND
 
-    run_script << "if " << node->getEffectiveCommand( options ) << " ;then \n"
+    run_script << "if bash run.sh ;then \n"
       "    echo \"Done running " << dirname << "\" >> ../JD3BASH_runlog.txt\n"
       "else\n"
       "    echo \"Failed to run " << dirname << "\" >> ../JD3BASH_runlog.txt\n"
