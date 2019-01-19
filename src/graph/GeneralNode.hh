@@ -30,7 +30,7 @@ public:
 
   GeneralNode(
     Options const &,
-    std::string title,//pass-by-value on purpose
+    std::string const & title,
     int x,
     int y,
     Graph * parent
@@ -65,10 +65,15 @@ public://general compilation access
     std::stringstream & run_script
   ) const override;
 
-protected:
-  //void init( Options const & );
+protected://saving and loading
+  void save_additional_tokens( serialization::Archiver & archiver ) const override;
 
-  void save( serialization::Archiver & archiver ) const override;
+  void
+  load_from_token(
+    std::string const & token,
+    std::string const & value
+  ) override;
+
 
 private:
   std::string bash_script_;
