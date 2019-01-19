@@ -146,7 +146,7 @@ setup_working_directory(
     std::string const subsubdirectory = subdirectory_name + "/" + node->dirname();
     std::filesystem::create_directory( subsubdirectory );
 
-    {//xml script
+    {//run script
       std::stringstream run_script;
       run_script << "#!/bin/bash\n\n";
       node->addToRunScript( options, run_script );
