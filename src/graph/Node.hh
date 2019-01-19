@@ -1,5 +1,5 @@
 #pragma once
->
+
 #include <graph/Node.fwd.hh>
 #include <graph/Edge.fwd.hh>
 #include <graph/Graph.fwd.hh>
