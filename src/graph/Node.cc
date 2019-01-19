@@ -8,6 +8,7 @@
 namespace graph {
 
 namespace {
+
 //Stolen from https://stackoverflow.com/questions/874134/find-if-string-ends-with-another-string-in-c
 bool hasEnding ( std::string const & fullString, std::string const & ending ) {
   if( fullString.length() < ending.length() ) {
@@ -16,6 +17,31 @@ bool hasEnding ( std::string const & fullString, std::string const & ending ) {
 
   return fullString.compare ( fullString.length() - ending.length(), ending.length(), ending ) == 0;
 }
+
+std::string get_starting_bash_script(){
+  return
+    "# TODO write any bash command you want here!\n"
+    "# Rules:\n"
+    "# 1) Don't include the '#!/bin/bash' line. We will take care of that\n"
+    "# 2) If this stage has upstream nodes, there will be a file called 'input_poses' that will list absolute paths to all of the structures.\n"
+    "# 3) You must store your results in a whitespace-delimited file named '_data.txt' with a header row, similar to Rosetta's score.sc file.\n"
+    "#    The final column of _data.txt needs to contain a unique prefix to the corresponding output structure created by this stage (output structures MUST be in this directory).\n"
+    "# Here is an example of a stage that counts the number of atoms in each pose:\n"
+
+    "echo num_atoms num_ARG_atoms file > _data.txt\n"
+    "count=0\n"
+    "while read path_to_struct; do\n"
+    "    name=$(basename $path_to_struct)\n"
+    "    count=$((count+1))\n"
+    "    local_filename=$count.$name\n"
+    "    cp $path_to_struct $local_filename\n"
+    "    num_atoms=$(grep ATOM $local_filename | wc -l)\n"
+    "    num_arginine_atoms=$(grep ATOM $local_filename | grep -i arg | wc -l)\n"
+    "    echo $num_atoms $num_arginine_atoms $local_filename >> _data.txt\n"
+    "done; < input_poses\n"
+    ;
+}
+
 }
 
 Node::Node( Options const & options, int x, int y, Graph * parent ) :
@@ -79,8 +105,7 @@ void Node::init( Options const & options ){
     "# You would need to pass '-s ../pose.pdb' instead of '-s pose.pdb'\n"
     "\n# -nstruct 1\n";
 
-  //TODO
-  //command_ = Options.getDefaultRunCommand();
+  bash_script_ = get_starting_bash_script();
 }
 
 int
@@ -244,8 +269,6 @@ Node::Node(
       continue;
     }
 
-    // Call derived class
-    load_from_token( element.token, element.value );
 
   }
 
@@ -254,10 +277,16 @@ Node::Node(
 
 void
 Node::addToRunScript( Options const & options, std::stringstream & run_script ) const {
-  run_script << "#!/bin/bash\n";
-  run_script << "nproc=" << options.num_processors << "\n";
-  run_script << getEffectiveCommand( options ) << " || exit 1\n\n";
-  run_script << "grep -v 'SEQUENCE:' score.sc > _data.txt\n";
+  switch( type_ ){
+  case ROSETTA_SCRIPTS:
+    run_script << "nproc=" << options.num_processors << "\n";
+    run_script << getEffectiveCommand( options ) << " || exit 1\n\n";
+    run_script << "grep -v 'SEQUENCE:' score.sc > _data.txt\n";
+    break;
+  case BASH:
+    run_script << bash_script_ << "\n";
+    break;
+  }
 }
 
 

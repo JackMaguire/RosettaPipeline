@@ -50,14 +50,6 @@ public:
     return "GEN_NODE";
   }
 
-public://getters and setters:
-  std::string const & getBashScript() const {
-    return bash_script_;
-  }
-
-  void setBashScript( std::string const & script ){
-    bash_script_ = script;
-  }
 
 public://general compilation access
   void addToRunScript(
@@ -76,7 +68,7 @@ protected://saving and loading
 
 
 private:
-  std::string bash_script_;
+
 };
 
 }//namespace graph

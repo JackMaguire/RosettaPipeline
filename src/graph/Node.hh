@@ -15,6 +15,11 @@
 
 namespace graph {
 
+enum NodeType {
+  ROSETTA_SCRIPTS,
+  BASH
+};
+
 class Node : public std::enable_shared_from_this< Node > {
 
 friend class Graph;
@@ -121,12 +126,6 @@ protected:
 
   void save( serialization::Archiver & archiver ) const;
 
-  virtual
-  void
-  save_additional_tokens( serialization::Archiver & ) const{
-    //This allows derived classes to save items
-  }
-
 public://Loading
   //load ctor
   Node(
@@ -135,15 +134,26 @@ public://Loading
     Graph * parent
   );
 
-  virtual
-  void
-  load_from_token(
-    std::string const & token,
-    std::string const & value
-  ){}
+public://getters and setters for general case
+  std::string const & getBashScript() const {
+    return bash_script_;
+  }
 
+  void setBashScript( std::string const & script ){
+    bash_script_ = script;
+  }
+
+  NodeType getNodeType() const {
+    return type_;
+  }
+
+  void setNodeType( NodeType nt ){
+    type_ = nt;
+  }
 
 private:
+  NodeType type_;
+  
   int id_;
   int x_;
   int y_;
@@ -171,6 +181,9 @@ private:
   std::string notes_;
 
   Graph * parent_;
+
+  //FOR GENERAL CASE:
+  std::string bash_script_;  
 };
 
 inline
