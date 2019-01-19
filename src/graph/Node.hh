@@ -1,5 +1,5 @@
 #pragma once
-
+>
 #include <graph/Node.fwd.hh>
 #include <graph/Edge.fwd.hh>
 #include <graph/Graph.fwd.hh>
@@ -121,13 +121,21 @@ protected:
 
   void save( serialization::Archiver & archiver ) const;
 
-public://This technically has to be public in order to use make_shared
+public://Loading
   //load ctor
   Node(
     serialization::Unarchiver &,
     Options const &,
     Graph * parent
   );
+
+  virtual
+  void
+  load_from_token(
+    std::string const & token,
+    std::string const & value
+  ){}
+
 
 private:
   int id_;

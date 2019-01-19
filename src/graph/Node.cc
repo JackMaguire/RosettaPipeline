@@ -244,6 +244,9 @@ Node::Node(
       continue;
     }
 
+    // Call derived class
+    load_from_token( element.token, element.value );
+
   }
 
 
