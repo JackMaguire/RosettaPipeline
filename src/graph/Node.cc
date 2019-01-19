@@ -177,7 +177,7 @@ Node::getAllRosettaFlags() const {
 void Node::save( serialization::Archiver & archiver ) const {
   archiver.add_element( "START", uniqueToken() );
 
-  archiver.add_element( "node_type", type_ );
+  archiver.add_element( "node_type", std::to_string( type_ ) );
 
   archiver.add_element( "id",  std::to_string( id_ ) );
   archiver.add_element( "x",  std::to_string( x_ ) );
