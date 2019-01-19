@@ -216,7 +216,7 @@ Node::Node(
        element = unarchiver.get_next_element() ){
 
     if( element.token == "node_type" ){
-      type_ = std::stoi( element.value );
+      type_ = NodeType( std::stoi( element.value ) );
       continue;
     }
 
