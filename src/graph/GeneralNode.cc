@@ -74,10 +74,8 @@ GeneralNode::GeneralNode(
   Graph * parent
 ) :
   Node( unarchiver, options, parent )
-{}
+{}//load ctor
 
-
-}//load ctor
 
 void
 GeneralNode::addToRunScript(
