@@ -1,0 +1,2 @@
+git pull origin master && make all -j4 && bin/graph_view_app --docroot . --http-address 0.0.0.0 --http-port 8080
+git pull origin master && make all -j4 && gdb -ex run --args bin/graph_view_app --docroot . --http-address 0.0.0.0 --http-port 8080
