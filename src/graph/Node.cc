@@ -73,6 +73,8 @@ Node::~Node(){}
 void Node::init( Options const & options ){
   assert( hasEnding( uniqueToken(), "_NODE" ) );
 
+  type_ = ROSETTA_SCRIPTS;
+
   use_default_command_ = true;
   id_ = 0;
 
@@ -175,6 +177,8 @@ Node::getAllRosettaFlags() const {
 void Node::save( serialization::Archiver & archiver ) const {
   archiver.add_element( "START", uniqueToken() );
 
+  archiver.add_element( "node_type", type_ );
+
   archiver.add_element( "id",  std::to_string( id_ ) );
   archiver.add_element( "x",  std::to_string( x_ ) );
   archiver.add_element( "y",  std::to_string( y_ ) );
@@ -188,6 +192,8 @@ void Node::save( serialization::Archiver & archiver ) const {
   archiver.add_element( "flags", user_rosetta_flags_ );
   archiver.add_element( "notes", notes_ );
   archiver.add_element( "xml_script", xml_script_ );
+
+  archiver.add_element( "bash_script", bash_script_ );
 
   archiver.add_element( "END", "NODE" );
 }
@@ -208,6 +214,11 @@ Node::Node(
   for( serialization::ArchiveElement element = unarchiver.get_next_element();
        element.token != "END" || element.value != "NODE";
        element = unarchiver.get_next_element() ){
+
+    if( element.token == "node_type" ){
+      type_ = std::stoi( element.value );
+      continue;
+    }
 
     if( element.token == "id" ){
       id_ = std::stoi( element.value );
@@ -269,6 +280,10 @@ Node::Node(
       continue;
     }
 
+    if( element.token == "bash_script" ){
+      bash_script_ = element.value;
+      continue;
+    }
 
   }
 
