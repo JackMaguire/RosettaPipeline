@@ -121,6 +121,12 @@ protected:
 
   void save( serialization::Archiver & archiver ) const;
 
+  virtual
+  void
+  save_additional_tokens( serialization::Archiver & ) const{
+    //This allows derived classes to save items
+  }
+
 public://Loading
   //load ctor
   Node(
