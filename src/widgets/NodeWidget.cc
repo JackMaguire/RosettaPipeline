@@ -16,7 +16,7 @@
 //#include <Wt/WPushButton.h>
 #include <Wt/WText.h>
 #include <Wt/WStackedWidget.h>
-#include <Wt/WTextEdit.h>
+#include <Wt/WMenu.h>
 #include <Wt/WVBoxLayout.h>
 
 namespace widgets {
@@ -47,6 +47,7 @@ NodeWidget::NodeWidget(
   Wt::WStackedWidget * const stack =
     center_container->addWidget( Wt::cpp14::make_unique< Wt::WStackedWidget >() );
 
+  /*
   //First is RSNode
   stack->addWidget(
     Wt::cpp14::make_unique< RSNodeWidget >( node_, graph_widget, options )
@@ -55,6 +56,29 @@ NodeWidget::NodeWidget(
   //Second is BashNode
   stack->addWidget(
     Wt::cpp14::make_unique< BashNodeWidget >( node_, graph_widget, options )
+  );
+ */
+
+
+  Wt::WMenu * const menu =
+    top_container->addWidget( Wt::cpp14::make_unique< Wt::WMenu >( stack.get() ) );
+  menu->setStyleClass("nav nav-pills");
+  menu->insertItem(
+    graph::NodeType::ROSETTA_SCRIPTS,
+    "Rosetta Scripts",
+    Wt::cpp14::make_unique< RSNodeWidget >( node_, graph_widget, options )
+  );
+  menu->addItem(
+    graph::NodeType::BASH,
+    "Bash Script",
+    Wt::cpp14::make_unique< BashNodeWidget >( node_, graph_widget, options )
+  );
+
+  menu->itemSelected().connect(
+    [=](){
+      auto const index = menu->currentIndex();
+      node->setNodeType( graph::NodeType( index ) );
+    }
   );
 
 }

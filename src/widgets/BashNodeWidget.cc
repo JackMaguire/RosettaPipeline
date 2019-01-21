@@ -44,19 +44,6 @@ BashNodeWidget::BashNodeWidget(
   Wt::WContainerWidget * const center_container =
     layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >(), Wt::LayoutPosition::Center );
 
-  Wt::WStackedWidget * const stack =
-    center_container->addWidget( Wt::cpp14::make_unique< Wt::WStackedWidget >() );
-
-  //First is RSNode
-  stack->addWidget(
-    Wt::cpp14::make_unique< RSBashNodeWidget >( node_, graph_widget, options )
-  );
-
-  //Second is BashNode
-  stack->addWidget(
-    Wt::cpp14::make_unique< BashBashNodeWidget >( node_, graph_widget, options )
-  );
-
 }
 
 BashNodeWidget::~BashNodeWidget(){
