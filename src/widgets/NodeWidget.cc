@@ -2,7 +2,6 @@
 
 #include <widgets/RSNodeWidget.hh>
 #include <widgets/BashNodeWidget.hh>
-#include <widgets/GraphWidget.fwd.hh>
 
 #include <graph/Node.hh>
 #include <listeners.hh>
