@@ -60,14 +60,14 @@ NodeWidget::NodeWidget(
 
 
   Wt::WMenu * const menu =
-    top_container->addWidget( Wt::cpp14::make_unique< Wt::WMenu >( stack.get() ) );
+    north_container->addWidget( Wt::cpp14::make_unique< Wt::WMenu >( stack.get() ) );
   menu->setStyleClass("nav nav-pills");
   menu->insertItem(
     graph::NodeType::ROSETTA_SCRIPTS,
     "Rosetta Scripts",
     Wt::cpp14::make_unique< RSNodeWidget >( node_, graph_widget, options )
   );
-  menu->addItem(
+  menu->insertItem(
     graph::NodeType::BASH,
     "Bash Script",
     Wt::cpp14::make_unique< BashNodeWidget >( node_, graph_widget, options )
