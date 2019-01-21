@@ -125,7 +125,8 @@ TopWidget.o: src/widgets/TopWidget.cc
 	${CXX} -c -o build/TopWidget.o src/widgets/TopWidget.cc ${GEN} ${WT_FLAGS}
 
 widgets: GraphWidget.o GraphToolbarWidget.o NodeWidget.o EdgeWidget.o TopWidget.o LeftViewWidget.o RightViewWidget.o CompileWidget.o EditFileDialog.o\
-	 LoadWidget.o SaveWidget.o OptionsWidget.o WelcomeWidget.o ExamplesWidget.o ExtraFileWidget.o PublishWidget.o PublicationBrowserDialog.o
+	 LoadWidget.o SaveWidget.o OptionsWidget.o WelcomeWidget.o ExamplesWidget.o ExtraFileWidget.o PublishWidget.o PublicationBrowserDialog.o\
+	 RSNodeWidget.o BashNodeWidget.o
 	ld -r build/GraphWidget.o build/GraphToolbarWidget.o build/TopWidget.o build/RightViewWidget.o build/LeftViewWidget.o\
 		build/ExtraFileWidget.o build/PublicationBrowserDialog.o build/EditFileDialog.o build/RSNodeWidget.o build/BashNodeWidget.o\
 		build/NodeWidget.o build/EdgeWidget.o build/SaveWidget.o build/OptionsWidget.o build/WelcomeWidget.o build/PublishWidget.o\
