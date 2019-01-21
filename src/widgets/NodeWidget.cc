@@ -60,7 +60,7 @@ NodeWidget::NodeWidget(
 
 
   Wt::WMenu * const menu =
-    north_container->addWidget( Wt::cpp14::make_unique< Wt::WMenu >( stack.get() ) );
+    north_container->addWidget( Wt::cpp14::make_unique< Wt::WMenu >( stack ) );
   menu->setStyleClass("nav nav-pills");
   menu->insertItem(
     graph::NodeType::ROSETTA_SCRIPTS,
