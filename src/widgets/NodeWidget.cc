@@ -72,6 +72,8 @@ NodeWidget::NodeWidget(
     "Bash Script",
     Wt::cpp14::make_unique< BashNodeWidget >( node_, graph_widget, options )
   );
+  menu->select( int( node->getNodeType() ) );
+
 
   menu->itemSelected().connect(
     [=](){
