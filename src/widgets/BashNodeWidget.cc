@@ -1,9 +1,5 @@
 #include <widgets/BashNodeWidget.hh>
 
-#include <widgets/RSBashNodeWidget.hh>
-#include <widgets/BashBashNodeWidget.hh>
-#include <widgets/GraphWidget.fwd.hh>
-
 #include <graph/Node.hh>
 #include <listeners.hh>
 
