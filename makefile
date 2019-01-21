@@ -79,6 +79,12 @@ PublicationBrowserDialog.o: src/widgets/PublicationBrowserDialog.hh graph
 NodeWidget.o: src/widgets/NodeWidget.hh graph
 	${CXX} -c -o build/NodeWidget.o src/widgets/NodeWidget.cc ${GEN} ${WT_FLAGS}
 
+RSNodeWidget.o: src/widgets/RSNodeWidget.hh graph
+	${CXX} -c -o build/RSNodeWidget.o src/widgets/RSNodeWidget.cc ${GEN} ${WT_FLAGS}
+
+BashNodeWidget.o: src/widgets/BashNodeWidget.hh graph
+	${CXX} -c -o build/BashNodeWidget.o src/widgets/BashNodeWidget.cc ${GEN} ${WT_FLAGS}
+
 EdgeWidget.o: src/widgets/EdgeWidget.hh graph
 	${CXX} -c -o build/EdgeWidget.o src/widgets/EdgeWidget.cc ${GEN} ${WT_FLAGS}
 
@@ -121,7 +127,7 @@ TopWidget.o: src/widgets/TopWidget.cc
 widgets: GraphWidget.o GraphToolbarWidget.o NodeWidget.o EdgeWidget.o TopWidget.o LeftViewWidget.o RightViewWidget.o CompileWidget.o EditFileDialog.o\
 	 LoadWidget.o SaveWidget.o OptionsWidget.o WelcomeWidget.o ExamplesWidget.o ExtraFileWidget.o PublishWidget.o PublicationBrowserDialog.o
 	ld -r build/GraphWidget.o build/GraphToolbarWidget.o build/TopWidget.o build/RightViewWidget.o build/LeftViewWidget.o\
-		build/ExtraFileWidget.o build/PublicationBrowserDialog.o build/EditFileDialog.o\
+		build/ExtraFileWidget.o build/PublicationBrowserDialog.o build/EditFileDialog.o build/RSNodeWidget.o build/BashNodeWidget.o\
 		build/NodeWidget.o build/EdgeWidget.o build/SaveWidget.o build/OptionsWidget.o build/WelcomeWidget.o build/PublishWidget.o\
 		build/LoadWidget.o build/CompileWidget.o build/ExamplesWidget.o -o build/widgets.o -arch ${ARCH}
 
