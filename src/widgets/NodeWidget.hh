@@ -19,20 +19,8 @@ public:
 
   void updateDefaultCommand( std::string const & );
 
-protected:
-  void construct_segment1( GraphWidget *, Wt::WVBoxLayout & layout );
-
-  void construct_segment2( Wt::WVBoxLayout & layout );
-
-  void construct_segment3( Wt::WVBoxLayout & layout );
-
-  void construct_segment4( Wt::WVBoxLayout & layout );
-
-  void construct_segment5( Wt::WBorderLayout & layout );
-
 private:
   graph::NodeSP node_;
-  Wt::WLineEdit * command_edit_;
 };
 
 
