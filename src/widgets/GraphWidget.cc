@@ -367,13 +367,17 @@ GraphWidget::drawNode(
   int const x = node->X() * grid_size + ( grid_size / 2 );
   int const y = node->Y() * grid_size + ( grid_size / 2 );
   int const diameter = grid_size * 3;
-  
+
   if( node == graph_->selectedNode() ){
     painter.setBrush( Wt::WBrush( theme_->selection_outline() ) );
     int const sx = x - selection_width;
     int const sy = y - selection_width;
     int const sdiameter = diameter + 2 * selection_width;
-    painter.drawEllipse( sx, sy, sdiameter, sdiameter );
+    if( node->getNodeType() == graph::NodeType::ROSETTA_SCRIPTS ){
+      painter.drawEllipse( sx, sy, sdiameter, sdiameter );
+    } else {
+      painter.drawRect( sx, sy, sdiameter, sdiameter );
+    }
   }
 
   if( node->numDownstreamEdges() == 0 ) {
@@ -382,7 +386,12 @@ GraphWidget::drawNode(
     painter.setBrush( Wt::WBrush( theme_->intermediate_node() ) );
   }
 
-  painter.drawEllipse( x, y, diameter, diameter );
+  if( node->getNodeType() == graph::NodeType::ROSETTA_SCRIPTS ){
+    painter.drawEllipse( x, y, diameter, diameter );
+  } else {
+    painter.drawRect( x, y, diameter, diameter );
+  }
+
   hitbox_for_node_[ node ] = hitbox( x, y, diameter, diameter );
 
   if( options_->show_node_titles ) {
