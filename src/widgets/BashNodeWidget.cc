@@ -34,12 +34,42 @@ BashNodeWidget::BashNodeWidget(
   Wt::WBorderLayout * const layout =
     setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
 
+  //////////
+  // NORTH
+
   Wt::WContainerWidget * const north_container =
     layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >(), Wt::LayoutPosition::North );
 
+  north_container->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Title: " ) );
+
+  Wt::WLineEdit * const title_edit =
+    container->addWidget( Wt::cpp14::make_unique< Wt::WLineEdit >( node_->title() ) );
+  title_edit->setInline( true );
+  title_edit->setFormObject( true );
+  title_edit->textInput().connect(
+    [=] {
+      node_->setTitle( title_edit->text().narrow() );
+      graph_widget->update();
+    }
+  );
+
+  //////////
+  // CENTER
+
   Wt::WContainerWidget * const center_container =
     layout->addWidget( Wt::cpp14::make_unique< Wt::WContainerWidget >(), Wt::LayoutPosition::Center );
+  Wt::WBorderLayout * const center_layout =
+    center_container->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
 
+  Wt::WTextArea * const bash_script_text_area =
+    center_layout->addWidget( Wt::cpp14::make_unique< Wt::WTextArea >( node_->getBashScript() ), Wt::LayoutPosition::Center );
+  bash_script_text_area->setMinimumSize( 500, 500 );
+
+  bash_script_text_area->changed().connect(
+    [=] {
+      node_->setBashScript( bash_script_text_area->text().toUTF8() );
+    }
+  );
 }
 
 BashNodeWidget::~BashNodeWidget(){

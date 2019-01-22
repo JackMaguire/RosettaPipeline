@@ -62,10 +62,13 @@ NodeWidget::NodeWidget(
   Wt::WMenu * const menu =
     north_container->addWidget( Wt::cpp14::make_unique< Wt::WMenu >( stack ) );
   menu->setStyleClass("nav nav-pills");
+
+  auto rs_ptr = Wt::cpp14::make_unique< RSNodeWidget >( node_, graph_widget, options );
+  rs_node_widget_ = rs_ptr;
   menu->insertItem(
     graph::NodeType::ROSETTA_SCRIPTS,
     "Rosetta Scripts",
-    Wt::cpp14::make_unique< RSNodeWidget >( node_, graph_widget, options )
+    std::move( rs_ptr )
   );
   menu->insertItem(
     graph::NodeType::BASH,
@@ -90,6 +93,9 @@ NodeWidget::~NodeWidget(){
 
 void
 NodeWidget::updateDefaultCommand( std::string const & new_command ) {
+  if( rs_node_widget_ != 0 ){
+    rs_node_widget_->updateDefaultCommand( new_command );
+  }
   /*if( node_->useDefaultCommand() ){
     command_edit_->setText( new_command );
   }*/

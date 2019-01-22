@@ -21,6 +21,8 @@ public:
 
 private:
   graph::NodeSP node_;
+  RSNodeWidget * rs_node_widget_ = 0;
+  //BashNodeWidget * bash_node_widget_ = 0;
 };
 
 
