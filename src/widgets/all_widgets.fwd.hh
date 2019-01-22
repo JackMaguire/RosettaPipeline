@@ -2,6 +2,7 @@
 
 namespace widgets {
 
+class BashNodeWidget;
 class CompileWidget;
 class EdgeWidget;
 class EditFileDialog;
@@ -15,6 +16,7 @@ class NodeWidget;
 class OptionsWidget;
 class PublicationBrowserDialog;
 class PublishWidget;
+class RSNodeWidget;
 class RightViewWidget;
 class SaveAndLoadWidget;
 class SaveWidget;
