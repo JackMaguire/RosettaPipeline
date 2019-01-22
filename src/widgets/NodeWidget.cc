@@ -64,7 +64,7 @@ NodeWidget::NodeWidget(
   menu->setStyleClass("nav nav-pills");
 
   auto rs_ptr = Wt::cpp14::make_unique< RSNodeWidget >( node_, graph_widget, options );
-  rs_node_widget_ = rs_ptr;
+  rs_node_widget_ = rs_ptr.get();
   menu->insertItem(
     graph::NodeType::ROSETTA_SCRIPTS,
     "Rosetta Scripts",
