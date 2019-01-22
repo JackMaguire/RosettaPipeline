@@ -1,4 +1,5 @@
 #include <widgets/BashNodeWidget.hh>
+#include <widgets/GraphWidget.hh>
 
 #include <graph/Node.hh>
 #include <listeners.hh>
@@ -43,7 +44,7 @@ BashNodeWidget::BashNodeWidget(
   north_container->addWidget( Wt::cpp14::make_unique< Wt::WText >( "Title: " ) );
 
   Wt::WLineEdit * const title_edit =
-    container->addWidget( Wt::cpp14::make_unique< Wt::WLineEdit >( node_->title() ) );
+    north_container->addWidget( Wt::cpp14::make_unique< Wt::WLineEdit >( node_->title() ) );
   title_edit->setInline( true );
   title_edit->setFormObject( true );
   title_edit->textInput().connect(
