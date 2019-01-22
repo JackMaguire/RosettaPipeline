@@ -63,8 +63,8 @@ BashNodeWidget::BashNodeWidget(
   Wt::WBorderLayout * const center_layout =
     center_container->setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
 
-  Wt::WTextEdit * const bash_script_text_area =
-    center_layout->addWidget( Wt::cpp14::make_unique< Wt::WTextEdit >( node_->getBashScript() ), Wt::LayoutPosition::Center );
+  Wt::WTextArea * const bash_script_text_area =
+    center_layout->addWidget( Wt::cpp14::make_unique< Wt::WTextArea >( node_->getBashScript() ), Wt::LayoutPosition::Center );
   bash_script_text_area->setMinimumSize( 500, 500 );
 
   bash_script_text_area->changed().connect(
