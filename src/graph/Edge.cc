@@ -172,7 +172,7 @@ Edge::addToRunScript( std::stringstream & run_script ) const {
   run_script << "while read line; do\n"
     "    # Each $line is a (hopefully) unique identifier to a structure\n"
     "    if [[ `grep $line $destination | wc -l` -eq 0 ]]; then\n"
-    "        echo `pwd`/$line.* >> $destination\n"
+    "        ls `pwd`/${line}* >> $destination\n"
     "    fi\n"
     "done << _temp3\n";
 
