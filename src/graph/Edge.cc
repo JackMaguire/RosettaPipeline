@@ -153,7 +153,8 @@ Edge::addToRunScript( std::stringstream & run_script ) const {
   if( useFractionInsteadOfCount() ) {
     run_script << "num_results=`cat _temp2 | wc -l`\n";
     run_script << "frac=\"" << fractionOfResultsToTransfer() << "\"\n";
-    run_script << "num_results_to_keep=`echo \"($num_results) * $frac\" | bc`\n";
+    run_script << "num_results_to_keep_float=`echo \"($num_results) * $frac\" | bc`\n";
+    run_script << "num_results_to_keep=${num_results_to_keep_float%.*} #convert to integer\n";
   } else {
     run_script << "num_results_to_keep=\"" << numResultsToTransfer() << "\"\n";
   }
