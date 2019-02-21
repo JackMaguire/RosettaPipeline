@@ -232,20 +232,20 @@ compile_run_script(
 
     // THE COMMAND
 
-    run_script << "if [[ `grep SUCCESS _status | wc -l` -eq \"0\" ]]; then\n";
+    // run_script << "if [[ `grep SUCCESS _status | wc -l` -eq \"0\" ]]; then\n";
 
-    run_script << "\techo STARTED > _status\n\n";
+    //run_script << "\techo STARTED > _status\n\n";
 
     run_script << "\tif bash run.sh; then \n"
-      "\t\techo SUCCESS > _status\n"
+      //"\t\techo SUCCESS > _status\n"
       "\t\techo \"Done running " << dirname << "\" >> ../JD3BASH_runlog.txt\n"
       "\telse\n"
-      "\t\techo FAILURE > _status\n"
+      //"\t\techo FAILURE > _status\n"
       "\t\techo \"Failed to run " << dirname << "\" >> ../JD3BASH_runlog.txt\n"
       "\t\texit " << node->stage() << "\n"
       "\tfi\n";
 
-    run_script << "fi\n";
+    //run_script << "fi\n";
 
     /*if( options.delete_unused_intermediate_poses && node->numDownstreamEdges() > 0 ) {
       run_script << "\n# Delete poses not needed for future stages\n" << "TODO";

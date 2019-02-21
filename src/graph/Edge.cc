@@ -148,7 +148,8 @@ Edge::addToRunScript( std::stringstream & run_script ) const {
     run_script << "sort -nk1 _temp > _temp2\n";
   }
 
-  run_script << "\n";
+  run_script << "\n# _temp (unsorted) and _temp2 (sorted) are both in the format \"[metric] [unique file prefix]\"\n";
+  run_script << "# _temp3 (sorted and truncated) is in the format \"[unique file prefix]\"\n\n";
 
   if( useFractionInsteadOfCount() ) {
     run_script << "num_results=`cat _temp2 | wc -l`\n";
@@ -172,11 +173,12 @@ Edge::addToRunScript( std::stringstream & run_script ) const {
     "    # Each $line is a (hopefully) unique identifier to a structure\n"
     "    if [[ `grep $line $destination | wc -l` -eq 0 ]]; then\n"
     "        echo `pwd`/$line.* >> $destination\n"
+    //"        echo $line.* >> _results_to_keep.txt\n"
     "    fi\n"
     "done << _temp3\n";
 
-  run_script << "\n# Save good files so that they do not get deleted later\n";
-  run_script << "cat _temp3 | while read line; do echo $line.* ; done >> _results_to_keep.txt\n\n";
+  //run_script << "\n# Save good files so that they do not get deleted later\n";
+  //run_script << "cat _temp3 | while read line; do echo $line.* ; done >> _results_to_keep.txt\n\n";
 
 }
 
