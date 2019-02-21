@@ -22,7 +22,17 @@ namespace widgets {
 
 struct UpperExtraFileWidget : public Wt::WContainerWidget {
   UpperExtraFileWidget(){
-    addWidget( Wt::cpp14::make_unique< Wt::WText >( "TODO: Describe How This Works!" ) );
+    addWidget( Wt::cpp14::make_unique< Wt::WText >(
+	    "This feature defines a way for you to provide extra files required for your protocol. "
+	    "This could be, for example, a .comp file for your aa_composition score term "
+	    "or a .wts file if you want to use a custom score function. "
+	    "All of these files will exist one directory up from your running directory "
+	    "so you should reference myscore.wts as ../myscore.wts. "
+    ) );
+    addWidget( Wt::cpp14::make_unique< Wt::WText >(
+	    "You can upload a file from your computer or start with a blank file. "
+	    "You can edit both the file name and contents (assuming it is a text file) in the browser. "
+    ) );
     addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
     addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
 
@@ -128,7 +138,7 @@ void ExtraFileWidget::update_table(){
   for( graph::ExtraFileSP const & file : graph_->extraFiles() ){
     table_->elementAt( counter, 0 )->addWidget( Wt::cpp14::make_unique< Wt::WText >( file->getName() ) );
     Wt::WPushButton * const edit_button =
-      table_->elementAt( counter, 1 )->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Edit As Text" ) );
+      table_->elementAt( counter, 1 )->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Edit" ) );
     Wt::WPushButton * const delete_button =
       table_->elementAt( counter, 2 )->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Delete" ) );
 
@@ -167,7 +177,7 @@ void ExtraFileWidget::update_table(){
       }
     );
 
-    counter++;
+    ++counter;
   }
 
 }

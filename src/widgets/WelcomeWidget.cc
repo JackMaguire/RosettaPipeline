@@ -148,11 +148,13 @@ WelcomeWidget::WelcomeWidget(
   )->addMessage(//Getting Started
     "If you are new, you can start by exploring sample pipelines in the \"Examples\" tab. ", 0
   )->addWidgetDerived(
-    std::move( examples_button ), 2
+    examples_button, 2
   )->addMessage(//Rules
-    "<b>Rules:</b>", 1
+    "<b>Run Details:</b>", 1
   )->addMessage(//Rules
-    "TODO"
+    "Each stage is given its own working directory, so you do not need to worry about creating conflicting filenames. "
+    "I have not tested this, but I assume that this program is <b>not compatible with silent files</b> for intermediate poses between stages. "
+    "This service will give you a working directory with a run.sh file, which you execute to run all stages of the pipeline. "
   );
   
 }
