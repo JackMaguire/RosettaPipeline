@@ -40,7 +40,7 @@ private:
   Wt::WCheckBox * show_node_titles_box_;
   Wt::WCheckBox * orient_node_titles_box_;
 
-  Wt::WCheckBox * delete_unused_intermediate_poses_box_;
+  //Wt::WCheckBox * delete_unused_intermediate_poses_box_;
   Wt::WCheckBox * serialize_intermediate_poses_box_;
   Wt::WSpinBox * num_proc_spin_box_;
   Wt::WLineEdit * command_edit_;

@@ -102,12 +102,14 @@ OptionsWidget::setup_run_options(){
   addWidget( Wt::cpp14::make_unique< Wt::WText >( "Run Options:" ) );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
 
+  /*
   delete_unused_intermediate_poses_box_ =
     addWidget( Wt::cpp14::make_unique< Wt::WCheckBox >( "<b>Delete Unused Intermediate Poses.</b>" ) );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
   addWidget( Wt::cpp14::make_unique< Wt::WText >( " This option can save disk space by deleting poses that are no longer needed. We will not delete any poses that result from terminal stages becase we assume you might want to look at those. We will also not delete any input structures." ) )->setWordWrap( true );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
+  */
 
   serialize_intermediate_poses_box_ =
     addWidget( Wt::cpp14::make_unique< Wt::WCheckBox >( "<b>Serialize Intermediate Poses.</b>" ) );
@@ -133,6 +135,7 @@ OptionsWidget::setup_run_options(){
 
 
   //delete_unused_intermediate_poses_box_
+  /*
   delete_unused_intermediate_poses_box_->setTextFormat( Wt::TextFormat::XHTML );
   delete_unused_intermediate_poses_box_->checked().connect (
     [=] {
@@ -144,7 +147,7 @@ OptionsWidget::setup_run_options(){
       options_->delete_unused_intermediate_poses = false;
     }
   );
-
+  */
 
   //serialize_intermediate_poses_box_
   serialize_intermediate_poses_box_->setTextFormat( Wt::TextFormat::XHTML );
@@ -195,7 +198,7 @@ OptionsWidget::update(){
   //Run
   command_edit_->setText( options_->default_run_command );
   serialize_intermediate_poses_box_->setChecked( options_->serialize_intermediate_poses );
-  delete_unused_intermediate_poses_box_->setChecked( options_->delete_unused_intermediate_poses );  
+  //delete_unused_intermediate_poses_box_->setChecked( options_->delete_unused_intermediate_poses );  
   num_proc_spin_box_->setValue( options_->num_processors );
 }
 
