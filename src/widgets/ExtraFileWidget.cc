@@ -177,7 +177,7 @@ void ExtraFileWidget::update_table(){
       }
     );
 
-    counter++;
+    ++counter;
   }
 
 }
