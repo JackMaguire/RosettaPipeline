@@ -148,11 +148,11 @@ WelcomeWidget::WelcomeWidget(
   )->addMessage(//Getting Started
     "If you are new, you can start by exploring sample pipelines in the \"Examples\" tab. ", 0
   )->addWidgetDerived(
-    std::move( examples_button ), 2
+    examples_button, 2
   )->addMessage(//Rules
-    "<b>Rules:</b>", 1
+    "<b>Run Details:</b>", 1
   )->addMessage(//Rules
-    "TODO"
+    "Each stage is given its own working directory, so you do not need to worry about creating conflicting filenames."
   );
   
 }
