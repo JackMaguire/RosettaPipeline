@@ -75,7 +75,13 @@ NodeWidget::NodeWidget(
     "Bash Script",
     Wt::cpp14::make_unique< BashNodeWidget >( node_, graph_widget, options )
   );
-  menu->select( int( node->getNodeType() ) );
+
+  if( node->getNodeType() == graph::NodeType::ROSETTA_SCRIPTS ){
+    menu->select( 0 );
+  } else {
+    menu->select( 1 );
+  }
+  //menu->select( int( node->getNodeType() ) );
 
 
   menu->itemSelected().connect(
