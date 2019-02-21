@@ -154,7 +154,8 @@ Edge::addToRunScript( std::stringstream & run_script ) const {
   if( useFractionInsteadOfCount() ) {
     run_script << "num_results=`cat _temp2 | wc -l`\n";
     run_script << "frac=\"" << fractionOfResultsToTransfer() << "\"\n";
-    run_script << "num_results_to_keep=`echo \"($num_results) * $frac\" | bc`\n";
+    run_script << "num_results_to_keep_float=`echo \"($num_results) * $frac\" | bc`\n";
+    run_script << "num_results_to_keep=${num_results_to_keep_float%.*} #convert to integer\n";
   } else {
     run_script << "num_results_to_keep=\"" << numResultsToTransfer() << "\"\n";
   }
@@ -171,8 +172,8 @@ Edge::addToRunScript( std::stringstream & run_script ) const {
 
   run_script << "while read line; do\n"
     "    # Each $line is a (hopefully) unique identifier to a structure\n"
-    "    if [[ `grep $line $destination | wc -l` -eq 0 ]]; then\n"
-    "        echo `pwd`/$line.* >> $destination\n"
+    "    if [[ ! `grep $line $destination` ]]; then\n"
+    "        ls `pwd`/${line}* >> $destination\n"
     //"        echo $line.* >> _results_to_keep.txt\n"
     "    fi\n"
     "done << _temp3\n";
