@@ -148,7 +148,7 @@ WelcomeWidget::WelcomeWidget(
   )->addMessage(//Getting Started
     "If you are new, you can start by exploring sample pipelines in the \"Examples\" tab. ", 0
   )->addWidgetDerived(
-    examples_button, 2
+    std::move( examples_button ), 2
   )->addMessage(//Rules
     "<b>Run Details:</b>", 1
   )->addMessage(//Rules
