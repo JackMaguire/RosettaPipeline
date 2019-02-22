@@ -83,6 +83,7 @@ Edge::load(
 
     if( element.token == "use_frac" ){
       use_fraction_instead_of_count_ = ( element.value == "1" );
+      std::cout << "!!! " << element.value << " " << use_fraction_instead_of_count_ << std::endl;
       continue;
     }
 
@@ -120,6 +121,8 @@ Edge::load(
       assert( found_a_match );
       continue;
     }
+
+    std::cout << "No Match For: " << element.token << std::endl;
 
   }
 
