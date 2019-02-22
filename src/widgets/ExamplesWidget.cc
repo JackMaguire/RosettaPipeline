@@ -47,6 +47,14 @@ ExamplesWidget::ExamplesWidget(
     "DockHBNetDesignTemp.rpf",
     graph, options, refreshers
   );
+
+  addExample(
+    "Bash Script Example",
+    "This pipeline (which is as simple as a unit test) is made up entirely of bash scripts and can be executed in seconds. It simply creates 10 files, with the contents of each file being a number.",
+    "BashExample.rpf",
+    graph, options, refreshers
+  );
+
 }
 
 ExamplesWidget::~ExamplesWidget(){}
