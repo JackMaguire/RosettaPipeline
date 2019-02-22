@@ -138,13 +138,13 @@ EdgeWidget::construct_segment2(
 
   if( edge_->useFractionInsteadOfCount() ){
     combo_box->setCurrentIndex( 1 );
-    std::cout << combo_box->currentIndex() << " " << 1 << std:endl;
+    std::cout << combo_box->currentIndex() << " " << 1 << std::endl;
     spin_box->setValue( edge_->fractionOfResultsToTransfer() );
     spin_box->setMaximum( 1.0 );
     spin_box->setSingleStep( 0.01 );
   } else {
     combo_box->setCurrentIndex( 0 );
-    std::cout << combo_box->currentIndex() << " " << 0 << std:endl;
+    std::cout << combo_box->currentIndex() << " " << 0 << std::endl;
     spin_box->setValue( edge_->numResultsToTransfer() );
     spin_box->setMaximum( std::numeric_limits< int >::max() );
     spin_box->setSingleStep( 1 );
