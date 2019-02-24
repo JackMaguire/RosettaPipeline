@@ -1,6 +1,7 @@
 #include <widgets/ExtraFileWidget.hh>
 
 #include <widgets/EditFileDialog.hh>
+#include <widgets/RenameFileDialog.hh>
 
 #include <Wt/WGlobal.h>
 #include <Wt/WBorderLayout.h>
@@ -105,6 +106,10 @@ ExtraFileWidget::ExtraFileWidget( graph::GraphSP graph ) :
 	std::string file_contents = contents.str();
 
 	std::string file_name = upper_widget->line_edit->text().toUTF8();
+	if( file_name.empty() ){
+	  file_name = "file.txt";
+	}
+
 	graph_->addExtraFile( file_name, file_contents);
 
 	upper_widget->upload_message_area->setText( "Upload Complete" );
@@ -137,10 +142,21 @@ void ExtraFileWidget::update_table(){
   int counter = 1;
   for( graph::ExtraFileSP const & file : graph_->extraFiles() ){
     table_->elementAt( counter, 0 )->addWidget( Wt::cpp14::make_unique< Wt::WText >( file->getName() ) );
+    Wt::WPushButton * const rename_button =
+      table_->elementAt( counter, 1 )->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Rename" ) );
     Wt::WPushButton * const edit_button =
-      table_->elementAt( counter, 1 )->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Edit" ) );
+      table_->elementAt( counter, 2 )->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Edit" ) );
     Wt::WPushButton * const delete_button =
-      table_->elementAt( counter, 2 )->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Delete" ) );
+      table_->elementAt( counter, 3 )->addWidget( Wt::cpp14::make_unique< Wt::WPushButton >( "Delete" ) );
+
+    rename_button->clicked().connect(
+      [=]{
+	RenameFileDialog * const editor = addChild(
+	  Wt::cpp14::make_unique< RenameFileDialog >( this, file )
+	);
+	editor->show();
+      }
+    );
 
     edit_button->clicked().connect(
       [=]{
