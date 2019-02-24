@@ -55,6 +55,7 @@ RenameFileDialog::RenameFileDialog(
   edit_area->changed().connect(
     [=] {
       extra_file_->setName( edit_area->text().toUTF8() );
+      parent->update_table();
     }
   );
 
