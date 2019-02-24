@@ -77,7 +77,7 @@ struct UpperExtraFileWidget : public Wt::WContainerWidget {
 
 ExtraFileWidget::ExtraFileWidget( graph::GraphSP graph ) :
   WContainerWidget(),
-  graph_( std::move( graph ) )
+  graph_( graph )
 {
   Wt::WBorderLayout * const layout =
     setLayout( Wt::cpp14::make_unique< Wt::WBorderLayout >() );
