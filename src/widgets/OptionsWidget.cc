@@ -120,7 +120,7 @@ OptionsWidget::setup_run_options(){
 
   num_proc_spin_box_ =
     addWidget( Wt::cpp14::make_unique< Wt::WSpinBox >() );
-  addWidget( Wt::cpp14::make_unique< Wt::WText >( "   <b>Number of processors.</b> This value is saved as $nproc in the run.sh script" ) )->setTextFormat( Wt::TextFormat::XHTML );
+  addWidget( Wt::cpp14::make_unique< Wt::WText >( "   <b>Number of processors.</b> This value is saved as $nproc in each stage's run script" ) )->setTextFormat( Wt::TextFormat::XHTML );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
   addWidget( Wt::cpp14::make_unique< Wt::WBreak >() );
 
