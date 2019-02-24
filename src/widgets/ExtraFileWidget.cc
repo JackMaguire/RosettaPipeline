@@ -122,7 +122,10 @@ ExtraFileWidget::ExtraFileWidget( graph::GraphSP graph ) :
   upper_widget->blank_file_button->clicked().connect(
     [=] {//TODO ask for filename if empty
       std::string file_name = upper_widget->line_edit->text().toUTF8();
-      graph_->addExtraFile( std::move( file_name ), "" );
+      if( file_name.empty() ) {
+	file_name = "rename_me.txt";
+      }
+      graph_->addExtraFile( file_name, "" );
       this->update_table();      
     }
   );
