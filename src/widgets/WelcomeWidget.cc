@@ -133,7 +133,7 @@ WelcomeWidget::WelcomeWidget(
     "each directed edge represents the transfer of poses from one stage to the next. "
     "Similar to multistage_rosetta_scripts, you can filter results between stages to save time. "
     "When you are finished, go to the \"Compile\" tab for instructions on how to download this workflow for use. "
-    "If you want to save a workflow, go to the \"Save/Load\" tab to download a text file that can be loaded in to this site later."
+    "If you want to save a workflow, go to the \"Save/Load\" tab to download a binary file that can be loaded in to this site later."
   )->addMessage(//How to?
     "<b>How to make a workflow:</b>", 1
   )->addMessage(//How to?
@@ -152,7 +152,7 @@ WelcomeWidget::WelcomeWidget(
   )->addMessage(//Rules
     "<b>Run Details:</b>", 1
   )->addMessage(//Rules
-    "Each stage is given its own working directory, so you do not need to worry about creating conflicting filenames. "
+    "Each stage is given its own working directory so you do not need to worry about creating conflicting filenames. "
     "I have not tested this, but I assume that this program is <b>not compatible with silent files</b> for intermediate poses between stages. "
     "This service will give you a working directory with a run.sh file, which you execute to run all stages of the pipeline. "
   );
