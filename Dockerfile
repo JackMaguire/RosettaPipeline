@@ -3,6 +3,7 @@ FROM ubuntu:bionic
 RUN apt-get update
 
 # WT
+# Try 21cae5a11513c70f1a6d451a6dd237e4c0f7b4e7 if this fails
 RUN apt-get -y install git cmake g++-8 libboost-all-dev build-essential && \
     git clone https://github.com/emweb/wt.git && \
     cd wt && \
